@@ -17,7 +17,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .rounded-button {
-	width: 140px;
+	width: 146px;
 	padding: 0.7rem;
 	border-radius: 25px;
 	display: flex;

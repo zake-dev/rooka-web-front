@@ -29,12 +29,40 @@
 						   required
 				></FormInput>
 				
-				<div class="form-card-buttons">
-					<RoundedButton class="button-success my-3"
+				<div class="form-card-buttons my-3">
+					<RoundedButton class="button-success"
 								   text="다음"
 								   @click="handleClickNext"
 								   :disabled="soldier.birthOfDate === null"
 					></RoundedButton>	
+				</div>
+			</div>
+
+			<FormBackButton @click="handleClickPrevious"></FormBackButton>
+		</div>
+		
+		<!-- 작성 폼 (군종) -->
+		<div v-else-if="stepper.currentStep === 3" class="form-card">
+			<div class="form-card-content">
+				<FormLabel class="mb-3">
+					{{ soldier.name }} 훈련병의<br>군종은 무엇인가요? 🤔
+				</FormLabel>
+				
+				<div class="form-card-buttons my-3">
+					<RoundedButton class="button-success"
+								   text="육군"
+								   @click="handleClickMilitaryType('육군')"
+					></RoundedButton>
+					<RoundedButton class="button-info"
+								   text="공군"
+								   @click="handleClickMilitaryType('공군')"
+					></RoundedButton>
+				</div>
+				
+				<div class="form-card-links">
+					<a class="form-card-links__help-link font-mobile__caption mt-4"
+				   	   href="#"
+			    	>해군/해병대는 왜 없나요?</a>
 				</div>
 			</div>
 
@@ -87,6 +115,10 @@ export default defineComponent({
 			store.dispatch('registerForm/updateBirthOfDate', date);
 			event.target.blur();
 		};
+		const handleClickMilitaryType = (militaryType: string) => {
+			store.dispatch('registerForm/updateMilitaryType', militaryType);
+			stepper.currentStep++;
+		};
 		const handleClickNext = () => {
 			stepper.currentStep++;
 		};
@@ -101,6 +133,7 @@ export default defineComponent({
 			/* Functions */
 			handleSubmitName,
 			handleSubmitBirthOfDate,
+			handleClickMilitaryType,
 			handleClickNext,
 			handleClickPrevious,
 		};
@@ -129,5 +162,16 @@ export default defineComponent({
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
+}
+.form-card-links {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	
+	&__help-link {
+		text-decoration: none;
+		color: $gray4;
+		border-bottom: 1px solid $gray4;
+	}
 }
 </style>

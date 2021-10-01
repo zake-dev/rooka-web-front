@@ -36,7 +36,10 @@ const module: Module<State, RootState> = {
 		},
 		updateBirthOfDate({ commit }, date: Date) {
 			commit('setBirthOfDate', date);
-		}
+		},
+		updateMilitaryType({ commit }, type: string) {
+			commit('setMilitaryType', type);
+		},
 	},
 };
 
