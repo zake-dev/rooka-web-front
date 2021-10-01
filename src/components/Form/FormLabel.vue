@@ -14,7 +14,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .form-label {
-	margin-bottom: 1.6rem;
 	white-space: pre;
 }
 </style>
