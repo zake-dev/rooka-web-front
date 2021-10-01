@@ -15,9 +15,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .form-back-button {
-	position: absolute;
-	bottom: 2rem;
-	left: 1rem;
 	display: flex;
 	flex-direction: row;
 	align-items: center;

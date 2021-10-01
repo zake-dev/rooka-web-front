@@ -24,6 +24,7 @@ export default defineComponent({
 @import "@/scss/_variables.scss";
 
 .app-bar {
+	width: 100%;
 	height: $appBarHeight;
 	padding: 1rem 1.4rem;
 	display: flex;

@@ -25,6 +25,10 @@ export default defineComponent({
 	padding: 0;
 	box-sizing: border-box;
 }
+html, body {
+	height: 100%;
+	width: 100%;
+}
 
 /* Fonts */
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
@@ -94,8 +98,8 @@ export default defineComponent({
 }
 
 #app {
-	height: 100vh;
-	width: 100vw;
+	height: 100%;
+	width: 100%;
 	font-family: 'Spoqa Han Sans Neo', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

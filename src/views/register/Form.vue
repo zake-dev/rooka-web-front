@@ -1,28 +1,33 @@
 <template>
 	<LineStepper :stepper="stepper"></LineStepper>
 
-	<div class="form-cards">
-		<transition-group name="slide">
-			<!-- 작성 폼 (이름) -->
-			<div v-if="stepper.currentStep === 1" class="form-card">
+	<transition name="slide">
+		<!-- 작성 폼 (이름) -->
+		<div v-if="stepper.currentStep === 1" class="form-card">
+			<div class="form-card-content">
 				<FormLabel>훈련병의 이름은<br>무엇인가요? 😮</FormLabel>
 				<FormInput type="text"
 						   placeholder="이름을 입력해주세요"
 						   @keyup.enter="handleSubmitName"
 				></FormInput>
 			</div>
+		</div>
 
-			<!-- 작성 폼 (생년월일) -->
-			<div v-else-if="stepper.currentStep === 2" class="form-card">
-				<FormLabel>{{ soldier.name }} 훈련병은<br>언제 태어났나요? 🎂</FormLabel>
+		<!-- 작성 폼 (생년월일) -->
+		<div v-else-if="stepper.currentStep === 2" class="form-card">
+			<div class="form-card-content">
+				<FormLabel>
+					{{ soldier.name }} 훈련병은<br>언제 태어났나요? 🎂
+				</FormLabel>
 				<FormInput type="text"
 						   placeholder="생년월일을 입력해주세요"
 						   @keyup.enter="handleSubmitBirthOfDate"
-				></FormInput>
-				<FormBackButton @click="handleClickGoBack"></FormBackButton>
+				></FormInput>	
 			</div>
-		</transition-group>
-	</div>
+
+			<FormBackButton @click="handleClickGoBack"></FormBackButton>
+		</div>
+	</transition>
 </template>
 
 <script lang="ts">
@@ -60,9 +65,11 @@ export default defineComponent({
 		const handleSubmitName = (event: any) => {
 			store.dispatch('registerForm/updateName', event.target.value);
 			stepper.currentStep++;
+			event.target.blur();
 		};
 		const handleSubmitBirthOfDate = (event: any) => {
 			console.dir(event.target.value);
+			event.target.blur();
 		};
 		const handleClickGoBack = () => {
 			stepper.currentStep--;
@@ -84,16 +91,17 @@ export default defineComponent({
 <style scoped lang="scss">
 @import "@/scss/_variables.scss";
 
-.form-cards {
-	height: 100%;
-	display: flex;
-	flex-direction: row;
-}
 .form-card {
 	position: absolute;
-	width: 100vw;
+	width: 100%;
 	height: 100%;
-	padding: 3.5rem 2rem;
+	padding: 2rem;
 	background-color: $white;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.form-card-content {
+	padding: 1.5rem 0;
 }
 </style>
