@@ -1,5 +1,5 @@
 <template>
-<p class="form-label">
+<p class="form-label font-mobile__semi-title">
 	<slot></slot>
 </p>
 </template>
@@ -14,12 +14,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .form-label {
-	margin-bottom: 1.1rem;
-	font-style: normal;
-	font-weight: 700;
-	font-size: 24px;
-	line-height: 31px;
-	letter-spacing: -0.02em;
+	margin-bottom: 1.6rem;
 	white-space: pre;
 }
 </style>

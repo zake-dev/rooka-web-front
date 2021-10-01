@@ -1,7 +1,13 @@
 import { createStore } from "vuex";
 
+export interface RootState {
+	appTitle: string;
+}
+
 export default createStore({
-	state: {},
+	state: {
+		appTitle: "rooka",
+	},
 	mutations: {},
 	actions: {},
 	modules: {},

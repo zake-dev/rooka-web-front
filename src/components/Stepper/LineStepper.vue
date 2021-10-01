@@ -12,8 +12,8 @@
 import { defineComponent, PropType } from "vue";
 	
 export interface StepperState {
-	maxStep: number,
-	currentStep: number,
+	maxStep: number;
+	currentStep: number;
 }
 
 export default defineComponent({
