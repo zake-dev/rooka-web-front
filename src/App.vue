@@ -1,25 +1,34 @@
 <template>
-	<router-view />
+	<MobileLayout></MobileLayout>
 </template>
 
-<style lang="scss">
-/* Colors */
-$black: black;
-$white: white;
-$diminishedWhite: #E5E5E5;
-$gray1: #F6F7FB;
-$gray2: #D8DBE0;
-$gray3: #777B83;
-$gray4: #595B60;
-$gray5: #45474D;
-$rookaBlue: #80ADF0;
-$rookaRed: #CF5454;
-$armyGreen: #4A743F;
-$airforceBlue: #3481C8;
+<script lang="ts">
+import { defineComponent } from "vue";
 
+import MobileLayout from "@/components/Layout/MobileLayout.vue";
+
+export default defineComponent({
+ 	name: "App",
+	components: {
+		MobileLayout,
+	}
+});
+</script>
+
+
+<style lang="scss">
+@import  "@/scss/_variables.scss";
+
+/* Reset */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 /* Fonts */
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
-
+@import url(//fonts.cdnfonts.com/css/lane---narrow);
+	
 .font-mobile {
 	font-style: normal;
 	
@@ -72,10 +81,18 @@ $airforceBlue: #3481C8;
 }
 	
 #app {
-	font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+	height: 100vh;
+	width: 100vw;
+	font-family: 'Spoqa Han Sans Neo', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: $diminishedWhite;
+	background-color: $white;
+	color: $black;
+}
+	
+.button {
+	border: none;
+	background-color: transparent;
 	color: $black;
 }
 </style>
