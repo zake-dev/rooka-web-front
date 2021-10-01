@@ -40,6 +40,9 @@ const module: Module<State, RootState> = {
 		updateMilitaryType({ commit }, type: string) {
 			commit('setMilitaryType', type);
 		},
+		updateEnterDate({ commit }, date: Date) {
+			commit('setEnterDate', date);
+		},
 	},
 };
 

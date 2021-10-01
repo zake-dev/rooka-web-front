@@ -17,12 +17,15 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .rounded-button {
-	width: 146px;
+	width: 147px;
 	padding: 0.7rem;
 	border-radius: 25px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+}
+.button-lg {
+	width: 213px !important; 
 }
 </style>

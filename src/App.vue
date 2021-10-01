@@ -222,6 +222,10 @@ html, body {
 		background-color: $airforceBlue;
 		color: $white;
 	}
+	&-dark {
+		background-color: $gray5;
+		color: $white;
+	}
 	&:disabled {
 		background-color: $gray2 !important;
 		color: $white !important;

@@ -30,7 +30,7 @@
 				></FormInput>
 				
 				<div class="form-card-buttons my-3">
-					<RoundedButton class="button-success"
+					<RoundedButton class="button-dark button-lg"
 								   text="다음"
 								   @click="handleClickNext"
 								   :disabled="soldier.birthOfDate === null"
@@ -63,6 +63,32 @@
 					<a class="form-card-links__help-link font-mobile__caption mt-4"
 				   	   href="#"
 			    	>해군/해병대는 왜 없나요?</a>
+				</div>
+			</div>
+
+			<FormBackButton @click="handleClickPrevious"></FormBackButton>
+		</div>
+		
+		<!-- 작성 폼 (입대일) -->
+		<div v-else-if="stepper.currentStep === 4" class="form-card">
+			<div class="form-card-content">
+				<FormLabel class="mb-3">
+					{{ soldier.name }} 훈련병의<br>입대일은 언제인가요? 🗓️
+				</FormLabel>
+				<FormInput class="my-2"
+						   type="date"
+						   data-placeholder="입대일을 입력해주세요"
+						   :value="soldier.enterDate ? soldier.enterDate.toISOString().slice(0, 10) : ''"
+						   @change="handleSubmitEnterDate"
+						   required
+				></FormInput>
+				
+				<div class="form-card-buttons my-3">
+					<RoundedButton class="button-dark button-lg"
+								   text="편지 쓰러 가기"
+								   @click="handleSubmitForm"
+								   :disabled="soldier.enterDate === null"
+					></RoundedButton>	
 				</div>
 			</div>
 
@@ -119,11 +145,24 @@ export default defineComponent({
 			store.dispatch('registerForm/updateMilitaryType', militaryType);
 			stepper.currentStep++;
 		};
+		const handleSubmitEnterDate = (event: any) => {
+			const date: Date = new Date(event.target.value);
+			store.dispatch('registerForm/updateEnterDate', date);
+			event.target.blur();
+		};
 		const handleClickNext = () => {
 			stepper.currentStep++;
 		};
 		const handleClickPrevious = () => {
 			stepper.currentStep--;
+		};
+		const handleSubmitForm = () => {
+			const { name, birthOfDate, militaryType, enterDate } = soldier.value;
+			const log = `이름: ${name}\n`
+			          + `생년월일: ${birthOfDate.toLocaleDateString()}\n`
+			          + `군종: ${militaryType}\n`
+					  + `입대일: ${enterDate.toLocaleDateString()}\n`;
+			alert(log);
 		};
 		
 		return {
@@ -134,8 +173,10 @@ export default defineComponent({
 			handleSubmitName,
 			handleSubmitBirthOfDate,
 			handleClickMilitaryType,
+			handleSubmitEnterDate,
 			handleClickNext,
 			handleClickPrevious,
+			handleSubmitForm,
 		};
 	}
 });
