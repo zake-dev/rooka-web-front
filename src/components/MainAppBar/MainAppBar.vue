@@ -21,7 +21,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import "@/scss/_variables.scss";
+
 .app-bar {
+	height: $appBarHeight;
 	padding: 1rem 1.4rem;
 	display: flex;
 	justify-content: space-between;

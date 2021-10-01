@@ -25,6 +25,7 @@ export default defineComponent({
 	padding: 0;
 	box-sizing: border-box;
 }
+
 /* Fonts */
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 @import url(//fonts.cdnfonts.com/css/lane---narrow);
@@ -80,6 +81,18 @@ export default defineComponent({
 	}
 }
 	
+/* Animation */
+.slide-enter-active, .slide-leave-active {
+	transition: all .5s ease;
+}
+.slide-leave-to, .slide-enter {
+	z-index: 1;
+	transform: translateX(-100vw);
+}
+.slide-enter-to, .slide-leave {
+	z-index: 0;
+}
+
 #app {
 	height: 100vh;
 	width: 100vw;

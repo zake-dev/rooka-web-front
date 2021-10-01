@@ -42,6 +42,7 @@ export default defineComponent({
 	height: 1px;
 	display: flex;
 	flex-direction: row;
+	z-index: 1000;
 	
 	&__step {
 		width: 100%;

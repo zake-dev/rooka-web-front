@@ -19,8 +19,11 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+@import "@/scss/_variables.scss";
+
 main {
-	height: 100%;
+	position: relative;
+	height: calc(100% - #{$appBarHeight});
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
