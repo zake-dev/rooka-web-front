@@ -1,9 +1,6 @@
 <template>
 	<div class="app-bar">
-		<Logo></Logo>
-		<button class="button app-bar__button">
-			<i class="fas fa-bars"></i>
-		</button>
+		<Logo class="mx-4 my-2"></Logo>
 	</div>
 </template>
 
@@ -26,7 +23,6 @@ export default defineComponent({
 .app-bar {
 	width: 100%;
 	height: $appBarHeight;
-	padding: 1rem 1.4rem;
 	display: flex;
 	justify-content: space-between;
 	
