@@ -57,10 +57,10 @@ export default defineComponent({
 	position: absolute;
 	z-index: 9999;
 	height: fit-content;
-	width: calc(100% - 2rem);
+	width: calc(100% - 32px);
 	background: #FFFFFF;
 	box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 7px;
-	padding: 1.7rem;
+	padding: 32px;
 }
 </style>

@@ -152,30 +152,24 @@ html, body {
 
 /* Effect */
 .masked-overflow {
-  --scrollbar-width: 8px;
-  --mask-height: 26px;
-
-  overflow-y: auto;
-
-  /* Our height limit */
-  padding-bottom: var(--mask-height);
+	overflow-y: auto;
 	
-  --mask-image-content: linear-gradient(
-    to bottom,
-    transparent,
-    black var(--mask-height),
-    black calc(100% - var(--mask-height)),
-    transparent
-  );
-
-  --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
-  --mask-image-scrollbar: linear-gradient(black, black);
-  --mask-size-scrollbar: var(--scrollbar-width) 100%;
-
-  mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
-  mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
-  mask-position: 0 0, 100% 0;
-  mask-repeat: no-repeat, no-repeat;
+	$mask-height: 28px;
+	$mask-image-content: linear-gradient(
+		to bottom,
+		transparent,
+		black #{$mask-height},
+		black calc(100% - #{$mask-height}),
+		transparent
+	);
+	padding-bottom: $mask-height;
+	mask-image: $mask-image-content;
+	mask-size: 100% 100%;
+	mask-position: 0 0;
+	mask-repeat: no-repeat;
+	
+	scrollbar-width: none;
+	&::-webkit-scrollbar { display: none }
 }
 	
 /* Spacing */
