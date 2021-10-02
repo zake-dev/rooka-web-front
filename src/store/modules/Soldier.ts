@@ -3,30 +3,30 @@ import { RootState } from "@/store";
 
 interface State {
 	name: string;
-	birthOfDate: Date | null;
+	birthOfDate: string;
 	militaryType: string;
-	enterDate: Date | null;
+	enterDate: string;
 }
 
 const module: Module<State, RootState> = {
 	namespaced: true,
 	state: {
 		name: "",
-		birthOfDate: null,
+		birthOfDate: "",
 		militaryType: "",
-		enterDate: null,
+		enterDate: "",
 	},
 	mutations: {
 		setName(state, name: string) {
 			state.name = name;
 		},
-		setBirthOfDate(state, date: Date) {
+		setBirthOfDate(state, date: string) {
 			state.birthOfDate = date;
 		},
 		setMilitaryType(state, type: string) {
 			state.militaryType = type;
 		},
-		setEnterDate(state, date: Date) {
+		setEnterDate(state, date: string) {
 			state.enterDate = date;
 		},
 	},
@@ -34,13 +34,13 @@ const module: Module<State, RootState> = {
 		updateName({ commit }, name: string) {
 			commit('setName', name);
 		},
-		updateBirthOfDate({ commit }, date: Date) {
+		updateBirthOfDate({ commit }, date: string) {
 			commit('setBirthOfDate', date);
 		},
 		updateMilitaryType({ commit }, type: string) {
 			commit('setMilitaryType', type);
 		},
-		updateEnterDate({ commit }, date: Date) {
+		updateEnterDate({ commit }, date: string) {
 			commit('setEnterDate', date);
 		},
 	},

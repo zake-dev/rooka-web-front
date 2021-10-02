@@ -25,7 +25,7 @@
 				<FormInput class="my-2"
 						   type="date"
 						   data-placeholder="생년월일을 입력해주세요"
-						   :value="soldier.birthOfDate ? soldier.birthOfDate.toISOString().slice(0, 10) : ''"
+						   :value="soldier.birthOfDate"
 						   @change="handleSubmitBirthOfDate"
 						   required
 				></FormInput>
@@ -34,7 +34,7 @@
 					<RoundedButton class="button-dark button-lg"
 								   text="다음"
 								   @click="handleToNextStep"
-								   :disabled="soldier.birthOfDate === null"
+								   :disabled="soldier.birthOfDate === ''"
 					></RoundedButton>	
 				</div>
 			</div>
@@ -84,7 +84,7 @@
 				<FormInput class="my-2"
 						   type="date"
 						   data-placeholder="입대일을 입력해주세요"
-						   :value="soldier.enterDate ? soldier.enterDate.toISOString().slice(0, 10) : ''"
+						   :value="soldier.enterDate"
 						   @change="handleSubmitEnterDate"
 						   required
 				></FormInput>
@@ -93,7 +93,7 @@
 					<RoundedButton class="button-dark button-lg"
 								   text="편지 쓰러 가기"
 								   @click="handleSubmitForm"
-								   :disabled="soldier.enterDate === null"
+								   :disabled="soldier.enterDate === ''"
 					></RoundedButton>	
 				</div>
 			</div>
@@ -132,8 +132,6 @@ export default defineComponent({
 	setup() {
 		/* Vuex */
 		const store = useStore();
-		if (!store.hasModule('registerForm'))
-			store.registerModule('registerForm', SoliderModule);
 		const soldier = computed(() => store.state.registerForm);
 		
 		/* Router */
@@ -154,8 +152,7 @@ export default defineComponent({
 			event.target.blur();
 		};
 		const handleSubmitBirthOfDate = (event: any) => {
-			const date: Date = new Date(event.target.value);
-			store.dispatch('registerForm/updateBirthOfDate', date);
+			store.dispatch('registerForm/updateBirthOfDate', event.target.value);
 			event.target.blur();
 		};
 		const handleClickMilitaryType = (militaryType: string) => {
@@ -163,8 +160,7 @@ export default defineComponent({
 			handleToNextStep();
 		};
 		const handleSubmitEnterDate = (event: any) => {
-			const date: Date = new Date(event.target.value);
-			store.dispatch('registerForm/updateEnterDate', date);
+			store.dispatch('registerForm/updateEnterDate', event.target.value);
 			event.target.blur();
 		};
 		const handleToNextStep = () => {

@@ -1,4 +1,7 @@
 import { createStore } from "vuex";
+import createPersistedState from "vuex-persistedstate";
+
+import RegisterForm from "@/store/modules/Soldier";
 
 export interface RootState {
 	appTitle: string;
@@ -10,5 +13,13 @@ export default createStore({
 	},
 	mutations: {},
 	actions: {},
-	modules: {},
+	modules: {
+		registerForm: RegisterForm,
+	},
+	plugins: [
+		createPersistedState({
+			paths: ["registerForm"],
+			storage: window.sessionStorage,
+		}),
+	],
 });
