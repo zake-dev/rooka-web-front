@@ -96,17 +96,80 @@ html, body {
 }
 	
 /* Animation */
-.slide-enter-active, .slide-leave-active {
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
 	transition: all .5s ease;
 }
-.slide-leave-to, .slide-enter {
+.slide-left-enter-from {
+	transform: translateX(100vw);	
+}
+.slide-left-leave-to {
 	z-index: 1;
 	transform: translateX(-100vw);
 }
-.slide-enter-to, .slide-leave {
+.slide-left-enter-to,
+.slide-left-leave-from {
 	z-index: 0;
 }
+.slide-right-enter-from {
+	transform: translateX(-100vw);	
+}
+.slide-right-leave-to {
+	z-index: 1;
+	transform: translateX(100vw);
+}
+.slide-right-enter-to,
+.slide-right-leave-from {
+	z-index: 0;
+}
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity .3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+	opacity: 0;
+}
+.pop-enter-active,
+.pop-leave-active {
+	transition: transform .3s cubic-bezier(0.5, 0, 0.5, 1), opacity .3s ease;
+}
+.pop-enter-from,
+.pop-leave-to {
+	opacity: 0;
+	transform: scale(0.3) translateY(-50%);
+}
 
+/* Effect */
+.masked-overflow {
+  --scrollbar-width: 8px;
+  --mask-height: 28px;
+
+  overflow-y: auto;
+
+  /* Our height limit */
+  padding-bottom: var(--mask-height);
+	
+  --mask-image-content: linear-gradient(
+    to bottom,
+    transparent,
+    black var(--mask-height),
+    black calc(100% - var(--mask-height)),
+    transparent
+  );
+
+  --mask-size-content: calc(100% - var(--scrollbar-width)) 100%;
+  --mask-image-scrollbar: linear-gradient(black, black);
+  --mask-size-scrollbar: var(--scrollbar-width) 100%;
+
+  mask-image: var(--mask-image-content), var(--mask-image-scrollbar);
+  mask-size: var(--mask-size-content), var(--mask-size-scrollbar);
+  mask-position: 0 0, 100% 0;
+  mask-repeat: no-repeat, no-repeat;
+}
+	
 /* Spacing */
 .m {
 	&-0 { margin: 0 }
@@ -221,6 +284,10 @@ html, body {
 	&-info {
 		background-color: $airforceBlue;
 		color: $white;
+	}
+	&-light {
+		background-color: $gray1;
+		color: $gray5;
 	}
 	&-dark {
 		background-color: $gray5;

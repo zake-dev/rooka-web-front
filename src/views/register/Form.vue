@@ -1,7 +1,7 @@
 <template>
 	<LineStepper :stepper="stepper"></LineStepper>
 
-	<transition name="slide">
+	<transition :name="slideTransition">
 		<!-- 작성 폼 (이름) -->
 		<div v-if="stepper.currentStep === 1" class="form-card">
 			<div class="form-card-content">
@@ -32,13 +32,13 @@
 				<div class="form-card-buttons my-3">
 					<RoundedButton class="button-dark button-lg"
 								   text="다음"
-								   @click="handleClickNext"
+								   @click="handleToNextStep"
 								   :disabled="soldier.birthOfDate === null"
 					></RoundedButton>	
 				</div>
 			</div>
 
-			<FormBackButton @click="handleClickPrevious"></FormBackButton>
+			<FormBackButton @click="handleToPreviousStep"></FormBackButton>
 		</div>
 		
 		<!-- 작성 폼 (군종) -->
@@ -61,12 +61,17 @@
 				
 				<div class="form-card-links">
 					<a class="form-card-links__help-link font-mobile__caption mt-4"
-				   	   href="#"
+				   	   @click="isModalVisible = true"
 			    	>해군/해병대는 왜 없나요?</a>
 				</div>
 			</div>
 
-			<FormBackButton @click="handleClickPrevious"></FormBackButton>
+			<FormBackButton @click="handleToPreviousStep"></FormBackButton>
+			
+			<Modal :show="isModalVisible" @closeModal="isModalVisible = false">
+				<MissingMilitaryTypeModalContent @closeModal="isModalVisible = false"
+			    ></MissingMilitaryTypeModalContent>
+			</Modal>
 		</div>
 		
 		<!-- 작성 폼 (입대일) -->
@@ -92,13 +97,13 @@
 				</div>
 			</div>
 
-			<FormBackButton @click="handleClickPrevious"></FormBackButton>
+			<FormBackButton @click="handleToPreviousStep"></FormBackButton>
 		</div>
 	</transition>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed } from "vue";
+import { defineComponent, ref, reactive, computed } from "vue";
 import { useStore } from "vuex";
 	
 import SoliderModule from "@/store/modules/Soldier";
@@ -107,6 +112,8 @@ import FormLabel from "@/components/Form/FormLabel.vue";
 import FormInput from "@/components/Form/FormInput.vue";
 import FormBackButton from "@/components/Form/FormBackButton.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
+import Modal from "@/components/Modal/Modal.vue";
+import MissingMilitaryTypeModalContent from "@/components/Modal/Content/MissingMilitaryTypeModalContent.vue";
 
 export default defineComponent({
  	name: "RegisterForm",
@@ -116,6 +123,8 @@ export default defineComponent({
 		FormInput,
 		FormBackButton,
 		RoundedButton,
+		Modal,
+		MissingMilitaryTypeModalContent,
  	},
 	setup() {
 		/* Vuex */
@@ -129,11 +138,13 @@ export default defineComponent({
 			maxStep: 4,
 			currentStep: 1
 		} as StepperState);
+		const slideTransition = ref("slide-left");
+		const isModalVisible = ref(false);
 		
 		/* Event Handler */
 		const handleSubmitName = (event: any) => {
 			store.dispatch('registerForm/updateName', event.target.value);
-			stepper.currentStep++;
+			handleToNextStep();
 			event.target.blur();
 		};
 		const handleSubmitBirthOfDate = (event: any) => {
@@ -143,17 +154,19 @@ export default defineComponent({
 		};
 		const handleClickMilitaryType = (militaryType: string) => {
 			store.dispatch('registerForm/updateMilitaryType', militaryType);
-			stepper.currentStep++;
+			handleToNextStep();
 		};
 		const handleSubmitEnterDate = (event: any) => {
 			const date: Date = new Date(event.target.value);
 			store.dispatch('registerForm/updateEnterDate', date);
 			event.target.blur();
 		};
-		const handleClickNext = () => {
+		const handleToNextStep = () => {
+			slideTransition.value = "slide-left";
 			stepper.currentStep++;
 		};
-		const handleClickPrevious = () => {
+		const handleToPreviousStep = () => {
+			slideTransition.value = "slide-right";
 			stepper.currentStep--;
 		};
 		const handleSubmitForm = () => {
@@ -169,13 +182,15 @@ export default defineComponent({
 			/* Variables */ 
 			soldier,
 			stepper,
+			slideTransition,
+			isModalVisible,
 			/* Functions */
 			handleSubmitName,
 			handleSubmitBirthOfDate,
 			handleClickMilitaryType,
 			handleSubmitEnterDate,
-			handleClickNext,
-			handleClickPrevious,
+			handleToNextStep,
+			handleToPreviousStep,
 			handleSubmitForm,
 		};
 	}
