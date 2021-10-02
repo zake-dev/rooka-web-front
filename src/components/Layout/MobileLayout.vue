@@ -1,7 +1,11 @@
 <template>
 	<MainAppBar></MainAppBar>
 	<main>
-		<router-view />
+		<router-view v-slot="{ Component }">
+			<transition name="fade" mode="out-in">
+				<component :is="Component" />
+			</transition>
+		</router-view>
 	</main>
 </template>
 
@@ -14,7 +18,7 @@ export default defineComponent({
  	name: "MobileLayout",
 	components: {
 		MainAppBar,
-	}
+	},
 });
 </script>
 
@@ -22,10 +26,6 @@ export default defineComponent({
 @import "@/scss/_variables.scss";
 
 main {
-	position: relative;
 	height: calc(100% - #{$appBarHeight});
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
 }
 </style>

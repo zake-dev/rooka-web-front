@@ -1,4 +1,5 @@
 <template>
+<div class="page-wrapper">
 	<LineStepper :stepper="stepper"></LineStepper>
 
 	<transition :name="slideTransition">
@@ -100,11 +101,13 @@
 			<FormBackButton @click="handleToPreviousStep"></FormBackButton>
 		</div>
 	</transition>
+</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, reactive, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 	
 import SoliderModule from "@/store/modules/Soldier";
 import LineStepper, { StepperState } from "@/components/Stepper/LineStepper.vue";
@@ -132,6 +135,9 @@ export default defineComponent({
 		if (!store.hasModule('registerForm'))
 			store.registerModule('registerForm', SoliderModule);
 		const soldier = computed(() => store.state.registerForm);
+		
+		/* Router */
+		const router = useRouter();
 		
 		/* Local State */
 		const stepper = reactive({
@@ -170,12 +176,7 @@ export default defineComponent({
 			stepper.currentStep--;
 		};
 		const handleSubmitForm = () => {
-			const { name, birthOfDate, militaryType, enterDate } = soldier.value;
-			const log = `이름: ${name}\n`
-			          + `생년월일: ${birthOfDate.toLocaleDateString()}\n`
-			          + `군종: ${militaryType}\n`
-					  + `입대일: ${enterDate.toLocaleDateString()}\n`;
-			alert(log);
+			router.push({ name: "RegisterCreateLink" });
 		};
 		
 		return {

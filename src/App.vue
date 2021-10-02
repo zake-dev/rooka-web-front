@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
 
 import MobileLayout from "@/components/Layout/MobileLayout.vue";
 
@@ -11,7 +11,7 @@ export default defineComponent({
  	name: "App",
 	components: {
 		MobileLayout,
-	}
+	},
 });
 </script>
 
@@ -30,6 +30,7 @@ html, body {
 	width: 100%;
 }
 
+/* Layout */
 #app {
 	height: 100%;
 	width: 100%;
@@ -38,6 +39,13 @@ html, body {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: $white;
 	color: $black;
+}
+.page-wrapper {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 }
 
 /* Fonts */
@@ -103,22 +111,22 @@ html, body {
 	transition: all .5s ease;
 }
 .slide-left-enter-from {
-	transform: translateX(100vw);	
+	transform: translateX(100%);	
 }
 .slide-left-leave-to {
 	z-index: 1;
-	transform: translateX(-100vw);
+	transform: translateX(-100%);
 }
 .slide-left-enter-to,
 .slide-left-leave-from {
 	z-index: 0;
 }
 .slide-right-enter-from {
-	transform: translateX(-100vw);	
+	transform: translateX(-100%);	
 }
 .slide-right-leave-to {
 	z-index: 1;
-	transform: translateX(100vw);
+	transform: translateX(100%);
 }
 .slide-right-enter-to,
 .slide-right-leave-from {

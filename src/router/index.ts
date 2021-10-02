@@ -15,6 +15,11 @@ const routes: Array<RouteRecordRaw> = [
     	component: () => import("../views/register/Form.vue"),
 	},
 	{
+    	path: "/register/create-link",
+    	name: "RegisterCreateLink",
+    	component: () => import("../views/register/CreateLink.vue"),
+	},
+	{
     	path: "/register/result",
     	name: "RegisterResult",
    		component: () => import("../views/register/Result.vue"),
