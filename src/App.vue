@@ -306,6 +306,10 @@ input[type="date"] {
 	&::before {
 		content: attr(data-placeholder);
 		width: 100%;
+		font-weight: 300;
+		font-size: 12px;
+		line-height: 16px;
+		color: $gray3;
 	}
 	&:focus::before,
 	&:valid::before { display: none }
