@@ -1,15 +1,13 @@
 <template>
 	<div class="stepper">
-		<div v-for="step in stepper.maxStep"
-			 :key="step"
-			 class="stepper__step"
-			 :class="{ 'stepper__step--complete': isCompletedStep(step) }"
+		<div class="stepper__progress-bar"
+	    	 :style="progressBarStyle"
 		></div>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, computed } from "vue";
 	
 export interface StepperState {
 	maxStep: number;
@@ -25,9 +23,19 @@ export default defineComponent({
 		},
 	},
 	setup(props) {
+		/* Local State */
+		const progressBarStyle = computed(() => {
+			const { maxStep, currentStep } = props.stepper;
+			return { width: `${currentStep / maxStep * 100}%` };
+		});
+		
+		/* Computed Functions */
 		const isCompletedStep = (step: number) => (step <= props.stepper.currentStep);
 		
 		return {
+			/* Variables */
+			progressBarStyle,
+			/* Functions */
 			isCompletedStep
 		};
 	}
@@ -40,18 +48,12 @@ export default defineComponent({
 .stepper {
 	width: 100%;
 	height: 1px;
-	display: flex;
-	flex-direction: row;
 	z-index: 1000;
-	
-	&__step {
-		width: 100%;
-		height: 1px;
-		border: none;
-		
-		&--complete {
-			border-bottom: 1px solid $black;
-		}
-	}
+	display: inline-block;
+}
+.stepper__progress-bar {
+	height: 1px;
+	background-color: $black;
+	transition: width 0.3s ease;
 }
 </style>
