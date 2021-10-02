@@ -141,11 +141,19 @@ html, body {
 	opacity: 0;
 	transform: scale(0.3);
 }
+.stretch-enter-active,
+.stretch-leave-active {
+	width: opacity .3s ease;	
+}
+.stretch-enter-from,
+.stretch-leave-to {
+	width: 0;
+}
 
 /* Effect */
 .masked-overflow {
   --scrollbar-width: 8px;
-  --mask-height: 28px;
+  --mask-height: 26px;
 
   overflow-y: auto;
 

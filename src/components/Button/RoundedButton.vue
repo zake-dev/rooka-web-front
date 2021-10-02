@@ -17,9 +17,12 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .rounded-button {
+	$height: 42px;
+	
 	width: 147px;
+	height: $height;
 	padding: 0.7rem;
-	border-radius: 25px;
+	border-radius: calc(#{$height} / 2);
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
