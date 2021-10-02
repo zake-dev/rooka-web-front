@@ -139,7 +139,7 @@ html, body {
 .pop-enter-from,
 .pop-leave-to {
 	opacity: 0;
-	transform: scale(0.3) translateY(-50%);
+	transform: scale(0.3);
 }
 
 /* Effect */

@@ -45,7 +45,7 @@ export default defineComponent({
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	height: 500px;
+	height: 450px;
 	
 	&__close-button {
 		width: 23px;
