@@ -1,46 +1,29 @@
 <template>
-	<div class="logo">
-		<span class="logo__text">r</span>
-		<div class="logo__circle logo__circle--red"></div>
-		<div class="logo__circle logo__circle--blue"></div>
-		<span class="logo__text">ka</span>
-	</div>
+	<img class="logo" :src="LogoSvg" />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import LogoSvg from "@/assets/images/logo.svg";
+
 export default defineComponent({
  	name: "Logo",
+	setup() {
+		return {
+			LogoSvg
+		};
+	}
 });
 </script>
 
-<style lang="scss">
-@import  "@/scss/_variables.scss";
-
+<style scoped lang="scss">
 .logo {
-	display: flex;
-	align-items: flex-end;
-	
-	&__text {
-		font-family: "Lane - Narrow", sans-serif;
-		font-size: 30px;
-		font-weight: bold;
-		line-height: 36px;
-		color: $black;
-	}
-	&__circle {
-		margin: 6px 1px;
-		width: 18px;
-		height: 18px;
-		border-radius: 50%;
-		
-		&--red {
-			background-color: $rookaRed;
-		}
-		&--blue {
-			background-color: $rookaBlue;
-		}
-	}
+	height: 25.18px;
+	width: 78px;
+}
+.logo-stamp {
+	height: 10.65px;
+	width: 33px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div class="app-bar">
-		<Logo class="mx-4 my-2"></Logo>
+		<Logo class="mx-4 my-3"></Logo>
 	</div>
 </template>
 
