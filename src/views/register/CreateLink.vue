@@ -46,6 +46,11 @@
 			   @click="isModalVisible = true"
 			>인터넷 편지함 링크라는 게 뭔가요?</a>
 		</div>
+		
+		<Modal :show="isModalVisible" @closeModal="isModalVisible = false">
+			<WhatIsMailBoxLinkModalContent @closeModal="isModalVisible = false"
+			></WhatIsMailBoxLinkModalContent>
+		</Modal>
 	</div>
 </template>
 
@@ -54,11 +59,15 @@ import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
 	
 import RoundedButton from "@/components/Button/RoundedButton.vue";
+import Modal from "@/components/Modal/Modal.vue";
+import WhatIsMailBoxLinkModalContent from "@/components/Modal/Content/WhatIsMailBoxLinkModalContent.vue";
 
 export default defineComponent({
 	name: "RegisterCreateLink",
 	components: {
 		RoundedButton,
+		Modal,
+		WhatIsMailBoxLinkModalContent,
 	},
 	setup() {
 		/* Vuex */
