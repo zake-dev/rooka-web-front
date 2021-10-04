@@ -22,6 +22,7 @@ html, body {
 	color: $black;
 }
 .page-wrapper {
+	position: relative;
 	height: 100%;
 	width: 100%;
 	display: flex;
@@ -305,6 +306,9 @@ html, body {
 }
 
 /* Input */
+input {
+	-webkit-appearance: none;
+}
 input[type="date"] {
 	position: relative;
 	
