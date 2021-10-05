@@ -295,6 +295,10 @@ html, body {
 		background-color: $gray1;
 		color: $gray5;
 	}
+	&-gray {
+		background-color: $gray3;
+		color: $white;
+	}
 	&-dark {
 		background-color: $gray5;
 		color: $white;

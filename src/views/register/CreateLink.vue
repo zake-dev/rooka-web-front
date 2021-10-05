@@ -57,6 +57,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 	
 import RoundedButton from "@/components/Button/RoundedButton.vue";
 import Modal from "@/components/Modal/Modal.vue";
@@ -74,6 +75,9 @@ export default defineComponent({
 		const store = useStore();
 		const soldier = computed(() => store.state.registerForm);
 		
+		/* Router */
+		const router = useRouter();
+		
 		/* Local State */
 		const isModalVisible = ref(false);
 		
@@ -85,7 +89,7 @@ export default defineComponent({
 		
 		/* Event Handler */
 		const handleClickCreateLink = () => {
-			alert("아직 제공되지 않는 서비스입니다.");
+			router.push({ name: "RegisterResult" });
 		};
 		
 		return {
