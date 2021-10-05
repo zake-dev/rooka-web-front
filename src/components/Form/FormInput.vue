@@ -15,7 +15,7 @@ export default defineComponent({
 	
 .form-input {
 	width: 100%;
-	padding: 0.4rem 0.8rem;
+	padding: 8px 12px;
 	background-color: $gray1;
 	border: none;
 	border-radius: 7px;

@@ -320,8 +320,7 @@ input[type="date"] {
 		line-height: 16px;
 		color: $gray3;
 	}
-	&:focus::before,
-	&:valid::before { display: none }
+	&:valid::before { display: none; }
 	
 	&::-webkit-calendar-picker-indicator {
 		position: absolute;
@@ -330,7 +329,7 @@ input[type="date"] {
 		cursor: pointer;
 		height: auto;
 		width: auto;
-		left: 0;
+		left: -100px;
 		right: 0;
 		top: 0;
 		bottom: 0;
