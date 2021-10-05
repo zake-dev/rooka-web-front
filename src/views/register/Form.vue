@@ -7,12 +7,24 @@
 		<div v-if="stepper.currentStep === 1" class="form-card">
 			<div class="form-card-content">
 				<FormLabel class="mb-3">훈련병의 이름은<br>무엇인가요? 😮</FormLabel>
-				<FormInput class="my-2"
-						   type="text"
-						   placeholder="이름을 입력해주세요"
-						   :value="soldier.name"
-						   @keyup.enter="handleSubmitName"
-				></FormInput>
+				<div class="input-area">
+					<span v-if="isInvalidName"
+						  class="input-area__text--invalid font-mobile__caption"
+				    >올바르지 않은 이름 형태입니다.</span>
+					<FormInput type="text"
+							   placeholder="이름을 입력해주세요"
+							   :value="soldier.name"
+							   @input="handleUpdateName"
+							   @keyup.enter="handleSubmitName"
+					></FormInput>
+				</div>
+				<div class="form-card-buttons">
+					<RoundedButton class="button-dark button-lg"
+								   text="다음"
+								   @click="handleSubmitName"
+								   :disabled="soldier.name === ''"
+					></RoundedButton>	
+				</div>
 			</div>
 		</div>
 
@@ -22,8 +34,7 @@
 				<FormLabel class="mb-3">
 					{{ soldier.name }} 훈련병은<br>언제 태어났나요? 🎂
 				</FormLabel>
-				<FormInput class="my-2"
-						   type="date"
+				<FormInput type="date"
 						   data-placeholder="생년월일을 입력해주세요"
 						   :value="soldier.birthOfDate"
 						   @change="handleSubmitBirthOfDate"
@@ -49,7 +60,7 @@
 					{{ soldier.name }} 훈련병의<br>군종은 무엇인가요? 🤔
 				</FormLabel>
 				
-				<div class="form-card-buttons my-3">
+				<div class="form-card-buttons">
 					<RoundedButton class="button-success"
 								   text="육군"
 								   @click="handleClickMilitaryType('육군')"
@@ -89,7 +100,7 @@
 						   required
 				></FormInput>
 				
-				<div class="form-card-buttons my-3">
+				<div class="form-card-buttons">
 					<RoundedButton class="button-dark button-lg"
 								   text="편지 쓰러 가기"
 								   @click="handleSubmitForm"
@@ -144,12 +155,21 @@ export default defineComponent({
 		} as StepperState);
 		const slideTransition = ref("slide-left");
 		const isModalVisible = ref(false);
+		const isInvalidName = ref(false);
 		
 		/* Event Handler */
-		const handleSubmitName = (event: any) => {
+		const handleUpdateName = (event: any) => {
 			store.dispatch('registerForm/updateName', event.target.value);
+		};
+		const handleSubmitName = () => {
+			const isValidKoreanName = (name: string) => new RegExp(/^[가-힣]{2,}$/g).test(name);
+			
+			if (!isValidKoreanName(soldier.value.name)) {
+				isInvalidName.value = true;
+				return;
+			}
+			isInvalidName.value = false;
 			handleToNextStep();
-			event.target.blur();
 		};
 		const handleSubmitBirthOfDate = (event: any) => {
 			store.dispatch('registerForm/updateBirthOfDate', event.target.value);
@@ -181,7 +201,9 @@ export default defineComponent({
 			stepper,
 			slideTransition,
 			isModalVisible,
+			isInvalidName,
 			/* Functions */
+			handleUpdateName,
 			handleSubmitName,
 			handleSubmitBirthOfDate,
 			handleClickMilitaryType,
@@ -211,6 +233,7 @@ export default defineComponent({
 	padding: 1.5rem 0;
 }
 .form-card-buttons {
+	margin-top: 40px;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -225,6 +248,20 @@ export default defineComponent({
 		text-decoration: none;
 		color: $gray4;
 		border-bottom: 1px solid $gray4;
+	}
+}
+.input-area {
+	height: 46px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: flex-end;
+	
+	&__text {		
+		&--invalid {
+			padding: 0.4px 0;
+			color: $rookaRed
+		}
 	}
 }
 </style>
