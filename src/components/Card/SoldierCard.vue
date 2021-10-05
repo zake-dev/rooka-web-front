@@ -3,7 +3,7 @@
 		<div class="card-content">
 			<div class="card-content-row mb-3">
 				<p class="font-mobile__title">{{ soldier.name }} 훈련병</p>
-				<img class="card-content__image" :src="militaryHelmetImageUrl" />
+				<img class="card-content__image" :src="MilitaryHelmetPng" />
 			</div>
 			
 			<table class="mt-1">
@@ -36,6 +36,7 @@
 <script lang="ts">
 import { defineComponent, PropType, computed } from "vue";
 	
+import MilitaryHelmetPng from "@/assets/images/military-helmet.png";
 import Logo from "@/components/Logo/Logo.vue";
 import LinkChip from "@/components/Chip/LinkChip.vue";
 
@@ -56,9 +57,6 @@ export default defineComponent({
 		soldier: Object as PropType<Soldier>,
 	},
 	setup() {
-		/* Asset */
-		const militaryHelmetImageUrl = computed(() => require("@/assets/images/military-helmet.png"));
-		
 		/* Helper Function */
 		const toKoreanLocaleDateString = (dateString: string) => {
 			const [year, month, day] = dateString.split('-');
@@ -66,8 +64,8 @@ export default defineComponent({
 		};
 		
 		return {
-			/* Variables */
-			militaryHelmetImageUrl,
+			/* Assets */
+			MilitaryHelmetPng,
 			/* Functions */
 			toKoreanLocaleDateString,
 		};
