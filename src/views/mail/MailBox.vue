@@ -14,12 +14,10 @@
 			
 		</div>
 		
-		<div class="action-buttons">
-			<IconButton class="button-dark me-2"
-						fontAwesomeIcon="fas fa-share-alt"
-						@click="handleClickShare"
-			></IconButton>
-			<RoundedButton class="button-dark button-md"
+		<div class="action-buttons" :class="{ 'action-buttons--closed': !isSendable }">
+			<ShareButton @click="handleClickShare"></ShareButton>
+			<RoundedButton v-if="isSendable"
+						   class="button-dark button-md ms-2"
 						   text="편지 쓰기"
 						   @click="handleClickNewMail"
 			></RoundedButton>	
@@ -31,13 +29,13 @@
 import { computed } from "vue";
 
 import InfoButton from "@/components/Button/InfoButton.vue";
-import IconButton from "@/components/Button/IconButton.vue";
+import ShareButton from "@/components/Button/ShareButton.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
 
 export default {
 	components: {
 		InfoButton,
-		IconButton,
+		ShareButton,
 		RoundedButton,
 	},
 	setup() {
@@ -318,6 +316,7 @@ export default {
 			}
 		});
 		const soldier = computed(() => context.value.soldier);
+		const isSendable = computed(() => context.value.state === "OPEN");
 		const mails = computed(() => context.value.mails);
 		const headerMessage = computed(() => {
 			const { soldier, state, mails } = context.value;
@@ -351,8 +350,9 @@ export default {
 		return {
 			/* Variables */
 			soldier,
-			headerMessage,
+			isSendable,
 			mails,
+			headerMessage,
 			/* Functions */
 			handleClickShare,
 			handleClickNewMail,
@@ -382,7 +382,12 @@ export default {
 	bottom: 0;
 	width: 100%;
 	height: 94px;
+	padding: 16px;
 	display: inline-flex;
 	justify-content: center;
+	
+	&--closed {
+		justify-content: flex-end;
+	}
 }
 </style>
