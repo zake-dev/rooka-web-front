@@ -3,15 +3,24 @@
 		<div class="mailbox-header">
 			<div class="mailbox-header-title mb-2">
 				<span class="font-mobile__title me-2">{{ soldier.name }} 훈련병</span>
-				<InfoButton class="mb-1"></InfoButton>
+				<InfoButton class="mb-1"
+							@click="handleClickInfo"
+				></InfoButton>
 			</div>
 			<span class="font-mobile__content-text">
 				{{ headerMessage }}
 			</span>
 		</div>
 		
-		<div class="mailbox masked-overflow">
-			
+		<div class="mailbox">
+			<div class="mailbox-list masked-overflow">
+				<template v-if="mails.length === 0">
+					<MailListItem v-for="index in 10" :key="index"></MailListItem>
+				</template>
+				<template v-else>
+					<MailListItem v-for="mail in mails" :key="mail.id"></MailListItem>
+				</template>
+			</div>
 		</div>
 		
 		<div class="action-buttons" :class="{ 'action-buttons--closed': !isSendable }">
@@ -31,12 +40,14 @@ import { computed } from "vue";
 import InfoButton from "@/components/Button/InfoButton.vue";
 import ShareButton from "@/components/Button/ShareButton.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
+import MailListItem from "@/components/MailBox/MailListItem.vue";
 
 export default {
 	components: {
 		InfoButton,
 		ShareButton,
 		RoundedButton,
+		MailListItem,
 	},
 	setup() {
 		/* Local State */
@@ -62,6 +73,7 @@ export default {
 				state: "OPEN",
 				mails: [
 					{
+						id: 1,
 						author: "김공군",
 						relationship: "동생",
 						body: "이것을 밝은 보이는 우는 용기가 있다.",
@@ -69,6 +81,7 @@ export default {
 						state: "PENDING",
 					},
 					{
+						id: 2,
 						author: "이힘찬",
 						relationship: "친구",
 						body: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
@@ -87,6 +100,7 @@ export default {
 				state: "OPEN",
 				mails: [
 					{
+						id: 1,
 						author: "김공군",
 						relationship: "동생",
 						body: "이것을 밝은 보이는 우는 용기가 있다.",
@@ -95,6 +109,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 2,
 						author: "이힘찬",
 						relationship: "친구",
 						body: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
@@ -103,6 +118,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 3,
 						author: "김공군",
 						relationship: "동생",
 						body: "이것을 밝은 보이는 우는 용기가 있다.",
@@ -111,6 +127,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 4,
 						author: "이힘찬",
 						relationship: "친구",
 						body: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
@@ -119,6 +136,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 5,
 						author: "강해병",
 						relationship: "엄마",
 						body: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
@@ -127,6 +145,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 6,
 						author: "강해병",
 						relationship: "엄마",
 						body: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
@@ -135,6 +154,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 7,
 						author: "정대한",
 						relationship: "아빠",
 						body: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
@@ -143,6 +163,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 8,
 						author: "정대한",
 						relationship: "아빠",
 						body: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
@@ -151,6 +172,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 9,
 						author: "최민국",
 						relationship: "애인",
 						body: "얼마나 구하지 이상의 끓는 아니다.",
@@ -159,6 +181,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 10,
 						author: "최민국",
 						relationship: "애인",
 						body: "얼마나 구하지 이상의 끓는 아니다.",
@@ -178,6 +201,7 @@ export default {
 				state: "OPEN",
 				mails: [
 					{
+						id: 1,
 						author: "김공군",
 						relationship: "동생",
 						body: "이것을 밝은 보이는 우는 용기가 있다.",
@@ -186,6 +210,7 @@ export default {
 						state: "PENDING",
 					},
 					{
+						id: 2,
 						author: "이힘찬",
 						relationship: "친구",
 						body: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
@@ -194,6 +219,7 @@ export default {
 						state: "PENDING",
 					},
 					{
+						id: 3,
 						author: "강해병",
 						relationship: "엄마",
 						body: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
@@ -202,6 +228,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 4,
 						author: "정대한",
 						relationship: "아빠",
 						body: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
@@ -210,6 +237,7 @@ export default {
 						state: "FAILED",
 					},
 					{
+						id: 5,
 						author: "최민국",
 						relationship: "애인",
 						body: "얼마나 구하지 이상의 끓는 아니다.",
@@ -218,6 +246,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 6,
 						author: "최민국",
 						relationship: "애인",
 						body: "얼마나 구하지 이상의 끓는 아니다.",
@@ -226,6 +255,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 7,
 						author: "최민국",
 						relationship: "애인",
 						body: "얼마나 구하지 이상의 끓는 아니다.",
@@ -234,6 +264,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 8,
 						author: "최민국",
 						relationship: "애인",
 						body: "얼마나 구하지 이상의 끓는 아니다.",
@@ -253,6 +284,7 @@ export default {
 				state: "CLOSED",
 				mails: [
 					{
+						id: 1,
 						author: "김공군",
 						relationship: "동생",
 						body: "이것을 밝은 보이는 우는 용기가 있다.",
@@ -261,6 +293,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 2,
 						author: "이힘찬",
 						relationship: "친구",
 						body: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
@@ -269,6 +302,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 3,
 						author: "강해병",
 						relationship: "엄마",
 						body: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
@@ -277,6 +311,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 4,
 						author: "정대한",
 						relationship: "아빠",
 						body: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
@@ -285,6 +320,7 @@ export default {
 						state: "DELIVERED",
 					},
 					{
+						id: 5,
 						author: "최민국",
 						relationship: "애인",
 						body: "얼마나 구하지 이상의 끓는 아니다.",
@@ -340,6 +376,9 @@ export default {
 		});
 		
 		/* Event Handler */
+		const handleClickInfo = () => {
+			alert('아직 제공되지 않는 서비스입니다.');
+		};
 		const handleClickShare = () => {
 			alert('아직 제공되지 않는 서비스입니다.');
 		};
@@ -354,6 +393,7 @@ export default {
 			mails,
 			headerMessage,
 			/* Functions */
+			handleClickInfo,
 			handleClickShare,
 			handleClickNewMail,
 		}
@@ -362,9 +402,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$headerHeight: 112px;
+
 .mailbox-header {
 	width: 100%;
-	height: 112px;
+	min-height: $headerHeight;
 	padding: 8px 24px;
 	display: flex;
 	flex-direction: column;
@@ -375,6 +417,17 @@ export default {
 		display: flex;
 		flex-direction: row;
 		align-items: flex-end;
+	}
+}
+.mailbox {
+	width: 100%;
+	height: calc(100% - #{$headerHeight});
+	padding: 0 16px 24px 16px;
+	display: flex;
+	flex-direction: column;
+	
+	&-list {
+		padding-top: 8px;
 	}
 }
 .action-buttons {
