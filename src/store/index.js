@@ -3,10 +3,6 @@ import createPersistedState from "vuex-persistedstate";
 
 import RegisterForm from "@/store/modules/Soldier";
 
-export interface RootState {
-	appTitle: string;
-}
-
 export default createStore({
 	state: {
 		appTitle: "rooka",

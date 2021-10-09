@@ -115,13 +115,13 @@
 </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, reactive, computed } from "vue";
+<script>
+import { ref, reactive, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 	
 import SoliderModule from "@/store/modules/Soldier";
-import LineStepper, { StepperState } from "@/components/Stepper/LineStepper.vue";
+import LineStepper from "@/components/Stepper/LineStepper.vue";
 import FormLabel from "@/components/Form/FormLabel.vue";
 import FormInput from "@/components/Form/FormInput.vue";
 import FormBackButton from "@/components/Form/FormBackButton.vue";
@@ -129,7 +129,7 @@ import RoundedButton from "@/components/Button/RoundedButton.vue";
 import Modal from "@/components/Modal/Modal.vue";
 import MissingMilitaryTypeModalContent from "@/components/Modal/Content/MissingMilitaryTypeModalContent.vue";
 
-export default defineComponent({
+export default {
  	name: "RegisterForm",
  	components: {
 		LineStepper,
@@ -152,17 +152,17 @@ export default defineComponent({
 		const stepper = reactive({
 			maxStep: 4,
 			currentStep: 1
-		} as StepperState);
+		});
 		const slideTransition = ref("slide-left");
 		const isModalVisible = ref(false);
 		const isInvalidName = ref(false);
 		
 		/* Event Handler */
-		const handleUpdateName = (event: any) => {
+		const handleUpdateName = (event) => {
 			store.dispatch('registerForm/updateName', event.target.value);
 		};
 		const handleSubmitName = () => {
-			const isValidKoreanName = (name: string) => new RegExp(/^[가-힣]{2,}$/g).test(name);
+			const isValidKoreanName = (name) => new RegExp(/^[가-힣]{2,}$/g).test(name);
 			
 			if (!isValidKoreanName(soldier.value.name)) {
 				isInvalidName.value = true;
@@ -171,15 +171,15 @@ export default defineComponent({
 			isInvalidName.value = false;
 			handleToNextStep();
 		};
-		const handleSubmitBirthOfDate = (event: any) => {
+		const handleSubmitBirthOfDate = (event) => {
 			store.dispatch('registerForm/updateBirthOfDate', event.target.value);
 			event.target.blur();
 		};
-		const handleClickMilitaryType = (militaryType: string) => {
+		const handleClickMilitaryType = (militaryType) => {
 			store.dispatch('registerForm/updateMilitaryType', militaryType);
 			handleToNextStep();
 		};
-		const handleSubmitEnterDate = (event: any) => {
+		const handleSubmitEnterDate = (event) => {
 			store.dispatch('registerForm/updateEnterDate', event.target.value);
 			event.target.blur();
 		};
@@ -213,7 +213,7 @@ export default defineComponent({
 			handleSubmitForm,
 		};
 	}
-});
+};
 </script>
 
 <style scoped lang="scss">

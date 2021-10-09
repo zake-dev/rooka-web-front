@@ -9,17 +9,15 @@
 	</main>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-	
+<script>	
 import MainAppBar from "@/components/MainAppBar/MainAppBar.vue";
 
-export default defineComponent({
+export default {
  	name: "MobileLayout",
 	components: {
 		MainAppBar,
 	},
-});
+};
 </script>
 
 <style scoped lang="scss">

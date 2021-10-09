@@ -54,8 +54,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+<script>
+import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 	
@@ -63,7 +63,7 @@ import RoundedButton from "@/components/Button/RoundedButton.vue";
 import Modal from "@/components/Modal/Modal.vue";
 import WhatIsMailBoxLinkModalContent from "@/components/Modal/Content/WhatIsMailBoxLinkModalContent.vue";
 
-export default defineComponent({
+export default {
 	name: "RegisterCreateLink",
 	components: {
 		RoundedButton,
@@ -82,7 +82,7 @@ export default defineComponent({
 		const isModalVisible = ref(false);
 		
 		/* Helper Function */
-		const toKoreanLocaleDateString = (dateString: string) => {
+		const toKoreanLocaleDateString = (dateString) => {
 			const [year, month, day] = dateString.split('-');
 			return `${year}년 ${month}월 ${day}일`;
 		};
@@ -101,7 +101,7 @@ export default defineComponent({
 			handleClickCreateLink,
 		};
 	},
-});
+};
 </script>
 
 <style scoped lang="scss">

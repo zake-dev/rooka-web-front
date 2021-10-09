@@ -2,17 +2,15 @@
 	<MobileLayout></MobileLayout>
 </template>
 
-<script lang="ts">
-import { defineComponent, watch } from "vue";
-
+<script>
 import MobileLayout from "@/components/Layout/MobileLayout.vue";
 
-export default defineComponent({
+export default {
  	name: "App",
 	components: {
 		MobileLayout,
 	},
-});
+};
 </script>
 
 

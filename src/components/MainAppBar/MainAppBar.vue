@@ -4,17 +4,15 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-	
+<script>	
 import Logo from '@/components/Logo/Logo.vue';
 
-export default defineComponent({
+export default {
  	name: "MainAppBar",
 	components: {
 		Logo
 	}
-});
+};
 </script>
 
 <style lang="scss">

@@ -2,14 +2,6 @@
 	<input class="form-input" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
- 	name: "FormInput",
-});
-</script>
-
 <style scoped lang="scss">
 @import "@/scss/_variables.scss";
 	

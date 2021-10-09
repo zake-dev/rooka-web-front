@@ -24,10 +24,8 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
+<script>
+export default {
  	name: "WhatIsMailBoxLinkModalContent",
 	emits: ['closeModal'],
 	setup(props, { emit }) {
@@ -37,7 +35,7 @@ export default defineComponent({
 			handleClickCloseModal,
 		};
 	},
-});
+};
 </script>
 
 <style scoped lang="scss">

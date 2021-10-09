@@ -6,21 +6,13 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, computed } from "vue";
-	
-export interface StepperState {
-	maxStep: number;
-	currentStep: number;
-}
+<script>
+import { computed } from "vue";
 
-export default defineComponent({
+export default {
  	name: "LineStepper",
 	props: {
-		stepper: {
-			type: Object as PropType<StepperState>,
-			required: true,
-		},
+		stepper: Object,
 	},
 	setup(props) {
 		/* Local State */
@@ -30,7 +22,7 @@ export default defineComponent({
 		});
 		
 		/* Computed Functions */
-		const isCompletedStep = (step: number) => (step <= props.stepper.currentStep);
+		const isCompletedStep = (step) => (step <= props.stepper.currentStep);
 		
 		return {
 			/* Variables */
@@ -39,7 +31,7 @@ export default defineComponent({
 			isCompletedStep
 		};
 	}
-});
+};
 </script>
 
 <style scoped lang="scss">

@@ -1,5 +1,7 @@
 <template>
-	<div class="card">
+<div>
+	<!-- 이미지로 렌더될 html -->
+	<div id="card" class="card">
 		<div class="card-content">
 			<div class="card-content-row mb-3">
 				<p class="font-mobile__title">{{ soldier.name }} 훈련병</p>
@@ -16,7 +18,7 @@
 					<td class="font-mobile__content-text ps-1">{{ soldier.militaryType }}</td>
 				</tr>
 				<tr class="mt-2">
-					<td class="font-mobile__content-title pe-2">생년월일</td>
+					<td class="font-mobile__content-title pe-2">입대일</td>
 					<td class="font-mobile__content-text ps-1">{{ toKoreanLocaleDateString(soldier.enterDate) }}</td>
 				</tr>
 			</table>
@@ -31,37 +33,45 @@
 		</div>
 		<Logo class="logo-stamp"></Logo>
 	</div>
+
+	<!-- 이미지 출력물 -->
+	<div id="card-image"></div>
+</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType, computed } from "vue";
+<script>
+import { ref, computed, onMounted } from "vue";
+import * as htmlToImage from "html-to-image";
 	
 import MilitaryHelmetPng from "@/assets/images/military-helmet.png";
 import Logo from "@/components/Logo/Logo.vue";
 import LinkChip from "@/components/Chip/LinkChip.vue";
 
-export interface Soldier {
-	name: string;
-	birthOfDate: string;
-	militaryType: string;
-	enterDate: string;
-}
-
-export default defineComponent({
+export default {
  	name: "SoldierCard",
 	components: {
 		Logo,
 		LinkChip,
 	},
 	props: {
-		soldier: Object as PropType<Soldier>,
+		soldier: Object,
 	},
-	setup() {
+	setup() {		
 		/* Helper Function */
-		const toKoreanLocaleDateString = (dateString: string) => {
+		const toKoreanLocaleDateString = (dateString) => {
 			const [year, month, day] = dateString.split('-');
 			return `${year}년 ${month}월 ${day}일`;
 		};
+		
+		onMounted(async () => {			
+			const card = document.getElementById("card");
+			const imageUrl = await htmlToImage.toPng(card);
+			
+			const cardImage = document.getElementById("card-image");
+			const image = new Image();
+			image.src = imageUrl;
+			cardImage.appendChild(image);
+		});
 		
 		return {
 			/* Assets */
@@ -70,7 +80,7 @@ export default defineComponent({
 			toKoreanLocaleDateString,
 		};
 	}
-});
+};
 </script>
 
 <style scoped lang="scss">

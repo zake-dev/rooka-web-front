@@ -26,15 +26,15 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+<script>
+import { ref, computed } from "vue";
 import { useStore } from "vuex";
 
 import SoldierCard from "@/components/Card/SoldierCard.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
 import Modal from "@/components/Modal/Modal.vue";
 
-export default defineComponent({
+export default {
 	name: "RegisterResult",
 	components: {
 		SoldierCard,
@@ -66,7 +66,7 @@ export default defineComponent({
 			handleClickNewMail,
 		};
 	},
-});
+};
 </script>
 
 <style scoped lang="scss">

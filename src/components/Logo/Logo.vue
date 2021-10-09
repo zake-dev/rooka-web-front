@@ -2,19 +2,17 @@
 	<img class="logo" :src="LogoSvg" />
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
+<script>
 import LogoSvg from "@/assets/images/logo.svg";
 
-export default defineComponent({
+export default {
  	name: "Logo",
 	setup() {
 		return {
 			LogoSvg
 		};
 	}
-});
+};
 </script>
 
 <style scoped lang="scss">

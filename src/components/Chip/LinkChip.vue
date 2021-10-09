@@ -5,12 +5,12 @@
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed } from "vue";
+<script>
+import { computed } from "vue";
 	
 import LinkIconSvg from "@/assets/images/link-icon.svg";
 
-export default defineComponent({
+export default {
  	name: "SoldierCard",
 	props: {
 		link: String,
@@ -20,7 +20,7 @@ export default defineComponent({
 			LinkIconSvg
 		};
 	}
-});
+};
 </script>
 
 <style scoped lang="scss">
