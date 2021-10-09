@@ -1,9 +1,18 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
-const routes: Array<RouteRecordRaw> = [
+const routes = [
 	{
 		path: "/",
 		redirect: "/register",
+	},
+	{
+		path: "/:key(%.+[.-_~][0-9]{4})",
+		redirect: to => `/mail/${to.params.key}`,
+	},
+	{
+		path: "/mail/:key",
+		name: "MailBox",
+		component: () => import("../views/mail/MailBox.vue"),
 	},
 	{
 		path: "/register",
@@ -13,6 +22,11 @@ const routes: Array<RouteRecordRaw> = [
     	path: "/register/form",
     	name: "RegisterForm",
     	component: () => import("../views/register/Form.vue"),
+	},
+	{
+    	path: "/register/create-link",
+    	name: "RegisterCreateLink",
+    	component: () => import("../views/register/CreateLink.vue"),
 	},
 	{
     	path: "/register/result",

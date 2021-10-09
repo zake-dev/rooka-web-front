@@ -1,31 +1,29 @@
 <template>
 	<MainAppBar></MainAppBar>
 	<main>
-		<router-view />
+		<router-view v-slot="{ Component }">
+			<transition name="fade" mode="out-in">
+				<component :is="Component" />
+			</transition>
+		</router-view>
 	</main>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-	
+<script>	
 import MainAppBar from "@/components/MainAppBar/MainAppBar.vue";
 
-export default defineComponent({
+export default {
  	name: "MobileLayout",
 	components: {
 		MainAppBar,
-	}
-});
+	},
+};
 </script>
 
 <style scoped lang="scss">
 @import "@/scss/_variables.scss";
 
 main {
-	position: relative;
 	height: calc(100% - #{$appBarHeight});
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
 }
 </style>

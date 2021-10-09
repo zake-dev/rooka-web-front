@@ -1,31 +1,26 @@
 <template>
 	<div class="app-bar">
-		<Logo></Logo>
-		<button class="button app-bar__button">
-			<i class="fas fa-bars"></i>
-		</button>
+		<Logo class="mx-4 my-3"></Logo>
 	</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-	
+<script>	
 import Logo from '@/components/Logo/Logo.vue';
 
-export default defineComponent({
+export default {
  	name: "MainAppBar",
 	components: {
 		Logo
 	}
-});
+};
 </script>
 
 <style lang="scss">
 @import "@/scss/_variables.scss";
 
 .app-bar {
+	width: 100%;
 	height: $appBarHeight;
-	padding: 1rem 1.4rem;
 	display: flex;
 	justify-content: space-between;
 	
