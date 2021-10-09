@@ -1,7 +1,7 @@
 <template>
-<div>
+<div class="card-wrapper">
 	<!-- 이미지로 렌더될 html -->
-	<div id="card" class="card">
+	<div id="card-html" class="card">
 		<div class="card-content">
 			<div class="card-content-row mb-3">
 				<p class="font-mobile__title">{{ soldier.name }} 훈련병</p>
@@ -29,7 +29,7 @@
 				하단의 링크에 접속하여 훈련소에 있는<br>
 				{{ soldier.name }} 훈련병에게 편지를 써주세요!
 			</p>
-			<LinkChip link="http://rooka.co.kr/김루카@123"></LinkChip>
+			<LinkChip link="http://rooka.kr/김루카@123"></LinkChip>
 		</div>
 		<Logo class="logo-stamp"></Logo>
 	</div>
@@ -41,7 +41,7 @@
 
 <script>
 import { ref, computed, onMounted } from "vue";
-import * as htmlToImage from "html-to-image";
+import html2canvas from "html2canvas";
 	
 import MilitaryHelmetPng from "@/assets/images/military-helmet.png";
 import Logo from "@/components/Logo/Logo.vue";
@@ -64,13 +64,12 @@ export default {
 		};
 		
 		onMounted(async () => {			
-			const card = document.getElementById("card");
-			const imageUrl = await htmlToImage.toPng(card);
-			
+			const card = document.getElementById("card-html");
+			const canvas = await html2canvas(card, {
+				onclone: (clonedDocument => clonedDocument.getElementById("card-html").style.display = 'block'),
+			});
 			const cardImage = document.getElementById("card-image");
-			const image = new Image();
-			image.src = imageUrl;
-			cardImage.appendChild(image);
+			cardImage.appendChild(canvas);
 		});
 		
 		return {
@@ -86,11 +85,18 @@ export default {
 <style scoped lang="scss">
 @import "@/scss/_variables.scss";
 
+.card-wrapper {
+	width: 327px;
+	height: 327px;
+	box-shadow: 0px 6px 17px -1px #0000000D;
+	border-radius: 7px;
+	background-color: $white;
+}
 .card {
+	display: none;
 	width: 327px;
 	height: 327px;
 	padding: 20px;
-	box-shadow: 0px 6px 17px -1px #0000000D;
 	border-radius: 7px;
 	background-color: $white;
 	
