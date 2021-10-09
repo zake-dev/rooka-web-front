@@ -6,6 +6,15 @@ const routes = [
 		redirect: "/register",
 	},
 	{
+		path: "/:key(%.+[.-_~][0-9]{4})",
+		redirect: to => `/mail/${to.params.key}`,
+	},
+	{
+		path: "/mail/:key",
+		name: "MailBox",
+		component: () => import("../views/mail/MailBox.vue"),
+	},
+	{
 		path: "/register",
 		redirect: "/register/form",
 	},
