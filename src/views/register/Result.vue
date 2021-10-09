@@ -29,6 +29,7 @@
 <script>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 import SoldierCard from "@/components/Card/SoldierCard.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
@@ -46,6 +47,9 @@ export default {
 		const store = useStore();
 		const soldier = computed(() => store.state.registerForm);
 		
+		/* Router */
+		const router = useRouter();
+		
 		/* Local State */
 		const isModalVisible = ref(false);
 		
@@ -54,8 +58,9 @@ export default {
 			alert("아직 제공되지 않는 서비스입니다.");
 		};
 		const handleClickNewMail = () => {
-			alert("아직 제공되지 않는 서비스입니다.");
-		};
+			const link = `/mail/${soldier.value.name}_1234`;
+			router.push(link);
+		}
 		
 		return {
 			/* Variables */

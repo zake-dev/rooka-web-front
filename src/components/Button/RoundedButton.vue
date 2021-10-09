@@ -14,19 +14,24 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.rounded-button {
-	$height: 42px;
-	
+.rounded-button {	
 	width: 147px;
-	height: $height;
+	height: 42px;
 	padding: 0.7rem;
-	border-radius: calc(#{$height} / 2);
+	border-radius: 21px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 }
-.button-lg {
-	width: 213px !important; 
+.button {
+	&-lg {
+		width: 213px !important; 
+	}
+	&-md {
+		width: 172px !important;
+		height: 50px !important;
+		border-radius: 25px;
+	}
 }
 </style>
