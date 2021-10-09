@@ -4,7 +4,7 @@
 			<div class="mailbox-header-title mb-2">
 				<span class="font-mobile__title me-2">{{ soldier.name }} 훈련병</span>
 				<InfoButton class="mb-1"
-							@click="handleClickInfo"
+							@click="isModalVisible = true"
 				></InfoButton>
 			</div>
 			<span class="font-mobile__content-text">
@@ -31,16 +31,22 @@
 						   @click="handleClickNewMail"
 			></RoundedButton>	
 		</div>
+
+		<Modal :show="isModalVisible" @closeModal="isModalVisible = false">
+			<ProfileModalContent :soldier="soldier" @closeModal="isModalVisible = false"></ProfileModalContent>
+		</Modal>
 	</div>
 </template>
 
 <script>
-import { computed } from "vue";
+import { ref, computed } from "vue";
 
 import InfoButton from "@/components/Button/InfoButton.vue";
 import ShareButton from "@/components/Button/ShareButton.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
 import MailListItem from "@/components/MailBox/MailListItem.vue";
+import Modal from "@/components/Modal/Modal.vue";
+import ProfileModalContent from "@/components/Modal/Content/ProfileModalContent.vue";
 
 export default {
 	components: {
@@ -48,6 +54,8 @@ export default {
 		ShareButton,
 		RoundedButton,
 		MailListItem,
+		Modal,
+		ProfileModalContent,
 	},
 	setup() {
 		/* Local State */
@@ -76,7 +84,7 @@ export default {
 						id: 1,
 						author: "김공군",
 						relationship: "동생",
-						body: "이것을 밝은 보이는 우는 용기가 있다.",
+						preview: "이것을 밝은 보이는 우는 용기가 있다.",
 						createdAt: "2020-12-30",
 						state: "PENDING",
 					},
@@ -84,7 +92,7 @@ export default {
 						id: 2,
 						author: "이힘찬",
 						relationship: "친구",
-						body: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
+						preview: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
 						createdAt: "2020-12-30",
 						state: "PENDING",
 					}
@@ -103,7 +111,7 @@ export default {
 						id: 1,
 						author: "김공군",
 						relationship: "동생",
-						body: "이것을 밝은 보이는 우는 용기가 있다.",
+						preview: "이것을 밝은 보이는 우는 용기가 있다.",
 						createdAt: "2020-12-30",
 						deliveredAt: "2020-12-31",
 						state: "DELIVERED",
@@ -112,7 +120,7 @@ export default {
 						id: 2,
 						author: "이힘찬",
 						relationship: "친구",
-						body: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
+						preview: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
 						createdAt: "2020-12-30",
 						deliveredAt: "2020-12-31",
 						state: "DELIVERED",
@@ -121,7 +129,7 @@ export default {
 						id: 3,
 						author: "김공군",
 						relationship: "동생",
-						body: "이것을 밝은 보이는 우는 용기가 있다.",
+						preview: "이것을 밝은 보이는 우는 용기가 있다.",
 						createdAt: "2020-12-30",
 						deliveredAt: "2020-12-31",
 						state: "DELIVERED",
@@ -130,7 +138,7 @@ export default {
 						id: 4,
 						author: "이힘찬",
 						relationship: "친구",
-						body: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
+						preview: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
 						createdAt: "2020-12-30",
 						deliveredAt: "2020-12-31",
 						state: "DELIVERED",
@@ -139,7 +147,7 @@ export default {
 						id: 5,
 						author: "강해병",
 						relationship: "엄마",
-						body: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
+						preview: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
 						createdAt: "2020-12-29",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -148,7 +156,7 @@ export default {
 						id: 6,
 						author: "강해병",
 						relationship: "엄마",
-						body: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
+						preview: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
 						createdAt: "2020-12-29",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -157,7 +165,7 @@ export default {
 						id: 7,
 						author: "정대한",
 						relationship: "아빠",
-						body: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
+						preview: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
 						createdAt: "2020-12-28",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -166,7 +174,7 @@ export default {
 						id: 8,
 						author: "정대한",
 						relationship: "아빠",
-						body: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
+						preview: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
 						createdAt: "2020-12-28",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -175,7 +183,7 @@ export default {
 						id: 9,
 						author: "최민국",
 						relationship: "애인",
-						body: "얼마나 구하지 이상의 끓는 아니다.",
+						preview: "얼마나 구하지 이상의 끓는 아니다.",
 						createdAt: "2020-12-27",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -184,7 +192,7 @@ export default {
 						id: 10,
 						author: "최민국",
 						relationship: "애인",
-						body: "얼마나 구하지 이상의 끓는 아니다.",
+						preview: "얼마나 구하지 이상의 끓는 아니다.",
 						createdAt: "2020-12-27",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -204,7 +212,7 @@ export default {
 						id: 1,
 						author: "김공군",
 						relationship: "동생",
-						body: "이것을 밝은 보이는 우는 용기가 있다.",
+						preview: "이것을 밝은 보이는 우는 용기가 있다.",
 						createdAt: "2020-12-30",
 						deliveredAt: "2020-12-31",
 						state: "PENDING",
@@ -213,7 +221,7 @@ export default {
 						id: 2,
 						author: "이힘찬",
 						relationship: "친구",
-						body: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
+						preview: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
 						createdAt: "2020-12-30",
 						deliveredAt: "2020-12-31",
 						state: "PENDING",
@@ -222,7 +230,7 @@ export default {
 						id: 3,
 						author: "강해병",
 						relationship: "엄마",
-						body: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
+						preview: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
 						createdAt: "2020-12-29",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -231,7 +239,7 @@ export default {
 						id: 4,
 						author: "정대한",
 						relationship: "아빠",
-						body: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
+						preview: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
 						createdAt: "2020-12-28",
 						deliveredAt: "2020-12-30",
 						state: "FAILED",
@@ -240,7 +248,7 @@ export default {
 						id: 5,
 						author: "최민국",
 						relationship: "애인",
-						body: "얼마나 구하지 이상의 끓는 아니다.",
+						preview: "얼마나 구하지 이상의 끓는 아니다.",
 						createdAt: "2020-12-27",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -249,7 +257,7 @@ export default {
 						id: 6,
 						author: "최민국",
 						relationship: "애인",
-						body: "얼마나 구하지 이상의 끓는 아니다.",
+						preview: "얼마나 구하지 이상의 끓는 아니다.",
 						createdAt: "2020-12-27",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -258,7 +266,7 @@ export default {
 						id: 7,
 						author: "최민국",
 						relationship: "애인",
-						body: "얼마나 구하지 이상의 끓는 아니다.",
+						preview: "얼마나 구하지 이상의 끓는 아니다.",
 						createdAt: "2020-12-27",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -267,7 +275,7 @@ export default {
 						id: 8,
 						author: "최민국",
 						relationship: "애인",
-						body: "얼마나 구하지 이상의 끓는 아니다.",
+						preview: "얼마나 구하지 이상의 끓는 아니다.",
 						createdAt: "2020-12-27",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -287,7 +295,7 @@ export default {
 						id: 1,
 						author: "김공군",
 						relationship: "동생",
-						body: "이것을 밝은 보이는 우는 용기가 있다.",
+						preview: "이것을 밝은 보이는 우는 용기가 있다.",
 						createdAt: "2020-12-30",
 						deliveredAt: "2020-12-31",
 						state: "DELIVERED",
@@ -296,7 +304,7 @@ export default {
 						id: 2,
 						author: "이힘찬",
 						relationship: "친구",
-						body: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
+						preview: "얼음이 밝은 이상, 웃을 것이다. 그들에게 피가 자신과 있는가?",
 						createdAt: "2020-12-30",
 						deliveredAt: "2020-12-31",
 						state: "DELIVERED",
@@ -305,7 +313,7 @@ export default {
 						id: 3,
 						author: "강해병",
 						relationship: "엄마",
-						body: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
+						preview: "같은 크고 청춘이 청춘 위하여, 풍부하게 그림자는 뭇 것이다.",
 						createdAt: "2020-12-29",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -314,7 +322,7 @@ export default {
 						id: 4,
 						author: "정대한",
 						relationship: "아빠",
-						body: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
+						preview: "온갖 꽃 위하여 목숨을 들어 그들은 이상은 운다.",
 						createdAt: "2020-12-28",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -323,7 +331,7 @@ export default {
 						id: 5,
 						author: "최민국",
 						relationship: "애인",
-						body: "얼마나 구하지 이상의 끓는 아니다.",
+						preview: "얼마나 구하지 이상의 끓는 아니다.",
 						createdAt: "2020-12-27",
 						deliveredAt: "2020-12-30",
 						state: "DELIVERED",
@@ -374,11 +382,9 @@ export default {
 											  : `인터넷 편지가 마감되었어요. 소중한 ${deliveredCount}통의 편지 감사합니다!`;
 			}
 		});
+		const isModalVisible = ref(false);
 		
 		/* Event Handler */
-		const handleClickInfo = () => {
-			alert('아직 제공되지 않는 서비스입니다.');
-		};
 		const handleClickShare = () => {
 			alert('아직 제공되지 않는 서비스입니다.');
 		};
@@ -392,8 +398,8 @@ export default {
 			isSendable,
 			mails,
 			headerMessage,
+			isModalVisible,
 			/* Functions */
-			handleClickInfo,
 			handleClickShare,
 			handleClickNewMail,
 		}
