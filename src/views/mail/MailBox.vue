@@ -18,7 +18,10 @@
 					<MailListItem v-for="index in 10" :key="index"></MailListItem>
 				</template>
 				<template v-else>
-					<MailListItem v-for="mail in mails" :key="mail.id"></MailListItem>
+					<MailListItem v-for="mail in mails"
+								  :key="mail.id"
+								  :mail="mail"
+					></MailListItem>
 				</template>
 			</div>
 		</div>
@@ -428,7 +431,7 @@ $headerHeight: 112px;
 .mailbox {
 	width: 100%;
 	height: calc(100% - #{$headerHeight});
-	padding: 0 16px 24px 16px;
+	padding: 0 16px 64px 16px;
 	display: flex;
 	flex-direction: column;
 	

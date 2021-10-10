@@ -6,12 +6,10 @@
 </template>
 
 <script>
-import { computed } from "vue";
-	
 import LinkIconSvg from "@/assets/images/link-icon.svg";
 
 export default {
- 	name: "SoldierCard",
+ 	name: "LinkChip",
 	props: {
 		link: String,
 	},
