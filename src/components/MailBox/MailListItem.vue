@@ -1,7 +1,7 @@
 <template>
 	<div class="list-item-wrapper">
 		<div v-if="mail" class="list-item">
-			<div class="list-item-row mt-1 px-1">
+			<div class="list-item-row my-1 px-1">
 				<span class="font-mobile__content-title">
 					{{ mail.author }} ({{mail.relationship}})
 				</span>
@@ -9,9 +9,11 @@
 					{{ new Date(mail.createdAt).toLocaleDateString() }}
 				</span>
 			</div>
-			<span class="list-item__text font-mobile__content-text mt-1 px-1">
-				{{ mail.preview }}
-			</span>
+			<div class="list-item-row">
+				<span class="list-item__text font-mobile__content-text px-1">
+					{{ mail.title }}
+				</span>
+			</div>
 			
 			<MailStatusChip :mail="mail" class="mt-2"></MailStatusChip>
 		</div>
@@ -61,6 +63,12 @@ export default {
 		color: $gray3;
 	}
 	&__text {
+		height: 16px;
+		width: 100%;
+		display: inline-block;
+		white-space: pre;
+		overflow: hidden;
+		text-overflow: ellipsis;
 		color: $gray5;
 	}
 }
