@@ -8,8 +8,9 @@
 		<div v-else-if="mail.state === 'DELIVERED'"
 			 class="chip chip-delivered"
 		>
-			<span class="font-mobile__tag">
-				전달 완료 {{ new Date(mail.deliveredAt).toLocaleDateString() }}
+			<span class="font-mobile__tag me-1">전달 완료</span>
+			<span class="font-mobile__caption">
+				{{ new Date(mail.deliveredAt).toLocaleDateString() }}
 			</span>
 		</div>
 		<div v-else
