@@ -46,6 +46,7 @@ export default {
 	background-color: $white;
 	display: flex;
 	flex-direction: column;
+	transition: background-color .3s ease;
 	
 	&-wrapper {
 		width: 100%;
@@ -70,6 +71,10 @@ export default {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		color: $gray5;
+	}
+	&:hover {
+		cursor: pointer;
+		background-color: $gray1;
 	}
 }
 </style>

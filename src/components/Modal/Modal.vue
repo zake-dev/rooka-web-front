@@ -6,7 +6,9 @@
 			></div>
 
 			<transition name="pop" appear>
-				<div class="modal-card">
+				<div class="modal-card"
+					 :style="{ padding: `${padding}px` }"
+				>
 					<slot></slot>	
 				</div>
 			</transition>
@@ -19,6 +21,10 @@ export default {
  	name: "Modal",
 	props: {
 		show: Boolean,
+		padding: {
+			type: Number,
+			default: 32,
+		}
 	},
 	emits: ['closeModal'],
 	setup(props, { emit }) {
@@ -59,6 +65,5 @@ export default {
 	background: #FFFFFF;
 	box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 7px;
-	padding: 32px;
 }
 </style>

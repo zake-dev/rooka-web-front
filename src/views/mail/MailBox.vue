@@ -4,7 +4,7 @@
 			<div class="mailbox-header-title mb-2">
 				<span class="font-mobile__title me-2">{{ soldier.name }} 훈련병</span>
 				<InfoButton class="mb-1"
-							@click="isModalVisible = true"
+							@click="isProfileModalVisible = true"
 				></InfoButton>
 			</div>
 			<span class="font-mobile__content-text">
@@ -15,12 +15,15 @@
 		<div class="mailbox">
 			<div class="mailbox-list masked-overflow">
 				<template v-if="mails.length === 0">
-					<MailListItem v-for="index in 10" :key="index"></MailListItem>
+					<MailListItem v-for="index in 10"
+								  :key="index"
+				    ></MailListItem>
 				</template>
 				<template v-else>
 					<MailListItem v-for="mail in mails"
 								  :key="mail.id"
 								  :mail="mail"
+								  @click="handleClickMailListItem(mail.id)"
 					></MailListItem>
 				</template>
 			</div>
@@ -35,8 +38,15 @@
 			></RoundedButton>	
 		</div>
 
-		<Modal :show="isModalVisible" @closeModal="isModalVisible = false">
-			<ProfileModalContent :soldier="soldier" @closeModal="isModalVisible = false"></ProfileModalContent>
+		<Modal :show="isProfileModalVisible" @closeModal="isProfileModalVisible = false">
+			<ProfileModalContent :soldier="soldier" @closeModal="isProfileModalVisible = false"></ProfileModalContent>
+		</Modal>
+
+		<Modal :show="isPasswordModalVisible"
+			   :padding="20"
+			   @closeModal="isPasswordModalVisible = false"
+	    >
+			<PasswordCheckModalContent @closeModal="isPasswordModalVisible = false"></PasswordCheckModalContent>
 		</Modal>
 	</div>
 </template>
@@ -50,6 +60,7 @@ import RoundedButton from "@/components/Button/RoundedButton.vue";
 import MailListItem from "@/components/MailBox/MailListItem.vue";
 import Modal from "@/components/Modal/Modal.vue";
 import ProfileModalContent from "@/components/Modal/Content/ProfileModalContent.vue";
+import PasswordCheckModalContent from "@/components/Modal/Content/PasswordCheckModalContent.vue";
 
 export default {
 	components: {
@@ -59,6 +70,7 @@ export default {
 		MailListItem,
 		Modal,
 		ProfileModalContent,
+		PasswordCheckModalContent,
 	},
 	setup() {
 		/* Local State */
@@ -385,9 +397,14 @@ export default {
 											  : `인터넷 편지가 마감되었어요. 소중한 ${deliveredCount}통의 편지 감사합니다!`;
 			}
 		});
-		const isModalVisible = ref(false);
+		const isProfileModalVisible = ref(false);
+		const isPasswordModalVisible = ref(false);
 		
 		/* Event Handler */
+		const handleClickMailListItem = (id) => {
+			console.log(`선택된 메일: ${id}`);
+			isPasswordModalVisible.value = true;
+		};
 		const handleClickShare = () => {
 			alert('아직 제공되지 않는 서비스입니다.');
 		};
@@ -401,8 +418,10 @@ export default {
 			isSendable,
 			mails,
 			headerMessage,
-			isModalVisible,
+			isProfileModalVisible,
+			isPasswordModalVisible,
 			/* Functions */
+			handleClickMailListItem,
 			handleClickShare,
 			handleClickNewMail,
 		}

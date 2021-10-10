@@ -136,6 +136,6 @@ export default {
 	opacity: 0;
 	width: 327px;
 	height: 327px;
-	transition: opacity 0.3s ease;
+	transition: opacity .3s ease;
 }
 </style>
