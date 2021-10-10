@@ -5,6 +5,7 @@ const module = {
 		birthOfDate: "",
 		militaryType: "",
 		enterDate: "",
+		division: "",
 	},
 	mutations: {
 		setName(state, name) {
@@ -19,6 +20,9 @@ const module = {
 		setEnterDate(state, date) {
 			state.enterDate = date;
 		},
+		setDivision(state, division) {
+			state.division = division;
+		},
 	},
 	actions: {
 		updateName({ commit }, name) {
@@ -32,6 +36,9 @@ const module = {
 		},
 		updateEnterDate({ commit }, date) {
 			commit('setEnterDate', date);
+		},
+		updateDivision({ commit }, division) {
+			commit('setDivision', division);
 		},
 	},
 };

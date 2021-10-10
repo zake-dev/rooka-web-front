@@ -44,13 +44,13 @@
 				<div class="form-card-buttons my-3">
 					<RoundedButton class="button-dark button-lg"
 								   text="다음"
-								   @click="handleToNextStep"
+								   @click="handleIncreaseStep(1)"
 								   :disabled="soldier.birthOfDate === ''"
 					></RoundedButton>	
 				</div>
 			</div>
 
-			<FormBackButton @click="handleToPreviousStep"></FormBackButton>
+			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
 		</div>
 		
 		<!-- 작성 폼 (군종) -->
@@ -78,12 +78,34 @@
 				</div>
 			</div>
 
-			<FormBackButton @click="handleToPreviousStep"></FormBackButton>
+			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
 			
 			<Modal :show="isModalVisible" @closeModal="isModalVisible = false">
 				<MissingMilitaryTypeModalContent @closeModal="isModalVisible = false"
 			    ></MissingMilitaryTypeModalContent>
 			</Modal>
+		</div>
+		
+		<!-- 작성 폼 (육군 - 입영부대) -->
+		<div v-else-if="stepper.currentStep === 3.5" class="form-card">
+			<div class="form-card-content">
+				<FormLabel class="mb-3">
+					{{ soldier.name }} 훈련병의<br>입영 부대는 어디인가요? 🗺️
+				</FormLabel>
+				<ArmyDivisionSelect :value="soldier.division"
+									@change="handleSelectDivision"
+				></ArmyDivisionSelect>
+				
+				<div class="form-card-buttons my-3">
+					<RoundedButton class="button-dark button-lg"
+								   text="다음"
+								   @click="handleIncreaseStep(0.5)"
+								   :disabled="soldier.birthOfDate === ''"
+					></RoundedButton>	
+				</div>
+			</div>
+
+			<FormBackButton @click="handleDecreaseStep(0.5)"></FormBackButton>
 		</div>
 		
 		<!-- 작성 폼 (입대일) -->
@@ -102,14 +124,14 @@
 				
 				<div class="form-card-buttons">
 					<RoundedButton class="button-dark button-lg"
-								   text="편지 쓰러 가기"
+								   text="편지함 찾기"
 								   @click="handleSubmitForm"
 								   :disabled="soldier.enterDate === ''"
 					></RoundedButton>	
 				</div>
 			</div>
 
-			<FormBackButton @click="handleToPreviousStep"></FormBackButton>
+			<FormBackButton @click="handleDecreaseStep(soldier.militaryType === '공군' ? 1 : 0.5)"></FormBackButton>
 		</div>
 	</transition>
 </div>
@@ -124,6 +146,7 @@ import SoliderModule from "@/store/modules/Soldier";
 import LineStepper from "@/components/Stepper/LineStepper.vue";
 import FormLabel from "@/components/Form/FormLabel.vue";
 import FormInput from "@/components/Form/FormInput.vue";
+import ArmyDivisionSelect from "@/components/Form/ArmyDivisionSelect.vue";
 import FormBackButton from "@/components/Form/FormBackButton.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
 import Modal from "@/components/Modal/Modal.vue";
@@ -135,6 +158,7 @@ export default {
 		LineStepper,
 		FormLabel,
 		FormInput,
+		ArmyDivisionSelect,
 		FormBackButton,
 		RoundedButton,
 		Modal,
@@ -169,7 +193,7 @@ export default {
 				return;
 			}
 			isInvalidName.value = false;
-			handleToNextStep();
+			handleIncreaseStep(1);
 		};
 		const handleSubmitBirthOfDate = (event) => {
 			store.dispatch('registerForm/updateBirthOfDate', event.target.value);
@@ -177,19 +201,22 @@ export default {
 		};
 		const handleClickMilitaryType = (militaryType) => {
 			store.dispatch('registerForm/updateMilitaryType', militaryType);
-			handleToNextStep();
+			handleIncreaseStep(militaryType === "공군" ? 1 : 0.5);
+		};
+		const handleSelectDivision = (event) => {
+			store.dispatch('registerForm/updateDivision', event.target.value);
 		};
 		const handleSubmitEnterDate = (event) => {
 			store.dispatch('registerForm/updateEnterDate', event.target.value);
 			event.target.blur();
 		};
-		const handleToNextStep = () => {
+		const handleIncreaseStep = (amount) => {
 			slideTransition.value = "slide-left";
-			stepper.currentStep++;
+			stepper.currentStep += amount;
 		};
-		const handleToPreviousStep = () => {
+		const handleDecreaseStep = (amount) => {
 			slideTransition.value = "slide-right";
-			stepper.currentStep--;
+			stepper.currentStep -= amount;
 		};
 		const handleSubmitForm = () => {
 			router.push({ name: "RegisterCreateLink" });
@@ -207,9 +234,10 @@ export default {
 			handleSubmitName,
 			handleSubmitBirthOfDate,
 			handleClickMilitaryType,
+			handleSelectDivision,
 			handleSubmitEnterDate,
-			handleToNextStep,
-			handleToPreviousStep,
+			handleIncreaseStep,
+			handleDecreaseStep,
 			handleSubmitForm,
 		};
 	}
