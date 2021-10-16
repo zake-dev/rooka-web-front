@@ -17,7 +17,7 @@
 <script>
 import { reactive } from "vue";
 	
-import { getTrainingCenterNames } from "@/api/code/CodeApi.mjs";
+import { getTrainingCenterNames } from "@/api/code/CodeApi";
 
 export default {
 	setup() {

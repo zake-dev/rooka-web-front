@@ -1,3 +1,3 @@
-import { axiosService } from "@/api/config.mjs";
+import { axiosService } from "@/api";
 
 export const getTrainingCenterNames = () => axiosService.get("/army/training-centers");
