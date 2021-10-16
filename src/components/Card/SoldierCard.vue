@@ -11,7 +11,7 @@
 			<table class="mt-1">
 				<tr>
 					<td class="font-mobile__content-title pe-2">생년월일</td>
-					<td class="font-mobile__content-text ps-1">{{ toKoreanLocaleDateString(soldier.birthOfDate) }}</td>
+					<td class="font-mobile__content-text ps-1">{{ toKoreanDateString(soldier.birthOfDate) }}</td>
 				</tr>
 				<tr class="mt-2">
 					<td class="font-mobile__content-title pe-2">군종</td>
@@ -19,7 +19,7 @@
 				</tr>
 				<tr class="mt-2">
 					<td class="font-mobile__content-title pe-2">입대일</td>
-					<td class="font-mobile__content-text ps-1">{{ toKoreanLocaleDateString(soldier.enterDate) }}</td>
+					<td class="font-mobile__content-text ps-1">{{ toKoreanDateString(soldier.enterDate) }}</td>
 				</tr>
 			</table>
 		</div>
@@ -43,6 +43,8 @@
 import { ref, computed, onMounted } from "vue";
 import html2canvas from "html2canvas";
 	
+import { toKoreanDateString } from "@/utils/TextFormatter";
+	
 import MilitaryHelmetPng from "@/assets/images/military-helmet.png";
 import Logo from "@/components/Logo/Logo.vue";
 import LinkChip from "@/components/Chip/LinkChip.vue";
@@ -56,13 +58,7 @@ export default {
 	props: {
 		soldier: Object,
 	},
-	setup() {		
-		/* Helper Function */
-		const toKoreanLocaleDateString = (dateString) => {
-			const [year, month, day] = dateString.split('-');
-			return `${year}년 ${month}월 ${day}일`;
-		};
-		
+	setup() {
 		onMounted(async () => {			
 			const card = document.getElementById("card-html");
 			const canvas = await html2canvas(card, {
@@ -78,7 +74,7 @@ export default {
 			/* Assets */
 			MilitaryHelmetPng,
 			/* Functions */
-			toKoreanLocaleDateString,
+			toKoreanDateString,
 		};
 	}
 };

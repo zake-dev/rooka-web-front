@@ -19,7 +19,7 @@
 					<span class="modal-content-profile-row__label font-mobile__content-title"
 					>생년월일</span>
 					<span class="font-mobile__content-text"
-					>{{ toKoreanLocaleDateString(soldier.birthOfDate) }}</span>
+					>{{ toKoreanDateString(soldier.birthOfDate) }}</span>
 				</div>
 				<div class="modal-content-profile-row">
 					<span class="modal-content-profile-row__label font-mobile__content-title"
@@ -31,7 +31,7 @@
 					<span class="modal-content-profile-row__label font-mobile__content-title"
 					>입대일</span>
 					<span class="font-mobile__content-text"
-					>{{ toKoreanLocaleDateString(soldier.enterDate) }}</span>
+					>{{ toKoreanDateString(soldier.enterDate) }}</span>
 				</div>
 			</div>
 		</div>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { toKoreanDateString } from "@/utils/TextFormatter";
+	
 import ProfileAirforcePng from "@/assets/images/profile-airforce.png";
 
 export default {
@@ -47,13 +49,7 @@ export default {
 		soldier: Object,
 	},
 	emits: ['closeModal'],
-	setup(props, { emit }) {
-		/* Helper Function */
-		const toKoreanLocaleDateString = (dateString) => {
-			const [year, month, day] = dateString.split('-');
-			return `${year}년 ${month}월 ${day}일`;
-		};
-		
+	setup(props, { emit }) {		
 		/* Event Handler */
 		const handleClickCloseModal = () => emit('closeModal');
 		
@@ -61,7 +57,7 @@ export default {
 			/* Assets */
 			ProfileAirforcePng,
 			/* Functions */
-			toKoreanLocaleDateString,
+			toKoreanDateString,
 			handleClickCloseModal,
 		};
 	},

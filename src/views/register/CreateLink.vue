@@ -18,7 +18,7 @@
 			<div class="submitted-form-row">
 				<span class="font-mobile__content-title">생년월일</span>
 				<span class="font-mobile__content-text">
-					{{ toKoreanLocaleDateString(soldier.birthOfDate) }}
+					{{ toKoreanDateString(soldier.birthOfDate) }}
 				</span>
 			</div>
 			<div class="submitted-form__divider"></div>
@@ -30,7 +30,7 @@
 			<div class="submitted-form-row">
 				<span class="font-mobile__content-title">입대일</span>
 				<span class="font-mobile__content-text">
-					{{ toKoreanLocaleDateString(soldier.enterDate) }}
+					{{ toKoreanDateString(soldier.enterDate) }}
 				</span>
 			</div>
 			<div class="submitted-form__divider"></div>
@@ -58,6 +58,8 @@
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+
+import { toKoreanDateString } from "@/utils/TextFormatter";
 	
 import RoundedButton from "@/components/Button/RoundedButton.vue";
 import Modal from "@/components/Modal/Modal.vue";
@@ -81,12 +83,6 @@ export default {
 		/* Local State */
 		const isModalVisible = ref(false);
 		
-		/* Helper Function */
-		const toKoreanLocaleDateString = (dateString) => {
-			const [year, month, day] = dateString.split('-');
-			return `${year}년 ${month}월 ${day}일`;
-		};
-		
 		/* Event Handler */
 		const handleClickCreateLink = () => {
 			router.push({ name: "RegisterResult" });
@@ -97,7 +93,7 @@ export default {
 			soldier,
 			isModalVisible,
 			/* Functions */
-			toKoreanLocaleDateString,
+			toKoreanDateString,
 			handleClickCreateLink,
 		};
 	},
