@@ -2,6 +2,7 @@
 	<div class="modal-content">
 		<span class="modal-content__title font-mobile__page-title">비밀번호 입력</span>
 		<FormInput class="mx-1 mb-3"
+				   style="width: calc(100% - 8px)"
 				   type="password"
 				   v-model="password"
 				   placeholder="비밀번호를 입력해주세요"
@@ -60,7 +61,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	height: 150px;
+	padding: 20px;
 	
 	&__title {
 		margin: 12px 0 16px 0;

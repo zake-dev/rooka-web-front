@@ -45,7 +45,8 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	height: 400px;
+	height: 472px;
+	padding: 32px;
 	
 	&__close-button {
 		width: 23px;

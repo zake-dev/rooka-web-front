@@ -1,15 +1,15 @@
 <template>
 	<transition name="fade">
-		<div v-if="show" class="modal-wrapper">
+		<div v-if="isVisible" class="modal-wrapper">
 			<div class="modal__dismiss-area"
-				 @click="handleDismiss"
+				 @click="handleCloseModal"
 			></div>
 
 			<transition name="pop" appear>
-				<div class="modal-card"
-					 :style="{ padding: `${padding}px` }"
-				>
-					<slot></slot>	
+				<div class="modal-card">
+					<Component :is="ModalContent"
+							   @closeModal="handleCloseModal"
+				    ></Component>	
 				</div>
 			</transition>
 		</div>
@@ -17,21 +17,38 @@
 </template>
 
 <script>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+import MissingMilitaryTypeModalContent from "@/components/Modal/Content/MissingMilitaryTypeModalContent.vue";
+import WhatIsMailBoxLinkModalContent from "@/components/Modal/Content/WhatIsMailBoxLinkModalContent.vue";
+import ProfileModalContent from "@/components/Modal/Content/ProfileModalContent.vue";
+import RequestPasswordModalContent from "@/components/Modal/Content/RequestPasswordModalContent.vue";
+	
 export default {
  	name: "Modal",
-	props: {
-		show: Boolean,
-		padding: {
-			type: Number,
-			default: 32,
-		}
+	components: {
+		MissingMilitaryTypeModalContent,
+		WhatIsMailBoxLinkModalContent,
+		ProfileModalContent,
+		RequestPasswordModalContent,
 	},
-	emits: ['closeModal'],
-	setup(props, { emit }) {
-		const handleDismiss = () => emit('closeModal');
+	setup() {
+		/* Vuex */
+		const store = useStore();
+		const isVisible  = computed(() => store.state.isModalVisible);
+		const ModalContent = computed(() => store.state.modalContentName + "ModalContent");
+		
+		/* Event Handler */
+		const handleCloseModal = () => store.dispatch('CLOSE_MODAL');
 		
 		return {
-			handleDismiss,
+			/* Components */
+			ModalContent,
+			/* Variables */
+			isVisible,
+			/* Functions */
+			handleCloseModal,
 		};
 	},
 };
@@ -60,7 +77,7 @@ export default {
 .modal-card {
 	position: absolute;
 	z-index: 9999;
-	height: fit-content;
+	height: auto;
 	width: calc(100% - 32px);
 	background: #FFFFFF;
 	box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);

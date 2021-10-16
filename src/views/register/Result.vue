@@ -19,10 +19,6 @@
 					  	   @click="handleClickNewMail"
 	    	></RoundedButton>
 		</div>
-		
-		<Modal :show="isModalVisible" @closeModal="isModalVisible = false">
-			
-		</Modal>
 	</div>
 </template>
 
@@ -33,14 +29,12 @@ import { useRouter } from "vue-router";
 
 import SoldierCard from "@/components/Card/SoldierCard.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
-import Modal from "@/components/Modal/Modal.vue";
 
 export default {
 	name: "RegisterResult",
 	components: {
 		SoldierCard,
 		RoundedButton,
-		Modal,
 	},
 	setup() {
 		/* Vuex */
@@ -49,10 +43,7 @@ export default {
 		
 		/* Router */
 		const router = useRouter();
-		
-		/* Local State */
-		const isModalVisible = ref(false);
-		
+			
 		/* Event Handler */
 		const handleClickShareLink = () => {
 			alert("아직 제공되지 않는 서비스입니다.");
@@ -65,7 +56,6 @@ export default {
 		return {
 			/* Variables */
 			soldier,
-			isModalVisible,
 			/* Functions */
 			handleClickShareLink,
 			handleClickNewMail,

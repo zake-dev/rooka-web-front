@@ -6,7 +6,7 @@
 			<i class="fas fa-times"></i>
 		</button>
 	
-		<div class="modal-content-body masked-overflow">
+		<div class="modal-content-body">
 			<p class="modal-content-body__question-text font-mobile__input-label mb-2">
 				Q. 인터넷 편지함 링크라는 게 뭔가요?
 			</p>
@@ -45,7 +45,8 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	height: 370px;
+	height: 433px;
+	padding: 32px;
 	
 	&__close-button {
 		width: 23px;

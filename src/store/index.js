@@ -5,10 +5,26 @@ import RegisterForm from "@/store/modules/Soldier";
 
 export default createStore({
 	state: {
-		appTitle: "rooka",
+		isModalVisible: false,
+		modalContentName: "",
 	},
-	mutations: {},
-	actions: {},
+	mutations: {
+		SET_IS_MODAL_VISIBLE(state, isVisible) {
+			state.isModalVisible = isVisible;
+		},
+		SET_MODAL_CONTENT_NAME(state, name) {
+			state.modalContentName = name;
+		},
+	},
+	actions: {
+		OPEN_MODAL({ commit }, modalContentName) {
+			commit('SET_MODAL_CONTENT_NAME', modalContentName);
+			commit('SET_IS_MODAL_VISIBLE', true);
+		},
+		CLOSE_MODAL({ commit }) {
+			commit('SET_IS_MODAL_VISIBLE', false);
+		},
+	},
 	modules: {
 		registerForm: RegisterForm,
 	},

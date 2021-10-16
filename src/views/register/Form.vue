@@ -73,17 +73,12 @@
 				
 				<div class="form-card-links">
 					<a class="form-card-links__help-link font-mobile__caption mt-4"
-				   	   @click="isModalVisible = true"
+				   	   @click="openModal('MissingMilitaryType')"
 			    	>해군/해병대는 왜 없나요?</a>
 				</div>
 			</div>
 
 			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
-			
-			<Modal :show="isModalVisible" @closeModal="isModalVisible = false">
-				<MissingMilitaryTypeModalContent @closeModal="isModalVisible = false"
-			    ></MissingMilitaryTypeModalContent>
-			</Modal>
 		</div>
 		
 		<!-- 작성 폼 (육군 - 입영부대) -->
@@ -142,6 +137,8 @@ import { ref, reactive, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 	
+import { openModal } from "@/utils/DialogHandler";
+	
 import SoliderModule from "@/store/modules/Soldier";
 import LineStepper from "@/components/Stepper/LineStepper.vue";
 import FormLabel from "@/components/Form/FormLabel.vue";
@@ -149,8 +146,6 @@ import FormInput from "@/components/Form/FormInput.vue";
 import ArmyTrainingCenterSelect from "@/components/Form/ArmyTrainingCenterSelect.vue";
 import FormBackButton from "@/components/Form/FormBackButton.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
-import Modal from "@/components/Modal/Modal.vue";
-import MissingMilitaryTypeModalContent from "@/components/Modal/Content/MissingMilitaryTypeModalContent.vue";
 
 export default {
  	name: "RegisterForm",
@@ -161,8 +156,6 @@ export default {
 		ArmyTrainingCenterSelect,
 		FormBackButton,
 		RoundedButton,
-		Modal,
-		MissingMilitaryTypeModalContent,
  	},
 	setup() {
 		/* Vuex */
@@ -178,7 +171,6 @@ export default {
 			currentStep: 1
 		});
 		const slideTransition = ref("slide-left");
-		const isModalVisible = ref(false);
 		const isInvalidName = ref(false);
 		
 		/* Event Handler */
@@ -227,9 +219,9 @@ export default {
 			soldier,
 			stepper,
 			slideTransition,
-			isModalVisible,
 			isInvalidName,
 			/* Functions */
+			openModal,
 			handleUpdateName,
 			handleSubmitName,
 			handleSubmitBirthOfDate,

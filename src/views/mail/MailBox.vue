@@ -4,7 +4,7 @@
 			<div class="mailbox-header-title mb-2">
 				<span class="font-mobile__title me-2">{{ soldier.name }} 훈련병</span>
 				<InfoButton class="mb-1"
-							@click="isProfileModalVisible = true"
+							@click="openModal('Profile')"
 				></InfoButton>
 			</div>
 			<span class="font-mobile__content-text">
@@ -37,30 +37,18 @@
 						   @click="handleClickNewMail"
 			></RoundedButton>	
 		</div>
-
-		<Modal :show="isProfileModalVisible" @closeModal="isProfileModalVisible = false">
-			<ProfileModalContent :soldier="soldier" @closeModal="isProfileModalVisible = false"></ProfileModalContent>
-		</Modal>
-
-		<Modal :show="isPasswordModalVisible"
-			   :padding="20"
-			   @closeModal="isPasswordModalVisible = false"
-	    >
-			<PasswordCheckModalContent @closeModal="isPasswordModalVisible = false"></PasswordCheckModalContent>
-		</Modal>
 	</div>
 </template>
 
 <script>
 import { ref, computed } from "vue";
-
+	
+import { openModal } from "@/utils/DialogHandler";
+ 
 import InfoButton from "@/components/Button/InfoButton.vue";
 import ShareButton from "@/components/Button/ShareButton.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
 import MailListItem from "@/components/MailBox/MailListItem.vue";
-import Modal from "@/components/Modal/Modal.vue";
-import ProfileModalContent from "@/components/Modal/Content/ProfileModalContent.vue";
-import PasswordCheckModalContent from "@/components/Modal/Content/PasswordCheckModalContent.vue";
 
 export default {
 	components: {
@@ -68,9 +56,6 @@ export default {
 		ShareButton,
 		RoundedButton,
 		MailListItem,
-		Modal,
-		ProfileModalContent,
-		PasswordCheckModalContent,
 	},
 	setup() {
 		/* Local State */
@@ -397,13 +382,11 @@ export default {
 											  : `인터넷 편지가 마감되었어요. 소중한 ${deliveredCount}통의 편지 감사합니다!`;
 			}
 		});
-		const isProfileModalVisible = ref(false);
-		const isPasswordModalVisible = ref(false);
 		
 		/* Event Handler */
 		const handleClickMailListItem = (id) => {
 			console.log(`선택된 메일: ${id}`);
-			isPasswordModalVisible.value = true;
+			openModal('RequestPassword');
 		};
 		const handleClickShare = () => {
 			alert('아직 제공되지 않는 서비스입니다.');
@@ -418,9 +401,8 @@ export default {
 			isSendable,
 			mails,
 			headerMessage,
-			isProfileModalVisible,
-			isPasswordModalVisible,
 			/* Functions */
+			openModal,
 			handleClickMailListItem,
 			handleClickShare,
 			handleClickNewMail,

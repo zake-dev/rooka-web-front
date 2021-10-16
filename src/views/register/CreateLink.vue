@@ -43,14 +43,9 @@
 	    	></RoundedButton>
 		
 			<a class="action-container__help-link font-mobile__caption"
-			   @click="isModalVisible = true"
+			   @click="openModal('WhatIsMailBoxLink')"
 			>인터넷 편지함 링크라는 게 뭔가요?</a>
 		</div>
-		
-		<Modal :show="isModalVisible" @closeModal="isModalVisible = false">
-			<WhatIsMailBoxLinkModalContent @closeModal="isModalVisible = false"
-			></WhatIsMailBoxLinkModalContent>
-		</Modal>
 	</div>
 </template>
 
@@ -60,17 +55,14 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 import { toKoreanDateString } from "@/utils/TextFormatter";
+import { openModal } from "@/utils/DialogHandler";
 	
 import RoundedButton from "@/components/Button/RoundedButton.vue";
-import Modal from "@/components/Modal/Modal.vue";
-import WhatIsMailBoxLinkModalContent from "@/components/Modal/Content/WhatIsMailBoxLinkModalContent.vue";
 
 export default {
 	name: "RegisterCreateLink",
 	components: {
 		RoundedButton,
-		Modal,
-		WhatIsMailBoxLinkModalContent,
 	},
 	setup() {
 		/* Vuex */
@@ -79,10 +71,7 @@ export default {
 		
 		/* Router */
 		const router = useRouter();
-		
-		/* Local State */
-		const isModalVisible = ref(false);
-		
+				
 		/* Event Handler */
 		const handleClickCreateLink = () => {
 			router.push({ name: "RegisterResult" });
@@ -91,9 +80,9 @@ export default {
 		return {
 			/* Variables */
 			soldier,
-			isModalVisible,
 			/* Functions */
 			toKoreanDateString,
+			openModal,
 			handleClickCreateLink,
 		};
 	},
