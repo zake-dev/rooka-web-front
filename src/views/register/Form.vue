@@ -92,9 +92,9 @@
 				<FormLabel class="mb-3">
 					{{ soldier.name }} 훈련병의<br>입영 부대는 어디인가요? 🗺️
 				</FormLabel>
-				<ArmyDivisionSelect :value="soldier.division"
-									@change="handleSelectDivision"
-				></ArmyDivisionSelect>
+				<ArmyTrainingCenterSelect :value="soldier.division"
+										  @change="handleSelectDivision"
+				></ArmyTrainingCenterSelect>
 				
 				<div class="form-card-buttons my-3">
 					<RoundedButton class="button-dark button-lg"
@@ -146,7 +146,7 @@ import SoliderModule from "@/store/modules/Soldier";
 import LineStepper from "@/components/Stepper/LineStepper.vue";
 import FormLabel from "@/components/Form/FormLabel.vue";
 import FormInput from "@/components/Form/FormInput.vue";
-import ArmyDivisionSelect from "@/components/Form/ArmyDivisionSelect.vue";
+import ArmyTrainingCenterSelect from "@/components/Form/ArmyTrainingCenterSelect.vue";
 import FormBackButton from "@/components/Form/FormBackButton.vue";
 import RoundedButton from "@/components/Button/RoundedButton.vue";
 import Modal from "@/components/Modal/Modal.vue";
@@ -158,7 +158,7 @@ export default {
 		LineStepper,
 		FormLabel,
 		FormInput,
-		ArmyDivisionSelect,
+		ArmyTrainingCenterSelect,
 		FormBackButton,
 		RoundedButton,
 		Modal,
