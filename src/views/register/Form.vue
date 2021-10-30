@@ -36,8 +36,8 @@
 				</FormLabel>
 				<FormInput type="date"
 						   data-placeholder="생년월일을 입력해주세요"
-						   :value="soldier.birthOfDate"
-						   @change="handleSubmitBirthOfDate"
+						   :value="soldier.birthDate"
+						   @change="handleSubmitBirthDate"
 						   required
 				></FormInput>
 				
@@ -45,7 +45,7 @@
 					<RoundedButton class="button-dark button-lg"
 								   text="다음"
 								   @click="handleIncreaseStep(1)"
-								   :disabled="soldier.birthOfDate === ''"
+								   :disabled="soldier.birthDate === ''"
 					></RoundedButton>	
 				</div>
 			</div>
@@ -63,11 +63,11 @@
 				<div class="form-card-buttons">
 					<RoundedButton class="button-success"
 								   text="육군"
-								   @click="handleClickMilitaryType('육군')"
+								   @click="handleClickMilitaryType('army')"
 					></RoundedButton>
 					<RoundedButton class="button-info"
 								   text="공군"
-								   @click="handleClickMilitaryType('공군')"
+								   @click="handleClickMilitaryType('airforce')"
 					></RoundedButton>
 				</div>
 				
@@ -87,15 +87,15 @@
 				<FormLabel class="mb-3">
 					{{ soldier.name }} 훈련병의<br>입영 부대는 어디인가요? 🗺️
 				</FormLabel>
-				<ArmyTrainingCenterSelect :value="soldier.division"
-										  @change="handleSelectDivision"
+				<ArmyTrainingCenterSelect :value="soldier.trainingCenterName"
+										  @change="handleSelectTrainingCenterName"
 				></ArmyTrainingCenterSelect>
 				
 				<div class="form-card-buttons my-3">
 					<RoundedButton class="button-dark button-lg"
 								   text="다음"
 								   @click="handleIncreaseStep(0.5)"
-								   :disabled="soldier.birthOfDate === ''"
+								   :disabled="soldier.birthDate === ''"
 					></RoundedButton>	
 				</div>
 			</div>
@@ -126,7 +126,7 @@
 				</div>
 			</div>
 
-			<FormBackButton @click="handleDecreaseStep(soldier.militaryType === '공군' ? 1 : 0.5)"></FormBackButton>
+			<FormBackButton @click="handleDecreaseStep(soldier.militaryType === 'airforce' ? 1 : 0.5)"></FormBackButton>
 		</div>
 	</transition>
 </div>
@@ -138,6 +138,7 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 	
 import { openModal } from "@/utils/DialogHandler";
+import * as SoldierApi from "@/api/soldier/SoldierApi";
 	
 import SoliderModule from "@/store/modules/Soldier";
 import LineStepper from "@/components/Stepper/LineStepper.vue";
@@ -187,16 +188,16 @@ export default {
 			isInvalidName.value = false;
 			handleIncreaseStep(1);
 		};
-		const handleSubmitBirthOfDate = (event) => {
-			store.dispatch('registerForm/updateBirthOfDate', event.target.value);
+		const handleSubmitBirthDate = (event) => {
+			store.dispatch('registerForm/updateBirthDate', event.target.value);
 			event.target.blur();
 		};
 		const handleClickMilitaryType = (militaryType) => {
 			store.dispatch('registerForm/updateMilitaryType', militaryType);
-			handleIncreaseStep(militaryType === "공군" ? 1 : 0.5);
+			handleIncreaseStep(militaryType === "airforce" ? 1 : 0.5);
 		};
-		const handleSelectDivision = (event) => {
-			store.dispatch('registerForm/updateDivision', event.target.value);
+		const handleSelectTrainingCenterName = (event) => {
+			store.dispatch('registerForm/updateTrainingCenterName', event.target.value);
 		};
 		const handleSubmitEnterDate = (event) => {
 			store.dispatch('registerForm/updateEnterDate', event.target.value);
@@ -210,8 +211,14 @@ export default {
 			slideTransition.value = "slide-right";
 			stepper.currentStep -= amount;
 		};
-		const handleSubmitForm = () => {
-			router.push({ name: "RegisterCreateLink" });
+		const handleSubmitForm = async () => {
+        const { data } = await SoldierApi.getKey(soldier.value);
+        if (data.errorCode) {
+          router.push({ name: "RegisterCreateLink" });
+          return;
+        }
+        router.push(`/mail/${data}`);
+        
 		};
 		
 		return {
@@ -224,9 +231,9 @@ export default {
 			openModal,
 			handleUpdateName,
 			handleSubmitName,
-			handleSubmitBirthOfDate,
+			handleSubmitBirthDate,
 			handleClickMilitaryType,
-			handleSelectDivision,
+			handleSelectTrainingCenterName,
 			handleSubmitEnterDate,
 			handleIncreaseStep,
 			handleDecreaseStep,

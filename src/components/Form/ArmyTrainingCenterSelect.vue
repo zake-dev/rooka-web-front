@@ -17,7 +17,7 @@
 <script>
 import { reactive } from "vue";
 	
-import { getTrainingCenterNames } from "@/api/code/CodeApi";
+import * as CodeApi from "@/api/code/CodeApi";
 
 export default {
 	setup() {
@@ -26,7 +26,7 @@ export default {
 		
 		/* Fetch Data */
 		(async () => {
-			const { data } = await getTrainingCenterNames();
+			const { data } = await CodeApi.getTrainingCenterNames();
 			data.forEach((name) => trainingCenterNames.push(name));
 		})();
 

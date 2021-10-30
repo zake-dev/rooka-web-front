@@ -2,17 +2,17 @@ const module = {
 	namespaced: true,
 	state: {
 		name: "",
-		birthOfDate: "",
+		birthDate: "",
 		militaryType: "",
 		enterDate: "",
-		division: "",
+		trainingCenterName: "",
 	},
 	mutations: {
 		setName(state, name) {
 			state.name = name;
 		},
-		setBirthOfDate(state, date) {
-			state.birthOfDate = date;
+		setBirthDate(state, date) {
+			state.birthDate = date;
 		},
 		setMilitaryType(state, type) {
 			state.militaryType = type;
@@ -20,16 +20,16 @@ const module = {
 		setEnterDate(state, date) {
 			state.enterDate = date;
 		},
-		setDivision(state, division) {
-			state.division = division;
+		setTrainingCenterName(state, trainingCenterName) {
+			state.trainingCenterName = trainingCenterName;
 		},
 	},
 	actions: {
 		updateName({ commit }, name) {
 			commit('setName', name);
 		},
-		updateBirthOfDate({ commit }, date) {
-			commit('setBirthOfDate', date);
+		updateBirthDate({ commit }, date) {
+			commit('setBirthDate', date);
 		},
 		updateMilitaryType({ commit }, type) {
 			commit('setMilitaryType', type);
@@ -37,8 +37,8 @@ const module = {
 		updateEnterDate({ commit }, date) {
 			commit('setEnterDate', date);
 		},
-		updateDivision({ commit }, division) {
-			commit('setDivision', division);
+		updateTrainingCenterName({ commit }, trainingCenterName) {
+			commit('setTrainingCenterName', trainingCenterName);
 		},
 	},
 };

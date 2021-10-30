@@ -11,11 +11,11 @@
 			<table class="mt-1">
 				<tr>
 					<td class="font-mobile__content-title pe-2">생년월일</td>
-					<td class="font-mobile__content-text ps-1">{{ toKoreanDateString(soldier.birthOfDate) }}</td>
+					<td class="font-mobile__content-text ps-1">{{ toKoreanDateString(soldier.birthDate) }}</td>
 				</tr>
 				<tr class="mt-2">
 					<td class="font-mobile__content-title pe-2">군종</td>
-					<td class="font-mobile__content-text ps-1">{{ soldier.militaryType }}</td>
+					<td class="font-mobile__content-text ps-1">{{ toKoreanMilitaryType(soldier.militaryType) }}</td>
 				</tr>
 				<tr class="mt-2">
 					<td class="font-mobile__content-title pe-2">입대일</td>
@@ -43,7 +43,7 @@
 import { ref, computed, onMounted } from "vue";
 import html2canvas from "html2canvas";
 	
-import { toKoreanDateString } from "@/utils/TextFormatter";
+import { toKoreanDateString, toKoreanMilitaryType } from "@/utils/TextFormatter";
 	
 import MilitaryHelmetPng from "@/assets/images/military-helmet.png";
 import Logo from "@/components/Logo/Logo.vue";
@@ -75,6 +75,7 @@ export default {
 			MilitaryHelmetPng,
 			/* Functions */
 			toKoreanDateString,
+      toKoreanMilitaryType,
 		};
 	}
 };

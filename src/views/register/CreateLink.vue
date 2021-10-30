@@ -18,13 +18,13 @@
 			<div class="submitted-form-row">
 				<span class="font-mobile__content-title">생년월일</span>
 				<span class="font-mobile__content-text">
-					{{ toKoreanDateString(soldier.birthOfDate) }}
+					{{ toKoreanDateString(soldier.birthDate) }}
 				</span>
 			</div>
 			<div class="submitted-form__divider"></div>
 			<div class="submitted-form-row">
 				<span class="font-mobile__content-title">군종</span>
-				<span class="font-mobile__content-text">{{ soldier.militaryType }}</span>
+				<span class="font-mobile__content-text">{{ toKoreanMilitaryType(soldier.militaryType) }}</span>
 			</div>
 			<div class="submitted-form__divider"></div>
 			<div class="submitted-form-row">
@@ -54,7 +54,7 @@ import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
-import { toKoreanDateString } from "@/utils/TextFormatter";
+import { toKoreanDateString, toKoreanMilitaryType } from "@/utils/TextFormatter";
 import { openModal } from "@/utils/DialogHandler";
 	
 import RoundedButton from "@/components/Button/RoundedButton.vue";
@@ -82,6 +82,7 @@ export default {
 			soldier,
 			/* Functions */
 			toKoreanDateString,
+      toKoreanMilitaryType,
 			openModal,
 			handleClickCreateLink,
 		};
