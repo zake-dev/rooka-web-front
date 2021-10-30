@@ -27,7 +27,7 @@ export default {
 		/* Fetch Data */
 		(async () => {
 			const { data } = await getTrainingCenterNames();
-			data.forEach((name) => tratrainingCenterNames.push(name));
+			data.forEach((name) => trainingCenterNames.push(name));
 		})();
 
 		return {
