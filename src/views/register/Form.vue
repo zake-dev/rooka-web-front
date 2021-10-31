@@ -212,13 +212,12 @@ export default {
 			stepper.currentStep -= amount;
 		};
 		const handleSubmitForm = async () => {
+      try {
         const { data } = await SoldierApi.getKey(soldier.value);
-        if (data.errorCode) {
-          router.push({ name: "RegisterCreateLink" });
-          return;
-        }
         router.push(`/mail/${data}`);
-        
+      } catch (e) {
+        router.push({ name: "RegisterCreateLink" });
+      }
 		};
 		
 		return {

@@ -6,6 +6,7 @@ const module = {
 		militaryType: "",
 		enterDate: "",
 		trainingCenterName: "",
+    key: "",
 	},
 	mutations: {
 		setName(state, name) {
@@ -23,6 +24,9 @@ const module = {
 		setTrainingCenterName(state, trainingCenterName) {
 			state.trainingCenterName = trainingCenterName;
 		},
+    setKey(state, key) {
+      state.key = key;
+    },
 	},
 	actions: {
 		updateName({ commit }, name) {
@@ -40,6 +44,9 @@ const module = {
 		updateTrainingCenterName({ commit }, trainingCenterName) {
 			commit('setTrainingCenterName', trainingCenterName);
 		},
+    updateKey({ commit }, key) {
+      commit('setKey', key);
+    }
 	},
 };
 

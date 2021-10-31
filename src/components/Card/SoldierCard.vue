@@ -29,7 +29,7 @@
 				하단의 링크에 접속하여 훈련소에 있는<br>
 				{{ soldier.name }} 훈련병에게 편지를 써주세요!
 			</p>
-			<LinkChip link="http://rooka.kr/김루카@123"></LinkChip>
+			<LinkChip :link="`http://rooka.kr/${soldier.key}`"></LinkChip>
 		</div>
 		<Logo class="logo-stamp"></Logo>
 	</div>

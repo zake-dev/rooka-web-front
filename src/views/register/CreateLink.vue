@@ -56,6 +56,7 @@ import { useRouter } from "vue-router";
 
 import { toKoreanDateString, toKoreanMilitaryType } from "@/utils/TextFormatter";
 import { openModal } from "@/utils/DialogHandler";
+import * as SoldierApi from "@/api/soldier/SoldierApi";
 	
 import RoundedButton from "@/components/Button/RoundedButton.vue";
 
@@ -73,8 +74,15 @@ export default {
 		const router = useRouter();
 				
 		/* Event Handler */
-		const handleClickCreateLink = () => {
-			router.push({ name: "RegisterResult" });
+		const handleClickCreateLink = async () => {
+      try {
+        const { data } = await SoldierApi.postKey(soldier.value);
+        store.dispatch('registerForm/updateKey', data.key);
+			  router.push({ name: "RegisterResult" });
+      } catch (e) {
+        const { errorCode, status, message } = e.response;
+        alert(message);
+      }     
 		};
 		
 		return {
