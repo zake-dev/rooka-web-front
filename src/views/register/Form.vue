@@ -98,7 +98,7 @@
 					<RoundedButton class="button-dark button-lg"
                          text="다음"
                          @click="handleIncreaseStep(1)"
-                         :disabled="soldier.birthDate === ''"
+                         :disabled="soldier.enterDate === ''"
 					></RoundedButton>	
 				</div>
 			</div>
@@ -120,7 +120,7 @@
 					<RoundedButton class="button-dark button-lg"
 								   text="편지함 찾기"
 								   @click="handleSubmitForm"
-								   :disabled="soldier.enterDate === ''"
+								   :disabled="soldier.trainingCenterName === ''"
 					></RoundedButton>	
 				</div>
 			</div>
@@ -142,7 +142,7 @@
 					<RoundedButton class="button-dark button-lg"
 								   text="편지함 찾기"
 								   @click="handleSubmitForm"
-								   :disabled="soldier.enterDate === ''"
+								   :disabled="soldier.kisu === ''"
 					></RoundedButton>	
 				</div>
 			</div>

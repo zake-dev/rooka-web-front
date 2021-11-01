@@ -2,12 +2,13 @@
 	<div class="form-select-wrapper">
 		<select class="form-select">
 			<option class="form-select__placeholder-text"
-					value=""
-					hidden
+              value=""
+              hidden
 			>입영 부대를 선택해주세요</option>
 			<option v-for="trainingCenterName in trainingCenterNames"
-					:key="trainingCenterName"
-					:value="trainingCenterName"
+              :key="trainingCenterName"
+              :value="trainingCenterName"
+              :selected="trainingCenterName === soldier.trainingCenterName"
 			>{{ trainingCenterName }}</option>
 		</select>
 	</div>
@@ -15,12 +16,17 @@
 	
 
 <script>
-import { reactive } from "vue";
+import { reactive, computed } from "vue";
+import { useStore } from "vuex";
 	
 import * as CodeApi from "@/api/code/CodeApi";
 
 export default {
 	setup() {
+    /* Vuex */
+    const store = useStore();
+    const soldier = computed(() => store.state.registerForm);
+    
 		/* Local State */
 		const trainingCenterNames = reactive([]);
 		
@@ -31,6 +37,8 @@ export default {
 		})();
 
 		return {
+      /* Variables */
+      soldier,
 			trainingCenterNames,
 		}
 	}
