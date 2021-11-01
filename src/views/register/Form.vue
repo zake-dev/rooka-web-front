@@ -80,9 +80,34 @@
 
 			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
 		</div>
-		
-		<!-- 작성 폼 (육군 - 입영부대) -->
-		<div v-else-if="stepper.currentStep === 3.5" class="form-card">
+				
+		<!-- 작성 폼 (입대일) -->
+		<div v-else-if="stepper.currentStep === 4" class="form-card">
+			<div class="form-card-content">
+				<FormLabel class="mb-3">
+					{{ soldier.name }} 훈련병의<br>입대일은 언제인가요? 🗓️
+				</FormLabel>
+				<FormInput type="date"
+						       data-placeholder="입대일을 입력해주세요"
+                   :value="soldier.enterDate"
+                   @change="handleSubmitEnterDate"
+                   required
+				></FormInput>
+				
+				<div class="form-card-buttons my-3">
+					<RoundedButton class="button-dark button-lg"
+                         text="다음"
+                         @click="handleIncreaseStep(1)"
+                         :disabled="soldier.birthDate === ''"
+					></RoundedButton>	
+				</div>
+			</div>
+
+			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
+		</div>
+    
+    <!-- 작성 폼 (육군 - 입영부대) -->
+		<div v-else-if="soldier.militaryType === 'army' && stepper.currentStep === 5" class="form-card">
 			<div class="form-card-content">
 				<FormLabel class="mb-3">
 					{{ soldier.name }} 훈련병의<br>입영 부대는 어디인가요? 🗺️
@@ -90,32 +115,6 @@
 				<ArmyTrainingCenterSelect :value="soldier.trainingCenterName"
 										  @change="handleSelectTrainingCenterName"
 				></ArmyTrainingCenterSelect>
-				
-				<div class="form-card-buttons my-3">
-					<RoundedButton class="button-dark button-lg"
-								   text="다음"
-								   @click="handleIncreaseStep(0.5)"
-								   :disabled="soldier.birthDate === ''"
-					></RoundedButton>	
-				</div>
-			</div>
-
-			<FormBackButton @click="handleDecreaseStep(0.5)"></FormBackButton>
-		</div>
-		
-		<!-- 작성 폼 (입대일) -->
-		<div v-else-if="stepper.currentStep === 4" class="form-card">
-			<div class="form-card-content">
-				<FormLabel class="mb-3">
-					{{ soldier.name }} 훈련병의<br>입대일은 언제인가요? 🗓️
-				</FormLabel>
-				<FormInput class="my-2"
-						   type="date"
-						   data-placeholder="입대일을 입력해주세요"
-						   :value="soldier.enterDate"
-						   @change="handleSubmitEnterDate"
-						   required
-				></FormInput>
 				
 				<div class="form-card-buttons">
 					<RoundedButton class="button-dark button-lg"
@@ -126,7 +125,29 @@
 				</div>
 			</div>
 
-			<FormBackButton @click="handleDecreaseStep(soldier.militaryType === 'airforce' ? 1 : 0.5)"></FormBackButton>
+			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
+		</div>
+    
+    <!-- 작성 폼 (공군 - 기수) -->
+		<div v-else-if="soldier.militaryType === 'airforce' && stepper.currentStep === 5" class="form-card">
+			<div class="form-card-content">
+				<FormLabel class="mb-3">
+					{{ soldier.name }} 훈련병은<br>공군 몇 기인가요? 📋
+				</FormLabel>
+				<ArmyTrainingCenterSelect :value="soldier.trainingCenterName"
+										  @change="handleSelectTrainingCenterName"
+				></ArmyTrainingCenterSelect>
+				
+        <div class="form-card-buttons">
+					<RoundedButton class="button-dark button-lg"
+								   text="편지함 찾기"
+								   @click="handleSubmitForm"
+								   :disabled="soldier.enterDate === ''"
+					></RoundedButton>	
+				</div>
+			</div>
+
+			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
 		</div>
 	</transition>
 </div>
@@ -194,7 +215,7 @@ export default {
 		};
 		const handleClickMilitaryType = (militaryType) => {
 			store.dispatch('registerForm/updateMilitaryType', militaryType);
-			handleIncreaseStep(militaryType === "airforce" ? 1 : 0.5);
+			handleIncreaseStep(1);
 		};
 		const handleSelectTrainingCenterName = (event) => {
 			store.dispatch('registerForm/updateTrainingCenterName', event.target.value);
