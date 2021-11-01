@@ -42,6 +42,7 @@
 
 <script>
 import { ref, computed } from "vue";
+import { useStore } from "vuex";
 	
 import { openModal } from "@/utils/DialogHandler";
  
@@ -58,8 +59,8 @@ export default {
 		MailListItem,
 	},
 	setup() {
-		/* Local State */
-		// TODO: 실제 데이터 Fetch하도록 변경, Vuex 적용
+    /* Vuex */
+    const store = useStore();
 		const context = computed(() => {
 			const context1 = {
 				soldier: {

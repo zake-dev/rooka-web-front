@@ -19,13 +19,13 @@
 					<span class="modal-content-profile-row__label font-mobile__content-title"
 					>생년월일</span>
 					<span class="font-mobile__content-text"
-					>{{ toKoreanDateString(soldier.birthOfDate) }}</span>
+					>{{ toKoreanDateString(soldier.birthDate) }}</span>
 				</div>
 				<div class="modal-content-profile-row">
 					<span class="modal-content-profile-row__label font-mobile__content-title"
 					>군종</span>
 					<span class="font-mobile__content-text"
-					>{{ soldier.militaryType }}</span>
+					>{{ toKoreanMilitaryType(soldier.militaryType) }}</span>
 				</div>
 				<div class="modal-content-profile-row">
 					<span class="modal-content-profile-row__label font-mobile__content-title"
@@ -39,25 +39,32 @@
 </template>
 
 <script>
-import { toKoreanDateString } from "@/utils/TextFormatter";
+import { computed } from "vue";
+import { useStore } from "vuex";
+  
+import { toKoreanDateString, toKoreanMilitaryType } from "@/utils/TextFormatter";
 	
 import ProfileAirforcePng from "@/assets/images/profile-airforce.png";
 
 export default {
  	name: "ProfileModalContent",
-	props: {
-		soldier: Object,
-	},
 	emits: ['closeModal'],
-	setup(props, { emit }) {		
+	setup(props, { emit }) {
+    /* Vuex */
+    const store = useStore();
+    const soldier = computed(() => store.state.registerForm);
+    
 		/* Event Handler */
 		const handleClickCloseModal = () => emit('closeModal');
 		
 		return {
 			/* Assets */
 			ProfileAirforcePng,
+      /* Variables */
+      soldier,
 			/* Functions */
 			toKoreanDateString,
+      toKoreanMilitaryType,
 			handleClickCloseModal,
 		};
 	},
@@ -71,6 +78,8 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+  height: 319px;
+	padding: 32px;
 	
 	&__close-button {
 		width: 23px;

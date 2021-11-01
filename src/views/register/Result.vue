@@ -49,7 +49,6 @@ export default {
 			alert("아직 제공되지 않는 서비스입니다.");
 		};
 		const handleClickNewMail = () => {
-      console.dir(soldier.value);
       router.push(`/mail/${soldier.value.key}`);
     }
 		
