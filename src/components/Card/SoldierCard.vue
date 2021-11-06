@@ -21,6 +21,14 @@
 					<td class="font-mobile__content-title pe-2">입대일</td>
 					<td class="font-mobile__content-text ps-1">{{ toKoreanDateString(soldier.enterDate) }}</td>
 				</tr>
+        <tr v-if="soldier.militaryType === 'army'" class="mt-2">
+					<td class="font-mobile__content-title pe-2">부대</td>
+					<td class="font-mobile__content-text ps-1">{{ soldier.trainingCenterName }}</td>
+				</tr>
+        <tr v-if="soldier.militaryType === 'airforce'" class="mt-2">
+					<td class="font-mobile__content-title pe-2">기수</td>
+					<td class="font-mobile__content-text ps-1">{{ soldier.kisu }}기</td>
+				</tr>
 			</table>
 		</div>
 		
