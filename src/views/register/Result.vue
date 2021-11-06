@@ -23,33 +23,32 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
-import SoldierCard from "@/components/Card/SoldierCard.vue";
-import RoundedButton from "@/components/Button/RoundedButton.vue";
+import SoldierCard from '@/components/Card/SoldierCard.vue'
+import RoundedButton from '@/components/Button/RoundedButton.vue'
 
 export default {
-	name: "RegisterResult",
 	components: {
 		SoldierCard,
-		RoundedButton,
+		RoundedButton
 	},
 	setup() {
 		/* Vuex */
-		const store = useStore();
-		const soldier = computed(() => store.state.registerForm);
+		const store = useStore()
+		const soldier = computed(() => store.state.registerForm)
 		
 		/* Router */
-		const router = useRouter();
+		const router = useRouter()
 			
 		/* Event Handler */
 		const handleClickShareLink = () => {
-			alert("아직 제공되지 않는 서비스입니다.");
-		};
+			alert("아직 제공되지 않는 서비스입니다.")
+		}
 		const handleClickNewMail = () => {
-      router.push(`/mail/${soldier.value.key}`);
+      router.push(`/mail/${soldier.value.key}`)
     }
 		
 		return {
@@ -57,14 +56,14 @@ export default {
 			soldier,
 			/* Functions */
 			handleClickShareLink,
-			handleClickNewMail,
-		};
-	},
-};
+			handleClickNewMail
+		}
+	}
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .page-wrapper {
 	padding: 48px 32px;

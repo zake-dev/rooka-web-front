@@ -43,6 +43,7 @@
 <script>
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 	
 import { openModal } from '@/utils/DialogHandler'
  
@@ -58,6 +59,21 @@ export default {
 		RoundedButton,
 		MailListItem
 	},
+  beforeRouteEnter(to, from, next) {
+    switch (to.params.key.slice(-4)) {
+      case "1234":
+      case "1235":
+      case "1236":
+      case "1237":
+      case "1238":
+      case "1239":
+        next()
+        break
+      default:
+        next({ name: 'PageNotFound' })
+        break
+    }
+  },
 	setup() {
     /* Vuex */
     const store = useStore()
