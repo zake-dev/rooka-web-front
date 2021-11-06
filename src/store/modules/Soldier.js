@@ -7,6 +7,7 @@ const module = {
 		enterDate: '',
 		trainingCenterName: '',
     kisu: '',
+    sosok: '',
     key: '',
 	},
 	mutations: {
@@ -27,6 +28,9 @@ const module = {
 		},
     SET_KISU(state, kisu) {
       state.kisu = kisu
+    },
+    SET_SOSOK(state, sosok) {
+      state.sosok = sosok
     },
     SET_KEY(state, key) {
       state.key = key
@@ -50,6 +54,9 @@ const module = {
 		},
     UPDATE_KISU({ commit }, kisu) {
       commit('SET_KISU', kisu)
+    },
+    UPDATE_SOSOK({ commit }, sosok) {
+      commit('SET_SOSOK', sosok)
     },
     UPDATE_KEY({ commit }, key) {
       commit('SET_KEY', key)

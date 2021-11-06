@@ -33,6 +33,24 @@
 					<span class="font-mobile__content-text"
 					>{{ toKoreanDateString(soldier.enterDate) }}</span>
 				</div>
+        <div class="modal-content-profile-row">
+					<span class="modal-content-profile-row__label font-mobile__content-title"
+					>소속</span>
+					<span class="font-mobile__content-text"
+					>{{ soldier.sosok }}</span>
+				</div>
+        <div v-if="soldier.militaryType === 'army'" class="modal-content-profile-row">
+					<span class="modal-content-profile-row__label font-mobile__content-title"
+					>부대</span>
+					<span class="font-mobile__content-text"
+					>{{ soldier.traningCenterName }}</span>
+				</div>
+        <div v-if="soldier.militaryType === 'airforce'" class="modal-content-profile-row">
+					<span class="modal-content-profile-row__label font-mobile__content-title"
+					>기수</span>
+					<span class="font-mobile__content-text"
+					>{{ soldier.kisu }}기</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -77,14 +95,15 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-  height: 319px;
+  height: 343px;
+  width: 343px;
 	padding: 32px;
 	
 	&__close-button {
 		width: 23px;
-		height: 23px;
-		border-radius: 12px;
-		font-size: 7px;
+		min-height: 23px;
+		border-radius: 50%;
+		font-size: 8px;
 	}
 }
 .modal-content-profile {
@@ -95,12 +114,14 @@ export default {
 	color: $gray4;
 	
 	&-info {
-		width: 152px;
+		width: 100%;
+    padding: 0 16px;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 	}
 	&-row {
+    margin-bottom: 8px;
 		width: 100%;
 		display: inline-flex;
 		

@@ -49,9 +49,9 @@ export default {
 	
 	&__close-button {
 		width: 23px;
-		height: 23px;
-		border-radius: 12px;
-		font-size: 7px;
+		min-height: 23px;
+		border-radius: 50%;
+		font-size: 8px;
 	}
 }
 .modal-content-body {
