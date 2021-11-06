@@ -134,15 +134,15 @@
 				<FormLabel class="mb-3">
 					{{ soldier.name }} 훈련병은<br>공군 몇 기인가요? 📋
 				</FormLabel>
-				<ArmyTrainingCenterSelect :value="soldier.trainingCenterName"
-										  @change="handleSelectTrainingCenterName"
-				></ArmyTrainingCenterSelect>
+				<AirforceKisuSelect :value="soldier.kisu"
+										        @change="handleSelectKisu"
+				></AirforceKisuSelect>
 				
         <div class="form-card-buttons">
 					<RoundedButton class="button-dark button-lg"
-								   text="편지함 찾기"
-								   @click="handleSubmitForm"
-								   :disabled="soldier.kisu === ''"
+                         text="편지함 찾기"
+                         @click="handleSubmitForm"
+                         :disabled="soldier.kisu === ''"
 					></RoundedButton>	
 				</div>
 			</div>
@@ -166,6 +166,7 @@ import LineStepper from '@/components/Stepper/LineStepper.vue'
 import FormLabel from '@/components/Form/FormLabel.vue'
 import FormInput from '@/components/Form/FormInput.vue'
 import ArmyTrainingCenterSelect from '@/components/Form/ArmyTrainingCenterSelect.vue'
+import AirforceKisuSelect from '@/components/Form/AirforceKisuSelect'
 import FormBackButton from '@/components/Form/FormBackButton.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
 
@@ -175,6 +176,7 @@ export default {
 		FormLabel,
 		FormInput,
 		ArmyTrainingCenterSelect,
+    AirforceKisuSelect,
 		FormBackButton,
 		RoundedButton
  	},
@@ -216,13 +218,17 @@ export default {
 			store.dispatch('registerForm/UPDATE_MILITARY_TYPE', militaryType)
 			handleIncreaseStep()
 		}
-		const handleSelectTrainingCenterName = (event) => {
-			store.dispatch('registerForm/UPDATE_TRAINING_CENTER_NAME', event.target.value)
-		}
-		const handleSubmitEnterDate = (event) => {
+    const handleSubmitEnterDate = (event) => {
 			store.dispatch('registerForm/UPDATE_ENTER_DATE', event.target.value)
 			event.target.blur()
 		}
+		const handleSelectTrainingCenterName = (event) => {
+			store.dispatch('registerForm/UPDATE_TRAINING_CENTER_NAME', event.target.value)
+		}
+    const handleSelectKisu = (event) => {
+      store.dispatch('registerForm/UPDATE_KISU', event.traget.value)
+      event.target.blur()
+    }
 		const handleIncreaseStep = () => {
 			slideTransition.value = "slide-left"
 			stepper.currentStep++
@@ -252,8 +258,9 @@ export default {
 			handleSubmitName,
 			handleSubmitBirthDate,
 			handleClickMilitaryType,
+      handleSubmitEnterDate,
 			handleSelectTrainingCenterName,
-			handleSubmitEnterDate,
+			handleSelectKisu,
 			handleIncreaseStep,
 			handleDecreaseStep,
 			handleSubmitForm
