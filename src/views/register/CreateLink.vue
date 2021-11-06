@@ -34,6 +34,25 @@
 				</span>
 			</div>
 			<div class="submitted-form__divider"></div>
+      <template v-if="soldier.militaryType === 'army'">
+        <div class="submitted-form-row">
+          <span class="font-mobile__content-title">부대</span>
+          <span class="font-mobile__content-text">
+            {{ soldier.trainingCenterName }}
+          </span>
+        </div>
+        <div class="submitted-form__divider"></div>
+      </template>
+      
+      <template v-if="soldier.militaryType === 'airforce'">
+        <div class="submitted-form-row">
+          <span class="font-mobile__content-title">기수</span>
+          <span class="font-mobile__content-text">
+            {{ soldier.kisu }}기
+          </span>
+        </div>
+        <div class="submitted-form__divider"></div>
+      </template>
 		</div>
 		
 		<div class="action-container">
