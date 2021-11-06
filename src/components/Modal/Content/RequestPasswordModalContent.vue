@@ -21,26 +21,25 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref } from 'vue'
 
-import FormInput from "@/components/Form/FormInput.vue";
-import RoundedButton from "@/components/Button/RoundedButton.vue";
+import FormInput from '@/components/Form/FormInput.vue'
+import RoundedButton from '@/components/Button/RoundedButton.vue'
 
 export default {
- 	name: "PasswordCheckModalContent",
 	components: {
 		FormInput,
-		RoundedButton,
+		RoundedButton
 	},
 	emits: ['closeModal'],
 	setup(props, { emit }) {
 		/* Local State */
-		const password = ref("");
+		const password = ref("")
 		
 		/* Event Handler */
-		const handleClickCloseModal = () => emit('closeModal');
+		const handleClickCloseModal = () => emit('closeModal')
 		const handleSubmitPassword = () => {
-			alert('아직 제공되지 않는 서비스입니다.');
+			alert('아직 제공되지 않는 서비스입니다.')
 		}
 		
 		return {
@@ -48,14 +47,14 @@ export default {
 			password,
 			/* Functions */
 			handleClickCloseModal,
-			handleSubmitPassword,
-		};
-	},
-};
+			handleSubmitPassword
+		}
+	}
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .modal-content {
 	display: flex;

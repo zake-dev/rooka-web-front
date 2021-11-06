@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import MailStatusChip from "@/components/Chip/MailStatusChip.vue";
+import MailStatusChip from '@/components/Chip/MailStatusChip.vue'
 	
 export default {
 	components: {
@@ -29,15 +29,12 @@ export default {
 	},
 	props: {
 		mail: Object,
-	},
-	setup(props) {
-		
 	}
 }
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .list-item {
 	width: 100%;

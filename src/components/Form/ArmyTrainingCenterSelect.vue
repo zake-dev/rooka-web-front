@@ -16,37 +16,37 @@
 	
 
 <script>
-import { reactive, computed } from "vue";
-import { useStore } from "vuex";
+import { reactive, computed } from 'vue'
+import { useStore } from 'vuex'
 	
-import * as CodeApi from "@/api/code/CodeApi";
+import * as CodeApi from '@/api/code/CodeApi'
 
 export default {
 	setup() {
     /* Vuex */
-    const store = useStore();
-    const soldier = computed(() => store.state.registerForm);
+    const store = useStore()
+    const soldier = computed(() => store.state.registerForm)
     
-		/* Local State */
-		const trainingCenterNames = reactive([]);
-		
-		/* Fetch Data */
-		(async () => {
-			const { data } = await CodeApi.getTrainingCenterNames();
-			data.forEach((name) => trainingCenterNames.push(name));
-		})();
+    /* Local State */
+    const trainingCenterNames = reactive([])
+
+    /* Fetch Data */
+    ;(async () => {
+      const { data } = await CodeApi.getTrainingCenterNames()
+      data.forEach((name) => trainingCenterNames.push(name))
+	  })()
 
 		return {
       /* Variables */
       soldier,
-			trainingCenterNames,
+			trainingCenterNames
 		}
 	}
 }
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 	
 .form-select {
 	width: 100%;

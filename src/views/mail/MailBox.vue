@@ -41,33 +41,33 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
-import { useStore } from "vuex";
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
 	
-import { openModal } from "@/utils/DialogHandler";
+import { openModal } from '@/utils/DialogHandler'
  
-import InfoButton from "@/components/Button/InfoButton.vue";
-import ShareButton from "@/components/Button/ShareButton.vue";
-import RoundedButton from "@/components/Button/RoundedButton.vue";
-import MailListItem from "@/components/MailBox/MailListItem.vue";
+import InfoButton from '@/components/Button/InfoButton.vue'
+import ShareButton from '@/components/Button/ShareButton.vue'
+import RoundedButton from '@/components/Button/RoundedButton.vue'
+import MailListItem from '@/components/MailBox/MailListItem.vue'
 
 export default {
 	components: {
 		InfoButton,
 		ShareButton,
 		RoundedButton,
-		MailListItem,
+		MailListItem
 	},
 	setup() {
     /* Vuex */
-    const store = useStore();
+    const store = useStore()
 		const context = computed(() => {
 			const context1 = {
 				soldier: {
 					name: "김루카",
 					birthOfDate: "2000-01-01",
 					militaryType: "공군",
-					enterDate: "2021-12-10",
+					enterDate: "2021-12-10"
 				},
 				state: "OPEN",
 				mails: [],
@@ -350,7 +350,7 @@ export default {
 				mails: [],
 			};
 			
-			const id = location.href.slice(-4);
+			const id = location.href.slice(-4)
 			switch (id) {
 				case "1234": return context1;
 				case "1235": return context2;
@@ -360,41 +360,41 @@ export default {
 				case "1239": return context6;
 			}
 		});
-		const soldier = computed(() => context.value.soldier);
-		const isSendable = computed(() => context.value.state === "OPEN");
-		const mails = computed(() => context.value.mails);
+		const soldier = computed(() => context.value.soldier)
+		const isSendable = computed(() => context.value.state === 'OPEN')
+		const mails = computed(() => context.value.mails)
 		const headerMessage = computed(() => {
-			const { soldier, state, mails } = context.value;
-			const totalCount = mails.length;
-			const pendingCount = mails.filter((mail) => mail.state === "PENDING").length;
-			const deliveredCount = mails.filter((mail) => mail.state === "DELIVERED").length;
+			const { soldier, state, mails } = context.value
+			const totalCount = mails.length
+			const pendingCount = mails.filter((mail) => mail.state === 'PENDING').length
+			const deliveredCount = mails.filter((mail) => mail.state === 'DELIVERED').length
 			
 			switch (state) {
-				case "OPEN":
+				case 'OPEN':
 					if (totalCount === 0)
-						return "아직 받은 편지가 없네요. 지금 마음을 담아 편지를 보내보세요!";
+						return '아직 받은 편지가 없네요. 지금 마음을 담아 편지를 보내보세요!'
 					if (deliveredCount === 0)
 						return `${pendingCount}통의 편지가 전달될 예정이에요. 지금 편지를 보내보세요!`
 					if (pendingCount === 0)
-						return `${deliveredCount}통의 편지가 전달됐어요. 지금 마음을 담아 편지를 보내보세요!`;
-					return `총 ${deliveredCount}통의 편지가 전달됐고, ${pendingCount}통의 편지가 전달될 예정이에요.`;
+						return `${deliveredCount}통의 편지가 전달됐어요. 지금 마음을 담아 편지를 보내보세요!`
+					return `총 ${deliveredCount}통의 편지가 전달됐고, ${pendingCount}통의 편지가 전달될 예정이에요.`
 				case "CLOSED":
 					return (totalCount === 0) ? `인터넷 편지가 마감되었어요. 수고 많았어요 ${soldier.name}님!`
-											  : `인터넷 편지가 마감되었어요. 소중한 ${deliveredCount}통의 편지 감사합니다!`;
+											  : `인터넷 편지가 마감되었어요. 소중한 ${deliveredCount}통의 편지 감사합니다!`
 			}
-		});
+		})
 		
 		/* Event Handler */
 		const handleClickMailListItem = (id) => {
-			console.log(`선택된 메일: ${id}`);
-			openModal('RequestPassword');
-		};
+			console.log(`선택된 메일: ${id}`)
+			openModal('RequestPassword')
+		}
 		const handleClickShare = () => {
-			alert('아직 제공되지 않는 서비스입니다.');
-		};
+			alert('아직 제공되지 않는 서비스입니다.')
+		}
 		const handleClickNewMail = () => {
-			alert('아직 제공되지 않는 서비스입니다.');
-		};
+			alert('아직 제공되지 않는 서비스입니다.')
+		}
 		
 		return {
 			/* Variables */
@@ -406,7 +406,7 @@ export default {
 			openModal,
 			handleClickMailListItem,
 			handleClickShare,
-			handleClickNewMail,
+			handleClickNewMail
 		}
 	}
 }

@@ -7,35 +7,34 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed } from 'vue'
 
 export default {
- 	name: "LineStepper",
 	props: {
-		stepper: Object,
+		stepper: Object
 	},
 	setup(props) {
 		/* Local State */
 		const progressBarStyle = computed(() => {
-			const { maxStep, currentStep } = props.stepper;
-			return { width: `${currentStep / maxStep * 100}%` };
-		});
+			const { maxStep, currentStep } = props.stepper
+			return { width: `${currentStep / maxStep * 100}%` }
+		})
 		
 		/* Computed Functions */
-		const isCompletedStep = (step) => (step <= props.stepper.currentStep);
+		const isCompletedStep = (step) => (step <= props.stepper.currentStep)
 		
 		return {
 			/* Variables */
 			progressBarStyle,
 			/* Functions */
 			isCompletedStep
-		};
+		}
 	}
-};
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .stepper {
 	width: 100%;

@@ -40,17 +40,16 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
-import html2canvas from "html2canvas";
+import { ref, computed, onMounted } from 'vue'
+import html2canvas from 'html2canvas'
 	
-import { toKoreanDateString, toKoreanMilitaryType } from "@/utils/TextFormatter";
+import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 	
-import MilitaryHelmetPng from "@/assets/images/military-helmet.png";
-import Logo from "@/components/Logo/Logo.vue";
-import LinkChip from "@/components/Chip/LinkChip.vue";
+import MilitaryHelmetPng from '@/assets/images/military-helmet.png'
+import Logo from '@/components/Logo/Logo.vue'
+import LinkChip from '@/components/Chip/LinkChip.vue'
 
 export default {
- 	name: "SoldierCard",
 	components: {
 		Logo,
 		LinkChip,
@@ -60,30 +59,30 @@ export default {
 	},
 	setup() {
 		onMounted(async () => {			
-			const card = document.getElementById("card-html");
+			const card = document.getElementById("card-html")
 			const canvas = await html2canvas(card, {
 				scale: 2,
-				onclone: (clonedDocument => clonedDocument.getElementById("card-html").style.display = 'block'),
+				onclone: (clonedDocument => clonedDocument.getElementById("card-html").style.display = 'block')
 			})
-			const cardImage = document.getElementById("card-image");
-			cardImage.src = canvas.toDataURL("image/png");
-			cardImage.style.opacity = 1;
-		});
+			const cardImage = document.getElementById("card-image")
+			cardImage.src = canvas.toDataURL("image/png")
+			cardImage.style.opacity = 1
+		})
 		
 		return {
 			/* Assets */
 			MilitaryHelmetPng,
 			/* Functions */
 			toKoreanDateString,
-      toKoreanMilitaryType,
-		};
+      toKoreanMilitaryType
+		}
 	}
-};
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
-@import "@/scss/skeleton.scss";
+@import '@/scss/_variables.scss';
+@import '@/scss/skeleton.scss';
 
 .card-wrapper {
 	width: 327px;

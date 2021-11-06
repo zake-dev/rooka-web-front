@@ -26,20 +26,19 @@
 
 <script>
 export default {
- 	name: "WhatIsMailBoxLinkModalContent",
 	emits: ['closeModal'],
 	setup(props, { emit }) {
-		const handleClickCloseModal = () => emit('closeModal');
+		const handleClickCloseModal = () => emit('closeModal')
 		
 		return {
-			handleClickCloseModal,
-		};
-	},
-};
+			handleClickCloseModal
+		}
+	}
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .modal-content {
 	display: flex;

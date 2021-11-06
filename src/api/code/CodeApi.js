@@ -1,3 +1,3 @@
-import { axiosService } from "@/api";
+import { axiosService } from '@/api'
 
-export const getTrainingCenterNames = () => axiosService.get("/army/training-centers");
+export const getTrainingCenterNames = () => axiosService.get("/army/training-centers")

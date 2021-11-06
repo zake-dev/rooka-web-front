@@ -44,13 +44,13 @@
 				<div class="form-card-buttons my-3">
 					<RoundedButton class="button-dark button-lg"
 								   text="다음"
-								   @click="handleIncreaseStep(1)"
+								   @click="handleIncreaseStep"
 								   :disabled="soldier.birthDate === ''"
 					></RoundedButton>	
 				</div>
 			</div>
 
-			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
+			<FormBackButton @click="handleDecreaseStep"></FormBackButton>
 		</div>
 		
 		<!-- 작성 폼 (군종) -->
@@ -62,12 +62,12 @@
 				
 				<div class="form-card-buttons">
 					<RoundedButton class="button-success"
-								   text="육군"
-								   @click="handleClickMilitaryType('army')"
+                         text="육군"
+                         @click="handleClickMilitaryType('army')"
 					></RoundedButton>
 					<RoundedButton class="button-info"
-								   text="공군"
-								   @click="handleClickMilitaryType('airforce')"
+                         text="공군"
+                         @click="handleClickMilitaryType('airforce')"
 					></RoundedButton>
 				</div>
 				
@@ -78,7 +78,7 @@
 				</div>
 			</div>
 
-			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
+			<FormBackButton @click="handleDecreaseStep"></FormBackButton>
 		</div>
 				
 		<!-- 작성 폼 (입대일) -->
@@ -97,13 +97,13 @@
 				<div class="form-card-buttons my-3">
 					<RoundedButton class="button-dark button-lg"
                          text="다음"
-                         @click="handleIncreaseStep(1)"
+                         @click="handleIncreaseStep"
                          :disabled="soldier.enterDate === ''"
 					></RoundedButton>	
 				</div>
 			</div>
 
-			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
+			<FormBackButton @click="handleDecreaseStep"></FormBackButton>
 		</div>
     
     <!-- 작성 폼 (육군 - 입영부대) -->
@@ -125,7 +125,7 @@
 				</div>
 			</div>
 
-			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
+			<FormBackButton @click="handleDecreaseStep"></FormBackButton>
 		</div>
     
     <!-- 작성 폼 (공군 - 기수) -->
@@ -147,99 +147,98 @@
 				</div>
 			</div>
 
-			<FormBackButton @click="handleDecreaseStep(1)"></FormBackButton>
+			<FormBackButton @click="handleDecreaseStep"></FormBackButton>
 		</div>
 	</transition>
 </div>
 </template>
 
 <script>
-import { ref, reactive, computed } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { ref, reactive, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 	
-import { openModal } from "@/utils/DialogHandler";
-import * as SoldierApi from "@/api/soldier/SoldierApi";
+import { openModal } from '@/utils/DialogHandler'
+import * as SoldierApi from '@/api/soldier/SoldierApi'
 	
-import SoliderModule from "@/store/modules/Soldier";
-import LineStepper from "@/components/Stepper/LineStepper.vue";
-import FormLabel from "@/components/Form/FormLabel.vue";
-import FormInput from "@/components/Form/FormInput.vue";
-import ArmyTrainingCenterSelect from "@/components/Form/ArmyTrainingCenterSelect.vue";
-import FormBackButton from "@/components/Form/FormBackButton.vue";
-import RoundedButton from "@/components/Button/RoundedButton.vue";
+import SoliderModule from '@/store/modules/Soldier'
+import LineStepper from '@/components/Stepper/LineStepper.vue'
+import FormLabel from '@/components/Form/FormLabel.vue'
+import FormInput from '@/components/Form/FormInput.vue'
+import ArmyTrainingCenterSelect from '@/components/Form/ArmyTrainingCenterSelect.vue'
+import FormBackButton from '@/components/Form/FormBackButton.vue'
+import RoundedButton from '@/components/Button/RoundedButton.vue'
 
 export default {
- 	name: "RegisterForm",
  	components: {
 		LineStepper,
 		FormLabel,
 		FormInput,
 		ArmyTrainingCenterSelect,
 		FormBackButton,
-		RoundedButton,
+		RoundedButton
  	},
 	setup() {
 		/* Vuex */
-		const store = useStore();
-		const soldier = computed(() => store.state.registerForm);
+		const store = useStore()
+		const soldier = computed(() => store.state.registerForm)
 		
 		/* Router */
-		const router = useRouter();
+		const router = useRouter()
 		
 		/* Local State */
 		const stepper = reactive({
-			maxStep: 4,
+			maxStep: 5,
 			currentStep: 1
-		});
-		const slideTransition = ref("slide-left");
-		const isInvalidName = ref(false);
+		})
+		const slideTransition = ref("slide-left")
+		const isInvalidName = ref(false)
 		
 		/* Event Handler */
 		const handleUpdateName = (event) => {
-			store.dispatch('registerForm/updateName', event.target.value);
-		};
+			store.dispatch('registerForm/UPDATE_NAME', event.target.value)
+		}
 		const handleSubmitName = () => {
-			const isValidKoreanName = (name) => new RegExp(/^[가-힣]{2,}$/g).test(name);
+			const isValidKoreanName = (name) => new RegExp(/^[가-힣]{2,}$/g).test(name)
 			
 			if (!isValidKoreanName(soldier.value.name)) {
-				isInvalidName.value = true;
-				return;
+				isInvalidName.value = true
+				return
 			}
-			isInvalidName.value = false;
-			handleIncreaseStep(1);
+			isInvalidName.value = false
+			handleIncreaseStep()
 		};
 		const handleSubmitBirthDate = (event) => {
-			store.dispatch('registerForm/updateBirthDate', event.target.value);
-			event.target.blur();
-		};
+			store.dispatch('registerForm/UPDATE_BIRTH_DATE', event.target.value)
+			event.target.blur()
+		}
 		const handleClickMilitaryType = (militaryType) => {
-			store.dispatch('registerForm/updateMilitaryType', militaryType);
-			handleIncreaseStep(1);
-		};
+			store.dispatch('registerForm/UPDATE_MILITARY_TYPE', militaryType)
+			handleIncreaseStep()
+		}
 		const handleSelectTrainingCenterName = (event) => {
-			store.dispatch('registerForm/updateTrainingCenterName', event.target.value);
-		};
+			store.dispatch('registerForm/UPDATE_TRAINING_CENTER_NAME', event.target.value)
+		}
 		const handleSubmitEnterDate = (event) => {
-			store.dispatch('registerForm/updateEnterDate', event.target.value);
-			event.target.blur();
-		};
-		const handleIncreaseStep = (amount) => {
-			slideTransition.value = "slide-left";
-			stepper.currentStep += amount;
-		};
-		const handleDecreaseStep = (amount) => {
-			slideTransition.value = "slide-right";
-			stepper.currentStep -= amount;
-		};
+			store.dispatch('registerForm/UPDATE_ENTER_DATE', event.target.value)
+			event.target.blur()
+		}
+		const handleIncreaseStep = () => {
+			slideTransition.value = "slide-left"
+			stepper.currentStep++
+		}
+		const handleDecreaseStep = () => {
+			slideTransition.value = "slide-right"
+			stepper.currentStep--
+		}
 		const handleSubmitForm = async () => {
       try {
-        const { data } = await SoldierApi.getKey(soldier.value);
-        router.push(`/mail/${data}`);
+        const { data } = await SoldierApi.getKey(soldier.value)
+        router.push(`/mail/${data}`)
       } catch (e) {
-        router.push({ name: "RegisterCreateLink" });
+        router.push({ name: 'RegisterCreateLink' })
       }
-		};
+		}
 		
 		return {
 			/* Variables */ 
@@ -257,14 +256,14 @@ export default {
 			handleSubmitEnterDate,
 			handleIncreaseStep,
 			handleDecreaseStep,
-			handleSubmitForm,
-		};
+			handleSubmitForm
+		}
 	}
-};
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .form-card {
 	position: absolute;

@@ -3,16 +3,15 @@
 </template>
 
 <script>
-import LogoSvg from "@/assets/images/logo.svg";
+import LogoSvg from '@/assets/images/logo.svg'
 
 export default {
- 	name: "Logo",
 	setup() {
 		return {
 			LogoSvg
-		};
+		}
 	}
-};
+}
 </script>
 
 <style scoped lang="scss">

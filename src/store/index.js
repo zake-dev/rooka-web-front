@@ -1,37 +1,37 @@
-import { createStore } from "vuex";
-import createPersistedState from "vuex-persistedstate";
+import { createStore } from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
-import RegisterForm from "@/store/modules/Soldier";
+import RegisterForm from '@/store/modules/Soldier'
 
 export default createStore({
 	state: {
 		isModalVisible: false,
-		modalContentName: "",
+		modalContentName: '',
 	},
 	mutations: {
 		SET_IS_MODAL_VISIBLE(state, isVisible) {
-			state.isModalVisible = isVisible;
+			state.isModalVisible = isVisible
 		},
 		SET_MODAL_CONTENT_NAME(state, name) {
-			state.modalContentName = name;
-		},
+			state.modalContentName = name
+		}
 	},
 	actions: {
 		OPEN_MODAL({ commit }, modalContentName) {
-			commit('SET_MODAL_CONTENT_NAME', modalContentName);
-			commit('SET_IS_MODAL_VISIBLE', true);
+			commit('SET_MODAL_CONTENT_NAME', modalContentName)
+			commit('SET_IS_MODAL_VISIBLE', true)
 		},
 		CLOSE_MODAL({ commit }) {
-			commit('SET_IS_MODAL_VISIBLE', false);
-		},
+			commit('SET_IS_MODAL_VISIBLE', false)
+		}
 	},
 	modules: {
-		registerForm: RegisterForm,
+		registerForm: RegisterForm
 	},
 	plugins: [
 		createPersistedState({
 			paths: ["registerForm"],
-			storage: window.sessionStorage,
-		}),
-	],
-});
+			storage: window.sessionStorage
+		})
+	]
+})

@@ -3,7 +3,7 @@
 </template>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 	
 .form-input {
 	width: 100%;

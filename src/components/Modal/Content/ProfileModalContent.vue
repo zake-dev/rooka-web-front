@@ -39,23 +39,22 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { computed } from 'vue'
+import { useStore } from 'vuex'
   
-import { toKoreanDateString, toKoreanMilitaryType } from "@/utils/TextFormatter";
+import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 	
-import ProfileAirforcePng from "@/assets/images/profile-airforce.png";
+import ProfileAirforcePng from '@/assets/images/profile-airforce.png'
 
 export default {
- 	name: "ProfileModalContent",
 	emits: ['closeModal'],
 	setup(props, { emit }) {
     /* Vuex */
-    const store = useStore();
-    const soldier = computed(() => store.state.registerForm);
+    const store = useStore()
+    const soldier = computed(() => store.state.registerForm)
     
 		/* Event Handler */
-		const handleClickCloseModal = () => emit('closeModal');
+		const handleClickCloseModal = () => emit('closeModal')
 		
 		return {
 			/* Assets */
@@ -65,14 +64,14 @@ export default {
 			/* Functions */
 			toKoreanDateString,
       toKoreanMilitaryType,
-			handleClickCloseModal,
-		};
-	},
-};
+			handleClickCloseModal
+		}
+	}
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .modal-content {
 	display: flex;

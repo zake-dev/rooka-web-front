@@ -17,30 +17,29 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import { useStore } from "vuex";
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
-import MissingMilitaryTypeModalContent from "@/components/Modal/Content/MissingMilitaryTypeModalContent.vue";
-import WhatIsMailBoxLinkModalContent from "@/components/Modal/Content/WhatIsMailBoxLinkModalContent.vue";
-import ProfileModalContent from "@/components/Modal/Content/ProfileModalContent.vue";
-import RequestPasswordModalContent from "@/components/Modal/Content/RequestPasswordModalContent.vue";
+import MissingMilitaryTypeModalContent from '@/components/Modal/Content/MissingMilitaryTypeModalContent.vue'
+import WhatIsMailBoxLinkModalContent from '@/components/Modal/Content/WhatIsMailBoxLinkModalContent.vue'
+import ProfileModalContent from '@/components/Modal/Content/ProfileModalContent.vue'
+import RequestPasswordModalContent from '@/components/Modal/Content/RequestPasswordModalContent.vue'
 	
 export default {
- 	name: "Modal",
 	components: {
 		MissingMilitaryTypeModalContent,
 		WhatIsMailBoxLinkModalContent,
 		ProfileModalContent,
-		RequestPasswordModalContent,
+		RequestPasswordModalContent
 	},
 	setup() {
 		/* Vuex */
 		const store = useStore();
-		const isVisible  = computed(() => store.state.isModalVisible);
-		const ModalContent = computed(() => store.state.modalContentName + "ModalContent");
+		const isVisible  = computed(() => store.state.isModalVisible)
+		const ModalContent = computed(() => store.state.modalContentName + "ModalContent")
 		
 		/* Event Handler */
-		const handleCloseModal = () => store.dispatch('CLOSE_MODAL');
+		const handleCloseModal = () => store.dispatch('CLOSE_MODAL')
 		
 		return {
 			/* Components */
@@ -48,10 +47,10 @@ export default {
 			/* Variables */
 			isVisible,
 			/* Functions */
-			handleCloseModal,
-		};
+			handleCloseModal
+		}
 	},
-};
+}
 </script>
 
 <style scoped lang="scss">

@@ -5,18 +5,17 @@
 </template>
 
 <script>	
-import Logo from '@/components/Logo/Logo.vue';
+import Logo from '@/components/Logo/Logo.vue'
 
 export default {
- 	name: "MainAppBar",
 	components: {
 		Logo
 	}
-};
+}
 </script>
 
 <style lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .app-bar {
 	width: 100%;

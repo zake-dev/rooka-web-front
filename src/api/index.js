@@ -1,5 +1,5 @@
-import axios from "axios";
+import axios from 'axios'
 
 export const axiosService = axios.create({
-	baseURL: process.env.VUE_APP_ROOKA_API_URL,
-});
+	baseURL: process.env.VUE_APP_ROOKA_API_URL
+})

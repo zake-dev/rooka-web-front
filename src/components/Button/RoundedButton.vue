@@ -6,11 +6,10 @@
 
 <script>
 export default {
- 	name: "RoundedButton",
 	props: {
 		text: String,
 	}
-};
+}
 </script>
 
 <style scoped lang="scss">

@@ -5,16 +5,15 @@
 </template>
 
 <script>
-import ShareIconSvg from "@/assets/images/share-icon.svg";
+import ShareIconSvg from '@/assets/images/share-icon.svg'
 
 export default {
- 	name: "ShareButton",
 	setup() {
 		return {
-			ShareIconSvg,
+			ShareIconSvg
 		}
 	}
-};
+}
 </script>
 
 <style scoped lang="scss">

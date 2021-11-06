@@ -5,22 +5,19 @@
 </template>
 
 <script>
-import InfoIconSvg from "@/assets/images/info-icon.svg";
+import InfoIconSvg from '@/assets/images/info-icon.svg'
 
 export default {
- 	name: "InfoButton",
-	props: {
-	},
 	setup() {
 		return {
-			InfoIconSvg,
+			InfoIconSvg
 		}
 	}
-};
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .info-button {
 	width: 16px;

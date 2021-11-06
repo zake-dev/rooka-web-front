@@ -6,23 +6,22 @@
 </template>
 
 <script>
-import LinkIconSvg from "@/assets/images/link-icon.svg";
+import LinkIconSvg from '@/assets/images/link-icon.svg'
 
 export default {
- 	name: "LinkChip",
 	props: {
 		link: String,
 	},
 	setup() {		
 		return {
 			LinkIconSvg
-		};
+		}
 	}
-};
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .chip {
 	height: 20px;

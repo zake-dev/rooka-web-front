@@ -4,19 +4,19 @@
 </template>
 
 <script>
-import MobileLayout from "@/components/Layout/MobileLayout.vue";
-import Modal from "@/components/Modal/Modal.vue";
+import MobileLayout from '@/components/Layout/MobileLayout.vue'
+import Modal from '@/components/Modal/Modal.vue'
 
 export default {
- 	name: "App",
+ 	name: 'App',
 	components: {
 		MobileLayout,
-		Modal,
-	},
-};
+		Modal
+	}
+}
 </script>
 
 
 <style lang="scss">
-@import "@/scss/global.scss";
+@import '@/scss/global.scss';
 </style>

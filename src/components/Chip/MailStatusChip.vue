@@ -22,22 +22,17 @@
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed } from 'vue'
 
 export default {
- 	name: "MailStatusChip",
 	props: {
 		mail: Object
-	},
-	setup() {		
-		return {
-		};
 	}
-};
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .chip {
 	height: 22px;

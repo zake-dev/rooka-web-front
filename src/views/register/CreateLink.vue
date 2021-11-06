@@ -50,40 +50,39 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
-import { toKoreanDateString, toKoreanMilitaryType } from "@/utils/TextFormatter";
-import { openModal } from "@/utils/DialogHandler";
-import * as SoldierApi from "@/api/soldier/SoldierApi";
+import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
+import { openModal } from '@/utils/DialogHandler'
+import * as SoldierApi from '@/api/soldier/SoldierApi'
 	
-import RoundedButton from "@/components/Button/RoundedButton.vue";
+import RoundedButton from '@/components/Button/RoundedButton.vue'
 
 export default {
-	name: "RegisterCreateLink",
 	components: {
-		RoundedButton,
+		RoundedButton
 	},
 	setup() {
 		/* Vuex */
-		const store = useStore();
-		const soldier = computed(() => store.state.registerForm);
+		const store = useStore()
+		const soldier = computed(() => store.state.registerForm)
 		
 		/* Router */
-		const router = useRouter();
+		const router = useRouter()
 				
 		/* Event Handler */
 		const handleClickCreateLink = async () => {
       try {
-        const { data } = await SoldierApi.postKey(soldier.value);
-        store.dispatch('registerForm/updateKey', data.key);
-			  router.push({ name: "RegisterResult" });
+        const { data } = await SoldierApi.postKey(soldier.value)
+        store.dispatch('registerForm/UPDATE_KEY', data.key)
+			  router.push({ name: "RegisterResult" })
       } catch (e) {
-        const { errorCode, status, message } = e.response;
-        alert(message);
+        const { errorCode, status, message } = e.response
+        alert(message)
       }     
-		};
+		}
 		
 		return {
 			/* Variables */
@@ -92,14 +91,14 @@ export default {
 			toKoreanDateString,
       toKoreanMilitaryType,
 			openModal,
-			handleClickCreateLink,
-		};
-	},
-};
+			handleClickCreateLink
+		}
+	}
+}
 </script>
 
 <style scoped lang="scss">
-@import "@/scss/_variables.scss";
+@import '@/scss/_variables.scss';
 
 .page-wrapper {
 	padding: 48px 32px;
