@@ -49,16 +49,13 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+@import '@/scss/_variables.scss';
+
 main {
   height: 100% !important;
   overflow: hidden;
 }
-</style>
-
-<style scoped lang="scss">
-@import '@/scss/_variables.scss';
-
 .text-content {
   margin-top: 116px;
 	padding: 48px 32px;
