@@ -38,13 +38,14 @@ export default {
 
 .stepper {
 	width: 100%;
-	height: 1px;
+	height: 2px;
 	z-index: 1000;
 	display: inline-block;
+  background-color: $gray2;
 }
 .stepper__progress-bar {
-	height: 1px;
-	background-color: $black;
+	height: 2px;
+	background-color: $gray5;
 	transition: width 0.3s ease;
 }
 </style>
