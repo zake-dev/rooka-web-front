@@ -400,6 +400,9 @@ export default {
 			}
 		})
 		
+    /* Router */
+    const router = useRouter()
+    
 		/* Event Handler */
 		const handleClickMailListItem = (id) => {
 			console.log(`선택된 메일: ${id}`)
@@ -409,7 +412,7 @@ export default {
 			alert('아직 제공되지 않는 서비스입니다.')
 		}
 		const handleClickNewMail = () => {
-			alert('아직 제공되지 않는 서비스입니다.')
+			router.push(`/mail/post/${soldier.value.key}`)
 		}
 		
 		return {

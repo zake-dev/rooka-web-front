@@ -13,6 +13,10 @@ const routes = [
 		name: 'MailBox',
 		component: () => import('../views/mail/MailBox.vue')
 	}, {
+    path: '/mail/post/:key',
+    name: 'PostMail',
+    component: () => import('../views/mail/Post.vue')
+  }, {
 		path: '/register',
 		redirect: '/register/form',
 	}, {
