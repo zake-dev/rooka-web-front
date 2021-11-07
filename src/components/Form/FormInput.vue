@@ -6,7 +6,6 @@
 @import '@/scss/_variables.scss';
 	
 .form-input {
-	width: 100%;
 	padding: 8px 12px;
 	background-color: $gray1;
 	border: none;

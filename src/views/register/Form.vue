@@ -10,7 +10,7 @@
 				<div class="input-area">
 					<span v-if="isInvalidName"
 						  class="input-area__text--invalid font-mobile__caption"
-				    >올바르지 않은 이름 형태입니다.</span>
+				    >올바르지 않은 이름 형태에요!</span>
 					<FormInput type="text"
 							   placeholder="이름을 입력해주세요"
 							   :value="soldier.name"
@@ -200,11 +200,12 @@ export default {
 		const handleUpdateName = (event) => {
 			store.dispatch('registerForm/UPDATE_NAME', event.target.value)
 		}
-		const handleSubmitName = () => {
+		const handleSubmitName = (event) => {
 			const isValidKoreanName = (name) => new RegExp(/^[가-힣]{2,}$/g).test(name)
 			
 			if (!isValidKoreanName(soldier.value.name)) {
 				isInvalidName.value = true
+        event.target.blur()
 				return
 			}
 			isInvalidName.value = false
@@ -312,7 +313,7 @@ export default {
 	
 	&__text {		
 		&--invalid {
-			padding: 0.4px 0;
+			padding: 0 1px 0.6px 0;
 			color: $rookaRed
 		}
 	}

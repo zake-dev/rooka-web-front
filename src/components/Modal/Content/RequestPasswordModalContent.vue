@@ -1,13 +1,12 @@
 <template>
 	<div class="modal-content">
 		<span class="modal-content__title font-mobile__page-title">비밀번호 입력</span>
-		<FormInput class="mx-1 mb-3"
-				   style="width: calc(100% - 8px)"
+		<FormInput class="mx-2 mb-3"
 				   type="password"
 				   v-model="password"
 				   placeholder="비밀번호를 입력해주세요"
 	    ></FormInput>
-		<div class="modal-actions mt-2">
+		<div class="modal-actions mt-2 mx-1">
 			<RoundedButton class="button-gray"
 						   text="취소"
 						   @click="handleClickCloseModal"
@@ -57,20 +56,26 @@ export default {
 @import '@/scss/_variables.scss';
 
 .modal-content {
+  width: 100%;
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	padding: 20px;
+	align-items: stretch;
+	padding: 16px;
 	
 	&__title {
-		margin: 12px 0 16px 0;
-		padding: 0 12px;
+		margin: 16px 0;
+		padding: 0 16px;
 		color: $gray5;
 	}
 }
 .modal-actions {
-	width: 100%;
-	display: inline-flex;
-	justify-content: space-between;
+  flex: 1;
+	display: flex;
+	justify-content: stretch;
+  gap: 8px;
+}
+.button {
+  width: 100%;
+  min-width: 147px;
 }
 </style>

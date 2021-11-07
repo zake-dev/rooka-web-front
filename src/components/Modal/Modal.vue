@@ -81,5 +81,7 @@ export default {
 	background: #FFFFFF;
 	box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 7px;
+  display: flex;
+  justify-content: center;
 }
 </style>
