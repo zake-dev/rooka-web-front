@@ -285,13 +285,16 @@ export default {
 }
 .form-card-content {
 	padding: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 .form-card-buttons {
 	margin-top: 40px;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
-	align-items: center;
+	justify-content: center;
+  gap: 16px;
 }
 .form-card-links {
 	display: flex;
@@ -309,12 +312,13 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
-	align-items: flex-end;
+	align-items: stretch;
 	
 	&__text {		
 		&--invalid {
 			padding: 0 1px 0.6px 0;
-			color: $rookaRed
+			color: $rookaRed;
+      text-align: right;
 		}
 	}
 }
