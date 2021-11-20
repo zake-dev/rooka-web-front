@@ -13,6 +13,20 @@ const module = {
     state: ''
 	},
 	mutations: {
+    RESET(state) {
+      Object.assign(state, {
+        id: null,
+        author: '',
+        relation: '',
+        address: '',
+        postCode: '',
+        title: '',
+        content: '',
+        password: '',
+        receiverKey: '',
+        state: ''
+      })
+    },
 		SET_ID(state, id) {
       state.id = id
     },
@@ -76,16 +90,7 @@ const module = {
       commit('SET_STATE', state)
     } ,
     RESET({ commit }) {
-      commit('SET_ID', null)
-      commit('SET_AUTHOR', '')
-      commit('SET_RELATION', '')
-      commit('SET_ADDRESS', '')
-      commit('SET_POST_CODE', '')
-      commit('SET_TITLE', '')
-      commit('SET_CONTENT', '')
-      commit('SET_PASSWORD', '')
-      commit('SET_RECEIVER_KEY', '')
-      SET_STATE('SET_STATE', '')
+      commit('RESET')
     }
 	}
 }

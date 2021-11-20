@@ -1,12 +1,14 @@
 <template>
-  <div class="mailbox-header">
-    <div class="mailbox-header__title mb-2"></div>
-    <div class="mailbox-header__message mb-2"></div>
-  </div>
+  <div>
+    <div class="mailbox-header">
+      <div class="mailbox-header__title mb-2"></div>
+      <div class="mailbox-header__message mb-2"></div>
+    </div>
 
-  <div class="mailbox">
-    <div class="mailbox-list">
-      <div v-for="_ in 4" class="mailbox-list__item"></div>
+    <div class="mailbox">
+      <div class="mailbox-list">
+        <div v-for="_ in 4" class="mailbox-list__item"></div>
+      </div>
     </div>
   </div>
 </template>

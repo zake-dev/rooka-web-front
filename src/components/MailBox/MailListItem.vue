@@ -3,7 +3,7 @@
 		<div v-if="mail" class="list-item">
 			<div class="list-item-row my-1 px-1">
 				<span class="font-mobile__content-title">
-					{{ mail.author }} ({{mail.relationship}})
+					{{ mail.author }} ({{mail.relation}})
 				</span>
 				<span class="list-item__caption font-mobile__caption mt-1">
 					{{ new Date(mail.createdAt).toLocaleDateString() }}

@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 import RegisterForm from '@/store/modules/Soldier'
+import MailBox from '@/store/modules/MailBox'
 import Mail from '@/store/modules/Mail'
 
 export default createStore({
@@ -28,6 +29,7 @@ export default createStore({
 	},
 	modules: {
 		registerForm: RegisterForm,
+    mailBox: MailBox,
     mail: Mail
 	},
 	plugins: [

@@ -13,3 +13,9 @@ export const postKey = (form) => {
   Object.entries(soldier).forEach(([key, value]) => formData.append(key, value))
   return axiosService.post(`/mailbox`, formData)
 }
+
+export const getContext = (key) => {
+  return axiosService.get('/mailbox', {
+    params: { key }
+  })
+}
