@@ -22,9 +22,9 @@
     </div>
     
     <div class="mail-footer">
-      <button class="button">사진</button>
-      <button class="button">소식</button>
-      <button class="button">보내기</button>
+      <PhotoMenuButton></PhotoMenuButton>
+      <NewsModalButton></NewsModalButton>
+      <SendMailButton></SendMailButton>
     </div>
 	</div>
 </template>
@@ -34,9 +34,16 @@ import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
   
-
+import PhotoMenuButton from '@/components/Button/PhotoMenuButton.vue'
+import NewsModalButton from '@/components/Button/NewsModalButton.vue'
+import SendMailButton from '@/components/Button/SendMailButton.vue'
 
 export default {
+  components: {
+    PhotoMenuButton,
+    NewsModalButton,
+    SendMailButton
+  },
 	setup() {
 		/* Vuex */
 		const store = useStore()
@@ -88,6 +95,7 @@ input {
       }
       &__input {
         flex: 1;
+        outline: none;
         
         &::placeholder {
           font-family: 'Spoqa Han Sans Neo', sans-serif;
@@ -128,7 +136,7 @@ input {
   }
   &-footer {
     height: 56px;
-    padding: 0 32px;
+    padding: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;

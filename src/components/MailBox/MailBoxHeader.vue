@@ -2,9 +2,9 @@
   <div class="mailbox-header">
     <div class="mailbox-header-title mb-2">
       <span class="font-mobile__title me-2">{{ soldier.name }} 훈련병</span>
-      <InfoButton class="mb-1"
+      <SoldierInfoButton class="mb-1"
             @click="openModal('Profile')"
-      ></InfoButton>
+      ></SoldierInfoButton>
     </div>
     <span class="font-mobile__content-text">
       {{ headerMessage }}
@@ -18,11 +18,11 @@ import { useStore } from 'vuex'
   
 import { openModal } from '@/utils/DialogHandler'
   
-import InfoButton from '@/components/Button/InfoButton.vue'
+import SoldierInfoButton from '@/components/Button/SoldierInfoButton.vue'
   
 export default {
   components: {
-    InfoButton
+    SoldierInfoButton
   },
   setup() {
     /* Vuex */
