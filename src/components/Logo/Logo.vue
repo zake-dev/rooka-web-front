@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import LogoSvg from '@/assets/images/logo.svg'
+import LogoSvg from '@/assets/rooka-logo.svg'
 
 export default {
 	setup() {
@@ -16,11 +16,11 @@ export default {
 
 <style scoped lang="scss">
 .logo {
-	height: 25.18px;
-	width: 78px;
+	height: 25px;
+	width: 95px;
 }
 .logo-stamp {
-	height: 10.65px;
-	width: 33px;
+	height: 17px;
+	width: 64px;
 }
 </style>

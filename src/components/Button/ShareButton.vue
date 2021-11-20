@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ShareIconSvg from '@/assets/images/share-icon.svg'
+import ShareIconSvg from '@/assets/icons/share-icon.svg'
 
 export default {
 	setup() {

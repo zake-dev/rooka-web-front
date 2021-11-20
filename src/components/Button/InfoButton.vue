@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import InfoIconSvg from '@/assets/images/info-icon.svg'
+import InfoIconSvg from '@/assets/icons/info-icon.svg'
 
 export default {
 	setup() {

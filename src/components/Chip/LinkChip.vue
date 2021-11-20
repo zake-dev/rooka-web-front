@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import LinkIconSvg from '@/assets/images/link-icon.svg'
+import LinkIconSvg from '@/assets/icons/link-icon.svg'
 
 export default {
 	props: {
@@ -27,7 +27,7 @@ export default {
 	height: 20px;
 	width: fit-content;
 	border-radius: 10px;
-	background-color: $gray4;
+	background-color: $gray3;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;

@@ -8,28 +8,28 @@
 				<img class="card-content__image" :src="MilitaryHelmetPng" />
 			</div>
 			
-			<table class="mt-1">
-				<tr>
-					<td class="font-mobile__content-title pe-2">생년월일</td>
-					<td class="font-mobile__content-text ps-1">{{ toKoreanDateString(soldier.birthDate) }}</td>
-				</tr>
-				<tr class="mt-2">
-					<td class="font-mobile__content-title pe-2">군종</td>
-					<td class="font-mobile__content-text ps-1">{{ toKoreanMilitaryType(soldier.militaryType) }}</td>
-				</tr>
-				<tr class="mt-2">
-					<td class="font-mobile__content-title pe-2">입대일</td>
-					<td class="font-mobile__content-text ps-1">{{ toKoreanDateString(soldier.enterDate) }}</td>
-				</tr>
-        <tr v-if="soldier.militaryType === 'ARMY'" class="mt-2">
-					<td class="font-mobile__content-title pe-2">부대</td>
-					<td class="font-mobile__content-text ps-1">{{ soldier.trainingCenterName }}</td>
-				</tr>
-        <tr v-if="soldier.militaryType === 'AF'" class="mt-2">
-					<td class="font-mobile__content-title pe-2">기수</td>
-					<td class="font-mobile__content-text ps-1">{{ soldier.kisu }}기</td>
-				</tr>
-			</table>
+			<div class="detail mt-1">
+				<div class="detail-row">
+					<span class="detail-row__label font-mobile__content-title">생년월일</span>
+					<span class="font-mobile__content-text">{{ toKoreanDateString(soldier.birthDate) }}</span>
+				</div>
+				<div class="detail-row">
+					<span class="detail-row__label font-mobile__content-title">군종</span>
+					<span class="font-mobile__content-text">{{ toKoreanMilitaryType(soldier.militaryType) }}</span>
+				</div>
+				<div class="detail-row">
+					<span class="detail-row__label font-mobile__content-title">입대일</span>
+					<span class="font-mobile__content-text">{{ toKoreanDateString(soldier.enterDate) }}</span>
+				</div>
+        <div v-if="soldier.militaryType === 'ARMY'" class="detail-row">
+					<span class="detail-row__label font-mobile__content-title">부대</span>
+					<span class="font-mobile__content-text">{{ soldier.trainingCenterName }}</span>
+				</div>
+        <div v-if="soldier.militaryType === 'AF'" class="detail-row">
+					<span class="detail-row__label font-mobile__content-title">기수</span>
+					<span class="font-mobile__content-text">{{ soldier.kisu }}기</span>
+				</div>
+			</div>
 		</div>
 		
 		<div class="card-footer">
@@ -96,6 +96,7 @@ export default {
 	height: 327px;
 	box-shadow: 0px 6px 17px -1px #0000000D;
 	border-radius: 7px;
+  transform: translateX(-8px);
 }
 .card {
 	display: none;
@@ -120,7 +121,7 @@ export default {
 		}
 	}
 	&-footer {
-		margin-top: 71px;
+		margin-top: 50px;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
@@ -131,10 +132,25 @@ export default {
 		}
 	}
 }
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  
+  &-row {
+    display: flex;
+    flex-direction: row;
+    
+    &__label {
+      width: 44px;
+      margin-right: 12px;
+    }
+  }
+}
 #card-image {
 	opacity: 0;
-	width: 327px;
-	height: 327px;
-	transition: opacity .3s ease;
+	width: 100%;
+	height: 100%;
+	divansition: opacity .3s ease;
 }
 </style>
