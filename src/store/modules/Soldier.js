@@ -11,6 +11,18 @@ const module = {
     key: '',
 	},
 	mutations: {
+    RESET(state) {
+      Object.assign(state, {
+        name: '',
+        birthDate: '',
+        militaryType: '',
+        enterDate: '',
+        trainingCenterName: '',
+        kisu: '',
+        sosok: '',
+        key: '',
+      })
+    },
 		SET_NAME(state, name) {
 			state.name = name
 		},
@@ -60,6 +72,9 @@ const module = {
     },
     UPDATE_KEY({ commit }, key) {
       commit('SET_KEY', key)
+    },
+    RESET({ commit }) {
+      commit('RESET')
     }
 	}
 }

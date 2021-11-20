@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -50,6 +50,8 @@ export default {
 		const handleClickNewMail = () => {
       router.push(`/mail/${soldier.value.key}`)
     }
+    
+    onUnmounted(() => store.dispatch('registerForm/RESET'))
 		
 		return {
 			/* Variables */
