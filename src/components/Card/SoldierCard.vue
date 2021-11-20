@@ -90,17 +90,12 @@ export default {
 
 <style scoped lang="scss">
 @import '@/scss/_variables.scss';
-@import '@/scss/skeleton.scss';
 
 .card-wrapper {
 	width: 327px;
 	height: 327px;
 	box-shadow: 0px 6px 17px -1px #0000000D;
 	border-radius: 7px;
-	
-	/* Skeleton */
-	@include background-gradient;
-	animation: shine 1.6s infinite;
 }
 .card {
 	display: none;
