@@ -1,10 +1,6 @@
 <template>
 	<div class="modal-content">
-		<button class="modal-content__close-button button button-light"
-				@click="handleClickCloseModal"
-		>
-			<i class="fas fa-times"></i>
-		</button>
+		<CloseModalButton></CloseModalButton>
 	
 		<div class="modal-content-body masked-overflow">
 			<p class="modal-content-body__question-text font-mobile__input-label mb-2">
@@ -25,15 +21,12 @@
 </template>
 
 <script>
+import CloseModalButton from '@/components/Button/CloseModalButton.vue'
+
 export default {
-	emits: ['closeModal'],
-	setup(props, { emit }) {
-		const handleClickCloseModal = () => emit('closeModal')
-		
-		return {
-			handleClickCloseModal,
-		}
-	}
+  components: {
+    CloseModalButton
+  }
 }
 </script>
 
@@ -46,13 +39,6 @@ export default {
 	align-items: flex-end;
 	height: 472px;
 	padding: 32px;
-	
-	&__close-button {
-		width: 23px;
-		min-height: 23px;
-		border-radius: 50%;
-		font-size: 8px;
-	}
 }
 .modal-content-body {
 	display: flex;

@@ -7,9 +7,7 @@
 
 			<transition name="pop" appear>
 				<div class="modal-card">
-					<Component :is="ModalContent"
-							   @closeModal="handleCloseModal"
-				    ></Component>	
+					<Component :is="ModalContent"></Component>	
 				</div>
 			</transition>
 		</div>

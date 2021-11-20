@@ -1,10 +1,6 @@
 <template>
 	<div class="modal-content">
-		<button class="modal-content__close-button button button-light"
-				@click="handleClickCloseModal"
-		>
-			<i class="fas fa-times"></i>
-		</button>
+		<CloseModalButton></CloseModalButton>
 	
 		<div class="modal-content-profile">
 			<img class="modal-content-profile__image mb-2"
@@ -62,17 +58,17 @@ import { useStore } from 'vuex'
   
 import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 	
+import CloseModalButton from '@/components/Button/CloseModalButton.vue'
 import ProfileAirforcePng from '@/assets/images/profile-airforce.png'
 
 export default {
-	emits: ['closeModal'],
-	setup(props, { emit }) {
+  components: {
+    CloseModalButton
+  },
+	setup() {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => store.state.mailBox.soldier)
-    
-		/* Event Handler */
-		const handleClickCloseModal = () => emit('closeModal')
 		
 		return {
 			/* Assets */
@@ -81,8 +77,7 @@ export default {
       soldier,
 			/* Functions */
 			toKoreanDateString,
-      toKoreanMilitaryType,
-			handleClickCloseModal
+      toKoreanMilitaryType
 		}
 	}
 }
@@ -98,13 +93,6 @@ export default {
   height: 343px;
   width: 343px;
 	padding: 32px;
-	
-	&__close-button {
-		width: 23px;
-		min-height: 23px;
-		border-radius: 50%;
-		font-size: 8px;
-	}
 }
 .modal-content-profile {
 	width: 100%;
