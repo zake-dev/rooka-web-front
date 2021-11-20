@@ -3,7 +3,7 @@
     <transition name="fade" mode="out-in">
       <MailBoxSkeleton v-if="!isLoaded"></MailBoxSkeleton>
 
-      <div v-else>
+      <div v-else class="h-100 w-100">
         <MailBoxHeader></MailBoxHeader>
 
         <div class="mailbox">
@@ -102,6 +102,7 @@ export default {
 .mailbox {
 	width: 100%;
 	height: calc(100% - 112px);
+  max-height: calc(100% - 112px);
 	padding: 0 16px 64px 16px;
 	display: flex;
 	flex-direction: column;

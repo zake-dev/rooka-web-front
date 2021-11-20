@@ -175,6 +175,12 @@ html, body {
 }
 	
 /* Spacing */
+.h {
+  &-100 { height: 100% }
+}
+.w {
+  &-100 { width: 100% }
+}
 .m {
 	&-0 { margin: 0 }
 	&-1 { margin: ($spacer * .25) }
