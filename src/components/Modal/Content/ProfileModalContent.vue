@@ -37,7 +37,7 @@
 					<span class="modal-content-profile-row__label font-mobile__content-title"
 					>소속</span>
 					<span class="font-mobile__content-text"
-					>{{ soldier.sosok }}</span>
+					>{{ soldier.trainingCenterDetail }}</span>
 				</div>
         <div v-if="soldier.militaryType === 'army'" class="modal-content-profile-row">
 					<span class="modal-content-profile-row__label font-mobile__content-title"
@@ -69,7 +69,7 @@ export default {
 	setup(props, { emit }) {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => store.state.registerForm)
+    const soldier = computed(() => store.state.mailBox.soldier)
     
 		/* Event Handler */
 		const handleClickCloseModal = () => emit('closeModal')
