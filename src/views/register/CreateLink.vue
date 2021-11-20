@@ -34,7 +34,7 @@
 				</span>
 			</div>
 			<div class="submitted-form__divider"></div>
-      <template v-if="soldier.militaryType === 'army'">
+      <template v-if="soldier.militaryType === 'ARMY'">
         <div class="submitted-form-row">
           <span class="font-mobile__content-title">부대</span>
           <span class="font-mobile__content-text">
@@ -44,7 +44,7 @@
         <div class="submitted-form__divider"></div>
       </template>
       
-      <template v-if="soldier.militaryType === 'airforce'">
+      <template v-if="soldier.militaryType === 'AF'">
         <div class="submitted-form-row">
           <span class="font-mobile__content-title">기수</span>
           <span class="font-mobile__content-text">
@@ -75,7 +75,7 @@ import { useRouter } from 'vue-router'
 
 import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 import { openModal } from '@/utils/DialogHandler'
-import * as SoldierApi from '@/api/soldier/SoldierApi'
+import * as MailBoxApi from '@/api/mailBox/MailBoxApi'
 	
 import RoundedButton from '@/components/Button/RoundedButton.vue'
 
@@ -94,7 +94,7 @@ export default {
 		/* Event Handler */
 		const handleClickCreateLink = async () => {
       try {
-        const { data } = await SoldierApi.postKey(soldier.value)
+        const { data } = await MailBoxApi.postKey(soldier.value)
         store.dispatch('registerForm/UPDATE_KEY', data.key)
 			  router.push({ name: "RegisterResult" })
       } catch (e) {

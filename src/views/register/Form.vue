@@ -63,11 +63,11 @@
 				<div class="form-card-buttons">
 					<RoundedButton class="button-success"
                          text="육군"
-                         @click="handleClickMilitaryType('army')"
+                         @click="handleClickMilitaryType('ARMY')"
 					></RoundedButton>
 					<RoundedButton class="button-info"
                          text="공군"
-                         @click="handleClickMilitaryType('airforce')"
+                         @click="handleClickMilitaryType('AF')"
 					></RoundedButton>
 				</div>
 				
@@ -107,7 +107,7 @@
 		</div>
     
     <!-- 작성 폼 (육군 - 입영부대) -->
-		<div v-else-if="soldier.militaryType === 'army' && stepper.currentStep === 5" class="form-card">
+		<div v-else-if="soldier.militaryType === 'ARMY' && stepper.currentStep === 5" class="form-card">
 			<div class="form-card-content">
 				<FormLabel class="mb-3">
 					{{ soldier.name }} 훈련병의<br>입영 부대는 어디인가요? 🗺️
@@ -129,7 +129,7 @@
 		</div>
     
     <!-- 작성 폼 (공군 - 기수) -->
-		<div v-else-if="soldier.militaryType === 'airforce' && stepper.currentStep === 5" class="form-card">
+		<div v-else-if="soldier.militaryType === 'AF' && stepper.currentStep === 5" class="form-card">
 			<div class="form-card-content">
 				<FormLabel class="mb-3">
 					{{ soldier.name }} 훈련병은<br>공군 몇 기인가요? 📋
@@ -159,7 +159,7 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 	
 import { openModal } from '@/utils/DialogHandler'
-import * as SoldierApi from '@/api/soldier/SoldierApi'
+import * as MailBoxApi from '@/api/mailBox/MailBoxApi'
 	
 import SoliderModule from '@/store/modules/Soldier'
 import LineStepper from '@/components/Stepper/LineStepper.vue'
@@ -240,7 +240,7 @@ export default {
 		}
 		const handleSubmitForm = async () => {
       try {
-        const { data } = await SoldierApi.getKey(soldier.value)
+        const { data } = await MailBoxApi.getKey(soldier.value)
         router.push(`/mail/${data}`)
       } catch (e) {
         router.push({ name: 'RegisterCreateLink' })

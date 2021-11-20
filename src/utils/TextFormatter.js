@@ -5,7 +5,7 @@ export const toKoreanDateString = (dateString) => {
 
 export const toKoreanMilitaryType = (militaryType) => {
   switch (militaryType) {
-    case "army": return "육군"
-    case "airforce": return "공군"
+    case "ARMY": return "육군"
+    case "AF": return "공군"
   }
 }
