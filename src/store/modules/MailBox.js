@@ -54,8 +54,11 @@ const module = {
         commit('SET_IS_LOADED', true)
       } catch (e) {
         switch (e.response.status) {
+          case 403:
+            router.push({ name: 'WatingForOpen' })
+            break
           case 404:
-            router.push('/error/404')
+            router.push({ name: 'PageNotFound' })
             break
         }
       }

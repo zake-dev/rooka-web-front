@@ -32,9 +32,13 @@ const routes = [
     name: 'RegisterResult',
     component: () => import('../views/register/Result.vue')
 	}, {
-    path: '/error/404',
+    path: '/error/mailbox-not-found',
     name: 'PageNotFound',
     component: () => import('../views/error/PageNotFound.vue')
+  }, {
+    path: '/error/to-early-birds',
+    name: 'WatingForOpen',
+    component: () => import('../views/error/WatingForOpen.vue')
   }, {
     path: '/:pathMatch(.*)*',
     redirect: '/error/404'
