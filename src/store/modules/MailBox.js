@@ -1,4 +1,4 @@
-import * as MaildBoxApi from '@/api/mailBox/MailBoxApi'
+import * as MaildBoxApi from '@/api/MailBoxApi'
 import router from '@/router'
 
 const module = {

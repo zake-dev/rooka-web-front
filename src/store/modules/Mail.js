@@ -1,29 +1,36 @@
+import * as MailApi from '@/api/MailApi'
+import router from '@/router'
+
 const module = {
 	namespaced: true,
 	state: {
-    id: null,
-		name: '',
-    relation: '',
-    address: '',
-    postCode: '',
-    title: '',
-    content: '',
-    password: '',
-    key: '',
-    state: ''
+    mail: {
+      id: null,
+      name: '',
+      relation: '',
+      address: '',
+      postCode: '',
+      title: '',
+      content: '',
+      password: '',
+      key: '',
+      state: ''
+    },
+    isBeingSend: false    
 	},
   getters: {
     isSendable: (state) => {
-      return state.name !== ''
-          && state.relation !== ''
-          && state.address !== ''
-          && state.title !== ''
-          && state.content !== ''
+      return state.mail.name !== ''
+          && state.mail.relation !== ''
+          && state.mail.address !== ''
+          && state.mail.title !== ''
+          && state.mail.content !== ''
+          && !state.isBeingSend
     }
   },
 	mutations: {
     RESET(state) {
-      Object.assign(state, {
+      Object.assign(state.mail, {
         id: null,
         name: '',
         relation: '',
@@ -35,44 +42,59 @@ const module = {
         key: '',
         state: ''
       })
+      state.isBeingSend = false
     },
 		SET_ID(state, id) {
-      state.id = id
+      state.mail.id = id
     },
     SET_NAME(state, name) {
-      state.name = name
+      state.mail.name = name
     },
     SET_RELATION(state, relation) {
-      state.relation = relation
+      state.mail.relation = relation
     },
     SET_ADDRESS(state, address) {
-      state.address = address
+      state.mail.address = address
     },
     SET_POST_CODE(state, postCode) {
-      state.postCode = postCode
+      state.mail.postCode = postCode
     },
     SET_TITLE(state, title) {
-      state.title = title
+      state.mail.title = title
     },
     SET_CONTENT(state, content) {
-      state.content = content
+      state.mail.content = content
     },
     SET_PASSWORD(state, password) {
-      state.password = password
+      state.mail.password = password
     },
     SET_KEY(state, key) {
-      state.key = key
+      state.mail.key = key
     },
     SET_STATE(state, mailState) {
-      state.state = mailState
+      state.mail.state = mailState
     },
+    SET_IS_BEING_SEND(state, isBeingSend) {
+      state.isBeingSend = isBeingSend
+    }
 	},
 	actions: {
     async FETCH_MAIL({ commit }, { id, password }) {
       // const { data } = await getMail(id, password)
     },
-    async SEND_MAIL({ state }) {
-      console.dir(state)
+    async SEND_MAIL({ commit, state }) {
+      commit('SET_IS_BEING_SEND', true)
+      
+      commit('SET_PASSWORD', '1234')
+      
+      try {
+        await MailApi.postMail(state.mail)
+        router.push(`/mail/${state.mail.key}`)
+      } catch (e) {
+        console.dir(e.response)
+      } finally {
+        commit('SET_IS_BEING_SEND', false)
+      }
     },
     UPDATE_ID({ commit }, id) {
       commit('SET_ID', id)

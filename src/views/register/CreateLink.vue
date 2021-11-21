@@ -75,7 +75,7 @@ import { useRouter } from 'vue-router'
 
 import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 import { openModal } from '@/utils/DialogHandler'
-import * as MailBoxApi from '@/api/mailBox/MailBoxApi'
+import * as MailBoxApi from '@/api/MailBoxApi'
 	
 import RoundedButton from '@/components/Button/RoundedButton.vue'
 

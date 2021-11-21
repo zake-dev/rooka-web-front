@@ -22,7 +22,7 @@
 import { reactive, computed } from 'vue'
 import { useStore } from 'vuex'
 	
-import * as CodeApi from '@/api/code/CodeApi'
+import * as CodeApi from '@/api/CodeApi'
   
 import { toKoreanDateString } from '@/utils/TextFormatter'
 

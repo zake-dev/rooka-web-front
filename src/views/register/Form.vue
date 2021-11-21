@@ -159,7 +159,7 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 	
 import { openModal } from '@/utils/DialogHandler'
-import * as MailBoxApi from '@/api/mailBox/MailBoxApi'
+import * as MailBoxApi from '@/api/MailBoxApi'
 	
 import SoliderModule from '@/store/modules/Soldier'
 import LineStepper from '@/components/Stepper/LineStepper.vue'
