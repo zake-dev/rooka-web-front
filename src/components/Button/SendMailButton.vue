@@ -1,11 +1,13 @@
 <template>
-	<button class="button send-button" @click="handleSendMail">
+	<button class="button send-button" @click="handleSendMail" :disabled="!isSendable">
 		<img :src="SendButtonIconSvg" />
 	</button>
 </template>
 
 <script>
+import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
   
 import SendButtonIconSvg from '@/assets/icons/send-button-icon.svg'
 
@@ -13,13 +15,22 @@ export default {
 	setup() {
     /* Vuex */
     const store = useStore()
+    const isSendable = computed(() => store.getters['mail/isSendable'])
+    
+    /* Router */
+		const route = useRoute()
     
     /* Event Handler */
-    const handleSendMail = () => alert('아직 제공되지 않는 서비습입니다.')
+    const handleSendMail = () => {
+      store.dispatch('mail/UPDATE_KEY', route.params.key)
+      store.dispatch('mail/SEND_MAIL')
+    }
     
 		return {
       /* Assets */
 			SendButtonIconSvg,
+      /* Variables */
+      isSendable,
       /* Functions */
       handleSendMail
 		}
@@ -34,15 +45,18 @@ export default {
 	width: 80px;
   height: 100%;
   min-height: 23px;
-  border-radius: 50%;
-  color: $gray5;
   
   &:disabled {
-    color: $gray2;
+    background-color: white !important;
+    
+    & img {
+      opacity: 0.3;
+    }
   }
 }
 img {
   width: 21px;
   height: 21px;
+  transition: opacity .3s ease;
 }
 </style>

@@ -3,21 +3,21 @@
 		<div class="mail-header">
       <div class="mail-header-row">
         <span class="mail-header-row__label font-mobile__content-title me-3">보내는 사람</span>
-        <input class="mail-header-row__input" placeholder="보내는 사람의 이름을 적어주세요" />
+        <input class="mail-header-row__input" placeholder="보내는 사람의 이름을 적어주세요" v-model="name" />
       </div>
       <div class="mail-header-row">
         <span class="mail-header-row__label font-mobile__content-title me-3">관계</span>
-        <input class="mail-header-row__input" placeholder="훈련병과의 관계를 적어주세요" />
+        <input class="mail-header-row__input" placeholder="훈련병과의 관계를 적어주세요" v-model="relation" />
       </div>
       <div class="mail-header-row">
         <span class="mail-header-row__label font-mobile__content-title me-3">주소</span>
-        <input class="mail-header-row__input" placeholder="답장을 받을 주소를 입력해주세요" />
+        <input class="mail-header-row__input" placeholder="답장을 받을 주소를 입력해주세요" v-model="address" />
       </div>
     </div>
     
     <div class="mail-content masked-overflow">
-      <div class="mail-content__input font-mobile__semi-title" placeholder="제목을 입력해주세요" contenteditable></div>
-      <div class="mail-content__textarea font-mobile__content-text" placeholder="내용을 입력해주세요" contenteditable ref="mailContentInput"></div>
+      <div class="mail-content__input font-mobile__semi-title" placeholder="제목을 입력해주세요" contenteditable @input="handleInputTitle"></div>
+      <div class="mail-content__textarea font-mobile__content-text" placeholder="내용을 입력해주세요" contenteditable @input="handleInputContent" ref="mailContentInput"></div>
       <div class="mail-content__focus-area" @click="handleFocusContent"></div>
     </div>
     
@@ -30,9 +30,8 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
   
 import PhotoMenuButton from '@/components/Button/PhotoMenuButton.vue'
 import NewsModalButton from '@/components/Button/NewsModalButton.vue'
@@ -47,22 +46,53 @@ export default {
 	setup() {
 		/* Vuex */
 		const store = useStore()
-    
-		/* Router */
-		const router = useRouter()
+    const state = store.state.mail
+    const name = computed({
+      get: () => state.name,
+      set: (value) => store.dispatch('mail/UPDATE_NAME', value)
+    })
+    const relation = computed({
+      get: () => state.relation,
+      set: (value) => store.dispatch('mail/UPDATE_RELATION', value)
+    })
+    const address = computed({
+      get: () => state.address,
+      set: (value) => store.dispatch('mail/UPDATE_ADDRESS', value)
+    })
+    const title = computed({
+      get: () => state.title,
+      set: (value) => store.dispatch('mail/UPDATE_TITLE', value)
+    })
+    const content = computed({
+      get: () => state.content,
+      set: (value) => store.dispatch('mail/UPDATE_CONTENT', value)
+    })
 		
     /* Refs */
     const mailContentInput = ref(null)
     
 		/* Event Handler */
-    const handleFocusContent = () => mailContentInput.value.focus()
+    const handleFocusContent = () => {
+      mailContentInput.value.focus()
+    }
+    const handleInputTitle = (e) => title.value = e.target.innerText
+    const handleInputContent = (e) => content.value = e.target.innerText
 		
+    onUnmounted(() => store.dispatch('mail/RESET'))
+    
 		return {
       /* Refs */
       mailContentInput,
 			/* Variables */
+      name,
+      relation,
+      address,
+      title,
+      content,
 			/* Functions */
-      handleFocusContent
+      handleFocusContent,
+      handleInputTitle,
+      handleInputContent
 		}
 	}
 }
@@ -96,6 +126,11 @@ input {
       &__input {
         flex: 1;
         outline: none;
+        font-family: 'Spoqa Han Sans Neo', snas-serif;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16px;
+        letter-spacing: 0em;
         
         &::placeholder {
           font-family: 'Spoqa Han Sans Neo', sans-serif;

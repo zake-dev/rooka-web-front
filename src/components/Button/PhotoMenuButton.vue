@@ -29,7 +29,6 @@ export default {
 	width: 80px;
   height: 100%;
   min-height: 23px;
-  border-radius: 50%;
   color: $gray5;
 }
 img {

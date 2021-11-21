@@ -2,36 +2,45 @@ const module = {
 	namespaced: true,
 	state: {
     id: null,
-		author: '',
+		name: '',
     relation: '',
     address: '',
     postCode: '',
     title: '',
     content: '',
     password: '',
-    receiverKey: '',
+    key: '',
     state: ''
 	},
+  getters: {
+    isSendable: (state) => {
+      return state.name !== ''
+          && state.relation !== ''
+          && state.address !== ''
+          && state.title !== ''
+          && state.content !== ''
+    }
+  },
 	mutations: {
     RESET(state) {
       Object.assign(state, {
         id: null,
-        author: '',
+        name: '',
         relation: '',
         address: '',
         postCode: '',
         title: '',
         content: '',
         password: '',
-        receiverKey: '',
+        key: '',
         state: ''
       })
     },
 		SET_ID(state, id) {
       state.id = id
     },
-    SET_AUTHOR(state, author) {
-      state.author = author
+    SET_NAME(state, name) {
+      state.name = name
     },
     SET_RELATION(state, relation) {
       state.relation = relation
@@ -51,8 +60,8 @@ const module = {
     SET_PASSWORD(state, password) {
       state.password = password
     },
-    SET_RECEIVER_KEY(state, receiverKey) {
-      state.receiverKey = receiverKey
+    SET_KEY(state, key) {
+      state.key = key
     },
     SET_STATE(state, mailState) {
       state.state = mailState
@@ -62,11 +71,17 @@ const module = {
     async FETCH_MAIL({ commit }, { id, password }) {
       // const { data } = await getMail(id, password)
     },
+    async SEND_MAIL({ state }) {
+      console.dir(state)
+    },
     UPDATE_ID({ commit }, id) {
       commit('SET_ID', id)
     },
-    UPDATE_AUTHOR({ commit }, author) {
-      commit('SET_AUTHOR', author)
+    UPDATE_NAME({ commit }, name) {
+      commit('SET_NAME', name)
+    },
+    UPDATE_RELATION({ commit }, relation) {
+      commit('SET_RELATION', relation)
     },
     UPDATE_ADDRESS({ commit }, address) {
       commit('SET_ADDRESS', address)
@@ -83,8 +98,8 @@ const module = {
     UPDATE_PASSWORD({ commit }, password) {
       commit('SET_PASSWORD', password)
     },
-    UPDATE_RECEIVER_KEY({ commit }, receiverKey) {
-      commit('SET_RECEIVER_KEY', receiverKey)
+    UPDATE_KEY({ commit }, key) {
+      commit('SET_KEY', key)
     },
     UPDATE_STATE({ commit }, state) {
       commit('SET_STATE', state)
