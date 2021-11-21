@@ -41,7 +41,7 @@ const routes = [
     component: () => import('../views/error/WatingForOpen.vue')
   }, {
     path: '/:pathMatch(.*)*',
-    redirect: '/error/404'
+    redirect: '/error/mailbox-not-found'
   }
 ]
 
