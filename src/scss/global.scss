@@ -301,12 +301,12 @@ html, body {
 	color: $black;
 	transition: background-color .2s ease, color .2s ease;
 	
-	&-success {
+	&-success, &-green {
 		background-color: $armyGreen;
 		color: $white;
 	}
-	&-info {
-		background-color: $airforceBlue;
+	&-info, &-blue {
+		background-color: $airForceBlue;
 		color: $white;
 	}
 	&-light {

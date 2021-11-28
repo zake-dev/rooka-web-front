@@ -61,11 +61,11 @@
 				</FormLabel>
 				
 				<div class="form-card-buttons">
-					<RoundedButton class="button-success"
+					<RoundedButton class="button-green"
                          text="육군"
                          @click="handleClickMilitaryType('ARMY')"
 					></RoundedButton>
-					<RoundedButton class="button-info"
+					<RoundedButton class="button-blue"
                          text="공군"
                          @click="handleClickMilitaryType('AF')"
 					></RoundedButton>
@@ -317,7 +317,7 @@ export default {
 	&__text {		
 		&--invalid {
 			padding: 0 1px 0.6px 0;
-			color: $rookaRed;
+			color: $warningRed;
       text-align: right;
 		}
 	}
