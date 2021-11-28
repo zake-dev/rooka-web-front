@@ -1,17 +1,17 @@
 <template>
 	<MobileLayout></MobileLayout>
-	<Modal></Modal>
+	<ModalContainer></ModalContainer>
 </template>
 
 <script>
 import MobileLayout from '@/components/Layout/MobileLayout.vue'
-import Modal from '@/components/Modal/Modal.vue'
+import ModalContainer from '@/components/Modal/ModalContainer.vue'
 
 export default {
  	name: 'App',
 	components: {
 		MobileLayout,
-		Modal
+		ModalContainer
 	}
 }
 </script>

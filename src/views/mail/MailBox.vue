@@ -75,9 +75,7 @@ export default {
       store.dispatch('mail/UPDATE_ID', id)
 			openModal('RequestPassword')
 		}
-		const handleClickShare = () => {
-			alert('아직 제공되지 않는 서비스입니다.')
-		}
+		const handleClickShare = () => openModal('ShareToSns')
 		const handleClickNewMail = () => router.push(`/mail/post/${key.value}`)
     
     onMounted(() => store.dispatch('mailBox/FETCH_CONTEXT', route.params.key))

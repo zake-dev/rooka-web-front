@@ -24,6 +24,7 @@ import ProfileModalContent from '@/components/Modal/Content/ProfileModalContent.
 import RequestPasswordModalContent from '@/components/Modal/Content/RequestPasswordModalContent.vue'
 import SetPasswordModalContent from '@/components/Modal/Content/SetPasswordModalContent.vue'
 import BeforeLeavePostMailModalContent from '@/components/Modal/Content/BeforeLeavePostMailModalContent.vue'
+import ShareToSnsModalContent from '@/components/Modal/Content/ShareToSnsModalContent.vue'
 	
 export default {
 	components: {
@@ -32,7 +33,8 @@ export default {
 		ProfileModalContent,
 		RequestPasswordModalContent,
     SetPasswordModalContent,
-    BeforeLeavePostMailModalContent
+    BeforeLeavePostMailModalContent,
+    ShareToSnsModalContent
 	},
 	setup() {
 		/* Vuex */

@@ -26,6 +26,8 @@
 import { ref, computed, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+  
+import { openModal } from '@/utils/DialogHandler'
 
 import SoldierCard from '@/components/Card/SoldierCard.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
@@ -44,9 +46,7 @@ export default {
 		const router = useRouter()
 			
 		/* Event Handler */
-		const handleClickShareLink = () => {
-			alert("아직 제공되지 않는 서비스입니다.")
-		}
+		const handleClickShareLink = () => openModal('ShareToSns')
 		const handleClickNewMail = () => {
       router.push(`/mail/${soldier.value.key}`)
     }
