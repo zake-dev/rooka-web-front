@@ -6,7 +6,7 @@ const module = {
 	state: {
     mail: {
       id: null,
-      name: '',
+      author: '',
       relation: '',
       address: '',
       postCode: '',
@@ -22,7 +22,7 @@ const module = {
 	},
   getters: {
     isSendable: (state) => {
-      return state.mail.name !== ''
+      return state.mail.author !== ''
           && state.mail.relation !== ''
           && state.mail.address !== ''
           && state.mail.title !== ''
@@ -34,7 +34,7 @@ const module = {
     RESET(state) {
       Object.assign(state.mail, {
         id: null,
-        name: '',
+        author: '',
         relation: '',
         address: '',
         postCode: '',
@@ -48,11 +48,14 @@ const module = {
       state.isConfirmedToLeave = false,
       state.leavingRoute = ''
     },
+    SET_MAIL(state, mail) {
+      Object.assign(state.mail, mail)
+    },
 		SET_ID(state, id) {
       state.mail.id = id
     },
-    SET_NAME(state, name) {
-      state.mail.name = name
+    SET_AUTHOR(state, author) {
+      state.mail.author = author
     },
     SET_RELATION(state, relation) {
       state.mail.relation = relation
@@ -89,8 +92,10 @@ const module = {
     }
 	},
 	actions: {
-    async FETCH_MAIL({ commit }, { id, password }) {
-      // const { data } = await getMail(id, password)
+    async FETCH_MAIL({ commit, state }, password) {
+      const { data } = await MailApi.getMail(state.mail.id, password)
+      console.dir(data)
+      commit('SET_MAIL', data)
     },
     async SEND_MAIL({ commit, state }) {
       commit('SET_IS_BEING_SENT', true)
@@ -109,8 +114,8 @@ const module = {
     UPDATE_ID({ commit }, id) {
       commit('SET_ID', id)
     },
-    UPDATE_NAME({ commit }, name) {
-      commit('SET_NAME', name)
+    UPDATE_AUTHOR({ commit }, author) {
+      commit('SET_AUTHOR', author)
     },
     UPDATE_RELATION({ commit }, relation) {
       commit('SET_RELATION', relation)

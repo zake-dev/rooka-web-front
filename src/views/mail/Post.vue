@@ -3,7 +3,7 @@
 		<div class="mail-header">
       <div class="mail-header-row">
         <span class="mail-header-row__label font-mobile__content-title me-3">보내는 사람</span>
-        <input class="mail-header-row__input" placeholder="보내는 사람의 이름을 적어주세요" v-model="name" />
+        <input class="mail-header-row__input" placeholder="보내는 사람의 이름을 적어주세요" v-model="author" />
       </div>
       <div class="mail-header-row">
         <span class="mail-header-row__label font-mobile__content-title me-3">관계</span>
@@ -62,9 +62,9 @@ export default {
 		/* Vuex */
 		const store = useStore()
     const state = store.state.mail
-    const name = computed({
-      get: () => state.name,
-      set: (value) => store.dispatch('mail/UPDATE_NAME', value)
+    const author = computed({
+      get: () => state.author,
+      set: (value) => store.dispatch('mail/UPDATE_AUTHOR', value)
     })
     const relation = computed({
       get: () => state.relation,
@@ -99,7 +99,7 @@ export default {
       /* Refs */
       mailContentInput,
 			/* Variables */
-      name,
+      author,
       relation,
       address,
       title,

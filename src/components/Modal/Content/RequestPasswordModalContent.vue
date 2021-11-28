@@ -43,9 +43,8 @@ export default {
 		/* Event Handler */
 		const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
 		const handleSubmitPassword = async () => {
-      const id = store.state.mail.mail.id
-      const { data } = await MailApi.getMail(id, password.value)
-      console.dir(data)
+      await store.dispatch('mail/FETCH_MAIL', password.value)
+      console.dir(store.state.mail.mail)
 		}
 		
 		return {
