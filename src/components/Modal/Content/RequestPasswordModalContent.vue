@@ -24,8 +24,9 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
 
 import * as MailApi from '@/api/MailApi'
   
@@ -40,6 +41,12 @@ export default {
 	setup(props) {
     /* Vuex */
     const store = useStore()
+    const id = computed(() => store.state.mail.mail.id)
+    
+    /* Router */
+    const router = useRouter()
+    const route = useRoute()
+    const key = route.params.key
     
 		/* Local State */
 		const password = ref('')
@@ -50,7 +57,8 @@ export default {
 		const handleSubmitPassword = async () => {
       try {
         await store.dispatch('mail/FETCH_MAIL', password.value)
-        router.push()
+        router.push(`/mail/${key}/${id.value}`)
+        store.dispatch('CLOSE_MODAL')
       } catch (e) {
         switch (e.response.status) {
           case 403:

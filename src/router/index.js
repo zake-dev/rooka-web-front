@@ -17,6 +17,9 @@ const routes = [
     name: 'PostMail',
     component: () => import('../views/mail/Post.vue')
   }, {
+    path: '/mail/:key/:id([0-9]+)',
+    component: () => import('../views/mail/Detailed.vue')
+  }, {
 		path: '/register',
 		redirect: '/register/form',
 	}, {
