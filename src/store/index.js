@@ -8,7 +8,7 @@ import Mail from '@/store/modules/Mail'
 export default createStore({
 	state: {
 		isModalVisible: false,
-		modalContentName: '',
+		modalContentName: ''
 	},
 	mutations: {
 		SET_IS_MODAL_VISIBLE(state, isVisible) {

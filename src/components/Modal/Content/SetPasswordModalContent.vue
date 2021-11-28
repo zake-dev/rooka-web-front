@@ -65,7 +65,7 @@ export default {
         return !isInvalidPassword.value
       }
       
-      if (validate()) {
+      if (validate()) {        
         store.dispatch('mail/UPDATE_KEY', route.params.key)
         store.dispatch('mail/UPDATE_PASSWORD', password.value)
         store.dispatch('mail/SEND_MAIL')

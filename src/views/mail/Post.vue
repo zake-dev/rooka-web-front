@@ -33,6 +33,8 @@
 import { ref, computed, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
   
+import { openModal } from '@/utils/DialogHandler'
+  
 import PhotoMenuButton from '@/components/Button/PhotoMenuButton.vue'
 import NewsModalButton from '@/components/Button/NewsModalButton.vue'
 import SendMailButton from '@/components/Button/SendMailButton.vue'
@@ -42,6 +44,19 @@ export default {
     PhotoMenuButton,
     NewsModalButton,
     SendMailButton
+  },
+  beforeRouteLeave(to, from, next) {
+    const isBeingSent = this.$store.state.mail.isBeingSent
+    const isConfirmedToLeave = this.$store.state.mail.isConfirmedToLeave
+    
+    if (isBeingSent || isConfirmedToLeave) {
+      next()
+      return
+    }
+    
+    this.$store.dispatch('mail/UPDATE_LEAVING_ROUTE', to.fullPath)
+    openModal('BeforeLeavePostMail')
+    next(false)
   },
 	setup() {
 		/* Vuex */

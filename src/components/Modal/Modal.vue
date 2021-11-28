@@ -23,6 +23,7 @@ import WhatIsMailBoxLinkModalContent from '@/components/Modal/Content/WhatIsMail
 import ProfileModalContent from '@/components/Modal/Content/ProfileModalContent.vue'
 import RequestPasswordModalContent from '@/components/Modal/Content/RequestPasswordModalContent.vue'
 import SetPasswordModalContent from '@/components/Modal/Content/SetPasswordModalContent.vue'
+import BeforeLeavePostMailModalContent from '@/components/Modal/Content/BeforeLeavePostMailModalContent.vue'
 	
 export default {
 	components: {
@@ -30,7 +31,8 @@ export default {
 		WhatIsMailBoxLinkModalContent,
 		ProfileModalContent,
 		RequestPasswordModalContent,
-    SetPasswordModalContent
+    SetPasswordModalContent,
+    BeforeLeavePostMailModalContent
 	},
 	setup() {
 		/* Vuex */

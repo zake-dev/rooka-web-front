@@ -16,7 +16,9 @@ const module = {
       key: '',
       state: ''
     },
-    isBeingSend: false    
+    isBeingSent: false,
+    isConfirmedToLeave: false,
+    leavingRoute: ''
 	},
   getters: {
     isSendable: (state) => {
@@ -42,7 +44,9 @@ const module = {
         key: '',
         state: ''
       })
-      state.isBeingSend = false
+      state.isBeingSent = false
+      state.isConfirmedToLeave = false,
+      state.leavingRoute = ''
     },
 		SET_ID(state, id) {
       state.mail.id = id
@@ -74,8 +78,14 @@ const module = {
     SET_STATE(state, mailState) {
       state.mail.state = mailState
     },
-    SET_IS_BEING_SEND(state, isBeingSend) {
-      state.isBeingSend = isBeingSend
+    SET_IS_BEING_SENT(state, isBeingSent) {
+      state.isBeingSent = isBeingSent
+    },
+    SET_IS_CONFIRMED_TO_LEAVE(state, isConfirmedToLeave) {
+      state.isConfirmedToLeave = isConfirmedToLeave
+    },
+    SET_LEAVING_ROUTE(state, route) {
+      state.leavingRoute = route
     }
 	},
 	actions: {
@@ -83,17 +93,17 @@ const module = {
       // const { data } = await getMail(id, password)
     },
     async SEND_MAIL({ commit, state }) {
-      commit('SET_IS_BEING_SEND', true)
+      commit('SET_IS_BEING_SENT', true)
       
       commit('SET_PASSWORD', '1234')
       
       try {
         await MailApi.postMail(state.mail)
-        router.push(`/mail/${state.mail.key}`)
+        await router.push(`/mail/${state.mail.key}`)
       } catch (e) {
         console.dir(e.response)
       } finally {
-        commit('SET_IS_BEING_SEND', false)
+        commit('SET_IS_BEING_SENT', false)
       }
     },
     UPDATE_ID({ commit }, id) {
@@ -126,6 +136,12 @@ const module = {
     UPDATE_STATE({ commit }, state) {
       commit('SET_STATE', state)
     } ,
+    UPDATE_IS_CONFIRMED_TO_LEAVE({ commit }, isConfirmedToLeave) {
+      commit('SET_IS_CONFIRMED_TO_LEAVE', isConfirmedToLeave)
+    },
+    UPDATE_LEAVING_ROUTE({ commit }, route) {
+      commit('SET_LEAVING_ROUTE', route)
+    },
     RESET({ commit }) {
       commit('RESET')
     }
