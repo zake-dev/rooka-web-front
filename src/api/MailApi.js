@@ -7,8 +7,10 @@ export const postMail = (form) => {
   return axiosService.post(`/mails`, formData)
 }
 
-export const getMail = (id) => axiosService.get(`/mails/${id}`)
+export const getMail = (id, password) => axiosService.post(`/mails/${id}`, {
+  params: { password }
+})
 
-export const deleteMail = (id, password) => axiosService.delete(`/mailbox/:${id}`, {
+export const deleteMail = (id, password) => axiosService.delete(`/mails/${id}`, {
     params: { password }
   })

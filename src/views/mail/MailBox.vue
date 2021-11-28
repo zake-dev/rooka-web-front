@@ -73,6 +73,7 @@ export default {
 		/* Event Handler */
 		const handleClickMailListItem = (id) => {
 			console.log(`선택된 메일: ${id}`)
+      store.dispatch('mail/UPDATE_ID', id)
 			openModal('RequestPassword')
 		}
 		const handleClickShare = () => {

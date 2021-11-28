@@ -23,6 +23,8 @@
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 
+import * as MailApi from '@/api/MailApi'
+  
 import FormInput from '@/components/Form/FormInput.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
 
@@ -36,12 +38,14 @@ export default {
     const store = useStore()
     
 		/* Local State */
-		const password = ref("")
+		const password = ref('')
 		
 		/* Event Handler */
 		const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
-		const handleSubmitPassword = () => {
-			alert('아직 제공되지 않는 서비스입니다.')
+		const handleSubmitPassword = async () => {
+      const id = store.state.mail.mail.id
+      const { data } = await MailApi.getMail(id, password.value)
+      console.dir(data)
 		}
 		
 		return {
