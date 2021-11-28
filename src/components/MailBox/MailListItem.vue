@@ -6,7 +6,7 @@
 					{{ mail.author }} ({{mail.relation}})
 				</span>
 				<span class="list-item__caption font-mobile__caption mt-1">
-					{{ new Date(mail.createdAt).toLocaleDateString() }}
+					{{ new Date(mail.createAt).toLocaleDateString() }}
 				</span>
 			</div>
 			<div class="list-item-row">
