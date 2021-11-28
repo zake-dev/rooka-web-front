@@ -1,12 +1,16 @@
 <template>
 	<div class="modal-content">
 		<span class="modal-content__title font-mobile__page-title">비밀번호 입력</span>
-		<FormInput class="mx-2 mb-3"
-				   type="password"
-				   v-model="password"
-				   placeholder="비밀번호를 입력해주세요"
-	    ></FormInput>
-		<div class="modal-actions mt-2 mx-1">
+    <div class="input-area mx-2">
+      <span v-if="isInvalidPassword" class="input-area__text--invalid font-mobile__caption"
+      >비밀번호가 맞지 않아요!</span>
+      <FormInput type="password"
+                 v-model="password"
+                 placeholder="비밀번호를 입력해주세요"
+      ></FormInput>
+    </div>
+    
+		<div class="modal-actions mt-3 mx-2">
 			<RoundedButton class="button-gray"
 						   text="취소"
 						   @click="handleClickCloseModal"
@@ -39,17 +43,27 @@ export default {
     
 		/* Local State */
 		const password = ref('')
+    const isInvalidPassword = ref(false)
 		
 		/* Event Handler */
 		const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
 		const handleSubmitPassword = async () => {
-      await store.dispatch('mail/FETCH_MAIL', password.value)
-      console.dir(store.state.mail.mail)
+      try {
+        await store.dispatch('mail/FETCH_MAIL', password.value)
+        router.push()
+      } catch (e) {
+        switch (e.response.status) {
+          case 403:
+            isInvalidPassword.value = true
+            break
+        }
+      }
 		}
 		
 		return {
 			/* Variables */
 			password,
+      isInvalidPassword,
 			/* Functions */
 			handleClickCloseModal,
 			handleSubmitPassword
@@ -69,8 +83,8 @@ export default {
 	padding: 16px;
 	
 	&__title {
-		margin: 16px 0;
-		padding: 0 16px;
+		margin: 8px;
+		padding-top: 8px;
 		color: $gray5;
 	}
 }
@@ -78,10 +92,20 @@ export default {
   flex: 1;
 	display: flex;
 	justify-content: stretch;
-  gap: 8px;
+  gap: 16px;
 }
-.button {
-  width: 100%;
-  min-width: 147px;
+.input-area {
+  flex: 1;
+  position: relative;
+  display: flex;
+  
+  &__text {
+    &--invalid {
+      position: absolute;
+      right: 0;
+      top: -1.25rem;
+      color: $warningRed;
+    }
+  }
 }
 </style>
