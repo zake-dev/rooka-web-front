@@ -105,7 +105,7 @@ const module = {
       
       try {
         await MailApi.postMail(state.mail)
-        await router.push(`/mail/${state.mail.key}`)
+        await router.push(`/${state.mail.key}/mail`)
       } catch (e) {
         console.dir(e.response)
       } finally {

@@ -76,7 +76,7 @@ export default {
 			openModal('RequestPassword')
 		}
 		const handleClickShare = () => openModal('ShareToSns')
-		const handleClickNewMail = () => router.push(`/mail/post/${key.value}`)
+		const handleClickNewMail = () => router.push(`/${key.value}/mail/post`)
     
     onMounted(() => store.dispatch('mailBox/FETCH_CONTEXT', route.params.key))
     onUnmounted(() => store.dispatch('mailBox/RESET'))

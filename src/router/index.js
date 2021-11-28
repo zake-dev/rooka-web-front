@@ -7,17 +7,17 @@ const routes = [
 	},
 	{
 		path: '/:key(%.+[.-_~][0-9]{4})',
-		redirect: to => `/mail/${to.params.key}`
+		redirect: to => `/${to.params.key}/mail`
 	}, {
-		path: '/mail/:key',
+		path: '/:key/mail',
 		name: 'MailBox',
 		component: () => import('../views/mail/MailBox.vue')
 	}, {
-    path: '/mail/post/:key',
+    path: '/:key/mail/post',
     name: 'PostMail',
     component: () => import('../views/mail/Post.vue')
   }, {
-    path: '/mail/:key/:id([0-9]+)',
+    path: '/:key/mail/:id([0-9]+)',
     component: () => import('../views/mail/Detailed.vue')
   }, {
 		path: '/register',

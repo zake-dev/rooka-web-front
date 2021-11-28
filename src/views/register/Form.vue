@@ -241,7 +241,7 @@ export default {
 		const handleSubmitForm = async () => {
       try {
         const { data } = await MailBoxApi.getKey(soldier.value)
-        router.push(`/mail/${data}`)
+        router.push(`/${data}/mail`)
       } catch (e) {
         router.push({ name: 'RegisterCreateLink' })
       }

@@ -57,7 +57,7 @@ export default {
 		const handleSubmitPassword = async () => {
       try {
         await store.dispatch('mail/FETCH_MAIL', password.value)
-        router.push(`/mail/${key}/${id.value}`)
+        router.push(`/${key}/mail/${id.value}`)
         store.dispatch('CLOSE_MODAL')
       } catch (e) {
         switch (e.response.status) {
