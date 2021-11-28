@@ -314,11 +314,11 @@ html, body {
 		color: $gray5;
 	}
 	&-gray {
-		background-color: $gray3;
+		background-color: $gray5;
 		color: $white;
 	}
 	&-dark {
-		background-color: $gray5;
+		background-color: $gray6;
 		color: $white;
 	}
 	&:disabled {
@@ -335,11 +335,9 @@ input[type="date"] {
 	position: relative;
 	
 	&::before {
+    @extend .font-mobile__content-text;
 		content: attr(data-placeholder);
 		width: 100%;
-		font-weight: 300;
-		font-size: 12px;
-		line-height: 16px;
 		color: $gray4;
 	}
 	&:valid::before { display: none; }

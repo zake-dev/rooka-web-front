@@ -21,6 +21,7 @@
 
 <script>
 import { ref } from 'vue'
+import { useStore } from 'vuex'
 
 import FormInput from '@/components/Form/FormInput.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
@@ -30,13 +31,15 @@ export default {
 		FormInput,
 		RoundedButton
 	},
-	emits: ['closeModal'],
-	setup(props, { emit }) {
+	setup(props) {
+    /* Vuex */
+    const store = useStore()
+    
 		/* Local State */
 		const password = ref("")
 		
 		/* Event Handler */
-		const handleClickCloseModal = () => emit('closeModal')
+		const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
 		const handleSubmitPassword = () => {
 			alert('아직 제공되지 않는 서비스입니다.')
 		}

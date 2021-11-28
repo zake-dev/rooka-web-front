@@ -14,10 +14,10 @@ export default {
 
 <style scoped lang="scss">
 .rounded-button {	
-	width: 147px;
-	height: 42px;
-	padding: 0.7rem;
-	border-radius: 21px;
+	flex: 1;
+	height: 48px;
+  padding: 15px 24px;
+	border-radius: 24px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;

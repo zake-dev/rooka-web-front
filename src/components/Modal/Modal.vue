@@ -22,13 +22,15 @@ import MissingMilitaryTypeModalContent from '@/components/Modal/Content/MissingM
 import WhatIsMailBoxLinkModalContent from '@/components/Modal/Content/WhatIsMailBoxLinkModalContent.vue'
 import ProfileModalContent from '@/components/Modal/Content/ProfileModalContent.vue'
 import RequestPasswordModalContent from '@/components/Modal/Content/RequestPasswordModalContent.vue'
+import SetPasswordModalContent from '@/components/Modal/Content/SetPasswordModalContent.vue'
 	
 export default {
 	components: {
 		MissingMilitaryTypeModalContent,
 		WhatIsMailBoxLinkModalContent,
 		ProfileModalContent,
-		RequestPasswordModalContent
+		RequestPasswordModalContent,
+    SetPasswordModalContent
 	},
 	setup() {
 		/* Vuex */
