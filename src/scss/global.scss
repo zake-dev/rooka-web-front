@@ -332,6 +332,7 @@ input {
 	-webkit-appearance: none;
 }
 input[type="date"] {
+  flex: 1;
 	position: relative;
 	
 	&::before {
@@ -339,6 +340,7 @@ input[type="date"] {
 		content: attr(data-placeholder);
 		width: 100%;
 		color: $gray4;
+    white-space: pre;
 	}
 	&:valid::before { display: none; }
 	
