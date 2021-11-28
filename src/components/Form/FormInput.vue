@@ -3,19 +3,22 @@
 </template>
 
 <style scoped lang="scss">
+@import '@/scss/global.scss';
 @import '@/scss/_variables.scss';
 	
 .form-input {
-	padding: 8px 12px;
+  @extend .font-mobile__content-text;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  height: 40px;
+	padding: 8px 16px;
 	background-color: $gray1;
 	border: none;
 	border-radius: 7px;
-	font-family: 'Spoqa Han Sans Neo', sans-serif;
+  color: $gray6;
 
 	&::placeholder {
-		font-weight: 300;
-		font-size: 12px;
-		line-height: 16px;
+    @extend .font-mobile__content-text;
+    color: $gray4;
 	}
 }
 </style>
