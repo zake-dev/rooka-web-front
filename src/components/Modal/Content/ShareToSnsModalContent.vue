@@ -16,7 +16,7 @@
       <div class="modal-content-body-templates">
         <div class="modal-content-body-templates-header">
           <span class="modal-content-body-templates__label font-mobile__content-title">인편함 링크</span>
-          <CopyTextButton :text="`rooka.kr/${key}`"></CopyTextButton>
+          <CopyTextButton :text="`rooka.kr/${key}`" type="link"></CopyTextButton>
         </div>
         <div class="modal-content-body-templates__example modal-content-body-templates__example--narrow font-mobile__content-text">
           rooka.kr/{{ key }}
@@ -26,7 +26,7 @@
       <div class="modal-content-body-templates">
         <div class="modal-content-body-templates-header">
           <span class="modal-content-body-templates__label font-mobile__content-title">공유 템플릿</span>
-          <CopyTextButton :text="template"></CopyTextButton>
+          <CopyTextButton :text="template" type="template"></CopyTextButton>
         </div>        
         <div class="modal-content-body-templates__example font-mobile__content-text">
           {{ template }}

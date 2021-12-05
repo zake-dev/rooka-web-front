@@ -7,13 +7,22 @@
 <script>
 export default {
   props: {
-    text: String
+    text: String,
+    type: String
   },
   setup(props) {
+    /* Local State */
+    const toastMessage = (() => {
+      switch(props.type) {
+        case 'link': return '인편함 링크가 복사되었어요👍'
+        case 'template': return '공유 템플릿이 복사되었어요👍'
+      }
+    })()
+    
     /* Event Handler */
     const handleCopyText = async () => {
       await navigator.clipboard.writeText(props.text)
-      alert('텍스트가 복사되었어요👍')
+      alert(toastMessage)
     }
     
     return {

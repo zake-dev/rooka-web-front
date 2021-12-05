@@ -1,5 +1,5 @@
 <template>
-  <button class="button">
+  <button class="button" @click="handleDownloadLinkImage">
     <div class="button-icon-wrapper">
       <img class="button-icon-wrapper__icon" :src="DownloadIconSvg" />
     </div>
@@ -19,9 +19,19 @@ export default {
     const store = useStore()
     const shareLink = computed(() => store.getters.shareLink)
     
+    /* Event Handler */
+    const handleDownloadLinkImage = () => {
+      const link = document.createElement('a')
+      link.href = document.getElementById('card-image').src
+      link.download = 'rooka-공유-이미지.png'
+      link.click()
+    }
+    
     return {
       /* Assets */
-      DownloadIconSvg
+      DownloadIconSvg,
+      /* Functions */
+      handleDownloadLinkImage
     }
   }
 }
