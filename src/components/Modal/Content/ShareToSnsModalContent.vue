@@ -83,8 +83,9 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	height: 55vh;
+	max-height: 60vh;
 	padding: 24px;
+  padding-bottom: 0;
   
   &-title {
     margin-bottom: 0;

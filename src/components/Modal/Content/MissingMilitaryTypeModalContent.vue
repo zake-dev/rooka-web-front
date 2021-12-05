@@ -37,7 +37,6 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	height: 472px;
 	padding: 32px;
 }
 .modal-content-body {

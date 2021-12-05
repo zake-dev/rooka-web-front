@@ -7,7 +7,7 @@
 			아래의 이미지를 저장하여 링크와 함께 공유해보세요!
 		</p>
 		
-		<SoldierCard :soldier="soldier"></SoldierCard>
+		<SoldierCard class="link-image" :soldier="soldier"></SoldierCard>
 		
 		<div class="action-container">
 			<RoundedButton class="button-gray button-lg mb-3"
@@ -72,21 +72,9 @@ export default {
 .page-wrapper {
 	padding: 48px 32px;
 }
-.submitted-form {
-	margin: 32px 0;
-	
-	&-row {
-		padding: 16px 8px;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-	}
-	&__divider {
-		width: 100%;
-		height: 0;
-		border-bottom: 1px solid $gray2;
-	}
+.link-image {
+  min-width: calc(100vw - 64px);
+  min-height: calc(100vw - 64px);
 }
 .action-container {
 	margin-top: 24px;

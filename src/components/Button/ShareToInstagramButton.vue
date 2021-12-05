@@ -1,5 +1,5 @@
 <template>
-  <button class="button">
+  <button class="button" @click="handleShareToInstagram">
     <div class="button-icon-wrapper">
       <img class="button-icon-wrapper__icon" :src="InstagramIconSvg" />
     </div>
@@ -8,13 +8,20 @@
 </template>
 
 <script>
+import { openModal } from '@/utils/DialogHandler' 
+
 import InstagramIconSvg from '@/assets/icons/instagram-icon.svg'
   
 export default {
-  setup() {
+  setup() {    
+    /* Event Handler */
+    const handleShareToInstagram = () => openModal('ShareToInstagramStepOne')
+    
     return {
       /* Assets */
-      InstagramIconSvg
+      InstagramIconSvg,
+      /* Functions */
+      handleShareToInstagram
     }
   }
 }

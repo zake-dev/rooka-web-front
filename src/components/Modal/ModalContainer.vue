@@ -7,7 +7,9 @@
 
 			<transition name="pop" appear>
 				<div class="modal-card">
-					<Component :is="ModalContent"></Component>	
+          <transition name="fade" mode="out-in">
+            <Component :is="ModalContent"></Component>	
+          </transition>
 				</div>
 			</transition>
 		</div>
@@ -25,6 +27,10 @@ import RequestPasswordModalContent from '@/components/Modal/Content/RequestPassw
 import SetPasswordModalContent from '@/components/Modal/Content/SetPasswordModalContent.vue'
 import BeforeLeavePostMailModalContent from '@/components/Modal/Content/BeforeLeavePostMailModalContent.vue'
 import ShareToSnsModalContent from '@/components/Modal/Content/ShareToSnsModalContent.vue'
+import ShareToInstagramStepOneModalContent from '@/components/Modal/Content/ShareToInstagramStepOneModalContent.vue'
+import ShareToInstagramStepTwoModalContent from '@/components/Modal/Content/ShareToInstagramStepTwoModalContent.vue'
+import ShareToFacebookStepOneModalContent from '@/components/Modal/Content/ShareToFacebookStepOneModalContent.vue'
+import ShareToFacebookStepTwoModalContent from '@/components/Modal/Content/ShareToFacebookStepTwoModalContent.vue'
 	
 export default {
 	components: {
@@ -34,7 +40,11 @@ export default {
 		RequestPasswordModalContent,
     SetPasswordModalContent,
     BeforeLeavePostMailModalContent,
-    ShareToSnsModalContent
+    ShareToSnsModalContent,
+    ShareToInstagramStepOneModalContent,
+    ShareToInstagramStepTwoModalContent,
+    ShareToFacebookStepOneModalContent,
+    ShareToFacebookStepTwoModalContent
 	},
 	setup() {
 		/* Vuex */

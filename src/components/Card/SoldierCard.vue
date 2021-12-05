@@ -41,14 +41,14 @@
 		</div>
 		<Logo class="logo-stamp"></Logo>
 	</div>
-
-	<!-- 이미지 출력물 -->
-	<img id="card-image" />
+  
+  <!-- 이미지 출력물 -->
+  <img id="card-image" />
 </div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import html2canvas from 'html2canvas'
 	
 import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
@@ -65,8 +65,8 @@ export default {
 	props: {
 		soldier: Object,
 	},
-	setup() {
-		onMounted(async () => {			
+	setup() {    
+		onMounted(async () => {
 			const card = document.getElementById("card-html")
 			const canvas = await html2canvas(card, {
 				scale: 2,
@@ -92,16 +92,14 @@ export default {
 @import '@/scss/_variables.scss';
 
 .card-wrapper {
-	width: 327px;
-	height: 327px;
-	box-shadow: 0px 6px 17px -1px #0000000D;
+  background-color: $gray1;
+  box-shadow: 0px 6px 17px -1px #0000000D;
 	border-radius: 7px;
-  transform: translateX(-8px);
 }
 .card {
 	display: none;
-	width: 327px;
-	height: 327px;
+	width: 1000px;
+	height: 1000px;
 	padding: 20px;
 	border-radius: 7px;
 	background-color: $white;
@@ -149,8 +147,9 @@ export default {
 }
 #card-image {
 	opacity: 0;
-	width: 100%;
-	height: 100%;
-	divansition: opacity .3s ease;
+	max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 7px;
 }
 </style>
