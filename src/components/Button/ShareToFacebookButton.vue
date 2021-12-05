@@ -1,5 +1,5 @@
 <template>
-  <button class="button">
+  <button class="button" @click="handleShareToFacebook">
     <div class="button-icon-wrapper">
       <img class="button-icon-wrapper__icon" :src="FacebookIconSvg" />
     </div>
@@ -8,13 +8,20 @@
 </template>
 
 <script>
+import { openModal } from '@/utils/DialogHandler'
+  
 import FacebookIconSvg from '@/assets/icons/facebook-icon.svg'
   
 export default {
   setup() {
+    /* Event Handler */
+    const handleShareToFacebook = () => openModal('ShareToFacebookStepOne')
+    
     return {
       /* Assets */
-      FacebookIconSvg
+      FacebookIconSvg,
+      /* Functions */
+      handleShareToFacebook
     }
   }
 }

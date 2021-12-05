@@ -24,7 +24,6 @@ import { openModal } from '@/utils/DialogHandler'
 
 import CloseModalButton from '@/components/Button/CloseModalButton.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
-import SoldierCard from '@/components/Card/SoldierCard'
 
 export default {
   components: {

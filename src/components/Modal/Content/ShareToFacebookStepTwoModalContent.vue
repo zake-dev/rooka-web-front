@@ -1,38 +1,50 @@
 <template>
 	<div class="modal-content">
     <div class="modal-content-title">
-      <span class="modal-content-title__text font-mobile__page-title">인스타그램 공유</span>
+      <span class="modal-content-title__text font-mobile__page-title">페이스북 공유</span>
       <CloseModalButton></CloseModalButton>
     </div>
 	
-		<div class="modal-content-body">
-			STEP 1<br>
-      카드 이미지를 저장해주세요!
-      <div class="modal-content-body-buttons"></div>
+		<div class="modal-content-body masked-overflow">
+			<span class="modal-content-body__step font-mobile__tag">STEP 2</span>
+      <span class="modal-content-body__title font-mobile__content-title">페이스북에 공유해주세요!</span>
+      
+      <div class="modal-content-buttons">
+        <RoundedButton class="modal-content-buttons__button button-gray" text="페이스북 열기" @click="handleOpenFacebook"></RoundedButton>
+        <a class="modal-content-buttons__link font-mobile__caption" @click="openModal('ShareToFacebookOne')">이전 단계</a>
+      </div>
 		</div>
+    
+    
 	</div>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-  
+
+import { openModal } from '@/utils/DialogHandler'
+
 import CloseModalButton from '@/components/Button/CloseModalButton.vue'
+import RoundedButton from '@/components/Button/RoundedButton.vue'
 
 export default {
   components: {
-    CloseModalButton
+    CloseModalButton,
+    RoundedButton
   },
   setup() {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => (store.state.mailBox.key ? store.state.mailBox.soldier : store.state.registerForm))
-    const template = computed(() => `📮${soldier.value.name} 인편 주소 나왔어요📮\n안녕하세요 ${soldier.value.name}의 인편지기입니다!\n${soldier.value.name}가 ${toKoreanDateString(soldier.value.enterDate)}에 공군훈련소에 입소했습니다.\n열심히 훈련받고 있을 ${soldier.value.name}를 위해 짧게나마 응원의 메시지를 적어서 편지를 보내 주시면 감사하겠습니다!\n\n아래 링크를 통해 정보 입력 없이 바로 편지를 작성할 수 있어요🤗\n\n💌루카에서 인편 쓰는 방법💌\n❶ 아래 링크를 통해 ${soldier.value.name}의 인편함으로 간다.\n❷ 편지 쓰기 버튼을 눌러 바로 편지를 작성한다.`)
-    
+
+    /* Event Handler */
+      const handleOpenFacebook = () => window.open(`https://www.facebook.com/sharer.php?u=rooka.kr/${soldier.value.key}`)
+  
     return {
-      /* Variables */
-      soldier,
-      template
+      /* Functions */
+      openModal,
+      handleOpenFacebook
     }
   }
 }
@@ -46,8 +58,9 @@ export default {
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	height: 55vh;
+  max-height: 80vh;
 	padding: 24px;
+  padding-bottom: 0;
   
   &-title {
     margin-bottom: 0;
@@ -59,18 +72,35 @@ export default {
       color: $gray6;
     }
   }
-  
   &-body {
+    padding-top: 24px;
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding-top: 22px;
-
-    &-buttons {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+    
+    &__step {
+      color: $rookaYellow;
+    }
+    &__title {
+      color: $gray6;
+    }
+  }
+  &-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding: 0 32px;
+    
+    &__button {
+      width: 100%;
+    }
+    &__link {
+      flex: 0;
+      color: $gray5;
+      border-bottom: 1px solid $gray5;
     }
   }
 }
