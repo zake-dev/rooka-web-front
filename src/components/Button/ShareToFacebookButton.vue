@@ -25,7 +25,6 @@ export default {
   
 .button {
   cursor: pointer;
-  padding: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,8 +36,8 @@ export default {
   }
   
   &-icon-wrapper {
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,20 +1,27 @@
 <template>
   <button class="button">
     <div class="button-icon-wrapper">
-      <img class="button-icon-wrapper__icon" :src="InstagramIconSvg" />
+      <img class="button-icon-wrapper__icon" :src="DownloadIconSvg" />
     </div>
-    <span class="button-label font-mobile__caption">인스타그램</span>
+    <span class="button-label font-mobile__caption">카드 이미지<br>저장</span>
   </button>
 </template>
 
 <script>
-import InstagramIconSvg from '@/assets/icons/instagram-icon.svg'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+  
+import DownloadIconSvg from '@/assets/icons/download-icon.svg'
   
 export default {
   setup() {
+    /* Vuex */
+    const store = useStore()
+    const shareLink = computed(() => store.getters.shareLink)
+    
     return {
       /* Assets */
-      InstagramIconSvg
+      DownloadIconSvg
     }
   }
 }
@@ -46,7 +53,7 @@ export default {
     
     &__icon {
       width: 24px;
-      height: 24px;
+      height: 21px;
     }
   }
   
