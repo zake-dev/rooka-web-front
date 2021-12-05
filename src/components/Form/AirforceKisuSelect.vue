@@ -1,18 +1,15 @@
 <template>
 	<div class="form-select-wrapper">
-		<select class="form-select" disabled>
+		<select class="form-select">
 			<option class="form-select__placeholder-text"
               value=""
               hidden
 			>입영 기수를 선택해주세요</option>
-      <option value="832" selected>
-        832기
-      </option>
-			<option v-for="(kisu, enterDate) in kisuAndEnterDates"
+			<option v-for="({ kisu, enterDate }) in kisuAndEnterDates"
               :key="kisu"
               :value="kisu"
               :selected="kisu === soldier.kisu"
-			>{{ toKoreanDateString(enterDate) }} ({{ kisu }})</option>
+			>{{ kisu }}기 ({{ toKoreanDateString(enterDate) }})</option>
 		</select>
 	</div>
 </template>
@@ -37,9 +34,8 @@ export default {
 
     /* Fetch Data */
     ;(async () => {
-      //const { data } = await CodeApi.getTrainingCenterNames()
-      //data.forEach((name) => trainingCenterNames.push(name))
-      store.dispatch('registerForm/UPDATE_KISU', '832')
+      const { data } = await CodeApi.getAirforceKisus()
+      data.forEach((kisu) => kisuAndEnterDates.push(kisu))
 	  })()
 
 		return {

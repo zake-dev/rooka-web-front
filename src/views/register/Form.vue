@@ -229,7 +229,7 @@ export default {
 			store.dispatch('registerForm/UPDATE_TRAINING_CENTER_NAME', event.target.value)
 		}
     const handleSelectKisu = (event) => {
-      store.dispatch('registerForm/UPDATE_KISU', event.traget.value)
+      store.dispatch('registerForm/UPDATE_KISU', event.target.value)
       event.target.blur()
     }
 		const handleIncreaseStep = () => {
