@@ -1,7 +1,7 @@
 <template>
 	<div class="page-wrapper">
 		<p class="font-mobile__semi-title">
-			편지함 링크가<br>생성됐어요! 😍
+			편지함 링크가<br>생성됐어요! <Emoji>😍</Emoji>
 		</p>
 		<p class="font-mobile__content-text mt-2 mb-3">
 			아래의 이미지를 저장하여 링크와 함께 공유해보세요!
@@ -29,11 +29,13 @@ import { useRouter } from 'vue-router'
   
 import { openModal } from '@/utils/DialogHandler'
 
+import Emoji from '@/components/Decorator/Emoji.vue'
 import SoldierCard from '@/components/Card/SoldierCard.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
 
 export default {
 	components: {
+    Emoji,
 		SoldierCard,
 		RoundedButton
 	},

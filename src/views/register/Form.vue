@@ -6,7 +6,7 @@
 		<!-- 작성 폼 (이름) -->
 		<div v-if="stepper.currentStep === 1" class="form-card">
 			<div class="form-card-content">
-				<FormLabel class="mb-3">훈련병의 이름은<br>무엇인가요? 😮</FormLabel>
+				<FormLabel class="mb-3">훈련병의 이름은<br>무엇인가요? <Emoji>😮</Emoji></FormLabel>
 				<div class="input-area">
 					<span v-if="isInvalidName"
 						  class="input-area__text--invalid font-mobile__caption"
@@ -32,7 +32,7 @@
 		<div v-else-if="stepper.currentStep === 2" class="form-card">
 			<div class="form-card-content">
 				<FormLabel class="mb-3">
-					{{ soldier.name }} 훈련병은<br>언제 태어났나요? 🎂
+					{{ soldier.name }} 훈련병은<br>언제 태어났나요? <Emoji>🎂</Emoji>
 				</FormLabel>
 				<FormInput type="date"
 						   data-placeholder="생년월일을 입력해주세요"
@@ -57,7 +57,7 @@
 		<div v-else-if="stepper.currentStep === 3" class="form-card">
 			<div class="form-card-content">
 				<FormLabel class="mb-3">
-					{{ soldier.name }} 훈련병의<br>군종은 무엇인가요? 🤔
+					{{ soldier.name }} 훈련병의<br>군종은 무엇인가요? <Emoji>🤔</Emoji>
 				</FormLabel>
 				
 				<div class="form-card-buttons">
@@ -85,7 +85,7 @@
 		<div v-else-if="stepper.currentStep === 4" class="form-card">
 			<div class="form-card-content">
 				<FormLabel class="mb-3">
-					{{ soldier.name }} 훈련병의<br>입대일은 언제인가요? 🗓️
+					{{ soldier.name }} 훈련병의<br>입대일은 언제인가요? <Emoji>🗓️</Emoji>
 				</FormLabel>
 				<FormInput type="date"
 						       data-placeholder="입대일을 입력해주세요"
@@ -110,7 +110,7 @@
 		<div v-else-if="soldier.militaryType === 'ARMY' && stepper.currentStep === 5" class="form-card">
 			<div class="form-card-content">
 				<FormLabel class="mb-3">
-					{{ soldier.name }} 훈련병의<br>입영 부대는 어디인가요? 🗺️
+					{{ soldier.name }} 훈련병의<br>입영 부대는 어디인가요? <Emoji>🗺️</Emoji>
 				</FormLabel>
 				<ArmyTrainingCenterSelect :value="soldier.trainingCenterName"
 										  @change="handleSelectTrainingCenterName"
@@ -132,7 +132,7 @@
 		<div v-else-if="soldier.militaryType === 'AF' && stepper.currentStep === 5" class="form-card">
 			<div class="form-card-content">
 				<FormLabel class="mb-3">
-					{{ soldier.name }} 훈련병은<br>공군 몇 기인가요? 📋
+					{{ soldier.name }} 훈련병은<br>공군 몇 기인가요? <Emoji>📋</Emoji>
 				</FormLabel>
 				<AirforceKisuSelect :value="soldier.kisu"
 										        @change="handleSelectKisu"
@@ -163,6 +163,7 @@ import * as MailBoxApi from '@/api/MailBoxApi'
 	
 import SoliderModule from '@/store/modules/Soldier'
 import LineStepper from '@/components/Stepper/LineStepper.vue'
+import Emoji from '@/components/Decorator/Emoji'
 import FormLabel from '@/components/Form/FormLabel.vue'
 import FormInput from '@/components/Form/FormInput.vue'
 import ArmyTrainingCenterSelect from '@/components/Form/ArmyTrainingCenterSelect.vue'
@@ -173,6 +174,7 @@ import RoundedButton from '@/components/Button/RoundedButton.vue'
 export default {
  	components: {
 		LineStepper,
+    Emoji,
 		FormLabel,
 		FormInput,
 		ArmyTrainingCenterSelect,

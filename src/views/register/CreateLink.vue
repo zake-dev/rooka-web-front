@@ -1,7 +1,7 @@
 <template>
 	<div class="page-wrapper">
 		<p class="font-mobile__semi-title">
-			축하합니다 🎉<br>1등으로 오셨군요!	
+			축하합니다 <Emoji>🎉</Emoji><br>1등으로 오셨군요!	
 		</p>
 		<p class="font-mobile__content-text py-4">
 			아직 아무도 김루카님의 인터넷 편지 링크를 생성하지 않았어요.<br>
@@ -76,11 +76,13 @@ import { useRouter } from 'vue-router'
 import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 import { openModal } from '@/utils/DialogHandler'
 import * as MailBoxApi from '@/api/MailBoxApi'
-	
+
+import Emoji from '@/components/Decorator/Emoji.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
 
 export default {
 	components: {
+    Emoji,
 		RoundedButton
 	},
 	setup() {
