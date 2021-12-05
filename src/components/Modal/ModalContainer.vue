@@ -29,6 +29,7 @@ import BeforeLeavePostMailModalContent from '@/components/Modal/Content/BeforeLe
 import ShareToSnsModalContent from '@/components/Modal/Content/ShareToSnsModalContent.vue'
 import ShareToInstagramStepOneModalContent from '@/components/Modal/Content/ShareToInstagramStepOneModalContent.vue'
 import ShareToInstagramStepTwoModalContent from '@/components/Modal/Content/ShareToInstagramStepTwoModalContent.vue'
+import ShareToInstagramStepThreeModalContent from '@/components/Modal/Content/ShareToInstagramStepThreeModalContent.vue'
 import ShareToFacebookStepOneModalContent from '@/components/Modal/Content/ShareToFacebookStepOneModalContent.vue'
 import ShareToFacebookStepTwoModalContent from '@/components/Modal/Content/ShareToFacebookStepTwoModalContent.vue'
 	
@@ -43,6 +44,7 @@ export default {
     ShareToSnsModalContent,
     ShareToInstagramStepOneModalContent,
     ShareToInstagramStepTwoModalContent,
+    ShareToInstagramStepThreeModalContent,
     ShareToFacebookStepOneModalContent,
     ShareToFacebookStepTwoModalContent
 	},
