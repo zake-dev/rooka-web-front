@@ -11,7 +11,7 @@
       
       <div class="modal-content-buttons">
         <RoundedButton class="modal-content-buttons__button button-gray" text="페이스북 열기" @click="handleOpenFacebook"></RoundedButton>
-        <a class="modal-content-buttons__link font-mobile__caption" @click="openModal('ShareToFacebookOne')">이전 단계</a>
+        <a class="modal-content-buttons__link font-mobile__caption" @click="openModal('ShareToFacebookStepOne')">이전 단계</a>
       </div>
 		</div>
     
