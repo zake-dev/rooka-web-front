@@ -30,13 +30,11 @@ import { toKoreanDateString } from '@/utils/TextFormatter'
 
 import CloseModalButton from '@/components/Button/CloseModalButton.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
-import SoldierCard from '@/components/Card/SoldierCard'
 
 export default {
   components: {
     CloseModalButton,
-    RoundedButton,
-    SoldierCard
+    RoundedButton
   },
   setup() {
     /* Vuex */
@@ -45,8 +43,9 @@ export default {
     const template = computed(() => `📮${soldier.value.name} 인편 주소 나왔어요📮\n\n🔗rooka.kr/${soldier.value.key}\n\n안녕하세요, ${soldier.value.name}의 인편지기입니다!\n${soldier.value.name}가 ${toKoreanDateString(soldier.value.enterDate)}에 훈련소에 입소했습니다.\n열심히 훈련받고 있을 ${soldier.value.name}를 위해 짧게나마 응원의 메시지를 적어서 편지를 보내 주시면 감사하겠습니다!\n\n아래 링크를 통해 정보 입력 없이 바로 편지를 작성할 수 있어요🤗\n\n💌루카에서 인편 쓰는 방법💌\n❶ 아래 링크를 통해 ${soldier.value.name}의 인편함으로 간다.\n❷ 편지 쓰기 버튼을 눌러 바로 편지를 작성한다.`)
     
     /* Event Handler */
-    const handleCopyText = () => {
-      navigator.clipboard.writeText(template.value)
+    const handleCopyText = async () => {
+      await navigator.clipboard.writeText(template.value)
+      alert('본문이 복사되었어요👍')
       openModal('ShareToInstagramStepThree')
     }
     
