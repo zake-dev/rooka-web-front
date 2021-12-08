@@ -26,7 +26,7 @@
           class="action-buttons"
           :class="{ 'action-buttons--closed': !isSendable }"
         >
-          <ShareButton @click="handleClickShare"></ShareButton>
+          <ShareButtonToSns @click="handleClickShare"></ShareButtonToSns>
           <RoundedButton
             v-if="isSendable"
             class="button-dark button-md ms-2"
@@ -48,7 +48,7 @@ import { openModal } from '@/utils/DialogHandler'
 
 import MailBoxSkeleton from '@/skeletons/mail/MailBox.vue'
 import MailBoxHeader from '@/components/MailBox/MailBoxHeader.vue'
-import ShareButton from '@/components/Button/ShareButton.vue'
+import ShareButtonToSns from '@/components/Button/ShareButtonToSns.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
 import MailListItem from '@/components/MailBox/MailListItem.vue'
 
@@ -56,7 +56,7 @@ export default {
   components: {
     MailBoxSkeleton,
     MailBoxHeader,
-    ShareButton,
+    ShareButtonToSns,
     RoundedButton,
     MailListItem,
   },

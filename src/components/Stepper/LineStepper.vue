@@ -1,35 +1,33 @@
 <template>
-	<div class="stepper">
-		<div class="stepper__progress-bar"
-	    	 :style="progressBarStyle"
-		></div>
-	</div>
+  <div class="stepper">
+    <div class="stepper__progress-bar" :style="progressBarStyle"></div>
+  </div>
 </template>
 
 <script>
 import { computed } from 'vue'
 
 export default {
-	props: {
-		stepper: Object
-	},
-	setup(props) {
-		/* Local State */
-		const progressBarStyle = computed(() => {
-			const { maxStep, currentStep } = props.stepper
-			return { width: `${currentStep / maxStep * 100}%` }
-		})
-		
-		/* Computed Functions */
-		const isCompletedStep = (step) => (step <= props.stepper.currentStep)
-		
-		return {
-			/* Variables */
-			progressBarStyle,
-			/* Functions */
-			isCompletedStep
-		}
-	}
+  props: {
+    stepper: Object,
+  },
+  setup(props) {
+    /* Local State */
+    const progressBarStyle = computed(() => {
+      const { maxStep, currentStep } = props.stepper
+      return { width: `${(currentStep / maxStep) * 100}%` }
+    })
+
+    /* Computed Functions */
+    const isCompletedStep = step => step <= props.stepper.currentStep
+
+    return {
+      /* Variables */
+      progressBarStyle,
+      /* Functions */
+      isCompletedStep,
+    }
+  },
 }
 </script>
 
@@ -37,15 +35,15 @@ export default {
 @import '@/scss/_variables.scss';
 
 .stepper {
-	width: 100%;
-	height: 2px;
-	z-index: 1000;
-	display: inline-block;
+  width: 100%;
+  height: 2px;
+  z-index: 1000;
+  display: inline-block;
   background-color: $gray2;
 }
 .stepper__progress-bar {
-	height: 2px;
-	background-color: $gray5;
-	transition: width 0.3s ease;
+  height: 2px;
+  background-color: $gray5;
+  transition: width 0.3s ease;
 }
 </style>

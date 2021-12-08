@@ -45,7 +45,7 @@ const routes = [
   {
     path: '/error/mailbox-not-found',
     name: 'PageNotFound',
-    component: () => import('../views/error/PageNotFoundPage.vue'),
+    component: () => import('../views/error/NotFoundPage.vue'),
   },
   {
     path: '/error/to-early-birds',

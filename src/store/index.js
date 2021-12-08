@@ -6,46 +6,46 @@ import MailBox from '@/store/modules/MailBox'
 import Mail from '@/store/modules/Mail'
 
 export default createStore({
-	state: {
-		isModalVisible: false,
-		modalContentName: '',
-    userKey: ''
-	},
-  getters: {
-    shareLink: (state) => `rooka.kr/${state.userKey}`
+  state: {
+    isModalVisible: false,
+    modalContentName: '',
+    userKey: '',
   },
-	mutations: {
-		SET_IS_MODAL_VISIBLE(state, isVisible) {
-			state.isModalVisible = isVisible
-		},
-		SET_MODAL_CONTENT_NAME(state, name) {
-			state.modalContentName = name
-		},
+  getters: {
+    shareLink: state => `rooka.kr/${state.userKey}`,
+  },
+  mutations: {
+    SET_IS_MODAL_VISIBLE(state, isVisible) {
+      state.isModalVisible = isVisible
+    },
+    SET_MODAL_CONTENT_NAME(state, name) {
+      state.modalContentName = name
+    },
     SET_USER_KEY(state, key) {
       state.userKey = key
-    }
-	},
-	actions: {
-		OPEN_MODAL({ commit }, modalContentName) {
-			commit('SET_MODAL_CONTENT_NAME', modalContentName)
-			commit('SET_IS_MODAL_VISIBLE', true)
-		},
-		CLOSE_MODAL({ commit }) {
-			commit('SET_IS_MODAL_VISIBLE', false)
-		},
+    },
+  },
+  actions: {
+    OPEN_MODAL({ commit }, modalContentName) {
+      commit('SET_MODAL_CONTENT_NAME', modalContentName)
+      commit('SET_IS_MODAL_VISIBLE', true)
+    },
+    CLOSE_MODAL({ commit }) {
+      commit('SET_IS_MODAL_VISIBLE', false)
+    },
     LOGIN_USER({ commit }, key) {
       commit('SET_USER_KEY', key)
-    }
-	},
-	modules: {
-		registerForm: RegisterForm,
+    },
+  },
+  modules: {
+    registerForm: RegisterForm,
     mailBox: MailBox,
-    mail: Mail
-	},
-	plugins: [
-		createPersistedState({
-			paths: ["registerForm"],
-			storage: window.sessionStorage
-		})
-	]
+    mail: Mail,
+  },
+  plugins: [
+    createPersistedState({
+      paths: ['registerForm'],
+      storage: window.sessionStorage,
+    }),
+  ],
 })

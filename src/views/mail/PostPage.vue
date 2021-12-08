@@ -51,9 +51,9 @@
     </div>
 
     <div class="mail-footer">
-      <PhotoMenuButton></PhotoMenuButton>
-      <NewsModalButton></NewsModalButton>
-      <SendMailButton></SendMailButton>
+      <MailButtonPhoto></MailButtonPhoto>
+      <MailButtonNews></MailButtonNews>
+      <MailButtonSend></MailButtonSend>
     </div>
   </div>
 </template>
@@ -64,15 +64,15 @@ import { useStore } from 'vuex'
 
 import { openModal } from '@/utils/DialogHandler'
 
-import PhotoMenuButton from '@/components/Button/PhotoMenuButton.vue'
-import NewsModalButton from '@/components/Button/NewsModalButton.vue'
-import SendMailButton from '@/components/Button/SendMailButton.vue'
+import MailButtonPhoto from '@/components/Button/MailButtonPhoto.vue'
+import MailButtonNews from '@/components/Button/MailButtonNews.vue'
+import MailButtonSend from '@/components/Button/MailButtonSend.vue'
 
 export default {
   components: {
-    PhotoMenuButton,
-    NewsModalButton,
-    SendMailButton,
+    MailButtonPhoto,
+    MailButtonNews,
+    MailButtonSend,
   },
   beforeRouteLeave(to, from, next) {
     const isBeingSent = this.$store.state.mail.isBeingSent

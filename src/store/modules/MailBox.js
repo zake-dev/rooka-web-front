@@ -2,8 +2,8 @@ import * as MaildBoxApi from '@/api/MailBoxApi'
 import router from '@/router'
 
 const module = {
-	namespaced: true,
-	state: {
+  namespaced: true,
+  state: {
     isLoaded: false,
     key: '',
     state: '',
@@ -14,11 +14,11 @@ const module = {
       trainingCenterDetail: '',
       enterDate: '',
       trainingCenterName: '',
-      kisu: 0
+      kisu: 0,
     },
-    mails: []
-	},
-	mutations: {
+    mails: [],
+  },
+  mutations: {
     RESET(state) {
       Object.assign(state, {
         isLoaded: false,
@@ -31,19 +31,19 @@ const module = {
           trainingCenterDetail: '',
           enterDate: '',
           trainingCenterName: '',
-          kisu: 0
+          kisu: 0,
         },
-        mails: []
+        mails: [],
       })
     },
-		SET_CONTEXT(state, context) {
+    SET_CONTEXT(state, context) {
       Object.assign(state, context)
     },
     SET_IS_LOADED(state, isLoaded) {
       state.isLoaded = isLoaded
-    }
-	},
-	actions: {
+    },
+  },
+  actions: {
     RESET({ commit }) {
       commit('RESET')
     },
@@ -62,8 +62,8 @@ const module = {
             break
         }
       }
-    }
-	}
+    },
+  },
 }
 
 export default module

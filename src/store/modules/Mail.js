@@ -2,8 +2,8 @@ import * as MailApi from '@/api/MailApi'
 import router from '@/router'
 
 const module = {
-	namespaced: true,
-	state: {
+  namespaced: true,
+  state: {
     mail: {
       id: null,
       author: '',
@@ -19,19 +19,21 @@ const module = {
     },
     isBeingSent: false,
     isConfirmedToLeave: false,
-    leavingRoute: ''
-	},
-  getters: {
-    isSendable: (state) => {
-      return state.mail.author !== ''
-          && state.mail.relation !== ''
-          && state.mail.address !== ''
-          && state.mail.title !== ''
-          && state.mail.content !== ''
-          && !state.isBeingSend
-    }
+    leavingRoute: '',
   },
-	mutations: {
+  getters: {
+    isSendable: state => {
+      return (
+        state.mail.author !== '' &&
+        state.mail.relation !== '' &&
+        state.mail.address !== '' &&
+        state.mail.title !== '' &&
+        state.mail.content !== '' &&
+        !state.isBeingSend
+      )
+    },
+  },
+  mutations: {
     RESET(state) {
       Object.assign(state.mail, {
         id: null,
@@ -44,16 +46,15 @@ const module = {
         password: '',
         key: '',
         state: '',
-        createAt: ''
+        createAt: '',
       })
       state.isBeingSent = false
-      state.isConfirmedToLeave = false,
-      state.leavingRoute = ''
+      ;(state.isConfirmedToLeave = false), (state.leavingRoute = '')
     },
     SET_MAIL(state, mail) {
       Object.assign(state.mail, mail)
     },
-		SET_ID(state, id) {
+    SET_ID(state, id) {
       state.mail.id = id
     },
     SET_AUTHOR(state, author) {
@@ -91,18 +92,18 @@ const module = {
     },
     SET_LEAVING_ROUTE(state, route) {
       state.leavingRoute = route
-    }
-	},
-	actions: {
+    },
+  },
+  actions: {
     async FETCH_MAIL({ commit, state }, password) {
       const { data } = await MailApi.getMail(state.mail.id, password)
       commit('SET_MAIL', data)
     },
     async SEND_MAIL({ commit, state }) {
       commit('SET_IS_BEING_SENT', true)
-      
+
       commit('SET_PASSWORD', '1234')
-      
+
       try {
         await MailApi.postMail(state.mail)
         await router.push(`/${state.mail.key}/mail`)
@@ -141,7 +142,7 @@ const module = {
     },
     UPDATE_STATE({ commit }, state) {
       commit('SET_STATE', state)
-    } ,
+    },
     UPDATE_IS_CONFIRMED_TO_LEAVE({ commit }, isConfirmedToLeave) {
       commit('SET_IS_CONFIRMED_TO_LEAVE', isConfirmedToLeave)
     },
@@ -150,8 +151,8 @@ const module = {
     },
     RESET({ commit }) {
       commit('RESET')
-    }
-	}
+    },
+  },
 }
 
 export default module

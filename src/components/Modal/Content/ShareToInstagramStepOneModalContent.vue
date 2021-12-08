@@ -1,24 +1,37 @@
 <template>
-	<div class="modal-content">
+  <div class="modal-content">
     <div class="modal-content-title">
-      <span class="modal-content-title__text font-mobile__page-title">인스타그램 공유</span>
-      <CloseModalButton></CloseModalButton>
+      <span class="modal-content-title__text font-mobile__page-title"
+        >인스타그램 공유</span
+      >
+      <ModalButtonClose></ModalButtonClose>
     </div>
-	
-		<div class="modal-content-body masked-overflow">
-			<span class="modal-content-body__step font-mobile__tag">STEP 1</span>
-      <span class="modal-content-body__title font-mobile__content-title">카드 이미지를 저장해주세요!</span>
-      
-      <SoldierCard class="modal-content-body__image" :soldier="soldier"></SoldierCard>
-      
+
+    <div class="modal-content-body masked-overflow">
+      <span class="modal-content-body__step font-mobile__tag">STEP 1</span>
+      <span class="modal-content-body__title font-mobile__content-title"
+        >카드 이미지를 저장해주세요!</span
+      >
+
+      <SoldierCard
+        class="modal-content-body__image"
+        :soldier="soldier"
+      ></SoldierCard>
+
       <div class="modal-content-buttons">
-        <RoundedButton class="modal-content-buttons__button button-gray" text="이미지 저장하기" @click="handleDownloadLinkImage"></RoundedButton>
-        <a class="modal-content-buttons__link font-mobile__caption" @click="openModal('ShareToSns')">이전 단계</a>
+        <RoundedButton
+          class="modal-content-buttons__button button-gray"
+          text="이미지 저장하기"
+          @click="handleDownloadLinkImage"
+        ></RoundedButton>
+        <a
+          class="modal-content-buttons__link font-mobile__caption"
+          @click="openModal('ShareToSns')"
+          >이전 단계</a
+        >
       </div>
-		</div>
-    
-    
-	</div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -27,34 +40,38 @@ import { useStore } from 'vuex'
 
 import { openModal } from '@/utils/DialogHandler'
 
-import CloseModalButton from '@/components/Button/CloseModalButton.vue'
+import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
 import SoldierCard from '@/components/Card/SoldierCard'
 
 export default {
   components: {
-    CloseModalButton,
+    ModalButtonClose,
     RoundedButton,
-    SoldierCard
+    SoldierCard,
   },
   setup() {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => (store.state.mailBox.key ? store.state.mailBox.soldier : store.state.registerForm))
-    
+    const soldier = computed(() =>
+      store.state.mailBox.key
+        ? store.state.mailBox.soldier
+        : store.state.registerForm,
+    )
+
     /* Event Handler */
-    const handleDownloadLinkImage = () => {      
+    const handleDownloadLinkImage = () => {
       openModal('ShareToInstagramStepTwo')
     }
-    
+
     return {
       /* Variables */
       soldier,
       /* Functions */
       openModal,
-      handleDownloadLinkImage
+      handleDownloadLinkImage,
     }
-  }
+  },
 }
 </script>
 
@@ -63,19 +80,19 @@ export default {
 
 .modal-content {
   flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   max-height: 80vh;
-	padding: 24px;
+  padding: 24px;
   padding-bottom: 0;
-  
+
   &-title {
     margin-bottom: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     &__text {
       color: $gray6;
     }
@@ -86,7 +103,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    
+
     &__step {
       color: $rookaYellow;
     }
@@ -105,7 +122,7 @@ export default {
     align-items: center;
     gap: 16px;
     padding: 0 32px;
-    
+
     &__button {
       width: 100%;
     }

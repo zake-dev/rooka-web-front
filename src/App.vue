@@ -1,16 +1,16 @@
 <template>
-  <MobileLayout></MobileLayout>
+  <TheLayout></TheLayout>
   <ModalContainer></ModalContainer>
 </template>
 
 <script>
-import MobileLayout from '@/components/Layout/MobileLayout.vue'
+import TheLayout from '@/components/Layout/TheLayout.vue'
 import ModalContainer from '@/components/Modal/ModalContainer.vue'
 
 export default {
   name: 'App',
   components: {
-    MobileLayout,
+    TheLayout,
     ModalContainer,
   },
 }

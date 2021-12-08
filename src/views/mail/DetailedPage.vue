@@ -50,11 +50,7 @@
       <div class="mail-content__focus-area" @click="handleFocusContent"></div>
     </div>
 
-    <div class="mail-footer">
-      <PhotoMenuButton></PhotoMenuButton>
-      <NewsModalButton></NewsModalButton>
-      <SendMailButton></SendMailButton>
-    </div>
+    <div class="mail-footer"></div>
   </div>
 </template>
 
@@ -64,16 +60,7 @@ import { useStore } from 'vuex'
 
 import { openModal } from '@/utils/DialogHandler'
 
-import PhotoMenuButton from '@/components/Button/PhotoMenuButton.vue'
-import NewsModalButton from '@/components/Button/NewsModalButton.vue'
-import SendMailButton from '@/components/Button/SendMailButton.vue'
-
 export default {
-  components: {
-    PhotoMenuButton,
-    NewsModalButton,
-    SendMailButton,
-  },
   beforeRouteLeave(to, from, next) {
     const isBeingSent = this.$store.state.mail.isBeingSent
     const isConfirmedToLeave = this.$store.state.mail.isConfirmedToLeave

@@ -1,34 +1,45 @@
 <template>
-	<div class="modal-content">
-		<span class="modal-content__title font-mobile__page-title">비밀번호 설정</span>
-		<FormInput class="mx-2"
-               type="password"
-               v-model="password"
-               placeholder="비밀번호를 입력해주세요"
+  <div class="modal-content">
+    <span class="modal-content__title font-mobile__page-title"
+      >비밀번호 설정</span
+    >
+    <FormInput
+      class="mx-2"
+      type="password"
+      v-model="password"
+      placeholder="비밀번호를 입력해주세요"
     ></FormInput>
-    
-    <span class="modal-content__title font-mobile__page-title">비밀번호 확인</span>
+
+    <span class="modal-content__title font-mobile__page-title"
+      >비밀번호 확인</span
+    >
     <div class="input-area mx-2">
-      <span v-if="isInvalidPassword" class="input-area__text--invalid font-mobile__caption"
-      >비밀번호가 일치하지 않아요!</span>
-      <FormInput type="password"
-                 v-model="passwordConfirmation"
-                 placeholder="비밀번호를 다시 한 번 입력해주세요"
+      <span
+        v-if="isInvalidPassword"
+        class="input-area__text--invalid font-mobile__caption"
+        >비밀번호가 일치하지 않아요!</span
+      >
+      <FormInput
+        type="password"
+        v-model="passwordConfirmation"
+        placeholder="비밀번호를 다시 한 번 입력해주세요"
       ></FormInput>
     </div>
-    
-		<div class="modal-actions mt-3 mx-2">
-			<RoundedButton class="button-gray"
-                     text="취소"
-                     @click="handleClickCloseModal"
-		    ></RoundedButton>
-			<RoundedButton class="button-dark"
-						         text="편지 보내기"
-						         @click="handleSubmitMail"
-                     :disabled="!isSendable"
-		    ></RoundedButton>
-		</div>
-	</div>
+
+    <div class="modal-actions mt-3 mx-2">
+      <RoundedButton
+        class="button-gray"
+        text="취소"
+        @click="handleClickCloseModal"
+      ></RoundedButton>
+      <RoundedButton
+        class="button-dark"
+        text="편지 보내기"
+        @click="handleSubmitMail"
+        :disabled="!isSendable"
+      ></RoundedButton>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -40,50 +51,52 @@ import FormInput from '@/components/Form/FormInput.vue'
 import RoundedButton from '@/components/Button/RoundedButton.vue'
 
 export default {
-	components: {
-		FormInput,
-		RoundedButton
-	},
-	setup(props) {
+  components: {
+    FormInput,
+    RoundedButton,
+  },
+  setup() {
     /* Vuex */
     const store = useStore()
-    
+
     /* Router */
     const route = useRoute()
-    
-		/* Local State */
-		const password = ref('')
+
+    /* Local State */
+    const password = ref('')
     const passwordConfirmation = ref('')
-    const isSendable = computed(() => password.value !== '' && passwordConfirmation.value !== '')
+    const isSendable = computed(
+      () => password.value !== '' && passwordConfirmation.value !== '',
+    )
     const isInvalidPassword = ref(false)
-		
-		/* Event Handler */
-		const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
-		const handleSubmitMail = () => {
+
+    /* Event Handler */
+    const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
+    const handleSubmitMail = () => {
       const validate = () => {
         isInvalidPassword.value = password.value !== passwordConfirmation.value
         return !isInvalidPassword.value
       }
-      
-      if (validate()) {        
+
+      if (validate()) {
         store.dispatch('mail/UPDATE_KEY', route.params.key)
         store.dispatch('mail/UPDATE_PASSWORD', password.value)
         store.dispatch('mail/SEND_MAIL')
         store.dispatch('CLOSE_MODAL')
       }
-		}
-		
-		return {
-			/* Variables */
-			password,
+    }
+
+    return {
+      /* Variables */
+      password,
       passwordConfirmation,
       isSendable,
       isInvalidPassword,
-			/* Functions */
-			handleClickCloseModal,
-			handleSubmitMail
-		}
-	}
+      /* Functions */
+      handleClickCloseModal,
+      handleSubmitMail,
+    }
+  },
 }
 </script>
 
@@ -92,28 +105,28 @@ export default {
 
 .modal-content {
   width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	padding: 16px;
-	
-	&__title {
-		margin: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 16px;
+
+  &__title {
+    margin: 8px;
     padding-top: 8px;
-		color: $gray6;
-	}
+    color: $gray6;
+  }
 }
 .modal-actions {
   flex: 1;
-	display: flex;
-	justify-content: stretch;
+  display: flex;
+  justify-content: stretch;
   gap: 16px;
 }
 .input-area {
   flex: 1;
   position: relative;
   display: flex;
-  
+
   &__text {
     &--invalid {
       position: absolute;

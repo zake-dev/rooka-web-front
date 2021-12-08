@@ -28,5 +28,14 @@ module.exports = {
       },
     ],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'vue/require-default-prop': 'off',
+    'no-unused-vars': [
+      'error',
+      {
+        vars: 'all',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
   },
 }
