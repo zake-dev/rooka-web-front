@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <LineStepper :stepper="stepper"></LineStepper>
+    <LineStepper :stepper="stepper" />
 
     <transition :name="slideTransition">
       <!-- 작성 폼 (이름) -->
@@ -58,7 +58,7 @@
           </div>
         </div>
 
-        <FormButtonBack @click="handleDecreaseStep"></FormButtonBack>
+        <FormButtonBack />
       </div>
 
       <!-- 작성 폼 (군종) -->
@@ -91,7 +91,7 @@
           </div>
         </div>
 
-        <FormButtonBack @click="handleDecreaseStep"></FormButtonBack>
+        <FormButtonBack />
       </div>
 
       <!-- 작성 폼 (입대일) -->
@@ -119,7 +119,7 @@
           </div>
         </div>
 
-        <FormButtonBack @click="handleDecreaseStep"></FormButtonBack>
+        <FormButtonBack />
       </div>
 
       <!-- 작성 폼 (육군 - 입영부대) -->
@@ -147,7 +147,7 @@
           </div>
         </div>
 
-        <FormButtonBack @click="handleDecreaseStep"></FormButtonBack>
+        <FormButtonBack />
       </div>
 
       <!-- 작성 폼 (공군 - 기수) -->
@@ -174,14 +174,14 @@
           </div>
         </div>
 
-        <FormButtonBack @click="handleDecreaseStep"></FormButtonBack>
+        <FormButtonBack />
       </div>
     </transition>
   </div>
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -211,17 +211,15 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => store.state.registerForm)
+    const state = store.state.registerForm
+    const slideTransition = computed(() => state.slideTransition)
+    const stepper = computed(() => state.stepper)
+    const soldier = computed(() => state.soldier)
 
     /* Router */
     const router = useRouter()
 
     /* Local State */
-    const stepper = reactive({
-      maxStep: 5,
-      currentStep: 1,
-    })
-    const slideTransition = ref('slide-left')
     const isInvalidName = ref(false)
 
     /* Event Handler */
@@ -237,7 +235,7 @@ export default {
         return
       }
       isInvalidName.value = false
-      handleIncreaseStep()
+      store.dispatch('registerForm/INCREASE_STEP')
     }
     const handleSubmitBirthDate = event => {
       store.dispatch('registerForm/UPDATE_BIRTH_DATE', event.target.value)
@@ -245,7 +243,7 @@ export default {
     }
     const handleClickMilitaryType = militaryType => {
       store.dispatch('registerForm/UPDATE_MILITARY_TYPE', militaryType)
-      handleIncreaseStep()
+      store.dispatch('registerForm/INCREASE_STEP')
     }
     const handleSubmitEnterDate = event => {
       store.dispatch('registerForm/UPDATE_ENTER_DATE', event.target.value)
@@ -261,14 +259,6 @@ export default {
       store.dispatch('registerForm/UPDATE_KISU', event.target.value)
       event.target.blur()
     }
-    const handleIncreaseStep = () => {
-      slideTransition.value = 'slide-left'
-      stepper.currentStep++
-    }
-    const handleDecreaseStep = () => {
-      slideTransition.value = 'slide-right'
-      stepper.currentStep--
-    }
     const handleSubmitForm = async () => {
       try {
         const { data } = await MailBoxApi.getKey(soldier.value)
@@ -277,12 +267,14 @@ export default {
         router.push({ name: 'RegisterCreateLink' })
       }
     }
+    const handleIncreaseStep = () =>
+      store.dispatch('registerForm/INCREASE_STEP')
 
     return {
       /* Variables */
       soldier,
-      stepper,
       slideTransition,
+      stepper,
       isInvalidName,
       /* Functions */
       openModal,
@@ -293,9 +285,8 @@ export default {
       handleSubmitEnterDate,
       handleSelectTrainingCenterName,
       handleSelectKisu,
-      handleIncreaseStep,
-      handleDecreaseStep,
       handleSubmitForm,
+      handleIncreaseStep,
     }
   },
 }

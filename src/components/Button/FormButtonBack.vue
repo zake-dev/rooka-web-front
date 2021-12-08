@@ -1,18 +1,29 @@
 <template>
-  <button class="button">
+  <button class="button" @click="handleDecreaseStep">
     <img class="button__icon" :src="LeftArrowIconSvg" />
     <span class="font__button-text">이전</span>
   </button>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+
 import LeftArrowIconSvg from '@/assets/icons/left-arrow-icon.svg'
 
 export default {
   setup() {
+    /* Vuex */
+    const store = useStore()
+
+    /* Event Handler */
+    const handleDecreaseStep = () =>
+      store.dispatch('registerForm/DECREASE_STEP')
+
     return {
       /* Assets */
       LeftArrowIconSvg,
+      /* Functions */
+      handleDecreaseStep,
     }
   },
 }
