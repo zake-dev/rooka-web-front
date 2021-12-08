@@ -3,7 +3,7 @@
     <ModalButtonClose />
 
     <div class="modal-content-body masked-overflow">
-      <p class="modal-content-body__question-text font__input-label mb-2">
+      <p class="modal-content-body__question-text font__content-title mb-2">
         Q. 인터넷 편지함 링크라는 게 뭔가요?
       </p>
       <p class="modal-content-body__answer-text font__page-title mb-3">
@@ -44,8 +44,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  height: 433px;
-  padding: 32px;
+  max-height: 60vh;
+  padding: 24px;
 }
 .modal-content-body {
   display: flex;
@@ -54,14 +54,14 @@ export default {
   padding-top: 22px;
 
   &__question-text {
-    color: $gray3;
+    color: $gray4;
   }
   &__answer-text {
     word-break: keep-all;
-    color: $gray5;
+    color: $gray6;
   }
   &__text {
-    color: $gray5;
+    color: $gray6;
   }
 }
 </style>
