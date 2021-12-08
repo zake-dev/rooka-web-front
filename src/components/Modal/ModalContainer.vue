@@ -6,7 +6,7 @@
       <transition name="pop" appear>
         <div class="modal-card">
           <transition name="fade" mode="out-in">
-            <Component :is="ModalContent"></Component>
+            <Component :is="ModalContent" />
           </transition>
         </div>
       </transition>

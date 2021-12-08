@@ -2,10 +2,7 @@
   <div class="mailbox-header">
     <div class="mailbox-header-title mb-2">
       <span class="font__title me-2">{{ soldier.name }} 훈련병</span>
-      <SoldierInfoButton
-        class="mb-1"
-        @click="openModal('Profile')"
-      ></SoldierInfoButton>
+      <SoldierInfoButton class="mb-1" @click="openModal('Profile')" />
     </div>
     <span class="font__content-text">
       {{ headerMessage }}

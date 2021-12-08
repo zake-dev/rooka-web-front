@@ -6,7 +6,7 @@
       type="password"
       v-model="password"
       placeholder="비밀번호를 입력해주세요"
-    ></FormInput>
+    />
 
     <span class="modal-content__title font__page-title">비밀번호 확인</span>
     <div class="input-area mx-2">
@@ -19,7 +19,7 @@
         type="password"
         v-model="passwordConfirmation"
         placeholder="비밀번호를 다시 한 번 입력해주세요"
-      ></FormInput>
+      />
     </div>
 
     <div class="modal-actions mt-3 mx-2">

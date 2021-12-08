@@ -15,7 +15,7 @@
         </span>
       </div>
 
-      <MailStatusChip :mail="mail" class="mt-2"></MailStatusChip>
+      <MailStatusChip :mail="mail" class="mt-2" />
     </div>
   </div>
 </template>

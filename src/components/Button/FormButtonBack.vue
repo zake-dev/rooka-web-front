@@ -33,14 +33,13 @@ export default {
 @import '@/scss/_variables.scss';
 
 .button {
-  position: absolute;
-  left: 1rem;
-  bottom: 1rem;
+  width: fit-content;
   display: flex;
   flex-direction: row;
   align-items: center;
   border: none;
   background-color: transparent;
+  transform: translateX(-1rem);
 
   &__icon {
     width: 24px;

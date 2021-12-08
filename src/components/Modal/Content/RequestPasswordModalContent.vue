@@ -11,7 +11,7 @@
         type="password"
         v-model="password"
         placeholder="비밀번호를 입력해주세요"
-      ></FormInput>
+      />
     </div>
 
     <div class="modal-actions mt-3 mx-2">

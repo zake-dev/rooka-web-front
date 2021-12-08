@@ -1,6 +1,6 @@
 <template>
   <div class="modal-content">
-    <ModalButtonClose></ModalButtonClose>
+    <ModalButtonClose />
 
     <div class="modal-content-body masked-overflow">
       <p class="modal-content-body__question-text font__input-label mb-2">

@@ -1,6 +1,6 @@
 <template>
   <div class="modal-content">
-    <ModalButtonClose></ModalButtonClose>
+    <ModalButtonClose />
 
     <div class="modal-content-profile">
       <img

@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isErrorPage" class="app-bar">
-    <LogoImage class="mx-4 my-3"></LogoImage>
+    <LogoImage class="mx-4 my-3" />
   </div>
 </template>
 

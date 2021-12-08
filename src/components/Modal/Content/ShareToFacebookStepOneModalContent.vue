@@ -4,7 +4,7 @@
       <span class="modal-content-title__text font__page-title"
         >페이스북 공유</span
       >
-      <ModalButtonClose></ModalButtonClose>
+      <ModalButtonClose />
     </div>
 
     <div class="modal-content-body masked-overflow">

@@ -2,7 +2,7 @@
   <div class="modal-content">
     <div class="modal-content-title">
       <span class="modal-content-title__text font__page-title">공유하기</span>
-      <ModalButtonClose></ModalButtonClose>
+      <ModalButtonClose />
     </div>
 
     <div class="modal-content-body masked-overflow">
@@ -18,10 +18,7 @@
           <span class="modal-content-body-templates__label font__content-title"
             >인편함 링크</span
           >
-          <ShareButtonCopyText
-            :text="`rooka.kr/${key}`"
-            type="link"
-          ></ShareButtonCopyText>
+          <ShareButtonCopyText :text="`rooka.kr/${key}`" type="link" />
         </div>
         <div
           class="modal-content-body-templates__example modal-content-body-templates__example--narrow font__content-text"
@@ -35,10 +32,7 @@
           <span class="modal-content-body-templates__label font__content-title"
             >공유 템플릿</span
           >
-          <ShareButtonCopyText
-            :text="template"
-            type="template"
-          ></ShareButtonCopyText>
+          <ShareButtonCopyText :text="template" type="template" />
         </div>
         <div class="modal-content-body-templates__example font__content-text">
           {{ template }}
