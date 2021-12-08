@@ -1,25 +1,25 @@
 <template>
   <div class="page-wrapper">
-    <p class="font-mobile__semi-title">
+    <p class="font__semi-title">
       편지함 링크가<br />생성됐어요! <Emoji>😍</Emoji>
     </p>
-    <p class="font-mobile__content-text mt-2 mb-3">
+    <p class="font__content-text mt-2 mb-3">
       아래의 이미지를 저장하여 링크와 함께 공유해보세요!
     </p>
 
     <SoldierCard class="link-image" :soldier="soldier"></SoldierCard>
 
     <div class="action-container">
-      <RoundedButton
+      <BaseButton
         class="button-gray button-lg mb-3"
         text="링크 공유하기"
         @click="handleClickShareLink"
-      ></RoundedButton>
-      <RoundedButton
+      ></BaseButton>
+      <BaseButton
         class="button-dark button-lg"
         text="첫 편지 쓰기"
         @click="handleClickNewMail"
-      ></RoundedButton>
+      ></BaseButton>
     </div>
   </div>
 </template>
@@ -33,13 +33,13 @@ import { openModal } from '@/utils/DialogHandler'
 
 import Emoji from '@/components/Decorator/Emoji.vue'
 import SoldierCard from '@/components/Card/SoldierCard.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
     Emoji,
     SoldierCard,
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Vuex */

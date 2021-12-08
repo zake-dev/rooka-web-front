@@ -1,24 +1,24 @@
 <template>
   <div class="modal-content">
-    <span class="modal-content__text font-mobile__page-title mt-3"
+    <span class="modal-content__text font__page-title mt-3"
       >작성을 그만두시나요?</span
     >
 
-    <span class="modal-content__text font-mobile__button-text my-2"
+    <span class="modal-content__text font__button-text my-2"
       >작성중인 내용은 저장되지 않아요.</span
     >
 
     <div class="modal-actions mt-1 mx-2">
-      <RoundedButton
+      <BaseButton
         class="button-gray"
         text="그만두기"
         @click="handleClickLeaveRoute"
-      ></RoundedButton>
-      <RoundedButton
+      ></BaseButton>
+      <BaseButton
         class="button-dark"
         text="취소"
         @click="handleClickCloseModal"
-      ></RoundedButton>
+      ></BaseButton>
     </div>
   </div>
 </template>
@@ -28,11 +28,11 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Vuex */

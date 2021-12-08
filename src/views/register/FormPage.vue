@@ -12,7 +12,7 @@
           <div class="input-area">
             <span
               v-if="isInvalidName"
-              class="input-area__text--invalid font-mobile__caption"
+              class="input-area__text--invalid font__caption"
               >올바르지 않은 이름 형태에요!</span
             >
             <FormInput
@@ -24,12 +24,12 @@
             ></FormInput>
           </div>
           <div class="form-card-buttons">
-            <RoundedButton
+            <BaseButton
               class="button-dark button-lg"
               text="다음"
               @click="handleSubmitName"
               :disabled="soldier.name === ''"
-            ></RoundedButton>
+            ></BaseButton>
           </div>
         </div>
       </div>
@@ -49,12 +49,12 @@
           ></FormInput>
 
           <div class="form-card-buttons my-3">
-            <RoundedButton
+            <BaseButton
               class="button-dark button-lg"
               text="다음"
               @click="handleIncreaseStep"
               :disabled="soldier.birthDate === ''"
-            ></RoundedButton>
+            ></BaseButton>
           </div>
         </div>
 
@@ -70,21 +70,21 @@
           </FormLabel>
 
           <div class="form-card-buttons">
-            <RoundedButton
+            <BaseButton
               class="button-green"
               text="육군"
               @click="handleClickMilitaryType('ARMY')"
-            ></RoundedButton>
-            <RoundedButton
+            ></BaseButton>
+            <BaseButton
               class="button-blue"
               text="공군"
               @click="handleClickMilitaryType('AF')"
-            ></RoundedButton>
+            ></BaseButton>
           </div>
 
           <div class="form-card-links">
             <a
-              class="form-card-links__help-link font-mobile__caption mt-4"
+              class="form-card-links__help-link font__caption mt-4"
               @click="openModal('MissingMilitaryType')"
               >해군/해병대는 왜 없나요?</a
             >
@@ -110,12 +110,12 @@
           ></FormInput>
 
           <div class="form-card-buttons my-3">
-            <RoundedButton
+            <BaseButton
               class="button-dark button-lg"
               text="다음"
               @click="handleIncreaseStep"
               :disabled="soldier.enterDate === ''"
-            ></RoundedButton>
+            ></BaseButton>
           </div>
         </div>
 
@@ -138,12 +138,12 @@
           ></ArmyTrainingCenterSelect>
 
           <div class="form-card-buttons">
-            <RoundedButton
+            <BaseButton
               class="button-dark button-lg"
               text="편지함 찾기"
               @click="handleSubmitForm"
               :disabled="soldier.trainingCenterName === ''"
-            ></RoundedButton>
+            ></BaseButton>
           </div>
         </div>
 
@@ -165,12 +165,12 @@
           ></AirforceKisuSelect>
 
           <div class="form-card-buttons">
-            <RoundedButton
+            <BaseButton
               class="button-dark button-lg"
               text="편지함 찾기"
               @click="handleSubmitForm"
               :disabled="soldier.kisu === ''"
-            ></RoundedButton>
+            ></BaseButton>
           </div>
         </div>
 
@@ -195,7 +195,7 @@ import FormInput from '@/components/Form/FormInput.vue'
 import ArmyTrainingCenterSelect from '@/components/Form/ArmyTrainingCenterSelect.vue'
 import AirforceKisuSelect from '@/components/Form/AirforceKisuSelect'
 import FormBackButton from '@/components/Form/FormBackButton.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
@@ -206,7 +206,7 @@ export default {
     ArmyTrainingCenterSelect,
     AirforceKisuSelect,
     FormBackButton,
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Vuex */

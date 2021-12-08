@@ -1,28 +1,28 @@
 <template>
   <div class="modal-content">
     <div class="modal-content-title">
-      <span class="modal-content-title__text font-mobile__page-title"
+      <span class="modal-content-title__text font__page-title"
         >페이스북 공유</span
       >
       <ModalButtonClose></ModalButtonClose>
     </div>
 
     <div class="modal-content-body masked-overflow">
-      <span class="modal-content-body__step font-mobile__tag">STEP 1</span>
-      <span class="modal-content-body__title font-mobile__content-title"
+      <span class="modal-content-body__step font__tag">STEP 1</span>
+      <span class="modal-content-body__title font__content-title"
         >본문을 복사해주세요!</span
       >
 
       <div class="modal-content-body__template">{{ template }}</div>
 
       <div class="modal-content-buttons">
-        <RoundedButton
+        <BaseButton
           class="modal-content-buttons__button button-gray"
           text="본문 복사하기"
           @click="handleCopyText"
-        ></RoundedButton>
+        ></BaseButton>
         <a
-          class="modal-content-buttons__link font-mobile__caption"
+          class="modal-content-buttons__link font__caption"
           @click="openModal('ShareToSns')"
           >이전 단계</a
         >
@@ -39,12 +39,12 @@ import { openModal } from '@/utils/DialogHandler'
 import { toKoreanDateString } from '@/utils/TextFormatter'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
     ModalButtonClose,
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Vuex */

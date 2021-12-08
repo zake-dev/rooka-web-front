@@ -1,16 +1,16 @@
 <template>
   <div>
     <div v-if="mail.state === 'PENDING'" class="chip chip-pending">
-      <span class="font-mobile__tag">전달 대기</span>
+      <span class="font__tag">전달 대기</span>
     </div>
     <div v-else-if="mail.state === 'DELIVERED'" class="chip chip-delivered">
-      <span class="font-mobile__tag me-1">전달 완료</span>
-      <span class="font-mobile__caption">
+      <span class="font__tag me-1">전달 완료</span>
+      <span class="font__caption">
         {{ new Date(mail.deliveredAt).toLocaleDateString() }}
       </span>
     </div>
     <div v-else class="chip chip-failed">
-      <span class="font-mobile__tag">전달 실패</span>
+      <span class="font__tag">전달 실패</span>
     </div>
   </div>
 </template>

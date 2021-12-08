@@ -24,7 +24,7 @@ export default {
 @import '@/scss/_variables.scss';
 
 .form-input {
-  @extend .font-mobile__content-text;
+  @extend .font__content-text;
   flex: 1;
   font-family: 'Spoqa Han Sans Neo', sans-serif;
   height: 40px;
@@ -35,7 +35,7 @@ export default {
   color: $gray6;
 
   &::placeholder {
-    @extend .font-mobile__content-text;
+    @extend .font__content-text;
     color: $gray4;
   }
 }

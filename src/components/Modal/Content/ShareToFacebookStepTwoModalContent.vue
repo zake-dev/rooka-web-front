@@ -1,26 +1,26 @@
 <template>
   <div class="modal-content">
     <div class="modal-content-title">
-      <span class="modal-content-title__text font-mobile__page-title"
+      <span class="modal-content-title__text font__page-title"
         >페이스북 공유</span
       >
       <ModalButtonClose></ModalButtonClose>
     </div>
 
     <div class="modal-content-body masked-overflow">
-      <span class="modal-content-body__step font-mobile__tag">STEP 2</span>
-      <span class="modal-content-body__title font-mobile__content-title"
+      <span class="modal-content-body__step font__tag">STEP 2</span>
+      <span class="modal-content-body__title font__content-title"
         >페이스북에 공유해주세요!</span
       >
 
       <div class="modal-content-buttons">
-        <RoundedButton
+        <BaseButton
           class="modal-content-buttons__button button-gray"
           text="페이스북 열기"
           @click="handleOpenFacebook"
-        ></RoundedButton>
+        ></BaseButton>
         <a
-          class="modal-content-buttons__link font-mobile__caption"
+          class="modal-content-buttons__link font__caption"
           @click="openModal('ShareToFacebookStepOne')"
           >이전 단계</a
         >
@@ -36,12 +36,12 @@ import { useStore } from 'vuex'
 import { openModal } from '@/utils/DialogHandler'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
     ModalButtonClose,
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Vuex */

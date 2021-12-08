@@ -1,9 +1,7 @@
 <template>
   <div class="modal-content">
     <div class="modal-content-title">
-      <span class="modal-content-title__text font-mobile__page-title"
-        >공유하기</span
-      >
+      <span class="modal-content-title__text font__page-title">공유하기</span>
       <ModalButtonClose></ModalButtonClose>
     </div>
 
@@ -17,8 +15,7 @@
 
       <div class="modal-content-body-templates">
         <div class="modal-content-body-templates-header">
-          <span
-            class="modal-content-body-templates__label font-mobile__content-title"
+          <span class="modal-content-body-templates__label font__content-title"
             >인편함 링크</span
           >
           <ShareButtonCopyText
@@ -27,7 +24,7 @@
           ></ShareButtonCopyText>
         </div>
         <div
-          class="modal-content-body-templates__example modal-content-body-templates__example--narrow font-mobile__content-text"
+          class="modal-content-body-templates__example modal-content-body-templates__example--narrow font__content-text"
         >
           rooka.kr/{{ key }}
         </div>
@@ -35,8 +32,7 @@
 
       <div class="modal-content-body-templates">
         <div class="modal-content-body-templates-header">
-          <span
-            class="modal-content-body-templates__label font-mobile__content-title"
+          <span class="modal-content-body-templates__label font__content-title"
             >공유 템플릿</span
           >
           <ShareButtonCopyText
@@ -44,9 +40,7 @@
             type="template"
           ></ShareButtonCopyText>
         </div>
-        <div
-          class="modal-content-body-templates__example font-mobile__content-text"
-        >
+        <div class="modal-content-body-templates__example font__content-text">
           {{ template }}
         </div>
       </div>

@@ -3,7 +3,7 @@
     <div class="button-icon-wrapper">
       <img class="button-icon-wrapper__icon" :src="KakaotalkIconSvg" />
     </div>
-    <span class="button-label font-mobile__caption">카카오톡</span>
+    <span class="button-label font__caption">카카오톡</span>
   </button>
 </template>
 

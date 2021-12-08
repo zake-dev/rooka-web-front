@@ -3,7 +3,7 @@
     <div class="button-icon-wrapper">
       <img class="button-icon-wrapper__icon" :src="InstagramIconSvg" />
     </div>
-    <span class="button-label font-mobile__caption">인스타그램</span>
+    <span class="button-label font__caption">인스타그램</span>
   </button>
 </template>
 

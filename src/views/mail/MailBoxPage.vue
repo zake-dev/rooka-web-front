@@ -27,12 +27,12 @@
           :class="{ 'action-buttons--closed': !isSendable }"
         >
           <ShareButtonToSns @click="handleClickShare"></ShareButtonToSns>
-          <RoundedButton
+          <BaseButton
             v-if="isSendable"
             class="button-dark button-md ms-2"
             text="편지 쓰기"
             @click="handleClickNewMail"
-          ></RoundedButton>
+          ></BaseButton>
         </div>
       </div>
     </transition>
@@ -49,7 +49,7 @@ import { openModal } from '@/utils/DialogHandler'
 import MailBoxSkeleton from '@/skeletons/mail/MailBox.vue'
 import MailBoxHeader from '@/components/MailBox/MailBoxHeader.vue'
 import ShareButtonToSns from '@/components/Button/ShareButtonToSns.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 import MailListItem from '@/components/MailBox/MailListItem.vue'
 
 export default {
@@ -57,7 +57,7 @@ export default {
     MailBoxSkeleton,
     MailBoxHeader,
     ShareButtonToSns,
-    RoundedButton,
+    BaseButton,
     MailListItem,
   },
   setup() {

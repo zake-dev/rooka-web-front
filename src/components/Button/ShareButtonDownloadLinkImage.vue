@@ -3,7 +3,7 @@
     <div class="button-icon-wrapper">
       <img class="button-icon-wrapper__icon" :src="DownloadIconSvg" />
     </div>
-    <span class="button-label font-mobile__caption">카드 이미지<br />저장</span>
+    <span class="button-label font__caption">카드 이미지<br />저장</span>
   </button>
 </template>
 

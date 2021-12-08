@@ -1,13 +1,13 @@
 <template>
   <div class="mailbox-header">
     <div class="mailbox-header-title mb-2">
-      <span class="font-mobile__title me-2">{{ soldier.name }} 훈련병</span>
+      <span class="font__title me-2">{{ soldier.name }} 훈련병</span>
       <SoldierInfoButton
         class="mb-1"
         @click="openModal('Profile')"
       ></SoldierInfoButton>
     </div>
-    <span class="font-mobile__content-text">
+    <span class="font__content-text">
       {{ headerMessage }}
     </span>
   </div>

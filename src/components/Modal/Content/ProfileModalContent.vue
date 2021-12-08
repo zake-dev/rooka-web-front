@@ -7,44 +7,40 @@
         class="modal-content-profile__image mb-2"
         :src="ProfileAirforcePng"
       />
-      <p class="modal-content-profile__name font-mobile__semi-title mb-3">
+      <p class="modal-content-profile__name font__semi-title mb-3">
         {{ soldier.name }} 훈련병
       </p>
 
       <div class="modal-content-profile-info mt-3">
         <div class="modal-content-profile-row">
-          <span
-            class="modal-content-profile-row__label font-mobile__content-title"
+          <span class="modal-content-profile-row__label font__content-title"
             >생년월일</span
           >
-          <span class="font-mobile__content-text">{{
+          <span class="font__content-text">{{
             toKoreanDateString(soldier.birthDate)
           }}</span>
         </div>
         <div class="modal-content-profile-row">
-          <span
-            class="modal-content-profile-row__label font-mobile__content-title"
+          <span class="modal-content-profile-row__label font__content-title"
             >군종</span
           >
-          <span class="font-mobile__content-text">{{
+          <span class="font__content-text">{{
             toKoreanMilitaryType(soldier.militaryType)
           }}</span>
         </div>
         <div class="modal-content-profile-row">
-          <span
-            class="modal-content-profile-row__label font-mobile__content-title"
+          <span class="modal-content-profile-row__label font__content-title"
             >입대일</span
           >
-          <span class="font-mobile__content-text">{{
+          <span class="font__content-text">{{
             toKoreanDateString(soldier.enterDate)
           }}</span>
         </div>
         <div class="modal-content-profile-row">
-          <span
-            class="modal-content-profile-row__label font-mobile__content-title"
+          <span class="modal-content-profile-row__label font__content-title"
             >소속</span
           >
-          <span class="font-mobile__content-text">{{
+          <span class="font__content-text">{{
             soldier.trainingCenterDetail
           }}</span>
         </div>
@@ -52,11 +48,10 @@
           v-if="soldier.militaryType === 'army'"
           class="modal-content-profile-row"
         >
-          <span
-            class="modal-content-profile-row__label font-mobile__content-title"
+          <span class="modal-content-profile-row__label font__content-title"
             >부대</span
           >
-          <span class="font-mobile__content-text">{{
+          <span class="font__content-text">{{
             soldier.traningCenterName
           }}</span>
         </div>
@@ -64,11 +59,10 @@
           v-if="soldier.militaryType === 'airforce'"
           class="modal-content-profile-row"
         >
-          <span
-            class="modal-content-profile-row__label font-mobile__content-title"
+          <span class="modal-content-profile-row__label font__content-title"
             >기수</span
           >
-          <span class="font-mobile__content-text">{{ soldier.kisu }}기</span>
+          <span class="font__content-text">{{ soldier.kisu }}기</span>
         </div>
       </div>
     </div>

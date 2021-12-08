@@ -3,15 +3,13 @@
     <ModalButtonClose></ModalButtonClose>
 
     <div class="modal-content-body masked-overflow">
-      <p
-        class="modal-content-body__question-text font-mobile__input-label mb-2"
-      >
+      <p class="modal-content-body__question-text font__input-label mb-2">
         Q. 해군/해병대는 왜 없나요?
       </p>
-      <p class="modal-content-body__answer-text font-mobile__page-title mb-3">
+      <p class="modal-content-body__answer-text font__page-title mb-3">
         A. 하루에 받을 수 있는 인터넷 편지의 수량에 제한이 있기 때문입니다.
       </p>
-      <p class="modal-content-body__text font-mobile__content-text">
+      <p class="modal-content-body__text font__content-text">
         온갖 것이 희망의 내려온 오직 청춘 꾸며 보배를 부패뿐이다. 피어나기 우는
         천지는 수 뼈 우리의 위하여서 것이다. 위하여 같이, 무엇을 할지라도 운다.
         그들은 속에서 살았으며, 이것이다. 뼈 이상은 용감하고 우리는 따뜻한 것은

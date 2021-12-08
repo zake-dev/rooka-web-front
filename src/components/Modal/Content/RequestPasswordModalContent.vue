@@ -1,12 +1,10 @@
 <template>
   <div class="modal-content">
-    <span class="modal-content__title font-mobile__page-title"
-      >비밀번호 입력</span
-    >
+    <span class="modal-content__title font__page-title">비밀번호 입력</span>
     <div class="input-area mx-2">
       <span
         v-if="isInvalidPassword"
-        class="input-area__text--invalid font-mobile__caption"
+        class="input-area__text--invalid font__caption"
         >비밀번호가 맞지 않아요!</span
       >
       <FormInput
@@ -17,16 +15,16 @@
     </div>
 
     <div class="modal-actions mt-3 mx-2">
-      <RoundedButton
+      <BaseButton
         class="button-gray"
         text="취소"
         @click="handleClickCloseModal"
-      ></RoundedButton>
-      <RoundedButton
+      ></BaseButton>
+      <BaseButton
         class="button-dark"
         text="확인"
         @click="handleSubmitPassword"
-      ></RoundedButton>
+      ></BaseButton>
     </div>
   </div>
 </template>
@@ -37,12 +35,12 @@ import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 
 import FormInput from '@/components/Form/FormInput.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
     FormInput,
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Vuex */

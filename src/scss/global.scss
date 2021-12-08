@@ -41,7 +41,7 @@ body {
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 @import url(//fonts.cdnfonts.com/css/lane---narrow);
 
-.font-mobile {
+.font-style {
   font-style: normal;
 
   &__title {
@@ -49,54 +49,63 @@ body {
     font-weight: 700;
     line-height: 2.75rem;
     letter-spacing: 0em;
+    color: $black;
   }
   &__semi-title {
     font-size: 1.75rem;
     font-weight: 700;
     line-height: 2.25rem;
     letter-spacing: -0.02em;
+    color: $black;
   }
   &__page-title {
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.75rem;
     letter-spacing: -0.02em;
+    color: $black;
   }
   &__input-label {
     font-size: 1.125rem;
     font-weight: 700;
     line-height: 1.625rem;
     letter-spacing: -0.02em;
+    color: $black;
   }
   &__button-text {
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.125rem;
     letter-spacing: 0.02em;
+    color: $black;
   }
   &__content-title {
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.5rem;
     letter-spacing: -0.02em;
+    color: $black;
   }
   &__content-text {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5rem;
     letter-spacing: 0em;
+    color: $black;
   }
   &__tag {
     font-size: 0.75rem;
     font-weight: 700;
     line-height: 1rem;
     letter-spacing: -0.02em;
+    color: $black;
   }
   &__caption {
     font-size: 0.75rem;
     font-weight: 400;
     line-height: 1rem;
     letter-spacing: -0.02em;
+    color: $black;
   }
 }
 
@@ -491,52 +500,17 @@ body {
   }
 }
 
-/* Button */
-.button {
-  font-family: 'Spoqa Han Sans Neo', sans-serif;
-  border: none;
-  background-color: transparent;
-  color: $black;
-  transition: background-color 0.2s ease, color 0.2s ease;
-
-  &-success,
-  &-green {
-    background-color: $armyGreen;
-    color: $white;
-  }
-  &-info,
-  &-blue {
-    background-color: $airForceBlue;
-    color: $white;
-  }
-  &-light {
-    background-color: $gray1;
-    color: $gray5;
-  }
-  &-gray {
-    background-color: $gray5;
-    color: $white;
-  }
-  &-dark {
-    background-color: $gray6;
-    color: $white;
-  }
-  &:disabled {
-    background-color: $gray2 !important;
-    color: $white !important;
-  }
-}
-
 /* Input */
 input {
   -webkit-appearance: none;
 }
 input[type='date'] {
   flex: 1;
+  width: 100%;
   position: relative;
 
   &::before {
-    @extend .font-mobile__content-text;
+    @extend .font__content-text;
     content: attr(data-placeholder);
     width: 100%;
     color: $gray4;

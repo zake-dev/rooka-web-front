@@ -1,6 +1,6 @@
 <template>
   <button class="button" @click="handleCopyText">
-    <span class="font-mobile__button-text">복사하기</span>
+    <span class="font__button-text">복사하기</span>
   </button>
 </template>
 

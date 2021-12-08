@@ -3,7 +3,7 @@
     <div class="button-icon-wrapper">
       <img class="button-icon-wrapper__icon" :src="FacebookIconSvg" />
     </div>
-    <span class="button-label font-mobile__caption">페이스북</span>
+    <span class="button-label font__caption">페이스북</span>
   </button>
 </template>
 
