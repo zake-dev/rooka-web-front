@@ -321,7 +321,8 @@ export default {
   align-items: stretch;
 }
 .form-card-buttons {
-  margin-top: 40px;
+  margin-top: 56px;
+  padding: 0 40px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -339,7 +340,8 @@ export default {
   }
 }
 .input-area {
-  height: 46px;
+  position: relative;
+  height: 40px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -347,9 +349,10 @@ export default {
 
   &__text {
     &--invalid {
-      padding: 0 1px 0.6px 0;
+      position: absolute;
+      bottom: -1.25rem;
+      right: 0;
       color: $warningRed;
-      text-align: right;
     }
   }
 }
