@@ -35,6 +35,17 @@ const module = {
         },
       })
     },
+    RESET_WITHOUT_FORM(state) {
+      Object.assign(state, {
+        key: '',
+        slideTransition: 'slide-left',
+        stepper: {
+          maxStep: 5,
+          currentStep: 1,
+        },
+      })
+      console.dir(state)
+    },
     SET_KEY(state, key) {
       state.key = key
     },
@@ -95,6 +106,9 @@ const module = {
     },
     RESET({ commit }) {
       commit('RESET')
+    },
+    RESET_WITHOUT_FORM({ commit }) {
+      commit('RESET_WITHOUT_FORM')
     },
   },
 }
