@@ -71,7 +71,7 @@
             <Emoji>🤔</Emoji>
           </FormLabel>
 
-          <div class="form-card-buttons">
+          <div class="form-card-buttons form-card-buttons__military-type">
             <BaseButton
               class="button-green"
               @click="handleClickMilitaryType('ARMY')"
@@ -86,7 +86,7 @@
 
           <div class="form-card-links">
             <a
-              class="form-card-links__help-link font__caption mt-4"
+              class="form-card-links__help-link font__caption"
               @click="openModal('MissingMilitaryType')"
               >해군/해병대는 왜 없나요?</a
             >
@@ -321,6 +321,11 @@ export default {
   flex-direction: row;
   justify-content: center;
   gap: 16px;
+
+  &__military-type {
+    margin: 0;
+    padding: 0;
+  }
 }
 .form-card-links {
   display: flex;
@@ -328,6 +333,7 @@ export default {
   justify-content: center;
 
   &__help-link {
+    margin-top: 32px;
     text-decoration: none;
     color: $gray4;
     border-bottom: 1px solid $gray4;

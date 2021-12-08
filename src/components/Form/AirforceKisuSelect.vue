@@ -51,9 +51,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/scss/global.scss';
 @import '@/scss/_variables.scss';
 
 .form-select {
+  @extend .font__content-text;
+  width: 100%;
+  height: 40px;
   width: 100%;
   padding: 8px 12px;
   background-color: $gray1;
