@@ -70,7 +70,7 @@ export default {
     const soldier = computed(() =>
       store.state.mailBox.key
         ? store.state.mailBox.soldier
-        : store.state.registerForm,
+        : store.state.registerForm.soldier,
     )
     const key = computed(() =>
       store.state.mailBox.key

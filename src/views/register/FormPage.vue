@@ -302,14 +302,14 @@ export default {
   position: absolute;
   width: 100%;
   min-height: calc(100% - 2px);
-  padding: 2rem;
+  padding: 32px;
   background-color: $white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .form-card-content {
-  padding: 1.5rem 0;
+  padding: 24px 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;

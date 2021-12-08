@@ -3,9 +3,9 @@
     <p class="font__semi-title">
       축하합니다 <Emoji>🎉</Emoji><br />1등으로 오셨군요!
     </p>
-    <p class="font__content-text py-4">
-      아직 아무도 김루카님의 인터넷 편지 링크를 생성하지 않았어요.<br />
-      지금 누구보다 먼저 인터넷 편지함 링크를 생성해 보세요!
+    <p class="font__content-text py-3">
+      아직 아무도 김루카님의 인터넷 편지 링크를 생성하지 않았어요. 지금 누구보다
+      먼저 인터넷 편지함 링크를 생성해 보세요!
     </p>
 
     <!-- 입력한 폼 정보 -->
@@ -56,7 +56,9 @@
     </div>
 
     <div class="action-container">
-      <BaseButton class="button-primary" @click="handleClickCreateLink"
+      <BaseButton
+        class="action-container__button button-primary"
+        @click="handleClickCreateLink"
         >링크 생성하기</BaseButton
       >
 
@@ -89,7 +91,7 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => store.state.registerForm)
+    const soldier = computed(() => store.state.registerForm.soldier)
 
     /* Router */
     const router = useRouter()
@@ -123,11 +125,9 @@ export default {
 @import '@/scss/_variables.scss';
 
 .page-wrapper {
-  padding: 48px 32px;
+  padding: 32px;
 }
 .submitted-form {
-  margin: 32px 0;
-
   &-row {
     padding: 16px 8px;
     display: flex;
@@ -142,12 +142,16 @@ export default {
   }
 }
 .action-container {
-  margin-top: 24px;
-  padding: 24px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  &__button {
+    width: 100%;
+    min-height: 48px;
+  }
 
   &__help-link {
     margin-top: 24px;

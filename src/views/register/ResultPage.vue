@@ -40,7 +40,7 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => store.state.registerForm)
+    const soldier = computed(() => store.state.registerForm.soldier)
 
     /* Router */
     const router = useRouter()
