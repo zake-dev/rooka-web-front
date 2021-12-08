@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-content">
+  <div class="modal-content masked-overflow">
     <ModalButtonClose />
 
     <div class="modal-content-profile">
@@ -16,7 +16,7 @@
           <span class="modal-content-profile-row__label font__content-title"
             >생년월일</span
           >
-          <span class="font__content-text">{{
+          <span class="modal-content-profile-row__text font__content-text">{{
             toKoreanDateString(soldier.birthDate)
           }}</span>
         </div>
@@ -24,7 +24,7 @@
           <span class="modal-content-profile-row__label font__content-title"
             >군종</span
           >
-          <span class="font__content-text">{{
+          <span class="modal-content-profile-row__text font__content-text">{{
             toKoreanMilitaryType(soldier.militaryType)
           }}</span>
         </div>
@@ -32,7 +32,7 @@
           <span class="modal-content-profile-row__label font__content-title"
             >입대일</span
           >
-          <span class="font__content-text">{{
+          <span class="modal-content-profile-row__text font__content-text">{{
             toKoreanDateString(soldier.enterDate)
           }}</span>
         </div>
@@ -40,23 +40,23 @@
           <span class="modal-content-profile-row__label font__content-title"
             >소속</span
           >
-          <span class="font__content-text">{{
+          <span class="modal-content-profile-row__text font__content-text">{{
             soldier.trainingCenterDetail
           }}</span>
         </div>
         <div
-          v-if="soldier.militaryType === 'army'"
+          v-if="soldier.militaryType === 'ARMY'"
           class="modal-content-profile-row"
         >
           <span class="modal-content-profile-row__label font__content-title"
             >부대</span
           >
-          <span class="font__content-text">{{
-            soldier.traningCenterName
+          <span class="modal-content-profile-row__text font__content-text">{{
+            soldier.trainingCenterName
           }}</span>
         </div>
         <div
-          v-if="soldier.militaryType === 'airforce'"
+          v-if="soldier.militaryType === 'AIR_FORCE'"
           class="modal-content-profile-row"
         >
           <span class="modal-content-profile-row__label font__content-title"
@@ -104,23 +104,26 @@ export default {
 @import '@/scss/_variables.scss';
 
 .modal-content {
+  flex: 1;
+  width: 100%;
+  max-height: 80vh;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  height: 343px;
-  width: 343px;
-  padding: 32px;
 }
 .modal-content-profile {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: $gray4;
+  color: $gray6;
 
+  &__name {
+    color: $gray6;
+  }
   &-info {
     width: 100%;
-    padding: 0 16px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -131,8 +134,12 @@ export default {
     display: inline-flex;
 
     &__label {
-      min-width: 44px;
-      margin-right: 12px;
+      min-width: 4rem;
+      margin-right: 1rem;
+      color: $gray6;
+    }
+    &__text {
+      color: $gray5;
     }
   }
   &__image {
