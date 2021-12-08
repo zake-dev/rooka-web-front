@@ -29,10 +29,10 @@
           <ShareButtonToSns @click="handleClickShare"></ShareButtonToSns>
           <BaseButton
             v-if="isSendable"
-            class="button-dark button-md ms-2"
-            text="편지 쓰기"
+            class="button-primary ms-2"
             @click="handleClickNewMail"
-          ></BaseButton>
+            >편지 쓰기</BaseButton
+          >
         </div>
       </div>
     </transition>

@@ -14,11 +14,9 @@
     <img class="background" :src="BackgroundPng" />
 
     <div class="action-buttons">
-      <BaseButton
-        class="button-dark button-lg mb-3"
-        text="홈으로 가기"
-        @click="handleClickGoHome"
-      ></BaseButton>
+      <BaseButton class="button-primary mb-3" @click="handleClickGoHome"
+        >홈으로 가기</BaseButton
+      >
     </div>
   </div>
 </template>

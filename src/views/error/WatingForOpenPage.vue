@@ -23,11 +23,9 @@
     ></div>
 
     <div class="action-buttons">
-      <BaseButton
-        class="button-dark button-lg mb-3"
-        text="홈으로 가기"
-        @click="handleClickGoHome"
-      ></BaseButton>
+      <BaseButton class="button-dark mb-3" @click="handleClickGoHome"
+        >홈으로 가기</BaseButton
+      >
     </div>
   </div>
 </template>

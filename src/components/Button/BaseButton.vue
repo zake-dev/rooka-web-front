@@ -1,12 +1,13 @@
 <template>
   <button class="button">
-    <span class="font__button-text">
+    <span class="button__text">
       <slot />
     </span>
   </button>
 </template>
 
 <style scoped lang="scss">
+@import '@/scss/global.scss';
 @import '@/scss/_variables.scss';
 
 .button {
@@ -50,6 +51,10 @@
   &:disabled {
     background-color: $gray2 !important;
     color: $white !important;
+  }
+  &__text {
+    @extend .font__button-text;
+    color: inherit;
   }
 }
 </style>

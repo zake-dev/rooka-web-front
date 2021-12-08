@@ -15,10 +15,10 @@
 
       <div class="modal-content-buttons">
         <BaseButton
-          class="modal-content-buttons__button button-gray"
-          text="페이스북 열기"
+          class="modal-content-buttons__button button-secondary"
           @click="handleOpenFacebook"
-        ></BaseButton>
+          >페이스북 열기</BaseButton
+        >
         <a
           class="modal-content-buttons__link font__caption"
           @click="openModal('ShareToFacebookStepOne')"

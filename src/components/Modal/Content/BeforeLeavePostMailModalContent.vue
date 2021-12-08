@@ -9,16 +9,10 @@
     >
 
     <div class="modal-actions mt-1 mx-2">
-      <BaseButton
-        class="button-gray"
-        text="그만두기"
-        @click="handleClickLeaveRoute"
-      ></BaseButton>
-      <BaseButton
-        class="button-dark"
-        text="취소"
-        @click="handleClickCloseModal"
-      ></BaseButton>
+      <BaseButton class="button-secondary" @click="handleClickLeaveRoute"
+        >그만두기</BaseButton
+      >
+      <BaseButton class="button-primary" @click="closeModal">취소</BaseButton>
     </div>
   </div>
 </template>
@@ -27,6 +21,8 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+
+import { closeModal } from '@/utils/DialogHandler'
 
 import BaseButton from '@/components/Button/BaseButton.vue'
 
@@ -46,14 +42,13 @@ export default {
     const handleClickLeaveRoute = () => {
       store.dispatch('mail/UPDATE_IS_CONFIRMED_TO_LEAVE', true)
       router.push(leavingRoute.value)
-      store.dispatch('CLOSE_MODAL')
+      closeModal()
     }
-    const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
 
     return {
       /* Functions */
       handleClickLeaveRoute,
-      handleClickCloseModal,
+      closeModal,
     }
   },
 }

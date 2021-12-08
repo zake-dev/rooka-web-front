@@ -25,11 +25,11 @@
           </div>
           <div class="form-card-buttons">
             <BaseButton
-              class="button-dark button-lg"
-              text="다음"
+              class="button-primary"
               @click="handleSubmitName"
               :disabled="soldier.name === ''"
-            ></BaseButton>
+              >다음</BaseButton
+            >
           </div>
         </div>
       </div>
@@ -50,15 +50,15 @@
 
           <div class="form-card-buttons my-3">
             <BaseButton
-              class="button-dark button-lg"
-              text="다음"
+              class="button-primary"
               @click="handleIncreaseStep"
               :disabled="soldier.birthDate === ''"
-            ></BaseButton>
+              >다음</BaseButton
+            >
           </div>
         </div>
 
-        <FormBackButton @click="handleDecreaseStep"></FormBackButton>
+        <FormButtonBack @click="handleDecreaseStep"></FormButtonBack>
       </div>
 
       <!-- 작성 폼 (군종) -->
@@ -72,14 +72,14 @@
           <div class="form-card-buttons">
             <BaseButton
               class="button-green"
-              text="육군"
               @click="handleClickMilitaryType('ARMY')"
-            ></BaseButton>
+              >육군</BaseButton
+            >
             <BaseButton
               class="button-blue"
-              text="공군"
               @click="handleClickMilitaryType('AF')"
-            ></BaseButton>
+              >공군</BaseButton
+            >
           </div>
 
           <div class="form-card-links">
@@ -91,7 +91,7 @@
           </div>
         </div>
 
-        <FormBackButton @click="handleDecreaseStep"></FormBackButton>
+        <FormButtonBack @click="handleDecreaseStep"></FormButtonBack>
       </div>
 
       <!-- 작성 폼 (입대일) -->
@@ -111,15 +111,15 @@
 
           <div class="form-card-buttons my-3">
             <BaseButton
-              class="button-dark button-lg"
-              text="다음"
+              class="button-primary"
               @click="handleIncreaseStep"
               :disabled="soldier.enterDate === ''"
-            ></BaseButton>
+              >다음</BaseButton
+            >
           </div>
         </div>
 
-        <FormBackButton @click="handleDecreaseStep"></FormBackButton>
+        <FormButtonBack @click="handleDecreaseStep"></FormButtonBack>
       </div>
 
       <!-- 작성 폼 (육군 - 입영부대) -->
@@ -139,15 +139,15 @@
 
           <div class="form-card-buttons">
             <BaseButton
-              class="button-dark button-lg"
-              text="편지함 찾기"
+              class="button-primary"
               @click="handleSubmitForm"
               :disabled="soldier.trainingCenterName === ''"
-            ></BaseButton>
+              >편지함 찾기</BaseButton
+            >
           </div>
         </div>
 
-        <FormBackButton @click="handleDecreaseStep"></FormBackButton>
+        <FormButtonBack @click="handleDecreaseStep"></FormButtonBack>
       </div>
 
       <!-- 작성 폼 (공군 - 기수) -->
@@ -166,15 +166,15 @@
 
           <div class="form-card-buttons">
             <BaseButton
-              class="button-dark button-lg"
-              text="편지함 찾기"
+              class="button-primary"
               @click="handleSubmitForm"
               :disabled="soldier.kisu === ''"
-            ></BaseButton>
+              >편지함 찾기</BaseButton
+            >
           </div>
         </div>
 
-        <FormBackButton @click="handleDecreaseStep"></FormBackButton>
+        <FormButtonBack @click="handleDecreaseStep"></FormButtonBack>
       </div>
     </transition>
   </div>
@@ -194,7 +194,7 @@ import FormLabel from '@/components/Form/FormLabel.vue'
 import FormInput from '@/components/Form/FormInput.vue'
 import ArmyTrainingCenterSelect from '@/components/Form/ArmyTrainingCenterSelect.vue'
 import AirforceKisuSelect from '@/components/Form/AirforceKisuSelect'
-import FormBackButton from '@/components/Form/FormBackButton.vue'
+import FormButtonBack from '@/components/Button/FormButtonBack.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
@@ -205,7 +205,7 @@ export default {
     FormInput,
     ArmyTrainingCenterSelect,
     AirforceKisuSelect,
-    FormBackButton,
+    FormButtonBack,
     BaseButton,
   },
   setup() {

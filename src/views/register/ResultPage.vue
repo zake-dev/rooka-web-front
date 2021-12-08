@@ -10,16 +10,12 @@
     <SoldierCard class="link-image" :soldier="soldier"></SoldierCard>
 
     <div class="action-container">
-      <BaseButton
-        class="button-gray button-lg mb-3"
-        text="링크 공유하기"
-        @click="handleClickShareLink"
-      ></BaseButton>
-      <BaseButton
-        class="button-dark button-lg"
-        text="첫 편지 쓰기"
-        @click="handleClickNewMail"
-      ></BaseButton>
+      <BaseButton class="button-secondary mb-3" @click="handleClickShareLink"
+        >링크 공유하기</BaseButton
+      >
+      <BaseButton class="button-primary button-lg" @click="handleClickNewMail"
+        >첫 편지 쓰기</BaseButton
+      >
     </div>
   </div>
 </template>

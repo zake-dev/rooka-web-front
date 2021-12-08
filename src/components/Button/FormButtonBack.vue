@@ -1,19 +1,40 @@
 <template>
-  <button class="button form-back-button">
-    <i class="fas fa-chevron-left form-back-button__icon"></i>
+  <button class="button">
+    <img class="button__icon" :src="LeftArrowIconSvg" />
     <span class="font__button-text">이전</span>
   </button>
 </template>
 
+<script>
+import LeftArrowIconSvg from '@/assets/icons/left-arrow-icon.svg'
+
+export default {
+  setup() {
+    return {
+      /* Assets */
+      LeftArrowIconSvg,
+    }
+  },
+}
+</script>
+
 <style scoped lang="scss">
-.form-back-button {
+@import '@/scss/_variables.scss';
+
+.button {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
+  border: none;
+  background-color: transparent;
 
   &__icon {
-    font-size: 20px;
-    margin-right: 0.4rem;
+    width: 24px;
+    height: 24px;
+    color: $black;
   }
 }
 </style>

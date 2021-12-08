@@ -15,16 +15,10 @@
     </div>
 
     <div class="modal-actions mt-3 mx-2">
-      <BaseButton
-        class="button-gray"
-        text="취소"
-        @click="handleClickCloseModal"
-      ></BaseButton>
-      <BaseButton
-        class="button-dark"
-        text="확인"
-        @click="handleSubmitPassword"
-      ></BaseButton>
+      <BaseButton class="button-secondary" @click="closeModal">취소</BaseButton>
+      <BaseButton class="button-primary" @click="handleSubmitPassword"
+        >확인</BaseButton
+      >
     </div>
   </div>
 </template>
@@ -33,6 +27,8 @@
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
+
+import { closeModal } from '@/utils/DialogHandler'
 
 import FormInput from '@/components/Form/FormInput.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
@@ -57,12 +53,11 @@ export default {
     const isInvalidPassword = ref(false)
 
     /* Event Handler */
-    const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
     const handleSubmitPassword = async () => {
       try {
         await store.dispatch('mail/FETCH_MAIL', password.value)
         router.push(`/${key}/mail/${id.value}`)
-        store.dispatch('CLOSE_MODAL')
+        closeModal()
       } catch (e) {
         switch (e.response.status) {
           case 403:
@@ -77,8 +72,8 @@ export default {
       password,
       isInvalidPassword,
       /* Functions */
-      handleClickCloseModal,
       handleSubmitPassword,
+      closeModal,
     }
   },
 }

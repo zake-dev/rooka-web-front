@@ -15,10 +15,10 @@
 
       <div class="modal-content-buttons">
         <BaseButton
-          class="modal-content-buttons__button button-gray"
-          text="인스타그램 열기"
+          class="modal-content-buttons__button button-secondary"
           @click="handleOpenInstagram"
-        ></BaseButton>
+          >인스타그램 열기</BaseButton
+        >
         <a
           class="modal-content-buttons__link font__caption"
           @click="openModal('ShareToInstagramStepTwo')"

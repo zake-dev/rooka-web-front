@@ -23,17 +23,13 @@
     </div>
 
     <div class="modal-actions mt-3 mx-2">
+      <BaseButton class="button-secondary" @click="closeModal">취소</BaseButton>
       <BaseButton
-        class="button-gray"
-        text="취소"
-        @click="handleClickCloseModal"
-      ></BaseButton>
-      <BaseButton
-        class="button-dark"
-        text="편지 보내기"
+        class="button-primary"
         @click="handleSubmitMail"
         :disabled="!isSendable"
-      ></BaseButton>
+        >편지 보내기</BaseButton
+      >
     </div>
   </div>
 </template>
@@ -42,6 +38,8 @@
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
+
+import { closeModal } from '@/utils/DialogHandler'
 
 import FormInput from '@/components/Form/FormInput.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
@@ -67,7 +65,6 @@ export default {
     const isInvalidPassword = ref(false)
 
     /* Event Handler */
-    const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
     const handleSubmitMail = () => {
       const validate = () => {
         isInvalidPassword.value = password.value !== passwordConfirmation.value
@@ -78,7 +75,7 @@ export default {
         store.dispatch('mail/UPDATE_KEY', route.params.key)
         store.dispatch('mail/UPDATE_PASSWORD', password.value)
         store.dispatch('mail/SEND_MAIL')
-        store.dispatch('CLOSE_MODAL')
+        closeModal()
       }
     }
 
@@ -89,8 +86,8 @@ export default {
       isSendable,
       isInvalidPassword,
       /* Functions */
-      handleClickCloseModal,
       handleSubmitMail,
+      closeModal,
     }
   },
 }

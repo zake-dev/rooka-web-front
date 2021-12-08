@@ -20,10 +20,10 @@
 
       <div class="modal-content-buttons">
         <BaseButton
-          class="modal-content-buttons__button button-gray"
-          text="이미지 저장하기"
+          class="modal-content-buttons__button button-secondary"
           @click="handleDownloadLinkImage"
-        ></BaseButton>
+          >이미지 저장하기</BaseButton
+        >
         <a
           class="modal-content-buttons__link font__caption"
           @click="openModal('ShareToSns')"

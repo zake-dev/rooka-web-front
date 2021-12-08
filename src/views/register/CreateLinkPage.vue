@@ -56,11 +56,9 @@
     </div>
 
     <div class="action-container">
-      <BaseButton
-        class="button-dark button-lg"
-        text="링크 생성하기"
-        @click="handleClickCreateLink"
-      ></BaseButton>
+      <BaseButton class="button-primary" @click="handleClickCreateLink"
+        >링크 생성하기</BaseButton
+      >
 
       <a
         class="action-container__help-link font__caption"
