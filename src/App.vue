@@ -1,21 +1,20 @@
 <template>
-	<MobileLayout></MobileLayout>
-	<Modal></Modal>
+  <TheLayout></TheLayout>
+  <ModalContainer></ModalContainer>
 </template>
 
 <script>
-import MobileLayout from '@/components/Layout/MobileLayout.vue'
-import Modal from '@/components/Modal/Modal.vue'
+import TheLayout from '@/components/Layout/TheLayout.vue'
+import ModalContainer from '@/components/Modal/ModalContainer.vue'
 
 export default {
- 	name: 'App',
-	components: {
-		MobileLayout,
-		Modal
-	}
+  name: 'App',
+  components: {
+    TheLayout,
+    ModalContainer,
+  },
 }
 </script>
-
 
 <style lang="scss">
 @import '@/scss/global.scss';

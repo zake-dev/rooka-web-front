@@ -1,85 +1,108 @@
 <template>
-	<div class="modal-content">
-		<CloseModalButton></CloseModalButton>
-	
-		<div class="modal-content-profile">
-			<img class="modal-content-profile__image mb-2"
-				 :src="ProfileAirforcePng"
-			/>
-			<p class="modal-content-profile__name font-mobile__semi-title mb-3">
-				{{ soldier.name }} 훈련병
-			</p>
-			
-			<div class="modal-content-profile-info mt-3">
-				<div class="modal-content-profile-row">
-					<span class="modal-content-profile-row__label font-mobile__content-title"
-					>생년월일</span>
-					<span class="font-mobile__content-text"
-					>{{ toKoreanDateString(soldier.birthDate) }}</span>
-				</div>
-				<div class="modal-content-profile-row">
-					<span class="modal-content-profile-row__label font-mobile__content-title"
-					>군종</span>
-					<span class="font-mobile__content-text"
-					>{{ toKoreanMilitaryType(soldier.militaryType) }}</span>
-				</div>
-				<div class="modal-content-profile-row">
-					<span class="modal-content-profile-row__label font-mobile__content-title"
-					>입대일</span>
-					<span class="font-mobile__content-text"
-					>{{ toKoreanDateString(soldier.enterDate) }}</span>
-				</div>
+  <div class="modal-content">
+    <ModalButtonClose></ModalButtonClose>
+
+    <div class="modal-content-profile">
+      <img
+        class="modal-content-profile__image mb-2"
+        :src="ProfileAirforcePng"
+      />
+      <p class="modal-content-profile__name font-mobile__semi-title mb-3">
+        {{ soldier.name }} 훈련병
+      </p>
+
+      <div class="modal-content-profile-info mt-3">
         <div class="modal-content-profile-row">
-					<span class="modal-content-profile-row__label font-mobile__content-title"
-					>소속</span>
-					<span class="font-mobile__content-text"
-					>{{ soldier.trainingCenterDetail }}</span>
-				</div>
-        <div v-if="soldier.militaryType === 'army'" class="modal-content-profile-row">
-					<span class="modal-content-profile-row__label font-mobile__content-title"
-					>부대</span>
-					<span class="font-mobile__content-text"
-					>{{ soldier.traningCenterName }}</span>
-				</div>
-        <div v-if="soldier.militaryType === 'airforce'" class="modal-content-profile-row">
-					<span class="modal-content-profile-row__label font-mobile__content-title"
-					>기수</span>
-					<span class="font-mobile__content-text"
-					>{{ soldier.kisu }}기</span>
-				</div>
-			</div>
-		</div>
-	</div>
+          <span
+            class="modal-content-profile-row__label font-mobile__content-title"
+            >생년월일</span
+          >
+          <span class="font-mobile__content-text">{{
+            toKoreanDateString(soldier.birthDate)
+          }}</span>
+        </div>
+        <div class="modal-content-profile-row">
+          <span
+            class="modal-content-profile-row__label font-mobile__content-title"
+            >군종</span
+          >
+          <span class="font-mobile__content-text">{{
+            toKoreanMilitaryType(soldier.militaryType)
+          }}</span>
+        </div>
+        <div class="modal-content-profile-row">
+          <span
+            class="modal-content-profile-row__label font-mobile__content-title"
+            >입대일</span
+          >
+          <span class="font-mobile__content-text">{{
+            toKoreanDateString(soldier.enterDate)
+          }}</span>
+        </div>
+        <div class="modal-content-profile-row">
+          <span
+            class="modal-content-profile-row__label font-mobile__content-title"
+            >소속</span
+          >
+          <span class="font-mobile__content-text">{{
+            soldier.trainingCenterDetail
+          }}</span>
+        </div>
+        <div
+          v-if="soldier.militaryType === 'army'"
+          class="modal-content-profile-row"
+        >
+          <span
+            class="modal-content-profile-row__label font-mobile__content-title"
+            >부대</span
+          >
+          <span class="font-mobile__content-text">{{
+            soldier.traningCenterName
+          }}</span>
+        </div>
+        <div
+          v-if="soldier.militaryType === 'airforce'"
+          class="modal-content-profile-row"
+        >
+          <span
+            class="modal-content-profile-row__label font-mobile__content-title"
+            >기수</span
+          >
+          <span class="font-mobile__content-text">{{ soldier.kisu }}기</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-  
+
 import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
-	
-import CloseModalButton from '@/components/Button/CloseModalButton.vue'
+
+import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
 import ProfileAirforcePng from '@/assets/images/profile-airforce.png'
 
 export default {
   components: {
-    CloseModalButton
+    ModalButtonClose,
   },
-	setup() {
+  setup() {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => store.state.mailBox.soldier)
-		
-		return {
-			/* Assets */
-			ProfileAirforcePng,
+
+    return {
+      /* Assets */
+      ProfileAirforcePng,
       /* Variables */
       soldier,
-			/* Functions */
-			toKoreanDateString,
-      toKoreanMilitaryType
-		}
-	}
+      /* Functions */
+      toKoreanDateString,
+      toKoreanMilitaryType,
+    }
+  },
 }
 </script>
 
@@ -87,40 +110,40 @@ export default {
 @import '@/scss/_variables.scss';
 
 .modal-content {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   height: 343px;
   width: 343px;
-	padding: 32px;
+  padding: 32px;
 }
 .modal-content-profile {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	color: $gray4;
-	
-	&-info {
-		width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $gray4;
+
+  &-info {
+    width: 100%;
     padding: 0 16px;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
-	&-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &-row {
     margin-bottom: 8px;
-		width: 100%;
-		display: inline-flex;
-		
-		&__label {
-			min-width: 44px;
-			margin-right: 12px;
-		}
-	}
-	&__image {
-		height: 72px;
-		width: 72px;
-	}
+    width: 100%;
+    display: inline-flex;
+
+    &__label {
+      min-width: 44px;
+      margin-right: 12px;
+    }
+  }
+  &__image {
+    height: 72px;
+    width: 72px;
+  }
 }
 </style>

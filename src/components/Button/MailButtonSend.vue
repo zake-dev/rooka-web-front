@@ -7,7 +7,8 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { useRoute } from 'vue-router'
+  
+import { openModal } from '@/utils/DialogHandler'
   
 import SendButtonIconSvg from '@/assets/icons/send-button-icon.svg'
 
@@ -17,14 +18,8 @@ export default {
     const store = useStore()
     const isSendable = computed(() => store.getters['mail/isSendable'])
     
-    /* Router */
-		const route = useRoute()
-    
     /* Event Handler */
-    const handleSendMail = () => {
-      store.dispatch('mail/UPDATE_KEY', route.params.key)
-      store.dispatch('mail/SEND_MAIL')
-    }
+    const handleSendMail = () => openModal('SetPassword')
     
 		return {
       /* Assets */

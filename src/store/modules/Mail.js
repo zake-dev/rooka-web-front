@@ -2,11 +2,11 @@ import * as MailApi from '@/api/MailApi'
 import router from '@/router'
 
 const module = {
-	namespaced: true,
-	state: {
+  namespaced: true,
+  state: {
     mail: {
       id: null,
-      name: '',
+      author: '',
       relation: '',
       address: '',
       postCode: '',
@@ -14,25 +14,30 @@ const module = {
       content: '',
       password: '',
       key: '',
-      state: ''
+      state: '',
+      createAt: '',
     },
-    isBeingSend: false    
-	},
-  getters: {
-    isSendable: (state) => {
-      return state.mail.name !== ''
-          && state.mail.relation !== ''
-          && state.mail.address !== ''
-          && state.mail.title !== ''
-          && state.mail.content !== ''
-          && !state.isBeingSend
-    }
+    isBeingSent: false,
+    isConfirmedToLeave: false,
+    leavingRoute: '',
   },
-	mutations: {
+  getters: {
+    isSendable: state => {
+      return (
+        state.mail.author !== '' &&
+        state.mail.relation !== '' &&
+        state.mail.address !== '' &&
+        state.mail.title !== '' &&
+        state.mail.content !== '' &&
+        !state.isBeingSend
+      )
+    },
+  },
+  mutations: {
     RESET(state) {
       Object.assign(state.mail, {
         id: null,
-        name: '',
+        author: '',
         relation: '',
         address: '',
         postCode: '',
@@ -40,15 +45,20 @@ const module = {
         content: '',
         password: '',
         key: '',
-        state: ''
+        state: '',
+        createAt: '',
       })
-      state.isBeingSend = false
+      state.isBeingSent = false
+      ;(state.isConfirmedToLeave = false), (state.leavingRoute = '')
     },
-		SET_ID(state, id) {
+    SET_MAIL(state, mail) {
+      Object.assign(state.mail, mail)
+    },
+    SET_ID(state, id) {
       state.mail.id = id
     },
-    SET_NAME(state, name) {
-      state.mail.name = name
+    SET_AUTHOR(state, author) {
+      state.mail.author = author
     },
     SET_RELATION(state, relation) {
       state.mail.relation = relation
@@ -74,33 +84,40 @@ const module = {
     SET_STATE(state, mailState) {
       state.mail.state = mailState
     },
-    SET_IS_BEING_SEND(state, isBeingSend) {
-      state.isBeingSend = isBeingSend
-    }
-	},
-	actions: {
-    async FETCH_MAIL({ commit }, { id, password }) {
-      // const { data } = await getMail(id, password)
+    SET_IS_BEING_SENT(state, isBeingSent) {
+      state.isBeingSent = isBeingSent
+    },
+    SET_IS_CONFIRMED_TO_LEAVE(state, isConfirmedToLeave) {
+      state.isConfirmedToLeave = isConfirmedToLeave
+    },
+    SET_LEAVING_ROUTE(state, route) {
+      state.leavingRoute = route
+    },
+  },
+  actions: {
+    async FETCH_MAIL({ commit, state }, password) {
+      const { data } = await MailApi.getMail(state.mail.id, password)
+      commit('SET_MAIL', data)
     },
     async SEND_MAIL({ commit, state }) {
-      commit('SET_IS_BEING_SEND', true)
-      
+      commit('SET_IS_BEING_SENT', true)
+
       commit('SET_PASSWORD', '1234')
-      
+
       try {
         await MailApi.postMail(state.mail)
-        router.push(`/mail/${state.mail.key}`)
+        await router.push(`/${state.mail.key}/mail`)
       } catch (e) {
         console.dir(e.response)
       } finally {
-        commit('SET_IS_BEING_SEND', false)
+        commit('SET_IS_BEING_SENT', false)
       }
     },
     UPDATE_ID({ commit }, id) {
       commit('SET_ID', id)
     },
-    UPDATE_NAME({ commit }, name) {
-      commit('SET_NAME', name)
+    UPDATE_AUTHOR({ commit }, author) {
+      commit('SET_AUTHOR', author)
     },
     UPDATE_RELATION({ commit }, relation) {
       commit('SET_RELATION', relation)
@@ -125,11 +142,17 @@ const module = {
     },
     UPDATE_STATE({ commit }, state) {
       commit('SET_STATE', state)
-    } ,
+    },
+    UPDATE_IS_CONFIRMED_TO_LEAVE({ commit }, isConfirmedToLeave) {
+      commit('SET_IS_CONFIRMED_TO_LEAVE', isConfirmedToLeave)
+    },
+    UPDATE_LEAVING_ROUTE({ commit }, route) {
+      commit('SET_LEAVING_ROUTE', route)
+    },
     RESET({ commit }) {
       commit('RESET')
-    }
-	}
+    },
+  },
 }
 
 export default module

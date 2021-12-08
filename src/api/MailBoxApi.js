@@ -1,21 +1,24 @@
 import { axiosService } from '@/api'
 
-export const getKey = (form) => {
-  const { militaryType, key, ...soldier } = form
+export const getKey = form => {
+  const soldier = form.filter(
+    ({ key }) => key !== 'militaryType' || key !== 'key',
+  )
   return axiosService.get('/mailbox/existence', {
-    params: soldier
+    params: soldier,
   })
 }
 
-export const postKey = (form) => {
-  const { key, ...soldier } = form
+export const postKey = form => {
   const formData = new FormData()
-  Object.entries(soldier).forEach(([key, value]) => formData.append(key, value))
+  Object.entries(form)
+    .filter(([key, _]) => key !== 'key')
+    .forEach(([key, value]) => formData.append(key, value))
   return axiosService.post('/mailbox', formData)
 }
 
-export const getContext = (key) => {
+export const getContext = key => {
   return axiosService.get('/mailbox', {
-    params: { key }
+    params: { key },
   })
 }

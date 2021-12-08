@@ -1,21 +1,42 @@
 <template>
-	<input class="form-input" />
+  <input class="form-input" @input="handleInput" />
 </template>
 
-<style scoped lang="scss">
-@import '@/scss/_variables.scss';
-	
-.form-input {
-	padding: 8px 12px;
-	background-color: $gray1;
-	border: none;
-	border-radius: 7px;
-	font-family: 'Spoqa Han Sans Neo', sans-serif;
+<script>
+export default {
+  props: {
+    modelValue: String,
+  },
+  emit: ['update:modelValue'],
+  setup(props, { emit }) {
+    /* Event Handler */
+    const handleInput = event => emit('update:modelValue', event.target.value)
 
-	&::placeholder {
-		font-weight: 300;
-		font-size: 12px;
-		line-height: 16px;
-	}
+    return {
+      handleInput,
+    }
+  },
+}
+</script>
+
+<style scoped lang="scss">
+@import '@/scss/global.scss';
+@import '@/scss/_variables.scss';
+
+.form-input {
+  @extend .font-mobile__content-text;
+  flex: 1;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  height: 40px;
+  padding: 8px 16px;
+  background-color: $gray1;
+  border: none;
+  border-radius: 7px;
+  color: $gray6;
+
+  &::placeholder {
+    @extend .font-mobile__content-text;
+    color: $gray4;
+  }
 }
 </style>

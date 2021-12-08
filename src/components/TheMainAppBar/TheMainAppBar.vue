@@ -1,30 +1,30 @@
 <template>
-	<div v-if="!isErrorPage" class="app-bar">
-		<Logo class="mx-4 my-3"></Logo>
-	</div>
+  <div v-if="!isErrorPage" class="app-bar">
+    <LogoImage class="mx-4 my-3"></LogoImage>
+  </div>
 </template>
 
 <script>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
-import Logo from '@/components/Logo/Logo.vue'
+import LogoImage from '@/components/LogoImage/LogoImage.vue'
 
 export default {
-	components: {
-		Logo
-	},
+  components: {
+    LogoImage,
+  },
   setup() {
     /* Router */
     const route = useRoute()
-    
+
     /* Local State */
     const isErrorPage = computed(() => route.path.includes('/error/'))
-    
+
     return {
-      isErrorPage
+      isErrorPage,
     }
-  }
+  },
 }
 </script>
 
@@ -32,13 +32,13 @@ export default {
 @import '@/scss/_variables.scss';
 
 .app-bar {
-	width: 100%;
-	height: $appBarHeight;
-	display: flex;
-	justify-content: space-between;
-	
-	&__button {
-		font-size: 20px;
-	}
+  width: 100%;
+  height: $appBarHeight;
+  display: flex;
+  justify-content: space-between;
+
+  &__button {
+    font-size: 20px;
+  }
 }
 </style>
