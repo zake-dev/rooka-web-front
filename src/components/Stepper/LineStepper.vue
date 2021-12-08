@@ -1,6 +1,6 @@
 <template>
   <div class="stepper">
-    <div class="stepper__progress-bar" :style="progressBarStyle"></div>
+    <div class="progress-bar" :style="progressBarStyle"></div>
   </div>
 </template>
 
@@ -39,11 +39,11 @@ export default {
   height: 2px;
   z-index: 1000;
   display: inline-block;
-  background-color: $gray2;
-}
-.stepper__progress-bar {
-  height: 2px;
   background-color: $gray5;
+}
+.progress-bar {
+  height: 2px;
+  background-color: $rookaYellow;
   transition: width 0.3s ease;
 }
 </style>
