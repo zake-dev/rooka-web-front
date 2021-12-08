@@ -12,7 +12,8 @@
 
 .button {
   flex: 1;
-  height: 3rem;
+  width: 100%;
+  min-height: 3rem;
   padding: 0 1.5rem;
   border-radius: 1.5rem;
   display: flex;

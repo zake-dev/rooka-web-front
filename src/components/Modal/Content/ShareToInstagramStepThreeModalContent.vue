@@ -14,9 +14,7 @@
       >
 
       <div class="modal-content-buttons">
-        <BaseButton
-          class="modal-content-buttons__button button-secondary"
-          @click="handleOpenInstagram"
+        <BaseButton class="button-secondary" @click="handleOpenInstagram"
           >인스타그램 열기</BaseButton
         >
         <a
@@ -30,7 +28,7 @@
 </template>
 
 <script>
-import { openModal } from '@/utils/DialogHandler'
+import { openModal, closeModal } from '@/utils/DialogHandler'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
@@ -42,7 +40,10 @@ export default {
   },
   setup() {
     /* Event Handler */
-    const handleOpenInstagram = () => window.open('https://www.instagram.com')
+    const handleOpenInstagram = () => {
+      window.open('https://www.instagram.com')
+      closeModal()
+    }
 
     return {
       /* Functions */
@@ -97,9 +98,6 @@ export default {
     margin-top: 24px;
     padding: 0 32px;
 
-    &__button {
-      width: 100%;
-    }
     &__link {
       flex: 0;
       color: $gray5;

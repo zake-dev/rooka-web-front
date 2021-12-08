@@ -1,6 +1,6 @@
 <template>
   <button class="button" @click="handleCopyText">
-    <span class="font__button-text">복사하기</span>
+    <span class="button__text font__button-text">복사하기</span>
   </button>
 </template>
 
@@ -39,6 +39,8 @@ export default {
 @import '@/scss/_variables.scss';
 
 .button {
-  color: $rookaYellow;
+  &__text {
+    color: $rookaYellow;
+  }
 }
 </style>

@@ -56,9 +56,7 @@
     </div>
 
     <div class="action-container">
-      <BaseButton
-        class="action-container__button button-primary"
-        @click="handleClickCreateLink"
+      <BaseButton class="button-primary" @click="handleClickCreateLink"
         >링크 생성하기</BaseButton
       >
 
@@ -147,11 +145,6 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  &__button {
-    width: 100%;
-    min-height: 48px;
-  }
 
   &__help-link {
     margin-top: 24px;

@@ -10,14 +10,10 @@
     <SoldierCard class="link-image" :soldier="soldier" />
 
     <div class="action-container">
-      <BaseButton
-        class="button button-secondary mb-3"
-        @click="handleClickShareLink"
+      <BaseButton class="button-secondary mb-3" @click="handleClickShareLink"
         >링크 공유하기</BaseButton
       >
-      <BaseButton
-        class="button button-primary button-lg"
-        @click="handleClickNewMail"
+      <BaseButton class="button-primary button-lg" @click="handleClickNewMail"
         >첫 편지 쓰기</BaseButton
       >
     </div>
@@ -84,9 +80,5 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-.button {
-  width: 100%;
-  min-height: 48px;
 }
 </style>

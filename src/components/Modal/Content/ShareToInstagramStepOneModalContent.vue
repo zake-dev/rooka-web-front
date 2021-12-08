@@ -19,9 +19,7 @@
       ></SoldierCard>
 
       <div class="modal-content-buttons">
-        <BaseButton
-          class="modal-content-buttons__button button-secondary"
-          @click="handleDownloadLinkImage"
+        <BaseButton class="button-secondary" @click="handleDownloadLinkImage"
           >이미지 저장하기</BaseButton
         >
         <a
@@ -56,7 +54,7 @@ export default {
     const soldier = computed(() =>
       store.state.mailBox.key
         ? store.state.mailBox.soldier
-        : store.state.registerForm,
+        : store.state.registerForm.soldier,
     )
 
     /* Event Handler */
@@ -123,9 +121,6 @@ export default {
     gap: 16px;
     padding: 0 32px;
 
-    &__button {
-      width: 100%;
-    }
     &__link {
       flex: 0;
       color: $gray5;

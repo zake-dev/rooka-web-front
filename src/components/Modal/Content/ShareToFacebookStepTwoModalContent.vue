@@ -14,9 +14,7 @@
       >
 
       <div class="modal-content-buttons">
-        <BaseButton
-          class="modal-content-buttons__button button-secondary"
-          @click="handleOpenFacebook"
+        <BaseButton class="button-secondary" @click="handleOpenFacebook"
           >페이스북 열기</BaseButton
         >
         <a
@@ -33,7 +31,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import { openModal } from '@/utils/DialogHandler'
+import { openModal, closeModal } from '@/utils/DialogHandler'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
@@ -49,14 +47,16 @@ export default {
     const soldier = computed(() =>
       store.state.mailBox.key
         ? store.state.mailBox.soldier
-        : store.state.registerForm,
+        : store.state.registerForm.soldier,
     )
 
     /* Event Handler */
-    const handleOpenFacebook = () =>
+    const handleOpenFacebook = () => {
       window.open(
         `https://www.facebook.com/sharer.php?u=rooka.kr/${soldier.value.key}`,
       )
+      closeModal()
+    }
 
     return {
       /* Functions */
@@ -111,9 +111,6 @@ export default {
     margin-top: 24px;
     padding: 0 32px;
 
-    &__button {
-      width: 100%;
-    }
     &__link {
       flex: 0;
       color: $gray5;

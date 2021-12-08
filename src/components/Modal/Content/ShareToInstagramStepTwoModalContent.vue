@@ -16,9 +16,7 @@
       <div class="modal-content-body__template">{{ template }}</div>
 
       <div class="modal-content-buttons">
-        <BaseButton
-          class="modal-content-buttons__button button-secondary"
-          @click="handleCopyText"
+        <BaseButton class="button-secondary" @click="handleCopyText"
           >본문 복사하기</BaseButton
         >
         <a
@@ -52,7 +50,7 @@ export default {
     const soldier = computed(() =>
       store.state.mailBox.key
         ? store.state.mailBox.soldier
-        : store.state.registerForm,
+        : store.state.registerForm.soldier,
     )
     const template = computed(
       () =>
@@ -138,9 +136,6 @@ export default {
     gap: 16px;
     padding: 0 32px;
 
-    &__button {
-      width: 100%;
-    }
     &__link {
       flex: 0;
       color: $gray5;
