@@ -39,7 +39,7 @@ export default {
   align-items: center;
   border: none;
   background-color: transparent;
-  transform: translateX(-1rem);
+  transform: translate(-1rem, 1rem);
 
   &__icon {
     width: 24px;

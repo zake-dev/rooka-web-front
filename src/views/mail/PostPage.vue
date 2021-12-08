@@ -51,9 +51,9 @@
     </div>
 
     <div class="mail-footer">
-      <MailButtonPhoto></MailButtonPhoto>
-      <MailButtonNews></MailButtonNews>
-      <MailButtonSend></MailButtonSend>
+      <MailButtonPhoto />
+      <MailButtonNews />
+      <MailButtonSend />
     </div>
   </div>
 </template>

@@ -7,7 +7,7 @@
       아래의 이미지를 저장하여 링크와 함께 공유해보세요!
     </p>
 
-    <SoldierCard class="link-image" :soldier="soldier"></SoldierCard>
+    <SoldierCard class="link-image" :soldier="soldier" />
 
     <div class="action-container">
       <BaseButton class="button-secondary mb-3" @click="handleClickShareLink"

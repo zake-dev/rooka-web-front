@@ -1,15 +1,15 @@
 <template>
   <div class="page-wrapper">
     <transition name="fade" mode="out-in">
-      <MailBoxSkeleton v-if="!isLoaded"></MailBoxSkeleton>
+      <MailBoxSkeleton v-if="!isLoaded" />
 
       <div v-else class="h-100 w-100">
-        <MailBoxHeader></MailBoxHeader>
+        <MailBoxHeader />
 
         <div class="mailbox">
           <div class="mailbox-list masked-overflow">
             <template v-if="mails.length === 0">
-              <MailListItem v-for="index in 10" :key="index"></MailListItem>
+              <MailListItem v-for="index in 10" :key="index" />
             </template>
             <template v-else>
               <MailListItem
@@ -17,7 +17,7 @@
                 :key="mail.id"
                 :mail="mail"
                 @click="handleClickMailListItem(mail.id)"
-              ></MailListItem>
+              />
             </template>
           </div>
         </div>
@@ -26,7 +26,7 @@
           class="action-buttons"
           :class="{ 'action-buttons--closed': !isSendable }"
         >
-          <ShareButtonToSns @click="handleClickShare"></ShareButtonToSns>
+          <ShareButtonToSns @click="handleClickShare" />
           <BaseButton
             v-if="isSendable"
             class="button-primary ms-2"

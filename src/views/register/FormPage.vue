@@ -7,8 +7,9 @@
       <div v-if="stepper.currentStep === 1" class="form-card">
         <div class="form-card-content">
           <FormLabel class="mb-3"
-            >훈련병의 이름은<br />무엇인가요? <Emoji>😮</Emoji></FormLabel
-          >
+            >훈련병의 이름은<br />무엇인가요?
+            <Emoji>😮</Emoji>
+          </FormLabel>
           <div class="input-area">
             <span
               v-if="isInvalidName"
@@ -21,7 +22,7 @@
               :value="soldier.name"
               @input="handleUpdateName"
               @keyup.enter="handleSubmitName"
-            ></FormInput>
+            />
           </div>
           <div class="form-card-buttons">
             <BaseButton
@@ -38,7 +39,8 @@
       <div v-else-if="stepper.currentStep === 2" class="form-card">
         <div class="form-card-content">
           <FormLabel class="mb-3">
-            {{ soldier.name }} 훈련병은<br />언제 태어났나요? <Emoji>🎂</Emoji>
+            {{ soldier.name }} 훈련병은<br />언제 태어났나요?
+            <Emoji>🎂</Emoji>
           </FormLabel>
           <FormInput
             type="date"
@@ -46,7 +48,7 @@
             :value="soldier.birthDate"
             @change="handleSubmitBirthDate"
             required
-          ></FormInput>
+          />
 
           <div class="form-card-buttons my-3">
             <BaseButton
@@ -107,7 +109,7 @@
             :value="soldier.enterDate"
             @change="handleSubmitEnterDate"
             required
-          ></FormInput>
+          />
 
           <div class="form-card-buttons my-3">
             <BaseButton
@@ -135,7 +137,7 @@
           <ArmyTrainingCenterSelect
             :value="soldier.trainingCenterName"
             @change="handleSelectTrainingCenterName"
-          ></ArmyTrainingCenterSelect>
+          />
 
           <div class="form-card-buttons">
             <BaseButton
@@ -157,12 +159,13 @@
       >
         <div class="form-card-content">
           <FormLabel class="mb-3">
-            {{ soldier.name }} 훈련병은<br />공군 몇 기인가요? <Emoji>📋</Emoji>
+            {{ soldier.name }} 훈련병은<br />공군 몇 기인가요?
+            <Emoji>📋</Emoji>
           </FormLabel>
           <AirforceKisuSelect
             :value="soldier.kisu"
             @change="handleSelectKisu"
-          ></AirforceKisuSelect>
+          />
 
           <div class="form-card-buttons">
             <BaseButton
@@ -298,7 +301,7 @@ export default {
 .form-card {
   position: absolute;
   width: 100%;
-  height: 100%;
+  min-height: calc(100% - 2px);
   padding: 2rem;
   background-color: $white;
   display: flex;
