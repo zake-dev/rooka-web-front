@@ -1,5 +1,5 @@
 <template>
-	<div class="page-wrapper">
+  <div class="page-wrapper">
     <transition name="fade" mode="out-in">
       <MailBoxSkeleton v-if="!isLoaded"></MailBoxSkeleton>
 
@@ -9,37 +9,41 @@
         <div class="mailbox">
           <div class="mailbox-list masked-overflow">
             <template v-if="mails.length === 0">
-              <MailListItem v-for="index in 10" :key="index"
-              ></MailListItem>
+              <MailListItem v-for="index in 10" :key="index"></MailListItem>
             </template>
             <template v-else>
-              <MailListItem v-for="mail in mails"
-                      :key="mail.id"
-                      :mail="mail"
-                      @click="handleClickMailListItem(mail.id)"
+              <MailListItem
+                v-for="mail in mails"
+                :key="mail.id"
+                :mail="mail"
+                @click="handleClickMailListItem(mail.id)"
               ></MailListItem>
             </template>
           </div>
         </div>
 
-        <div class="action-buttons" :class="{ 'action-buttons--closed': !isSendable }">
+        <div
+          class="action-buttons"
+          :class="{ 'action-buttons--closed': !isSendable }"
+        >
           <ShareButton @click="handleClickShare"></ShareButton>
-          <RoundedButton v-if="isSendable"
-                   class="button-dark button-md ms-2"
-                   text="편지 쓰기"
-                   @click="handleClickNewMail"
-          ></RoundedButton>	
+          <RoundedButton
+            v-if="isSendable"
+            class="button-dark button-md ms-2"
+            text="편지 쓰기"
+            @click="handleClickNewMail"
+          ></RoundedButton>
         </div>
       </div>
     </transition>
-	</div>
+  </div>
 </template>
 
 <script>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
-  
+
 import { openModal } from '@/utils/DialogHandler'
 
 import MailBoxSkeleton from '@/skeletons/mail/MailBox.vue'
@@ -49,77 +53,76 @@ import RoundedButton from '@/components/Button/RoundedButton.vue'
 import MailListItem from '@/components/MailBox/MailListItem.vue'
 
 export default {
-	components: {
+  components: {
     MailBoxSkeleton,
     MailBoxHeader,
-		ShareButton,
-		RoundedButton,
-		MailListItem
-	},
-	setup() {
+    ShareButton,
+    RoundedButton,
+    MailListItem,
+  },
+  setup() {
     /* Vuex */
     const store = useStore()
     const state = store.state.mailBox
     const isLoaded = computed(() => state.isLoaded)
-		const isSendable = computed(() => state.state === 'OPEN')
+    const isSendable = computed(() => state.state === 'OPEN')
     const key = computed(() => state.key)
-		const mails = computed(() => state.mails)
-		
-		
+    const mails = computed(() => state.mails)
+
     /* Router */
     const router = useRouter()
     const route = useRoute()
-    
-		/* Event Handler */
-		const handleClickMailListItem = (id) => {
+
+    /* Event Handler */
+    const handleClickMailListItem = id => {
       store.dispatch('mail/UPDATE_ID', id)
-			openModal('RequestPassword')
-		}
-		const handleClickShare = () => openModal('ShareToSns')
-		const handleClickNewMail = () => router.push(`/${key.value}/mail/post`)
-    
+      openModal('RequestPassword')
+    }
+    const handleClickShare = () => openModal('ShareToSns')
+    const handleClickNewMail = () => router.push(`/${key.value}/mail/post`)
+
     onMounted(() => store.dispatch('mailBox/FETCH_CONTEXT', route.params.key))
     onUnmounted(() => store.dispatch('mailBox/RESET'))
-		
-		return {
-			/* Variables */
+
+    return {
+      /* Variables */
       isLoaded,
-			isSendable,
-			mails,
-			/* Functions */
+      isSendable,
+      mails,
+      /* Functions */
       openModal,
-			handleClickMailListItem,
-			handleClickShare,
-			handleClickNewMail
-		}
-	}
+      handleClickMailListItem,
+      handleClickShare,
+      handleClickNewMail,
+    }
+  },
 }
 </script>
 
 <style scoped lang="scss">
 .mailbox {
-	width: 100%;
-	height: calc(100% - 112px);
+  width: 100%;
+  height: calc(100% - 112px);
   max-height: calc(100% - 112px);
-	padding: 0 16px 64px 16px;
-	display: flex;
-	flex-direction: column;
-	
-	&-list {
-		padding-top: 8px;
-	}
+  padding: 0 16px 64px 16px;
+  display: flex;
+  flex-direction: column;
+
+  &-list {
+    padding-top: 8px;
+  }
 }
 .action-buttons {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	height: 94px;
-	padding: 16px;
-	display: inline-flex;
-	justify-content: center;
-	
-	&--closed {
-		justify-content: flex-end;
-	}
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 94px;
+  padding: 16px;
+  display: inline-flex;
+  justify-content: center;
+
+  &--closed {
+    justify-content: flex-end;
+  }
 }
 </style>

@@ -1,25 +1,26 @@
 <template>
-	<div class="page-wrapper">
+  <div class="page-wrapper">
     <div class="text-content">
       <p class="font-mobile__semi-title">
-        여긴 어디...?<br>
+        여긴 어디...?<br />
         나는 누구...? 👁️👄👁️
       </p>
       <p class="font-mobile__content-text mt-2 mb-3">
-        편지함을 찾을 수 없어요...! 혹시 다른 행성의 주소일까요?<br>
+        편지함을 찾을 수 없어요...! 혹시 다른 행성의 주소일까요?<br />
         주소가 맞게 입력됐는지 다시 한 번 확인해주세요!
       </p>
     </div>
-    
+
     <img class="background" :src="BackgroundPng" />
-    
-		<div class="action-buttons">
-			<RoundedButton class="button-dark button-lg mb-3"
-					 	   text="홈으로 가기"
-					   	   @click="handleClickGoHome"
-	    	></RoundedButton>
+
+    <div class="action-buttons">
+      <RoundedButton
+        class="button-dark button-lg mb-3"
+        text="홈으로 가기"
+        @click="handleClickGoHome"
+      ></RoundedButton>
     </div>
-	</div>
+  </div>
 </template>
 
 <script>
@@ -27,25 +28,25 @@ import { useRouter } from 'vue-router'
 
 import BackgroundPng from '@/assets/images/404-background.png'
 import RoundedButton from '@/components/Button/RoundedButton'
-  
+
 export default {
   components: {
-    RoundedButton
+    RoundedButton,
   },
   setup() {
     /* Router */
     const router = useRouter()
-    
+
     /* Event Handler */
     const handleClickGoHome = () => router.push('/')
-    
+
     return {
       /* Assets */
       BackgroundPng,
       /* Functions */
-      handleClickGoHome
+      handleClickGoHome,
     }
-  }
+  },
 }
 </script>
 
@@ -58,18 +59,18 @@ main {
 }
 .text-content {
   margin-top: 116px;
-	padding: 48px 32px;
+  padding: 48px 32px;
 }
 .background {
   height: 100%;
 }
 .action-buttons {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	height: 94px;
-	padding: 16px;
-	display: inline-flex;
-	justify-content: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 94px;
+  padding: 16px;
+  display: inline-flex;
+  justify-content: center;
 }
 </style>

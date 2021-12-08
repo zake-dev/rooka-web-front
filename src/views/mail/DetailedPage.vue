@@ -1,40 +1,69 @@
 <template>
-	<div class="page-wrapper">
-		<div class="mail-header">
+  <div class="page-wrapper">
+    <div class="mail-header">
       <div class="mail-header-row">
-        <span class="mail-header-row__label font-mobile__content-title me-3">보내는 사람</span>
-        <input class="mail-header-row__input" placeholder="보내는 사람의 이름을 적어주세요" v-model="author" />
+        <span class="mail-header-row__label font-mobile__content-title me-3"
+          >보내는 사람</span
+        >
+        <input
+          class="mail-header-row__input"
+          placeholder="보내는 사람의 이름을 적어주세요"
+          v-model="author"
+        />
       </div>
       <div class="mail-header-row">
-        <span class="mail-header-row__label font-mobile__content-title me-3">관계</span>
-        <input class="mail-header-row__input" placeholder="훈련병과의 관계를 적어주세요" v-model="relation" />
+        <span class="mail-header-row__label font-mobile__content-title me-3"
+          >관계</span
+        >
+        <input
+          class="mail-header-row__input"
+          placeholder="훈련병과의 관계를 적어주세요"
+          v-model="relation"
+        />
       </div>
       <div class="mail-header-row">
-        <span class="mail-header-row__label font-mobile__content-title me-3">주소</span>
-        <input class="mail-header-row__input" placeholder="답장을 받을 주소를 입력해주세요" v-model="address" />
+        <span class="mail-header-row__label font-mobile__content-title me-3"
+          >주소</span
+        >
+        <input
+          class="mail-header-row__input"
+          placeholder="답장을 받을 주소를 입력해주세요"
+          v-model="address"
+        />
       </div>
     </div>
-    
+
     <div class="mail-content masked-overflow">
-      <div class="mail-content__input font-mobile__semi-title" placeholder="제목을 입력해주세요" contenteditable @input="handleInputTitle"></div>
-      <div class="mail-content__textarea font-mobile__content-text" placeholder="내용을 입력해주세요" contenteditable @input="handleInputContent" ref="mailContentInput"></div>
+      <div
+        class="mail-content__input font-mobile__semi-title"
+        placeholder="제목을 입력해주세요"
+        contenteditable
+        @input="handleInputTitle"
+      ></div>
+      <div
+        class="mail-content__textarea font-mobile__content-text"
+        placeholder="내용을 입력해주세요"
+        contenteditable
+        @input="handleInputContent"
+        ref="mailContentInput"
+      ></div>
       <div class="mail-content__focus-area" @click="handleFocusContent"></div>
     </div>
-    
+
     <div class="mail-footer">
       <PhotoMenuButton></PhotoMenuButton>
       <NewsModalButton></NewsModalButton>
       <SendMailButton></SendMailButton>
     </div>
-	</div>
+  </div>
 </template>
 
 <script>
 import { ref, computed, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
-  
+
 import { openModal } from '@/utils/DialogHandler'
-  
+
 import PhotoMenuButton from '@/components/Button/PhotoMenuButton.vue'
 import NewsModalButton from '@/components/Button/NewsModalButton.vue'
 import SendMailButton from '@/components/Button/SendMailButton.vue'
@@ -43,73 +72,73 @@ export default {
   components: {
     PhotoMenuButton,
     NewsModalButton,
-    SendMailButton
+    SendMailButton,
   },
   beforeRouteLeave(to, from, next) {
     const isBeingSent = this.$store.state.mail.isBeingSent
     const isConfirmedToLeave = this.$store.state.mail.isConfirmedToLeave
-    
+
     if (isBeingSent || isConfirmedToLeave) {
       next()
       return
     }
-    
+
     this.$store.dispatch('mail/UPDATE_LEAVING_ROUTE', to.fullPath)
     openModal('BeforeLeavePostMail')
     next(false)
   },
-	setup() {
-		/* Vuex */
-		const store = useStore()
+  setup() {
+    /* Vuex */
+    const store = useStore()
     const state = store.state.mail
     const author = computed({
       get: () => state.author,
-      set: (value) => store.dispatch('mail/UPDATE_AUTHOR', value)
+      set: value => store.dispatch('mail/UPDATE_AUTHOR', value),
     })
     const relation = computed({
       get: () => state.relation,
-      set: (value) => store.dispatch('mail/UPDATE_RELATION', value)
+      set: value => store.dispatch('mail/UPDATE_RELATION', value),
     })
     const address = computed({
       get: () => state.address,
-      set: (value) => store.dispatch('mail/UPDATE_ADDRESS', value)
+      set: value => store.dispatch('mail/UPDATE_ADDRESS', value),
     })
     const title = computed({
       get: () => state.title,
-      set: (value) => store.dispatch('mail/UPDATE_TITLE', value)
+      set: value => store.dispatch('mail/UPDATE_TITLE', value),
     })
     const content = computed({
       get: () => state.content,
-      set: (value) => store.dispatch('mail/UPDATE_CONTENT', value)
+      set: value => store.dispatch('mail/UPDATE_CONTENT', value),
     })
-		
+
     /* Refs */
     const mailContentInput = ref(null)
-    
-		/* Event Handler */
+
+    /* Event Handler */
     const handleFocusContent = () => {
       mailContentInput.value.focus()
     }
-    const handleInputTitle = (e) => title.value = e.target.innerText
-    const handleInputContent = (e) => content.value = e.target.innerText
-		
+    const handleInputTitle = e => (title.value = e.target.innerText)
+    const handleInputContent = e => (content.value = e.target.innerText)
+
     onUnmounted(() => store.dispatch('mail/RESET'))
-    
-		return {
+
+    return {
       /* Refs */
       mailContentInput,
-			/* Variables */
+      /* Variables */
       author,
       relation,
       address,
       title,
       content,
-			/* Functions */
+      /* Functions */
       handleFocusContent,
       handleInputTitle,
-      handleInputContent
-		}
-	}
+      handleInputContent,
+    }
+  },
 }
 </script>
 
@@ -117,9 +146,8 @@ export default {
 @import '@/scss/_variables.scss';
 
 .page-wrapper {
-	display: flex;
+  display: flex;
   flex-direction: column;
-  
 }
 input {
   border: none;
@@ -130,11 +158,11 @@ input {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    
+
     &-row {
       display: flex;
       flex-direction: row;
-      
+
       &__label {
         min-width: 57px;
       }
@@ -146,7 +174,7 @@ input {
         font-weight: 400;
         line-height: 16px;
         letter-spacing: 0em;
-        
+
         &::placeholder {
           font-family: 'Spoqa Han Sans Neo', sans-serif;
           font-size: 12px;
@@ -162,11 +190,11 @@ input {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    
+
     &__input {
       margin-bottom: 16px;
       outline: none;
-      
+
       &:empty:before {
         content: attr(placeholder);
         color: $gray3;
@@ -174,7 +202,7 @@ input {
     }
     &__textarea {
       outline: none;
-      
+
       &:empty:before {
         content: attr(placeholder);
         color: $gray3;
