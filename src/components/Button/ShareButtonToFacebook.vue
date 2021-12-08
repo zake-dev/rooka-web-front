@@ -9,27 +9,27 @@
 
 <script>
 import { openModal } from '@/utils/DialogHandler'
-  
+
 import FacebookIconSvg from '@/assets/icons/facebook-icon.svg'
-  
+
 export default {
   setup() {
     /* Event Handler */
     const handleShareToFacebook = () => openModal('ShareToFacebookStepOne')
-    
+
     return {
       /* Assets */
       FacebookIconSvg,
       /* Functions */
-      handleShareToFacebook
+      handleShareToFacebook,
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-@import "@/scss/_variables.scss";
-  
+@import '@/scss/_variables.scss';
+
 .button {
   cursor: pointer;
   display: flex;
@@ -37,11 +37,11 @@ export default {
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  
+
   &:hover {
     background-color: $gray2;
   }
-  
+
   &-icon-wrapper {
     width: 56px;
     height: 56px;
@@ -50,13 +50,13 @@ export default {
     align-items: center;
     border-radius: 50%;
     background-color: $gray1;
-    
+
     &__icon {
       width: 13px;
       height: 26px;
     }
   }
-  
+
   &-label {
     color: $gray6;
   }

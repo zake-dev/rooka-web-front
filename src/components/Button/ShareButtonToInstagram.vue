@@ -8,28 +8,28 @@
 </template>
 
 <script>
-import { openModal } from '@/utils/DialogHandler' 
+import { openModal } from '@/utils/DialogHandler'
 
 import InstagramIconSvg from '@/assets/icons/instagram-icon.svg'
-  
+
 export default {
-  setup() {    
+  setup() {
     /* Event Handler */
     const handleShareToInstagram = () => openModal('ShareToInstagramStepOne')
-    
+
     return {
       /* Assets */
       InstagramIconSvg,
       /* Functions */
-      handleShareToInstagram
+      handleShareToInstagram,
     }
-  }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-@import "@/scss/_variables.scss";
-  
+@import '@/scss/_variables.scss';
+
 .button {
   cursor: pointer;
   display: flex;
@@ -37,11 +37,11 @@ export default {
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  
+
   &:hover {
     background-color: $gray2;
   }
-  
+
   &-icon-wrapper {
     width: 56px;
     height: 56px;
@@ -50,13 +50,13 @@ export default {
     align-items: center;
     border-radius: 50%;
     background-color: $gray1;
-    
+
     &__icon {
       width: 24px;
       height: 24px;
     }
   }
-  
+
   &-label {
     color: $gray6;
   }

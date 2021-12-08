@@ -1,29 +1,29 @@
 <template>
-	<button class="button close-modal-button" @click="handleCloseModal">
-		<img :src="ExitButtonIconSvg" />
-	</button>
+  <button class="button close-modal-button" @click="handleCloseModal">
+    <img :src="ExitButtonIconSvg" />
+  </button>
 </template>
 
 <script>
 import { useStore } from 'vuex'
-  
+
 import ExitButtonIconSvg from '@/assets/icons/exit-button-icon.svg'
 
 export default {
-	setup() {
+  setup() {
     /* Vuex */
     const store = useStore()
-    
+
     /* Event Handler */
     const handleCloseModal = () => store.dispatch('CLOSE_MODAL')
-    
-		return {
+
+    return {
       /* Assets */
-			ExitButtonIconSvg,
+      ExitButtonIconSvg,
       /* Functions */
-      handleCloseModal
-		}
-	}
+      handleCloseModal,
+    }
+  },
 }
 </script>
 
@@ -31,7 +31,7 @@ export default {
 @import '@/scss/_variables.scss';
 
 .close-modal-button {
-	width: 23px;
+  width: 23px;
   min-height: 23px;
   border-radius: 50%;
 }
