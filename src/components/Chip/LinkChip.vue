@@ -1,7 +1,7 @@
 <template>
   <div class="chip px-2 py-1">
     <img class="chip__icon me-1" :src="LinkIconSvg" />
-    <span class="chip__text font-mobile__content-text">{{ link }}</span>
+    <span class="chip__text font__content-text">{{ link }}</span>
   </div>
 </template>
 

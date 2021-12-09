@@ -2,7 +2,8 @@
   <div>
     <div class="mailbox-header">
       <div class="mailbox-header__title mb-2"></div>
-      <div class="mailbox-header__message mb-2"></div>
+      <div class="mailbox-header__message mb-1"></div>
+      <div class="mailbox-header__message"></div>
     </div>
 
     <div class="mailbox">
@@ -20,13 +21,14 @@ $headerHeight: 112px;
 .mailbox-header {
   width: 100%;
   min-height: $headerHeight;
-  padding: 8px 24px;
+  padding: 32px;
+  padding-bottom: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 
   &__title {
-    height: 36px;
+    height: 44px;
     width: 180px;
     border-radius: 7px;
     background-color: $gray1;
@@ -43,32 +45,19 @@ $headerHeight: 112px;
   width: 100%;
   height: calc(100% - #{$headerHeight});
   padding: 0 16px 64px 16px;
-  display: flex;
-  flex-direction: column;
 
   &-list {
-    padding-top: 8px;
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 
     &__item {
       width: 100%;
-      height: 94px;
-      margin-top: 16px;
+      height: 112px;
       border-radius: 7px;
       background-color: $gray1;
     }
-  }
-}
-.action-buttons {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 94px;
-  padding: 16px;
-  display: inline-flex;
-  justify-content: center;
-
-  &--closed {
-    justify-content: flex-end;
   }
 }
 </style>

@@ -1,32 +1,24 @@
 <template>
   <div class="modal-content">
-    <span class="modal-content__title font-mobile__page-title"
-      >비밀번호 입력</span
-    >
+    <span class="modal-content__title font__page-title">비밀번호 입력</span>
     <div class="input-area mx-2">
       <span
         v-if="isInvalidPassword"
-        class="input-area__text--invalid font-mobile__caption"
+        class="input-area__text--invalid font__caption"
         >비밀번호가 맞지 않아요!</span
       >
       <FormInput
         type="password"
         v-model="password"
         placeholder="비밀번호를 입력해주세요"
-      ></FormInput>
+      />
     </div>
 
     <div class="modal-actions mt-3 mx-2">
-      <RoundedButton
-        class="button-gray"
-        text="취소"
-        @click="handleClickCloseModal"
-      ></RoundedButton>
-      <RoundedButton
-        class="button-dark"
-        text="확인"
-        @click="handleSubmitPassword"
-      ></RoundedButton>
+      <BaseButton class="button-secondary" @click="closeModal">취소</BaseButton>
+      <BaseButton class="button-primary" @click="handleSubmitPassword"
+        >확인</BaseButton
+      >
     </div>
   </div>
 </template>
@@ -36,13 +28,15 @@ import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 
+import { closeModal } from '@/utils/DialogHandler'
+
 import FormInput from '@/components/Form/FormInput.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
     FormInput,
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Vuex */
@@ -59,12 +53,11 @@ export default {
     const isInvalidPassword = ref(false)
 
     /* Event Handler */
-    const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
     const handleSubmitPassword = async () => {
       try {
         await store.dispatch('mail/FETCH_MAIL', password.value)
         router.push(`/${key}/mail/${id.value}`)
-        store.dispatch('CLOSE_MODAL')
+        closeModal()
       } catch (e) {
         switch (e.response.status) {
           case 403:
@@ -79,8 +72,8 @@ export default {
       password,
       isInvalidPassword,
       /* Functions */
-      handleClickCloseModal,
       handleSubmitPassword,
+      closeModal,
     }
   },
 }

@@ -1,26 +1,24 @@
 <template>
   <div class="modal-content">
     <div class="modal-content-title">
-      <span class="modal-content-title__text font-mobile__page-title"
+      <span class="modal-content-title__text font__page-title"
         >인스타그램 공유</span
       >
-      <ModalButtonClose></ModalButtonClose>
+      <ModalButtonClose />
     </div>
 
     <div class="modal-content-body masked-overflow">
-      <span class="modal-content-body__step font-mobile__tag">STEP 3</span>
-      <span class="modal-content-body__title font-mobile__content-title"
+      <span class="modal-content-body__step font__tag">STEP 3</span>
+      <span class="modal-content-body__title font__content-title"
         >인스타그램에 공유해주세요!</span
       >
 
       <div class="modal-content-buttons">
-        <RoundedButton
-          class="modal-content-buttons__button button-gray"
-          text="인스타그램 열기"
-          @click="handleOpenInstagram"
-        ></RoundedButton>
+        <BaseButton class="button-secondary" @click="handleOpenInstagram"
+          >인스타그램 열기</BaseButton
+        >
         <a
-          class="modal-content-buttons__link font-mobile__caption"
+          class="modal-content-buttons__link font__caption"
           @click="openModal('ShareToInstagramStepTwo')"
           >이전 단계</a
         >
@@ -30,19 +28,22 @@
 </template>
 
 <script>
-import { openModal } from '@/utils/DialogHandler'
+import { openModal, closeModal } from '@/utils/DialogHandler'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
     ModalButtonClose,
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Event Handler */
-    const handleOpenInstagram = () => window.open('https://www.instagram.com')
+    const handleOpenInstagram = () => {
+      window.open('https://www.instagram.com')
+      closeModal()
+    }
 
     return {
       /* Functions */
@@ -97,9 +98,6 @@ export default {
     margin-top: 24px;
     padding: 0 32px;
 
-    &__button {
-      width: 100%;
-    }
     &__link {
       flex: 0;
       color: $gray5;

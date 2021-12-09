@@ -47,11 +47,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/scss/global.scss';
 @import '@/scss/_variables.scss';
 
 .form-select {
+  @extend .font__content-text;
   width: 100%;
-  padding: 8px 12px;
+  height: 40px;
+  padding: 8px 16px;
   background-color: $gray1;
   border: none;
   border-radius: 7px;
@@ -67,12 +70,12 @@ export default {
       font-size: 10px;
       top: 9px;
       right: 12px;
-      color: $gray3;
+      color: $gray4;
     }
   }
 
   &__placeholder-text {
-    color: $gray3;
+    color: $gray4;
   }
 }
 </style>

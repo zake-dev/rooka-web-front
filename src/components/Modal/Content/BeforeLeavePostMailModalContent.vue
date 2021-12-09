@@ -1,24 +1,18 @@
 <template>
   <div class="modal-content">
-    <span class="modal-content__text font-mobile__page-title mt-3"
+    <span class="modal-content__text font__page-title mt-3"
       >작성을 그만두시나요?</span
     >
 
-    <span class="modal-content__text font-mobile__button-text my-2"
+    <span class="modal-content__text font__button-text my-2"
       >작성중인 내용은 저장되지 않아요.</span
     >
 
     <div class="modal-actions mt-1 mx-2">
-      <RoundedButton
-        class="button-gray"
-        text="그만두기"
-        @click="handleClickLeaveRoute"
-      ></RoundedButton>
-      <RoundedButton
-        class="button-dark"
-        text="취소"
-        @click="handleClickCloseModal"
-      ></RoundedButton>
+      <BaseButton class="button-secondary" @click="handleClickLeaveRoute"
+        >그만두기</BaseButton
+      >
+      <BaseButton class="button-primary" @click="closeModal">취소</BaseButton>
     </div>
   </div>
 </template>
@@ -28,11 +22,13 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import { closeModal } from '@/utils/DialogHandler'
+
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Vuex */
@@ -46,14 +42,13 @@ export default {
     const handleClickLeaveRoute = () => {
       store.dispatch('mail/UPDATE_IS_CONFIRMED_TO_LEAVE', true)
       router.push(leavingRoute.value)
-      store.dispatch('CLOSE_MODAL')
+      closeModal()
     }
-    const handleClickCloseModal = () => store.dispatch('CLOSE_MODAL')
 
     return {
       /* Functions */
       handleClickLeaveRoute,
-      handleClickCloseModal,
+      closeModal,
     }
   },
 }

@@ -1,25 +1,27 @@
 <template>
   <div class="stepper">
-    <div class="stepper__progress-bar" :style="progressBarStyle"></div>
+    <div class="progress-bar" :style="progressBarStyle"></div>
   </div>
 </template>
 
 <script>
 import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
-  props: {
-    stepper: Object,
-  },
-  setup(props) {
+  setup() {
+    /* Vuex */
+    const store = useStore()
+    const stepper = computed(() => store.state.registerForm.stepper)
+
     /* Local State */
     const progressBarStyle = computed(() => {
-      const { maxStep, currentStep } = props.stepper
+      const { maxStep, currentStep } = stepper.value
       return { width: `${(currentStep / maxStep) * 100}%` }
     })
 
     /* Computed Functions */
-    const isCompletedStep = step => step <= props.stepper.currentStep
+    const isCompletedStep = step => step <= stepper.value.currentStep
 
     return {
       /* Variables */
@@ -39,11 +41,11 @@ export default {
   height: 2px;
   z-index: 1000;
   display: inline-block;
-  background-color: $gray2;
-}
-.stepper__progress-bar {
-  height: 2px;
   background-color: $gray5;
+}
+.progress-bar {
+  height: 2px;
+  background-color: $rookaYellow;
   transition: width 0.3s ease;
 }
 </style>

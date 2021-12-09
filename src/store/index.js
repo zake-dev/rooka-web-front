@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
-import RegisterForm from '@/store/modules/Soldier'
+import RegisterForm from '@/store/modules/RegisterForm'
 import MailBox from '@/store/modules/MailBox'
 import Mail from '@/store/modules/Mail'
 

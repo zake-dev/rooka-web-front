@@ -4,60 +4,50 @@
     <div id="card-html" class="card">
       <div class="card-content">
         <div class="card-content-row mb-3">
-          <p class="font-mobile__title">{{ soldier.name }} 훈련병</p>
+          <p class="font__title">{{ soldier.name }} 훈련병</p>
           <img class="card-content__image" :src="MilitaryHelmetPng" />
         </div>
 
         <div class="detail mt-1">
           <div class="detail-row">
-            <span class="detail-row__label font-mobile__content-title"
-              >생년월일</span
-            >
-            <span class="font-mobile__content-text">{{
+            <span class="detail-row__label font__content-title">생년월일</span>
+            <span class="font__content-text">{{
               toKoreanDateString(soldier.birthDate)
             }}</span>
           </div>
           <div class="detail-row">
-            <span class="detail-row__label font-mobile__content-title"
-              >군종</span
-            >
-            <span class="font-mobile__content-text">{{
+            <span class="detail-row__label font__content-title">군종</span>
+            <span class="font__content-text">{{
               toKoreanMilitaryType(soldier.militaryType)
             }}</span>
           </div>
           <div class="detail-row">
-            <span class="detail-row__label font-mobile__content-title"
-              >입대일</span
-            >
-            <span class="font-mobile__content-text">{{
+            <span class="detail-row__label font__content-title">입대일</span>
+            <span class="font__content-text">{{
               toKoreanDateString(soldier.enterDate)
             }}</span>
           </div>
           <div v-if="soldier.militaryType === 'ARMY'" class="detail-row">
-            <span class="detail-row__label font-mobile__content-title"
-              >부대</span
-            >
-            <span class="font-mobile__content-text">{{
+            <span class="detail-row__label font__content-title">부대</span>
+            <span class="font__content-text">{{
               soldier.trainingCenterName
             }}</span>
           </div>
           <div v-if="soldier.militaryType === 'AF'" class="detail-row">
-            <span class="detail-row__label font-mobile__content-title"
-              >기수</span
-            >
-            <span class="font-mobile__content-text">{{ soldier.kisu }}기</span>
+            <span class="detail-row__label font__content-title">기수</span>
+            <span class="font__content-text">{{ soldier.kisu }}기</span>
           </div>
         </div>
       </div>
 
       <div class="card-footer">
-        <p class="card-footer__text font-mobile__caption mb-2">
+        <p class="card-footer__text font__caption mb-2">
           하단의 링크에 접속하여 훈련소에 있는<br />
           {{ soldier.name }} 훈련병에게 편지를 써주세요!
         </p>
-        <LinkChip :link="`http://rooka.kr/${soldier.key}`"></LinkChip>
+        <LinkChip :link="`http://rooka.kr/${soldier.key}`" />
       </div>
-      <LogoImage class="logo-stamp"></LogoImage>
+      <LogoImage class="logo-stamp" />
     </div>
 
     <!-- 이미지 출력물 -->

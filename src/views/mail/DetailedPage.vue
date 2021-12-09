@@ -2,7 +2,7 @@
   <div class="page-wrapper">
     <div class="mail-header">
       <div class="mail-header-row">
-        <span class="mail-header-row__label font-mobile__content-title me-3"
+        <span class="mail-header-row__label font__content-title me-3"
           >보내는 사람</span
         >
         <input
@@ -12,7 +12,7 @@
         />
       </div>
       <div class="mail-header-row">
-        <span class="mail-header-row__label font-mobile__content-title me-3"
+        <span class="mail-header-row__label font__content-title me-3"
           >관계</span
         >
         <input
@@ -22,7 +22,7 @@
         />
       </div>
       <div class="mail-header-row">
-        <span class="mail-header-row__label font-mobile__content-title me-3"
+        <span class="mail-header-row__label font__content-title me-3"
           >주소</span
         >
         <input
@@ -35,13 +35,13 @@
 
     <div class="mail-content masked-overflow">
       <div
-        class="mail-content__input font-mobile__semi-title"
+        class="mail-content__input font__semi-title"
         placeholder="제목을 입력해주세요"
         contenteditable
         @input="handleInputTitle"
       ></div>
       <div
-        class="mail-content__textarea font-mobile__content-text"
+        class="mail-content__textarea font__content-text"
         placeholder="내용을 입력해주세요"
         contenteditable
         @input="handleInputContent"

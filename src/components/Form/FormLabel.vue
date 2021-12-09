@@ -1,5 +1,5 @@
 <template>
-  <p class="form-label font-mobile__semi-title">
+  <p class="form-label font__semi-title">
     <slot></slot>
   </p>
 </template>

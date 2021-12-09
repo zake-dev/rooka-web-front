@@ -1,5 +1,5 @@
 <template>
-  <TheMainAppBar></TheMainAppBar>
+  <TheMainAppBar />
   <main>
     <router-view v-slot="{ Component }">
       <transition name="fade" mode="out-in">

@@ -1,15 +1,15 @@
 <template>
   <div class="page-wrapper">
     <transition name="fade" mode="out-in">
-      <MailBoxSkeleton v-if="!isLoaded"></MailBoxSkeleton>
+      <MailBoxSkeleton v-if="!isLoaded" />
 
       <div v-else class="h-100 w-100">
-        <MailBoxHeader></MailBoxHeader>
+        <MailBoxHeader />
 
         <div class="mailbox">
           <div class="mailbox-list masked-overflow">
             <template v-if="mails.length === 0">
-              <MailListItem v-for="index in 10" :key="index"></MailListItem>
+              <MailListItem v-for="index in 10" :key="index" />
             </template>
             <template v-else>
               <MailListItem
@@ -17,7 +17,7 @@
                 :key="mail.id"
                 :mail="mail"
                 @click="handleClickMailListItem(mail.id)"
-              ></MailListItem>
+              />
             </template>
           </div>
         </div>
@@ -26,13 +26,13 @@
           class="action-buttons"
           :class="{ 'action-buttons--closed': !isSendable }"
         >
-          <ShareButtonToSns @click="handleClickShare"></ShareButtonToSns>
-          <RoundedButton
+          <ShareButtonToSns @click="handleClickShare" />
+          <BaseButton
             v-if="isSendable"
-            class="button-dark button-md ms-2"
-            text="편지 쓰기"
+            class="button-primary ms-2"
             @click="handleClickNewMail"
-          ></RoundedButton>
+            >편지 쓰기</BaseButton
+          >
         </div>
       </div>
     </transition>
@@ -40,16 +40,16 @@
 </template>
 
 <script>
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed, onBeforeMount, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 
 import { openModal } from '@/utils/DialogHandler'
 
-import MailBoxSkeleton from '@/skeletons/mail/MailBox.vue'
+import MailBoxSkeleton from '@/skeletons/mail/MailBoxSkeleton.vue'
 import MailBoxHeader from '@/components/MailBox/MailBoxHeader.vue'
 import ShareButtonToSns from '@/components/Button/ShareButtonToSns.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 import MailListItem from '@/components/MailBox/MailListItem.vue'
 
 export default {
@@ -57,7 +57,7 @@ export default {
     MailBoxSkeleton,
     MailBoxHeader,
     ShareButtonToSns,
-    RoundedButton,
+    BaseButton,
     MailListItem,
   },
   setup() {
@@ -81,8 +81,8 @@ export default {
     const handleClickShare = () => openModal('ShareToSns')
     const handleClickNewMail = () => router.push(`/${key.value}/mail/post`)
 
+    onBeforeMount(() => store.dispatch('mailBox/RESET'))
     onMounted(() => store.dispatch('mailBox/FETCH_CONTEXT', route.params.key))
-    onUnmounted(() => store.dispatch('mailBox/RESET'))
 
     return {
       /* Variables */
@@ -105,23 +105,26 @@ export default {
   height: calc(100% - 112px);
   max-height: calc(100% - 112px);
   padding: 0 16px 64px 16px;
-  display: flex;
-  flex-direction: column;
 
   &-list {
-    padding-top: 8px;
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 }
 .action-buttons {
   position: fixed;
-  bottom: 0;
+  bottom: 16px;
   width: 100%;
-  height: 94px;
-  padding: 16px;
-  display: inline-flex;
+  height: 50px;
+  padding: 0 72px;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
 
   &--closed {
+    padding: 0 16px;
     justify-content: flex-end;
   }
 }

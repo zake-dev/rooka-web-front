@@ -1,45 +1,45 @@
 <template>
   <div class="page-wrapper">
-    <p class="font-mobile__semi-title">
+    <p class="font__semi-title">
       축하합니다 <Emoji>🎉</Emoji><br />1등으로 오셨군요!
     </p>
-    <p class="font-mobile__content-text py-4">
-      아직 아무도 김루카님의 인터넷 편지 링크를 생성하지 않았어요.<br />
-      지금 누구보다 먼저 인터넷 편지함 링크를 생성해 보세요!
+    <p class="font__content-text py-3">
+      아직 아무도 김루카님의 인터넷 편지 링크를 생성하지 않았어요. 지금 누구보다
+      먼저 인터넷 편지함 링크를 생성해 보세요!
     </p>
 
     <!-- 입력한 폼 정보 -->
     <div class="submitted-form">
       <div class="submitted-form-row">
-        <span class="font-mobile__content-title">이름</span>
-        <span class="font-mobile__content-text">{{ soldier.name }}</span>
+        <span class="font__content-title">이름</span>
+        <span class="font__content-text">{{ soldier.name }}</span>
       </div>
       <div class="submitted-form__divider"></div>
       <div class="submitted-form-row">
-        <span class="font-mobile__content-title">생년월일</span>
-        <span class="font-mobile__content-text">
+        <span class="font__content-title">생년월일</span>
+        <span class="font__content-text">
           {{ toKoreanDateString(soldier.birthDate) }}
         </span>
       </div>
       <div class="submitted-form__divider"></div>
       <div class="submitted-form-row">
-        <span class="font-mobile__content-title">군종</span>
-        <span class="font-mobile__content-text">{{
+        <span class="font__content-title">군종</span>
+        <span class="font__content-text">{{
           toKoreanMilitaryType(soldier.militaryType)
         }}</span>
       </div>
       <div class="submitted-form__divider"></div>
       <div class="submitted-form-row">
-        <span class="font-mobile__content-title">입대일</span>
-        <span class="font-mobile__content-text">
+        <span class="font__content-title">입대일</span>
+        <span class="font__content-text">
           {{ toKoreanDateString(soldier.enterDate) }}
         </span>
       </div>
       <div class="submitted-form__divider"></div>
       <template v-if="soldier.militaryType === 'ARMY'">
         <div class="submitted-form-row">
-          <span class="font-mobile__content-title">부대</span>
-          <span class="font-mobile__content-text">
+          <span class="font__content-title">부대</span>
+          <span class="font__content-text">
             {{ soldier.trainingCenterName }}
           </span>
         </div>
@@ -48,22 +48,20 @@
 
       <template v-if="soldier.militaryType === 'AF'">
         <div class="submitted-form-row">
-          <span class="font-mobile__content-title">기수</span>
-          <span class="font-mobile__content-text"> {{ soldier.kisu }}기 </span>
+          <span class="font__content-title">기수</span>
+          <span class="font__content-text"> {{ soldier.kisu }}기 </span>
         </div>
         <div class="submitted-form__divider"></div>
       </template>
     </div>
 
     <div class="action-container">
-      <RoundedButton
-        class="button-dark button-lg"
-        text="링크 생성하기"
-        @click="handleClickCreateLink"
-      ></RoundedButton>
+      <BaseButton class="button-primary" @click="handleClickCreateLink"
+        >링크 생성하기</BaseButton
+      >
 
       <a
-        class="action-container__help-link font-mobile__caption"
+        class="action-container__help-link font__caption"
         @click="openModal('WhatIsMailBoxLink')"
         >인터넷 편지함 링크라는 게 뭔가요?</a
       >
@@ -81,17 +79,17 @@ import { openModal } from '@/utils/DialogHandler'
 import * as MailBoxApi from '@/api/MailBoxApi'
 
 import Emoji from '@/components/Decorator/Emoji.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
     Emoji,
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => store.state.registerForm)
+    const soldier = computed(() => store.state.registerForm.soldier)
 
     /* Router */
     const router = useRouter()
@@ -125,11 +123,9 @@ export default {
 @import '@/scss/_variables.scss';
 
 .page-wrapper {
-  padding: 48px 32px;
+  padding: 32px;
 }
 .submitted-form {
-  margin: 32px 0;
-
   &-row {
     padding: 16px 8px;
     display: flex;
@@ -144,8 +140,7 @@ export default {
   }
 }
 .action-container {
-  margin-top: 24px;
-  padding: 24px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -1,10 +1,8 @@
 <template>
   <div class="modal-content">
     <div class="modal-content-title">
-      <span class="modal-content-title__text font-mobile__page-title"
-        >공유하기</span
-      >
-      <ModalButtonClose></ModalButtonClose>
+      <span class="modal-content-title__text font__page-title">공유하기</span>
+      <ModalButtonClose />
     </div>
 
     <div class="modal-content-body masked-overflow">
@@ -17,17 +15,13 @@
 
       <div class="modal-content-body-templates">
         <div class="modal-content-body-templates-header">
-          <span
-            class="modal-content-body-templates__label font-mobile__content-title"
+          <span class="modal-content-body-templates__label font__content-title"
             >인편함 링크</span
           >
-          <ShareButtonCopyText
-            :text="`rooka.kr/${key}`"
-            type="link"
-          ></ShareButtonCopyText>
+          <ShareButtonCopyText :text="`rooka.kr/${key}`" type="link" />
         </div>
         <div
-          class="modal-content-body-templates__example modal-content-body-templates__example--narrow font-mobile__content-text"
+          class="modal-content-body-templates__example modal-content-body-templates__example--narrow font__content-text"
         >
           rooka.kr/{{ key }}
         </div>
@@ -35,18 +29,12 @@
 
       <div class="modal-content-body-templates">
         <div class="modal-content-body-templates-header">
-          <span
-            class="modal-content-body-templates__label font-mobile__content-title"
+          <span class="modal-content-body-templates__label font__content-title"
             >공유 템플릿</span
           >
-          <ShareButtonCopyText
-            :text="template"
-            type="template"
-          ></ShareButtonCopyText>
+          <ShareButtonCopyText :text="template" type="template" />
         </div>
-        <div
-          class="modal-content-body-templates__example font-mobile__content-text"
-        >
+        <div class="modal-content-body-templates__example font__content-text">
           {{ template }}
         </div>
       </div>
@@ -82,7 +70,7 @@ export default {
     const soldier = computed(() =>
       store.state.mailBox.key
         ? store.state.mailBox.soldier
-        : store.state.registerForm,
+        : store.state.registerForm.soldier,
     )
     const key = computed(() =>
       store.state.mailBox.key

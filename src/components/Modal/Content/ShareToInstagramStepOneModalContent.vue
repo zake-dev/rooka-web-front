@@ -1,15 +1,15 @@
 <template>
   <div class="modal-content">
     <div class="modal-content-title">
-      <span class="modal-content-title__text font-mobile__page-title"
+      <span class="modal-content-title__text font__page-title"
         >인스타그램 공유</span
       >
-      <ModalButtonClose></ModalButtonClose>
+      <ModalButtonClose />
     </div>
 
     <div class="modal-content-body masked-overflow">
-      <span class="modal-content-body__step font-mobile__tag">STEP 1</span>
-      <span class="modal-content-body__title font-mobile__content-title"
+      <span class="modal-content-body__step font__tag">STEP 1</span>
+      <span class="modal-content-body__title font__content-title"
         >카드 이미지를 저장해주세요!</span
       >
 
@@ -19,13 +19,11 @@
       ></SoldierCard>
 
       <div class="modal-content-buttons">
-        <RoundedButton
-          class="modal-content-buttons__button button-gray"
-          text="이미지 저장하기"
-          @click="handleDownloadLinkImage"
-        ></RoundedButton>
+        <BaseButton class="button-secondary" @click="handleDownloadLinkImage"
+          >이미지 저장하기</BaseButton
+        >
         <a
-          class="modal-content-buttons__link font-mobile__caption"
+          class="modal-content-buttons__link font__caption"
           @click="openModal('ShareToSns')"
           >이전 단계</a
         >
@@ -41,13 +39,13 @@ import { useStore } from 'vuex'
 import { openModal } from '@/utils/DialogHandler'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 import SoldierCard from '@/components/Card/SoldierCard'
 
 export default {
   components: {
     ModalButtonClose,
-    RoundedButton,
+    BaseButton,
     SoldierCard,
   },
   setup() {
@@ -56,7 +54,7 @@ export default {
     const soldier = computed(() =>
       store.state.mailBox.key
         ? store.state.mailBox.soldier
-        : store.state.registerForm,
+        : store.state.registerForm.soldier,
     )
 
     /* Event Handler */
@@ -123,9 +121,6 @@ export default {
     gap: 16px;
     padding: 0 32px;
 
-    &__button {
-      width: 100%;
-    }
     &__link {
       flex: 0;
       color: $gray5;

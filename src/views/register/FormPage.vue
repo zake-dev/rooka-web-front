@@ -1,18 +1,19 @@
 <template>
   <div class="page-wrapper">
-    <LineStepper :stepper="stepper"></LineStepper>
+    <LineStepper :stepper="stepper" />
 
     <transition :name="slideTransition">
       <!-- 작성 폼 (이름) -->
       <div v-if="stepper.currentStep === 1" class="form-card">
         <div class="form-card-content">
           <FormLabel class="mb-3"
-            >훈련병의 이름은<br />무엇인가요? <Emoji>😮</Emoji></FormLabel
-          >
+            >훈련병의 이름은<br />무엇인가요?
+            <Emoji>😮</Emoji>
+          </FormLabel>
           <div class="input-area">
             <span
               v-if="isInvalidName"
-              class="input-area__text--invalid font-mobile__caption"
+              class="input-area__text--invalid font__caption"
               >올바르지 않은 이름 형태에요!</span
             >
             <FormInput
@@ -21,15 +22,15 @@
               :value="soldier.name"
               @input="handleUpdateName"
               @keyup.enter="handleSubmitName"
-            ></FormInput>
+            />
           </div>
           <div class="form-card-buttons">
-            <RoundedButton
-              class="button-dark button-lg"
-              text="다음"
+            <BaseButton
+              class="button-primary"
               @click="handleSubmitName"
               :disabled="soldier.name === ''"
-            ></RoundedButton>
+              >다음</BaseButton
+            >
           </div>
         </div>
       </div>
@@ -38,7 +39,8 @@
       <div v-else-if="stepper.currentStep === 2" class="form-card">
         <div class="form-card-content">
           <FormLabel class="mb-3">
-            {{ soldier.name }} 훈련병은<br />언제 태어났나요? <Emoji>🎂</Emoji>
+            {{ soldier.name }} 훈련병은<br />언제 태어났나요?
+            <Emoji>🎂</Emoji>
           </FormLabel>
           <FormInput
             type="date"
@@ -46,19 +48,19 @@
             :value="soldier.birthDate"
             @change="handleSubmitBirthDate"
             required
-          ></FormInput>
+          />
 
           <div class="form-card-buttons my-3">
-            <RoundedButton
-              class="button-dark button-lg"
-              text="다음"
+            <BaseButton
+              class="button-primary"
               @click="handleIncreaseStep"
               :disabled="soldier.birthDate === ''"
-            ></RoundedButton>
+              >다음</BaseButton
+            >
           </div>
         </div>
 
-        <FormBackButton @click="handleDecreaseStep"></FormBackButton>
+        <FormButtonBack />
       </div>
 
       <!-- 작성 폼 (군종) -->
@@ -69,29 +71,29 @@
             <Emoji>🤔</Emoji>
           </FormLabel>
 
-          <div class="form-card-buttons">
-            <RoundedButton
+          <div class="form-card-buttons form-card-buttons__military-type">
+            <BaseButton
               class="button-green"
-              text="육군"
               @click="handleClickMilitaryType('ARMY')"
-            ></RoundedButton>
-            <RoundedButton
+              >육군</BaseButton
+            >
+            <BaseButton
               class="button-blue"
-              text="공군"
               @click="handleClickMilitaryType('AF')"
-            ></RoundedButton>
+              >공군</BaseButton
+            >
           </div>
 
           <div class="form-card-links">
             <a
-              class="form-card-links__help-link font-mobile__caption mt-4"
+              class="form-card-links__help-link font__caption"
               @click="openModal('MissingMilitaryType')"
               >해군/해병대는 왜 없나요?</a
             >
           </div>
         </div>
 
-        <FormBackButton @click="handleDecreaseStep"></FormBackButton>
+        <FormButtonBack />
       </div>
 
       <!-- 작성 폼 (입대일) -->
@@ -107,19 +109,19 @@
             :value="soldier.enterDate"
             @change="handleSubmitEnterDate"
             required
-          ></FormInput>
+          />
 
           <div class="form-card-buttons my-3">
-            <RoundedButton
-              class="button-dark button-lg"
-              text="다음"
+            <BaseButton
+              class="button-primary"
               @click="handleIncreaseStep"
               :disabled="soldier.enterDate === ''"
-            ></RoundedButton>
+              >다음</BaseButton
+            >
           </div>
         </div>
 
-        <FormBackButton @click="handleDecreaseStep"></FormBackButton>
+        <FormButtonBack />
       </div>
 
       <!-- 작성 폼 (육군 - 입영부대) -->
@@ -135,19 +137,19 @@
           <ArmyTrainingCenterSelect
             :value="soldier.trainingCenterName"
             @change="handleSelectTrainingCenterName"
-          ></ArmyTrainingCenterSelect>
+          />
 
           <div class="form-card-buttons">
-            <RoundedButton
-              class="button-dark button-lg"
-              text="편지함 찾기"
+            <BaseButton
+              class="button-primary"
               @click="handleSubmitForm"
               :disabled="soldier.trainingCenterName === ''"
-            ></RoundedButton>
+              >편지함 찾기</BaseButton
+            >
           </div>
         </div>
 
-        <FormBackButton @click="handleDecreaseStep"></FormBackButton>
+        <FormButtonBack />
       </div>
 
       <!-- 작성 폼 (공군 - 기수) -->
@@ -157,31 +159,32 @@
       >
         <div class="form-card-content">
           <FormLabel class="mb-3">
-            {{ soldier.name }} 훈련병은<br />공군 몇 기인가요? <Emoji>📋</Emoji>
+            {{ soldier.name }} 훈련병은<br />공군 몇 기인가요?
+            <Emoji>📋</Emoji>
           </FormLabel>
           <AirforceKisuSelect
             :value="soldier.kisu"
             @change="handleSelectKisu"
-          ></AirforceKisuSelect>
+          />
 
           <div class="form-card-buttons">
-            <RoundedButton
-              class="button-dark button-lg"
-              text="편지함 찾기"
+            <BaseButton
+              class="button-primary"
               @click="handleSubmitForm"
               :disabled="soldier.kisu === ''"
-            ></RoundedButton>
+              >편지함 찾기</BaseButton
+            >
           </div>
         </div>
 
-        <FormBackButton @click="handleDecreaseStep"></FormBackButton>
+        <FormButtonBack />
       </div>
     </transition>
   </div>
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -194,8 +197,8 @@ import FormLabel from '@/components/Form/FormLabel.vue'
 import FormInput from '@/components/Form/FormInput.vue'
 import ArmyTrainingCenterSelect from '@/components/Form/ArmyTrainingCenterSelect.vue'
 import AirforceKisuSelect from '@/components/Form/AirforceKisuSelect'
-import FormBackButton from '@/components/Form/FormBackButton.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import FormButtonBack from '@/components/Button/FormButtonBack.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
@@ -205,23 +208,21 @@ export default {
     FormInput,
     ArmyTrainingCenterSelect,
     AirforceKisuSelect,
-    FormBackButton,
-    RoundedButton,
+    FormButtonBack,
+    BaseButton,
   },
   setup() {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => store.state.registerForm)
+    const state = store.state.registerForm
+    const slideTransition = computed(() => state.slideTransition)
+    const stepper = computed(() => state.stepper)
+    const soldier = computed(() => state.soldier)
 
     /* Router */
     const router = useRouter()
 
     /* Local State */
-    const stepper = reactive({
-      maxStep: 5,
-      currentStep: 1,
-    })
-    const slideTransition = ref('slide-left')
     const isInvalidName = ref(false)
 
     /* Event Handler */
@@ -237,7 +238,7 @@ export default {
         return
       }
       isInvalidName.value = false
-      handleIncreaseStep()
+      store.dispatch('registerForm/INCREASE_STEP')
     }
     const handleSubmitBirthDate = event => {
       store.dispatch('registerForm/UPDATE_BIRTH_DATE', event.target.value)
@@ -245,7 +246,7 @@ export default {
     }
     const handleClickMilitaryType = militaryType => {
       store.dispatch('registerForm/UPDATE_MILITARY_TYPE', militaryType)
-      handleIncreaseStep()
+      store.dispatch('registerForm/INCREASE_STEP')
     }
     const handleSubmitEnterDate = event => {
       store.dispatch('registerForm/UPDATE_ENTER_DATE', event.target.value)
@@ -261,14 +262,6 @@ export default {
       store.dispatch('registerForm/UPDATE_KISU', event.target.value)
       event.target.blur()
     }
-    const handleIncreaseStep = () => {
-      slideTransition.value = 'slide-left'
-      stepper.currentStep++
-    }
-    const handleDecreaseStep = () => {
-      slideTransition.value = 'slide-right'
-      stepper.currentStep--
-    }
     const handleSubmitForm = async () => {
       try {
         const { data } = await MailBoxApi.getKey(soldier.value)
@@ -277,12 +270,16 @@ export default {
         router.push({ name: 'RegisterCreateLink' })
       }
     }
+    const handleIncreaseStep = () =>
+      store.dispatch('registerForm/INCREASE_STEP')
+
+    onBeforeMount(() => store.dispatch('registerForm/RESET_WITHOUT_FORM'))
 
     return {
       /* Variables */
       soldier,
-      stepper,
       slideTransition,
+      stepper,
       isInvalidName,
       /* Functions */
       openModal,
@@ -293,9 +290,8 @@ export default {
       handleSubmitEnterDate,
       handleSelectTrainingCenterName,
       handleSelectKisu,
-      handleIncreaseStep,
-      handleDecreaseStep,
       handleSubmitForm,
+      handleIncreaseStep,
     }
   },
 }
@@ -307,25 +303,31 @@ export default {
 .form-card {
   position: absolute;
   width: 100%;
-  height: 100%;
-  padding: 2rem;
+  min-height: calc(100% - 2px);
+  padding: 32px;
   background-color: $white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .form-card-content {
-  padding: 1.5rem 0;
+  padding: 24px 0;
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 .form-card-buttons {
-  margin-top: 40px;
+  margin-top: 56px;
+  padding: 0 40px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 16px;
+
+  &__military-type {
+    margin: 0;
+    padding: 0;
+  }
 }
 .form-card-links {
   display: flex;
@@ -333,13 +335,15 @@ export default {
   justify-content: center;
 
   &__help-link {
+    margin-top: 32px;
     text-decoration: none;
     color: $gray4;
     border-bottom: 1px solid $gray4;
   }
 }
 .input-area {
-  height: 46px;
+  position: relative;
+  height: 40px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -347,9 +351,10 @@ export default {
 
   &__text {
     &--invalid {
-      padding: 0 1px 0.6px 0;
+      position: absolute;
+      bottom: -1.25rem;
+      right: 0;
       color: $warningRed;
-      text-align: right;
     }
   }
 }

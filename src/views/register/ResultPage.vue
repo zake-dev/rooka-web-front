@@ -1,25 +1,21 @@
 <template>
   <div class="page-wrapper">
-    <p class="font-mobile__semi-title">
+    <p class="font__semi-title">
       편지함 링크가<br />생성됐어요! <Emoji>😍</Emoji>
     </p>
-    <p class="font-mobile__content-text mt-2 mb-3">
+    <p class="font__content-text mt-3 mb-2">
       아래의 이미지를 저장하여 링크와 함께 공유해보세요!
     </p>
 
-    <SoldierCard class="link-image" :soldier="soldier"></SoldierCard>
+    <SoldierCard class="link-image" :soldier="soldier" />
 
     <div class="action-container">
-      <RoundedButton
-        class="button-gray button-lg mb-3"
-        text="링크 공유하기"
-        @click="handleClickShareLink"
-      ></RoundedButton>
-      <RoundedButton
-        class="button-dark button-lg"
-        text="첫 편지 쓰기"
-        @click="handleClickNewMail"
-      ></RoundedButton>
+      <BaseButton class="button-secondary mb-3" @click="handleClickShareLink"
+        >링크 공유하기</BaseButton
+      >
+      <BaseButton class="button-primary button-lg" @click="handleClickNewMail"
+        >첫 편지 쓰기</BaseButton
+      >
     </div>
   </div>
 </template>
@@ -33,18 +29,18 @@ import { openModal } from '@/utils/DialogHandler'
 
 import Emoji from '@/components/Decorator/Emoji.vue'
 import SoldierCard from '@/components/Card/SoldierCard.vue'
-import RoundedButton from '@/components/Button/RoundedButton.vue'
+import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
   components: {
     Emoji,
     SoldierCard,
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => store.state.registerForm)
+    const soldier = computed(() => store.state.registerForm.soldier)
 
     /* Router */
     const router = useRouter()
@@ -79,8 +75,7 @@ export default {
   min-height: calc(100vw - 64px);
 }
 .action-container {
-  margin-top: 24px;
-  padding: 24px;
+  padding: 24px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;

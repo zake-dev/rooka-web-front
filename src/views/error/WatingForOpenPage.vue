@@ -1,11 +1,11 @@
 <template>
   <div class="page-wrapper">
     <div class="text-content">
-      <p class="font-mobile__semi-title">
+      <p class="font__semi-title">
         너무 빨리 오셨군요!<br />
         감동이에요 😭
       </p>
-      <p class="font-mobile__content-text mt-2 mb-3">
+      <p class="font__content-text mt-2 mb-3">
         이렇게 먼저 찾아와 주셔서 정말 감사해요! 아쉽게도 아직은 인터넷 편지
         작성 기간이 아니지만 조금만 기다리시면 인터넷 편지를 보내실 수 있어요.
         캘린더에 일정을 추가해보세요!
@@ -23,11 +23,9 @@
     ></div>
 
     <div class="action-buttons">
-      <RoundedButton
-        class="button-dark button-lg mb-3"
-        text="홈으로 가기"
-        @click="handleClickGoHome"
-      ></RoundedButton>
+      <BaseButton class="button-dark mb-3" @click="handleClickGoHome"
+        >홈으로 가기</BaseButton
+      >
     </div>
   </div>
 </template>
@@ -36,11 +34,11 @@
 import { useRouter } from 'vue-router'
 
 import BackgroundPng from '@/assets/images/404-background.png'
-import RoundedButton from '@/components/Button/RoundedButton'
+import BaseButton from '@/components/Button/BaseButton'
 
 export default {
   components: {
-    RoundedButton,
+    BaseButton,
   },
   setup() {
     /* Router */

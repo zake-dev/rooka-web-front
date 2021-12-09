@@ -1,18 +1,16 @@
 <template>
   <div class="modal-content">
-    <ModalButtonClose></ModalButtonClose>
+    <ModalButtonClose />
 
     <div class="modal-content-body masked-overflow">
-      <p
-        class="modal-content-body__question-text font-mobile__input-label mb-2"
-      >
+      <p class="modal-content-body__question-text font__content-title mb-2">
         Q. 인터넷 편지함 링크라는 게 뭔가요?
       </p>
-      <p class="modal-content-body__answer-text font-mobile__page-title mb-3">
+      <p class="modal-content-body__answer-text font__page-title mb-3">
         A. 인편 작성을 위한 훈련병 정보 입력 없이 바로 인편을 작성할 수 있는
         링크랍니다!
       </p>
-      <p class="modal-content-body__text font-mobile__content-text">
+      <p class="modal-content-body__text font__content-text">
         그동안 인편을 쓰기 위해서는 감수해야 할 것들이 많았어요. 일단 먼저 앱을
         설치하거나 쓰기 불편한 웹사이트에 접속해야만 했죠. 그리고 훈련병의
         생년월일을 포함한 여러가지 정보를 입력해야만 했어요. 이렇게 복잡한
@@ -46,8 +44,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  height: 433px;
-  padding: 32px;
+  max-height: 60vh;
+  padding: 24px;
 }
 .modal-content-body {
   display: flex;
@@ -56,14 +54,14 @@ export default {
   padding-top: 22px;
 
   &__question-text {
-    color: $gray3;
+    color: $gray4;
   }
   &__answer-text {
     word-break: keep-all;
-    color: $gray5;
+    color: $gray6;
   }
   &__text {
-    color: $gray5;
+    color: $gray6;
   }
 }
 </style>
