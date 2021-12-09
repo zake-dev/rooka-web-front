@@ -105,23 +105,26 @@ export default {
   height: calc(100% - 112px);
   max-height: calc(100% - 112px);
   padding: 0 16px 64px 16px;
-  display: flex;
-  flex-direction: column;
 
   &-list {
-    padding-top: 8px;
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 }
 .action-buttons {
   position: fixed;
-  bottom: 0;
+  bottom: 16px;
   width: 100%;
-  height: 94px;
-  padding: 16px;
-  display: inline-flex;
+  height: 50px;
+  padding: 0 72px;
+  display: flex;
+  flex-direction: row;
   justify-content: center;
 
   &--closed {
+    padding: 0 16px;
     justify-content: flex-end;
   }
 }

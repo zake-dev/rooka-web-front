@@ -1,16 +1,16 @@
 <template>
   <div>
     <div v-if="mail.state === 'PENDING'" class="chip chip-pending">
-      <span class="font__tag">전달 대기</span>
+      <span class="chip__text font__tag">전달 대기</span>
     </div>
     <div v-else-if="mail.state === 'DELIVERED'" class="chip chip-delivered">
-      <span class="font__tag me-1">전달 완료</span>
-      <span class="font__caption">
+      <span class="chip__text font__tag me-1">전달 완료</span>
+      <span class="chip__text font__caption">
         {{ new Date(mail.deliveredAt).toLocaleDateString() }}
       </span>
     </div>
     <div v-else class="chip chip-failed">
-      <span class="font__tag">전달 실패</span>
+      <span class="chip__text font__tag">전달 실패</span>
     </div>
   </div>
 </template>
@@ -23,28 +23,32 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import '@/scss/_variables.scss';
 
 .chip {
-  height: 22px;
+  height: 24px;
   width: fit-content;
   padding: 4px 8px;
-  border-radius: 11px;
-  display: inline-flex;
+  border-radius: 12px;
+  display: flex;
   justify-content: center;
+  align-items: center;
 
   &-pending {
-    background-color: #fcf2cf;
-    color: #ffc700;
+    background-color: $gray2;
+    color: $gray3;
   }
   &-delivered {
-    background-color: #d7f4d2;
-    color: #1fe000;
+    background-color: $rookaYellow;
+    color: $white;
   }
   &-failed {
-    background-color: #ffdfd8;
-    color: #ff2e00;
+    background-color: $black;
+    color: $gray2;
+  }
+  &__text {
+    color: inherit;
   }
 }
 </style>

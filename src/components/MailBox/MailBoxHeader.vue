@@ -1,8 +1,8 @@
 <template>
   <div class="mailbox-header">
     <div class="mailbox-header-title mb-2">
-      <span class="font__title me-2">{{ soldier.name }} 훈련병</span>
-      <SoldierInfoButton class="mb-1" @click="openModal('Profile')" />
+      <span class="font__title me-1">{{ soldier.name }} 훈련병</span>
+      <SoldierInfoButton class="mb-2" @click="openModal('Profile')" />
     </div>
     <span class="font__content-text">
       {{ headerMessage }}
@@ -67,7 +67,7 @@ export default {
 .mailbox-header {
   width: 100%;
   min-height: 112px;
-  padding: 8px 24px;
+  padding: 0 32px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
