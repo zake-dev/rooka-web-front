@@ -1,14 +1,27 @@
 <template>
-  <img class="logo" :src="LogoSvg" />
+  <img class="logo" :src="LogoPositiveSvg" :style="styleObject" />
 </template>
 
 <script>
-import LogoSvg from '@/assets/rooka-logo.svg'
+import { computed } from 'vue'
+
+import LogoPositiveSvg from '@/assets/logo-positive.svg'
 
 export default {
-  setup() {
+  props: {
+    isStamp: Boolean,
+  },
+  setup(props) {
+    /* Style */
+    const styleObject = computed(() =>
+      props.isStamp
+        ? { height: '56px', width: '205px' }
+        : { height: '26px', width: '95px' },
+    )
+
     return {
-      LogoSvg,
+      LogoPositiveSvg,
+      styleObject,
     }
   },
 }
@@ -16,11 +29,11 @@ export default {
 
 <style scoped lang="scss">
 .logo {
-  height: 25px;
+  height: 26px;
   width: 95px;
 }
 .logo-stamp {
-  height: 17px;
-  width: 64px;
+  height: 56px;
+  width: 205px;
 }
 </style>

@@ -7,7 +7,7 @@
       아래의 이미지를 저장하여 링크와 함께 공유해보세요!
     </p>
 
-    <SoldierCard class="link-image" :soldier="soldier" />
+    <SoldierCard class="link-image" :soldier="soldier" :link-key="key" />
 
     <div class="action-container">
       <BaseButton class="button-secondary mb-3" @click="handleClickShareLink"
@@ -41,6 +41,7 @@ export default {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => store.state.registerForm.soldier)
+    const key = computed(() => store.state.registerForm.key)
 
     /* Router */
     const router = useRouter()
@@ -56,6 +57,7 @@ export default {
     return {
       /* Variables */
       soldier,
+      key,
       /* Functions */
       handleClickShareLink,
       handleClickNewMail,

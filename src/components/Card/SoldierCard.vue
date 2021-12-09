@@ -3,51 +3,47 @@
     <!-- 이미지로 렌더될 html -->
     <div id="card-html" class="card">
       <div class="card-content">
-        <div class="card-content-row mb-3">
-          <p class="font__title">{{ soldier.name }} 훈련병</p>
-          <img class="card-content__image" :src="MilitaryHelmetPng" />
+        <div class="card-content-title">
+          <span class="card-content-title__text"
+            >{{ soldier.name }} 훈련병에게</span
+          >
+          <span
+            class="card-content-title__text card-content-title__text--accent"
+            >인편을 써주세요
+            <img class="card-content__image" :src="LetterBoxPng" />
+          </span>
         </div>
 
-        <div class="detail mt-1">
+        <div class="detail">
           <div class="detail-row">
-            <span class="detail-row__label font__content-title">생년월일</span>
-            <span class="font__content-text">{{
-              toKoreanDateString(soldier.birthDate)
-            }}</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-row__label font__content-title">군종</span>
-            <span class="font__content-text">{{
+            <span class="detail-row__label">군종</span>
+            <span class="detail-row__text">{{
               toKoreanMilitaryType(soldier.militaryType)
             }}</span>
           </div>
           <div class="detail-row">
-            <span class="detail-row__label font__content-title">입대일</span>
-            <span class="font__content-text">{{
+            <span class="detail-row__label">입대일</span>
+            <span class="detail-row__text">{{
               toKoreanDateString(soldier.enterDate)
             }}</span>
           </div>
           <div v-if="soldier.militaryType === 'ARMY'" class="detail-row">
-            <span class="detail-row__label font__content-title">부대</span>
-            <span class="font__content-text">{{
+            <span class="detail-row__label">부대</span>
+            <span class="detail-row__text">{{
               soldier.trainingCenterName
             }}</span>
           </div>
           <div v-if="soldier.militaryType === 'AF'" class="detail-row">
-            <span class="detail-row__label font__content-title">기수</span>
-            <span class="font__content-text">{{ soldier.kisu }}기</span>
+            <span class="detail-row__label">기수</span>
+            <span class="detail-row__text">{{ soldier.kisu }}기</span>
           </div>
         </div>
       </div>
 
       <div class="card-footer">
-        <p class="card-footer__text font__caption mb-2">
-          하단의 링크에 접속하여 훈련소에 있는<br />
-          {{ soldier.name }} 훈련병에게 편지를 써주세요!
-        </p>
-        <LinkChip :link="`http://rooka.kr/${soldier.key}`" />
+        <TheLinkChip>{{ linkKey }}</TheLinkChip>
+        <LogoImage class="logo-stamp" is-stamp />
       </div>
-      <LogoImage class="logo-stamp" />
     </div>
 
     <!-- 이미지 출력물 -->
@@ -61,23 +57,26 @@ import html2canvas from 'html2canvas'
 
 import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 
-import MilitaryHelmetPng from '@/assets/images/military-helmet.png'
+import LetterBoxPng from '@/assets/images/letter-box.png'
 import LogoImage from '@/components/LogoImage/LogoImage.vue'
-import LinkChip from '@/components/Chip/LinkChip.vue'
+import TheLinkChip from '@/components/Chip/TheLinkChip.vue'
 
 export default {
   components: {
     LogoImage,
-    LinkChip,
+    TheLinkChip,
   },
   props: {
     soldier: Object,
+    linkKey: String,
   },
   setup() {
     onMounted(async () => {
       const card = document.getElementById('card-html')
       const canvas = await html2canvas(card, {
-        scale: 2,
+        width: 1000,
+        height: 1000,
+        proxy: '/etc/proxy_image',
         onclone: clonedDocument =>
           (clonedDocument.getElementById('card-html').style.display = 'block'),
       })
@@ -88,7 +87,7 @@ export default {
 
     return {
       /* Assets */
-      MilitaryHelmetPng,
+      LetterBoxPng,
       /* Functions */
       toKoreanDateString,
       toKoreanMilitaryType,
@@ -106,52 +105,71 @@ export default {
   border-radius: 7px;
 }
 .card {
-  display: none;
   width: 1000px;
   height: 1000px;
-  padding: 20px;
-  border-radius: 7px;
+  padding: 64px;
   background-color: $white;
 
   &-content {
     margin-top: 20px;
 
+    &-title {
+      margin: 42px 0 0 8px;
+      display: flex;
+      flex-direction: column;
+
+      &__text {
+        font-family: 'Spoqa Han Sans Neo', sans-serif;
+        font-size: 82px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 113px;
+        letter-spacing: 0em;
+
+        &--accent {
+          color: $rookaYellow;
+        }
+      }
+    }
+    &__image {
+      min-width: 81px;
+      min-height: 81px;
+    }
+  }
+  .detail {
+    margin: 242px 0 56px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
     &-row {
       display: flex;
       flex-direction: row;
-      align-items: center;
-    }
-    &__image {
-      width: 34px;
-      height: 34px;
-      margin-left: 3px;
+
+      &__label {
+        width: 190px;
+        font-family: 'Spoqa Han Sans Neo', sans-serif;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 60px;
+        letter-spacing: 0em;
+      }
+      &__text {
+        font-family: 'Spoqa Han Sans Neo', sans-serif;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 60px;
+        letter-spacing: 0em;
+      }
     }
   }
   &-footer {
-    margin-top: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-
-    &__text {
-      color: $gray5;
-      text-align: right;
-    }
-  }
-}
-.detail {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  &-row {
     display: flex;
     flex-direction: row;
-
-    &__label {
-      width: 44px;
-      margin-right: 12px;
-    }
+    justify-content: space-between;
+    align-items: flex-end;
   }
 }
 #card-image {
