@@ -51,10 +51,19 @@
     </div>
 
     <div class="mail-footer">
-      <MailButtonPhoto v-if="soldier.militaryType === 'ARMY'" />
+      <MailButtonPhoto
+        v-if="soldier.militaryType === 'ARMY'"
+        @click="handleOpenUploader"
+      />
       <MailButtonNews />
       <MailButtonSend />
     </div>
+    <input
+      ref="imageUploadInput"
+      type="file"
+      @input="handleUploadImage"
+      hidden
+    />
   </div>
 </template>
 
@@ -63,6 +72,7 @@ import { ref, computed, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 
 import { openModal } from '@/utils/DialogHandler'
+import * as FileApi from '@/api/FileApi'
 
 import MailButtonPhoto from '@/components/Button/MailButtonPhoto.vue'
 import MailButtonNews from '@/components/Button/MailButtonNews.vue'
@@ -115,6 +125,7 @@ export default {
 
     /* Refs */
     const mailContentInput = ref(null)
+    const imageUploadInput = ref(null)
 
     /* Local State */
     const isMailHeaderVisible = ref(true)
@@ -144,16 +155,6 @@ export default {
     }
     const handleInputTitle = e => (title.value = e.target.innerText)
     const handleInputContent = e => (content.value = e.target.innerText)
-    const handleOpenUploader = () => imageUploadInput.value.click()
-    const handleUploadImage = async e => {
-      try {
-        const image = e.target.files[0]
-        const { data } = await FileApi.postImage(image)
-        console.dir(data)
-      } catch (e) {
-        console.dir(e)
-      }
-    }
 
     window.addEventListener('resize', () => {
       const MIN_KEYBOARD_HEIGHT = 300
@@ -171,6 +172,7 @@ export default {
     return {
       /* Refs */
       mailContentInput,
+      imageUploadInput,
       /* Variables */
       isMailHeaderVisible,
       soldier,
@@ -185,6 +187,8 @@ export default {
       handlePasteText,
       handleInputTitle,
       handleInputContent,
+      handleOpenUploader,
+      handleUploadImage,
     }
   },
 }
