@@ -4,14 +4,15 @@
     <div id="card-html" class="card">
       <div class="card-content">
         <div class="card-content-title">
-          <span class="card-content-title__text"
-            >{{ soldier.name }} 훈련병에게</span
-          >
-          <span
+          <div class="card-content-title__text">
+            {{ soldier.name }} 훈련병에게
+          </div>
+          <div
             class="card-content-title__text card-content-title__text--accent"
-            >인편을 써주세요
+          >
+            인편을 써주세요
             <img class="card-content__image" :src="LetterBoxPng" />
-          </span>
+          </div>
         </div>
 
         <div class="detail">
@@ -74,9 +75,7 @@ export default {
     onMounted(async () => {
       const card = document.getElementById('card-html')
       const canvas = await html2canvas(card, {
-        width: 1000,
-        height: 1000,
-        proxy: '/etc/proxy_image',
+        scale: 1,
         onclone: clonedDocument =>
           (clonedDocument.getElementById('card-html').style.display = 'block'),
       })
@@ -105,16 +104,17 @@ export default {
   border-radius: 7px;
 }
 .card {
+  display: none;
   width: 1000px;
   height: 1000px;
   padding: 64px;
   background-color: $white;
 
   &-content {
-    margin-top: 20px;
+    padding-top: 20px;
 
     &-title {
-      margin: 42px 0 0 8px;
+      padding: 42px 0 0 8px;
       display: flex;
       flex-direction: column;
 
@@ -137,7 +137,7 @@ export default {
     }
   }
   .detail {
-    margin: 242px 0 56px 8px;
+    padding: 242px 0 56px 8px;
     display: flex;
     flex-direction: column;
     gap: 16px;
