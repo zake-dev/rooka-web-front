@@ -114,7 +114,14 @@ export default {
 
     /* Event Handler */
     const handleFocusContent = () => {
-      mailContentInput.value.focus()
+      const input = mailContentInput.value
+      const selection = window.getSelection()
+      const range = document.createRange()
+      selection.removeAllRanges()
+      range.selectNodeContents(input)
+      range.collapse(false)
+      selection.addRange(range)
+      input.focus()
     }
     const handleInputTitle = e => (title.value = e.target.innerText)
     const handleInputContent = e => (content.value = e.target.innerText)
