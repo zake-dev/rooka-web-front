@@ -34,12 +34,14 @@
         class="mail-content__input font__semi-title"
         placeholder="제목을 입력해주세요"
         contenteditable
+        @paste.prevent="handlePasteText"
         @input="handleInputTitle"
       ></div>
       <div
         class="mail-content__textarea font__content-text"
         placeholder="내용을 입력해주세요"
         contenteditable
+        @paste.prevent="handlePasteText"
         @input="handleInputContent"
         ref="mailContentInput"
       ></div>
@@ -123,6 +125,10 @@ export default {
       selection.addRange(range)
       input.focus()
     }
+    const handlePasteText = async e => {
+      const text = e.clipboardData.getData('text/plain')
+      document.execCommand('insertText', false, text)
+    }
     const handleInputTitle = e => (title.value = e.target.innerText)
     const handleInputContent = e => (content.value = e.target.innerText)
 
@@ -140,6 +146,7 @@ export default {
       content,
       /* Functions */
       handleFocusContent,
+      handlePasteText,
       handleInputTitle,
       handleInputContent,
     }
