@@ -184,7 +184,7 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -273,7 +273,7 @@ export default {
     const handleIncreaseStep = () =>
       store.dispatch('registerForm/INCREASE_STEP')
 
-    onMounted(() => store.dispatch('registerForm/RESET_WITHOUT_FORM'))
+    onBeforeMount(() => store.dispatch('registerForm/RESET_WITHOUT_FORM'))
 
     return {
       /* Variables */
