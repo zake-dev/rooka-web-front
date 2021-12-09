@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <div class="mail-header">
+    <div v-show="isMailHeaderVisible" class="mail-header">
       <div class="mail-header-row">
         <span class="mail-header-row__label font__content-title"
           >보내는 사람</span
@@ -34,6 +34,7 @@
         class="mail-content__input font__semi-title"
         placeholder="제목을 입력해주세요"
         contenteditable
+        @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputTitle"
       ></div>
@@ -41,6 +42,7 @@
         class="mail-content__textarea font__content-text"
         placeholder="내용을 입력해주세요"
         contenteditable
+        @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputContent"
         ref="mailContentInput"
@@ -114,7 +116,18 @@ export default {
     /* Refs */
     const mailContentInput = ref(null)
 
+    /* Local State */
+    const isMailHeaderVisible = ref(true)
+
     /* Event Handler */
+    const handleCollapseMailHeader = e => {
+      e.target.focus()
+
+      const isMobile =
+        'ontouchstart' in document.documentElement &&
+        navigator.userAgent.match(/Mobi/)
+      if (isMobile) isMailHeaderVisible.value = false
+    }
     const handleFocusContent = () => {
       const input = mailContentInput.value
       const selection = window.getSelection()
@@ -125,19 +138,41 @@ export default {
       selection.addRange(range)
       input.focus()
     }
-    const handlePasteText = async e => {
-      const text = e.clipboardData.getData('text/plain')
+    const handlePasteText = async () => {
+      const text = await navigator.clipboard.readText()
       document.execCommand('insertText', false, text)
     }
     const handleInputTitle = e => (title.value = e.target.innerText)
     const handleInputContent = e => (content.value = e.target.innerText)
+    const handleOpenUploader = () => imageUploadInput.value.click()
+    const handleUploadImage = async e => {
+      try {
+        const image = e.target.files[0]
+        const { data } = await FileApi.postImage(image)
+        console.dir(data)
+      } catch (e) {
+        console.dir(e)
+      }
+    }
 
+    window.addEventListener('resize', () => {
+      const MIN_KEYBOARD_HEIGHT = 300
+      const isMobile =
+        'ontouchstart' in document.documentElement &&
+        navigator.userAgent.match(/Mobi/)
+      const isKeyboardClosed =
+        isMobile &&
+        window.screen.height <
+          window.visualViewport.height + MIN_KEYBOARD_HEIGHT
+      if (isKeyboardClosed) isMailHeaderVisible.value = true
+    })
     onUnmounted(() => store.dispatch('mail/RESET'))
 
     return {
       /* Refs */
       mailContentInput,
       /* Variables */
+      isMailHeaderVisible,
       soldier,
       author,
       relation,
@@ -145,6 +180,7 @@ export default {
       title,
       content,
       /* Functions */
+      handleCollapseMailHeader,
       handleFocusContent,
       handlePasteText,
       handleInputTitle,
@@ -161,6 +197,7 @@ export default {
 .page-wrapper {
   display: flex;
   flex-direction: column;
+  max-height: 100%;
 }
 input {
   border: none;
@@ -207,6 +244,7 @@ input {
     align-items: stretch;
 
     &__input {
+      cursor: text;
       margin-bottom: 16px;
       outline: none;
 
@@ -216,6 +254,7 @@ input {
       }
     }
     &__textarea {
+      cursor: text;
       outline: none;
 
       &:empty:before {
