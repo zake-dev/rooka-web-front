@@ -41,15 +41,15 @@ export default {
 @import '@/scss/_variables.scss';
 
 .send-button {
-  width: 80px;
+  width: 96px;
   height: 100%;
-  min-height: 23px;
+  min-height: 56px;
 
   &:disabled {
     background-color: white !important;
 
     & img {
-      opacity: 0.3;
+      opacity: 0.2;
     }
   }
 }

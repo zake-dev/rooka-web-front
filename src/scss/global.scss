@@ -534,8 +534,8 @@ body {
     color: $white;
   }
   &:disabled {
-    background-color: $gray2 !important;
-    color: $white !important;
+    background-color: $gray2;
+    color: $white;
   }
   &__text {
     @extend .font__button-text;

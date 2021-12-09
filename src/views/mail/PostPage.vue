@@ -2,7 +2,7 @@
   <div class="page-wrapper">
     <div class="mail-header">
       <div class="mail-header-row">
-        <span class="mail-header-row__label font__content-title me-3"
+        <span class="mail-header-row__label font__content-title"
           >보내는 사람</span
         >
         <input
@@ -12,9 +12,7 @@
         />
       </div>
       <div class="mail-header-row">
-        <span class="mail-header-row__label font__content-title me-3"
-          >관계</span
-        >
+        <span class="mail-header-row__label font__content-title">관계</span>
         <input
           class="mail-header-row__input"
           placeholder="훈련병과의 관계를 적어주세요"
@@ -22,9 +20,7 @@
         />
       </div>
       <div class="mail-header-row">
-        <span class="mail-header-row__label font__content-title me-3"
-          >주소</span
-        >
+        <span class="mail-header-row__label font__content-title">주소</span>
         <input
           class="mail-header-row__input"
           placeholder="답장을 받을 주소를 입력해주세요"
@@ -51,7 +47,7 @@
     </div>
 
     <div class="mail-footer">
-      <MailButtonPhoto />
+      <MailButtonPhoto v-if="soldier.militaryType === 'ARMY'" />
       <MailButtonNews />
       <MailButtonSend />
     </div>
@@ -90,6 +86,7 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
+    const soldier = computed(() => store.state.mailBox.soldier)
     const state = store.state.mail
     const author = computed({
       get: () => state.author,
@@ -128,6 +125,7 @@ export default {
       /* Refs */
       mailContentInput,
       /* Variables */
+      soldier,
       author,
       relation,
       address,
@@ -143,6 +141,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/scss/global.scss';
 @import '@/scss/_variables.scss';
 
 .page-wrapper {
@@ -154,32 +153,34 @@ input {
 }
 .mail {
   &-header {
-    padding: 16px 32px;
+    padding: 8px 32px;
+    margin-bottom: 12px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
 
     &-row {
       display: flex;
       flex-direction: row;
 
       &__label {
-        min-width: 57px;
+        margin-right: 8px;
+        min-width: 80px;
+        color: $black;
       }
       &__input {
+        @extend .font__content-text;
+        font-family: 'Spoqa Han Sans Neo', sans-serif;
+        color: $gray6;
         flex: 1;
         outline: none;
-        font-family: 'Spoqa Han Sans Neo', snas-serif;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 16px;
-        letter-spacing: 0em;
 
+        &:placeholder-shown {
+          text-overflow: ellipsis;
+        }
         &::placeholder {
-          font-family: 'Spoqa Han Sans Neo', sans-serif;
-          font-size: 12px;
-          line-height: 16px;
-          color: $gray3;
+          @extend .font__content-text;
+          color: $gray4;
         }
       }
     }
@@ -197,7 +198,7 @@ input {
 
       &:empty:before {
         content: attr(placeholder);
-        color: $gray3;
+        color: $gray4;
       }
     }
     &__textarea {
@@ -205,7 +206,7 @@ input {
 
       &:empty:before {
         content: attr(placeholder);
-        color: $gray3;
+        color: $gray4;
       }
     }
     &__focus-area {

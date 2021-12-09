@@ -40,13 +40,13 @@
 </template>
 
 <script>
-import { computed, onMounted, onUnmounted } from 'vue'
+import { computed, onBeforeMount, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 
 import { openModal } from '@/utils/DialogHandler'
 
-import MailBoxSkeleton from '@/skeletons/mail/MailBox.vue'
+import MailBoxSkeleton from '@/skeletons/mail/MailBoxSkeleton.vue'
 import MailBoxHeader from '@/components/MailBox/MailBoxHeader.vue'
 import ShareButtonToSns from '@/components/Button/ShareButtonToSns.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
@@ -81,8 +81,8 @@ export default {
     const handleClickShare = () => openModal('ShareToSns')
     const handleClickNewMail = () => router.push(`/${key.value}/mail/post`)
 
+    onBeforeMount(() => store.dispatch('mailBox/RESET'))
     onMounted(() => store.dispatch('mailBox/FETCH_CONTEXT', route.params.key))
-    onUnmounted(() => store.dispatch('mailBox/RESET'))
 
     return {
       /* Variables */

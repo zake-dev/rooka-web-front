@@ -1,5 +1,5 @@
 <template>
-  <button class="button news-button" @click="handleOpenNewsModal">
+  <button class="button news-button" @click="handleOpenNewsModal" disabled>
     <img :src="NewsButtonIconSvg" />
   </button>
 </template>
@@ -26,10 +26,18 @@ export default {
 @import '@/scss/_variables.scss';
 
 .news-button {
-  width: 80px;
+  width: 96px;
   height: 100%;
-  min-height: 23px;
+  min-height: 56px;
   color: $gray5;
+
+  &:disabled {
+    background-color: white !important;
+
+    & img {
+      opacity: 0.2;
+    }
+  }
 }
 img {
   width: 21px;

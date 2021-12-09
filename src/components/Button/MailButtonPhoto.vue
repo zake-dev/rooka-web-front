@@ -26,9 +26,9 @@ export default {
 @import '@/scss/_variables.scss';
 
 .photo-menu-button {
-  width: 80px;
+  width: 96px;
   height: 100%;
-  min-height: 23px;
+  min-height: 56px;
   color: $gray5;
 }
 img {
