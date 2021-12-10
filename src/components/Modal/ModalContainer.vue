@@ -30,6 +30,7 @@ import ShareToInstagramStepTwoModalContent from '@/components/Modal/Content/Shar
 import ShareToInstagramStepThreeModalContent from '@/components/Modal/Content/ShareToInstagramStepThreeModalContent.vue'
 import ShareToFacebookStepOneModalContent from '@/components/Modal/Content/ShareToFacebookStepOneModalContent.vue'
 import ShareToFacebookStepTwoModalContent from '@/components/Modal/Content/ShareToFacebookStepTwoModalContent.vue'
+import ConfirmDeleteMailModalContent from '@/components/Modal/Content/ConfirmDeleteMailModalContent'
 
 export default {
   components: {
@@ -45,6 +46,7 @@ export default {
     ShareToInstagramStepThreeModalContent,
     ShareToFacebookStepOneModalContent,
     ShareToFacebookStepTwoModalContent,
+    ConfirmDeleteMailModalContent,
   },
   setup() {
     /* Vuex */

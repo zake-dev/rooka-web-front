@@ -104,7 +104,6 @@ const module = {
   actions: {
     async FETCH_MAIL({ commit, state }, password) {
       const { data } = await MailApi.getMail(state.mail.id, password)
-      console.dir(data)
       commit('SET_MAIL', data)
     },
     async SEND_MAIL({ commit, state }) {
