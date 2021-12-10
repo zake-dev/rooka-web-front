@@ -21,11 +21,23 @@
       </div>
       <div class="mail-header-row">
         <span class="mail-header-row__label font__content-title">주소</span>
-        <input
-          class="mail-header-row__input"
-          placeholder="답장을 받을 주소를 입력해주세요"
-          v-model="address"
-        />
+        <div class="mail-header-row-address">
+          <input
+            class="mail-header-row__input"
+            placeholder="답장을 받을 주소를 입력해주세요"
+            :value="addressInputText"
+            @click="handleOpenDaumPostcodeApi"
+            readonly
+          />
+          <input
+            class="mail-header-row__input"
+            placeholder="상세주소를 입력해주세요"
+            v-model="address2"
+          />
+          <a class="mail-header-row__link" @click="handleOpenDaumPostcodeApi"
+            >우편번호 검색</a
+          >
+        </div>
       </div>
     </div>
 
@@ -87,7 +99,7 @@ export default {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => store.state.mailBox.soldier)
-    const state = store.state.mail
+    const state = store.state.mail.mail
     const author = computed({
       get: () => state.author,
       set: value => store.dispatch('mail/UPDATE_AUTHOR', value),
@@ -96,9 +108,14 @@ export default {
       get: () => state.relation,
       set: value => store.dispatch('mail/UPDATE_RELATION', value),
     })
-    const address = computed({
-      get: () => state.address,
-      set: value => store.dispatch('mail/UPDATE_ADDRESS', value),
+    const addressInputText = computed(() =>
+      state.address1 && state.postCode
+        ? `(${state.postCode}) ${state.address1}`
+        : '',
+    )
+    const address2 = computed({
+      get: () => state.address2,
+      set: value => store.dispatch('mail/UPDATE_ADDRESS2', value),
     })
     const title = computed({
       get: () => state.title,
@@ -116,6 +133,17 @@ export default {
     const handleFocusContent = () => {
       mailContentInput.value.focus()
     }
+    const handleOpenDaumPostcodeApi = e => {
+      // eslint-disable-next-line
+      new daum.Postcode({
+        oncomplete: data => {
+          store.dispatch('mail/UPDATE_ADDRESS1', data.address)
+          store.dispatch('mail/UPDATE_POST_CODE', data.zonecode)
+        },
+      }).open()
+
+      e.target.blur()
+    }
     const handleInputTitle = e => (title.value = e.target.innerText)
     const handleInputContent = e => (content.value = e.target.innerText)
 
@@ -128,11 +156,13 @@ export default {
       soldier,
       author,
       relation,
-      address,
+      addressInputText,
+      address2,
       title,
       content,
       /* Functions */
       handleFocusContent,
+      handleOpenDaumPostcodeApi,
       handleInputTitle,
       handleInputContent,
     }
@@ -163,6 +193,19 @@ input {
       display: flex;
       flex-direction: row;
 
+      &-address {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+      &__link {
+        @extend .font__button-text;
+        text-decoration: underline;
+        text-decoration-color: $gray6;
+        color: $gray6;
+      }
       &__label {
         margin-right: 8px;
         min-width: 80px;
@@ -174,10 +217,10 @@ input {
         color: $gray6;
         flex: 1;
         outline: none;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
-        &:placeholder-shown {
-          text-overflow: ellipsis;
-        }
         &::placeholder {
           @extend .font__content-text;
           color: $gray4;
