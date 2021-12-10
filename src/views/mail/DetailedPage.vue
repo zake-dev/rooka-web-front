@@ -20,7 +20,10 @@
       <span class="font__content-text">{{ mail.content }}</span>
     </div>
 
-    <div class="mail-footer"></div>
+    <div class="mail-footer">
+      <MailButtonDelete />
+      <MailButtonBackToMailBox />
+    </div>
   </div>
 </template>
 
@@ -31,10 +34,14 @@ import { useStore } from 'vuex'
 import { openModal } from '@/utils/DialogHandler'
 
 import MailStatusChip from '@/components/Chip/MailStatusChip'
+import MailButtonDelete from '@/components/Button/MailButtonDelete'
+import MailButtonBackToMailBox from '@/components/Button/MailButtonBackToMailBox'
 
 export default {
   components: {
     MailStatusChip,
+    MailButtonDelete,
+    MailButtonBackToMailBox,
   },
   setup() {
     /* Vuex */
