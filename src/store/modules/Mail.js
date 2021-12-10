@@ -8,7 +8,8 @@ const module = {
       id: null,
       author: '',
       relation: '',
-      address: '',
+      address1: '',
+      address2: '',
       postCode: '',
       title: '',
       content: '',
@@ -26,7 +27,9 @@ const module = {
       return (
         state.mail.author !== '' &&
         state.mail.relation !== '' &&
-        state.mail.address !== '' &&
+        state.mail.address1 !== '' &&
+        state.mail.address2 !== '' &&
+        state.mail.postCode !== '' &&
         state.mail.title !== '' &&
         state.mail.content !== '' &&
         !state.isBeingSend
@@ -39,7 +42,8 @@ const module = {
         id: null,
         author: '',
         relation: '',
-        address: '',
+        address1: '',
+        address2: '',
         postCode: '',
         title: '',
         content: '',
@@ -63,8 +67,11 @@ const module = {
     SET_RELATION(state, relation) {
       state.mail.relation = relation
     },
-    SET_ADDRESS(state, address) {
-      state.mail.address = address
+    SET_ADDRESS1(state, address1) {
+      state.mail.address1 = address1
+    },
+    SET_ADDRESS2(state, address2) {
+      state.mail.address2 = address2
     },
     SET_POST_CODE(state, postCode) {
       state.mail.postCode = postCode
@@ -97,12 +104,11 @@ const module = {
   actions: {
     async FETCH_MAIL({ commit, state }, password) {
       const { data } = await MailApi.getMail(state.mail.id, password)
+      console.dir(data)
       commit('SET_MAIL', data)
     },
     async SEND_MAIL({ commit, state }) {
       commit('SET_IS_BEING_SENT', true)
-
-      commit('SET_PASSWORD', '1234')
 
       try {
         await MailApi.postMail(state.mail)
@@ -122,8 +128,11 @@ const module = {
     UPDATE_RELATION({ commit }, relation) {
       commit('SET_RELATION', relation)
     },
-    UPDATE_ADDRESS({ commit }, address) {
-      commit('SET_ADDRESS', address)
+    UPDATE_ADDRESS1({ commit }, address1) {
+      commit('SET_ADDRESS1', address1)
+    },
+    UPDATE_ADDRESS2({ commit }, address2) {
+      commit('SET_ADDRESS2', address2)
     },
     UPDATE_POST_CODE({ commit }, postCode) {
       commit('SET_POST_CODE', postCode)

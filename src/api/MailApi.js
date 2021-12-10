@@ -3,8 +3,15 @@ import { axiosService } from '@/api'
 export const postMail = form => {
   const formData = new FormData()
   Object.entries(form)
-    .filter(([key, _]) => key !== 'id' || key !== 'state')
+    .filter(
+      ([key, _]) =>
+        key !== 'id' ||
+        key !== 'state' ||
+        key !== 'address1' ||
+        key !== 'address2',
+    )
     .forEach(([key, value]) => formData.append(key, value))
+  formData.append('address', `${form.address1} ${form.address2}`)
   return axiosService.post(`/mails`, formData)
 }
 
