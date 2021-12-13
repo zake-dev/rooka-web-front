@@ -73,12 +73,23 @@ export default {
   },
   setup() {
     onMounted(async () => {
+      const currentViewPort = document
+        .getElementById('viewportMeta')
+        .getAttribute('content')
+      document
+        .getElementById('viewportMeta')
+        .setAttribute('content', 'width=1000px')
+
       const card = document.getElementById('card-html')
       const canvas = await html2canvas(card, {
-        scale: 1,
+        windowWidth: '1000px',
+        windowHeight: '1000px',
         onclone: clonedDocument =>
           (clonedDocument.getElementById('card-html').style.display = 'block'),
       })
+      document
+        .getElementById('viewportMeta')
+        .setAttribute('content', currentViewPort)
       const cardImage = document.getElementById('card-image')
       cardImage.src = canvas.toDataURL('image/png')
       cardImage.style.opacity = 1

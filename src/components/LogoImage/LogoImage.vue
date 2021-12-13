@@ -1,11 +1,11 @@
 <template>
-  <img class="logo" :src="LogoPositiveSvg" :style="styleObject" />
+  <img class="logo" :src="LogoPositivePng" :style="styleObject" />
 </template>
 
 <script>
 import { computed } from 'vue'
 
-import LogoPositiveSvg from '@/assets/logo-positive.svg'
+import LogoPositivePng from '@/assets/images/rooka-logo-positive.png'
 
 export default {
   props: {
@@ -20,7 +20,7 @@ export default {
     )
 
     return {
-      LogoPositiveSvg,
+      LogoPositivePng,
       styleObject,
     }
   },
