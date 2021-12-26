@@ -44,7 +44,7 @@ export default createStore({
   },
   plugins: [
     createPersistedState({
-      paths: ['registerForm', 'mail'],
+      paths: ['registerForm', 'mail', 'mailBox'],
       storage: window.sessionStorage,
     }),
   ],

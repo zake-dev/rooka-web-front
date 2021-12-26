@@ -1,5 +1,5 @@
 <template>
-  <button class="button photo-menu-button" @click="handleOpenPhotoMenu">
+  <button class="button photo-menu-button">
     <img :src="PhotoButtonIconSvg" />
   </button>
 </template>
@@ -9,14 +9,9 @@ import PhotoButtonIconSvg from '@/assets/icons/photo-button-icon.svg'
 
 export default {
   setup() {
-    /* Event Handler */
-    const handleOpenPhotoMenu = () => alert('아직 제공되지 않는 서비스입니다.')
-
     return {
       /* Assets */
       PhotoButtonIconSvg,
-      /* Functions */
-      handleOpenPhotoMenu,
     }
   },
 }
