@@ -33,7 +33,6 @@
 <script>
 import { useRouter } from 'vue-router'
 
-import BackgroundPng from '@/assets/images/404-background.png'
 import BaseButton from '@/components/Button/BaseButton'
 
 export default {
@@ -48,8 +47,6 @@ export default {
     const handleClickGoHome = () => router.push('/')
 
     return {
-      /* Assets */
-      BackgroundPng,
       /* Functions */
       handleClickGoHome,
     }

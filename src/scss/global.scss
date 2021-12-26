@@ -41,7 +41,6 @@ body {
 
 /* Fonts */
 @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
-@import url(//fonts.cdnfonts.com/css/lane---narrow);
 
 .font {
   font-style: normal;
@@ -509,6 +508,10 @@ body {
   &-info,
   &-blue {
     background-color: $airForceBlue;
+    color: $white;
+  }
+  &-yellow {
+    background-color: $rookaYellow;
     color: $white;
   }
   &-light {

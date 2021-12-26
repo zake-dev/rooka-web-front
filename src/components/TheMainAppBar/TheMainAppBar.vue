@@ -1,7 +1,9 @@
 <template>
-  <div v-if="!isErrorPage" class="app-bar">
-    <LogoImage class="mx-4 my-3" />
-  </div>
+  <transition name="fade" appear>
+    <div key="mainAppBar" v-if="!isErrorPage" class="app-bar">
+      <LogoImage class="mx-4 my-3" />
+    </div>
+  </transition>
 </template>
 
 <script>
