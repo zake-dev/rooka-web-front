@@ -65,7 +65,7 @@ export default {
     const store = useStore()
     const state = store.state.mailBox
     const isLoaded = computed(() => state.isLoaded)
-    const isSendable = computed(() => state.state === 'OPEN')
+    const isSendable = computed(() => state.status === 'OPEN')
     const key = computed(() => state.key)
     const mails = computed(() => state.mails)
 

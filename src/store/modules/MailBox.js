@@ -6,7 +6,7 @@ const module = {
   state: {
     isLoaded: false,
     key: '',
-    state: '',
+    status: '',
     soldier: {
       name: '',
       birthDate: '',
@@ -23,7 +23,7 @@ const module = {
       Object.assign(state, {
         isLoaded: false,
         key: '',
-        state: '',
+        status: '',
         soldier: {
           militaryType: '',
           name: '',

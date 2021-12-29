@@ -28,14 +28,16 @@ export default {
     const context = store.state.mailBox
     const soldier = computed(() => context.soldier)
     const headerMessage = computed(() => {
-      const { soldier, state, mails } = context
+      const { soldier, status, mails } = context
       const totalCount = mails.length
-      const pendingCount = mails.filter(mail => mail.state === 'PENDING').length
+      const pendingCount = mails.filter(
+        mail => mail.status === 'PENDING',
+      ).length
       const deliveredCount = mails.filter(
-        mail => mail.state === 'DELIVERED',
+        mail => mail.status === 'DELIVERED',
       ).length
 
-      switch (state) {
+      switch (status) {
         case 'OPEN':
           if (totalCount === 0)
             return '아직 받은 편지가 없네요. 지금 마음을 담아 편지를 보내보세요!'
