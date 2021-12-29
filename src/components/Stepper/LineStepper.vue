@@ -37,6 +37,8 @@ export default {
 @import '@/scss/_variables.scss';
 
 .stepper {
+  position: fixed;
+  top: $appBarHeight;
   width: 100%;
   height: 2px;
   z-index: 1000;

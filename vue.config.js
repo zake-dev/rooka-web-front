@@ -5,6 +5,6 @@ module.exports = {
     sockPath: '/absproxy/8081/sockjs-node',
     port: 8081,
     disableHostCheck: true,
-    overlay: false
-  }
+    overlay: false,
+  },
 }

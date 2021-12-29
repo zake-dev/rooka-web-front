@@ -71,6 +71,7 @@ export default {
 
 .page-wrapper {
   padding: 48px 32px;
+  padding-top: calc(#{$appBarHeight} + 48px);
 }
 .link-image {
   min-width: calc(100vw - 64px);

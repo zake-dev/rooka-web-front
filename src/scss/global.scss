@@ -30,6 +30,7 @@ body {
   color: $black;
 }
 .page-wrapper {
+  padding-top: $appBarHeight;
   position: relative;
   height: auto;
   min-height: 100%;

@@ -124,6 +124,7 @@ export default {
 
 .page-wrapper {
   padding: 32px;
+  padding-top: calc(#{$appBarHeight} + 32px);
 }
 .submitted-form {
   &-row {

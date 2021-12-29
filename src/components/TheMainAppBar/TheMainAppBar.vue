@@ -1,9 +1,11 @@
 <template>
-  <transition name="fade" appear>
-    <div key="mainAppBar" v-if="!isErrorPage" class="app-bar">
-      <LogoImage class="mx-4 my-3" />
-    </div>
-  </transition>
+  <div
+    key="mainAppBar"
+    class="appbar"
+    :class="{ 'appbar--transparent': isErrorPage }"
+  >
+    <LogoImage class="mx-4 my-3" />
+  </div>
 </template>
 
 <script>
@@ -33,14 +35,16 @@ export default {
 <style lang="scss">
 @import '@/scss/_variables.scss';
 
-.app-bar {
+.appbar {
+  position: fixed;
   width: 100%;
   height: $appBarHeight;
-  display: flex;
   justify-content: space-between;
+  background-color: white;
+  z-index: 1000;
 
-  &__button {
-    font-size: 20px;
+  &--transparent {
+    display: none;
   }
 }
 </style>
