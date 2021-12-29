@@ -63,7 +63,7 @@ export default {
 @import '@/scss/_variables.scss';
 
 .page-wrapper {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   background: linear-gradient(180deg, #553a03 17.98%, #191919 82.64%);
   display: flex;
@@ -72,7 +72,7 @@ export default {
 }
 .content {
   flex: 1;
-  padding: 92px 32px;
+  padding: 92px 32px 32px 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -90,15 +90,13 @@ export default {
   }
 }
 .action-buttons {
-  position: fixed;
-  bottom: 60px;
   width: 100%;
-  height: 48px;
-  padding: 0 72px;
+  padding: 0 72px 32px 72px;
   display: flex;
   justify-content: center;
 }
 .decorations {
+  min-height: 360px;
   flex: 1;
   position: relative;
 }
