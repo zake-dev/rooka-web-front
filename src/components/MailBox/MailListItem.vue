@@ -38,7 +38,7 @@ export default {
 
 .list-item-wrapper {
   width: 100%;
-  height: 112px;
+  min-height: 112px;
   background-color: $gray1;
   border-radius: 7px;
   box-shadow: 0px 6px 17px -1px #0000000d;

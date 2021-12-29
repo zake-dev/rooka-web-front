@@ -67,12 +67,10 @@ export default {
 
 <style lang="scss" scoped>
 .mailbox-header {
-  width: 100%;
-  min-height: 112px;
-  padding: 0 32px;
+  grid-area: mailbox-header;
+  padding: 32px 16px 0 16px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
 
   &-title {
     width: 100%;

@@ -3,10 +3,10 @@
     <transition name="fade" mode="out-in">
       <MailBoxSkeleton v-if="!isLoaded" />
 
-      <div v-else class="h-100 w-100">
+      <div v-else class="mailbox">
         <MailBoxHeader />
 
-        <div class="mailbox">
+        <div class="h-100">
           <div class="mailbox-list masked-overflow">
             <template v-if="mails.length === 0">
               <MailListItem v-for="index in 10" :key="index" />
@@ -100,13 +100,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/scss/_variables.scss';
+
 .mailbox {
-  width: 100%;
-  height: calc(100% - 112px);
-  max-height: calc(100% - 112px);
   padding: 0 16px 64px 16px;
+  height: calc(100vh - #{$appBarHeight});
+  max-height: calc(100vh - #{$appBarHeight});
 
   &-list {
+    max-height: 100%;
     padding-top: 24px;
     display: flex;
     flex-direction: column;
