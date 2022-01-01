@@ -3,7 +3,7 @@
     <div class="text-content">
       <p class="font__semi-title">
         너무 빨리 오셨군요!<br />
-        감동이에요 😭
+        감동이에요 <Emoji>😭</Emoji>
       </p>
       <p class="font__content-text mt-2 mb-3">
         이렇게 먼저 찾아와 주셔서 정말 감사해요! 아쉽게도 아직은 인터넷 편지
@@ -23,8 +23,11 @@
     ></div>
 
     <div class="action-buttons">
-      <BaseButton class="button-dark mb-3" @click="handleClickGoHome"
+      <BaseButton class="button-gray" @click="handleGoHome"
         >홈으로 가기</BaseButton
+      >
+      <BaseButton class="button-dark" @click="handleAddCalendar"
+        >캘린더에 추가하기</BaseButton
       >
     </div>
   </div>
@@ -33,10 +36,12 @@
 <script>
 import { useRouter } from 'vue-router'
 
+import Emoji from '@/components/Decorator/Emoji'
 import BaseButton from '@/components/Button/BaseButton'
 
 export default {
   components: {
+    Emoji,
     BaseButton,
   },
   setup() {
@@ -44,11 +49,16 @@ export default {
     const router = useRouter()
 
     /* Event Handler */
-    const handleClickGoHome = () => router.push('/')
+    const handleGoHome = () => router.push('/')
+    const handleAddCalendar = () =>
+      window.open(
+        'https://www.google.com/calendar/render?action=TEMPLATE&text=test&details=this+is+description&location=rooka.kr%2F%EA%B0%80%EB%82%98%EB%8B%A4.1610&dates=20220127T030300Z%2F20220130T030300Z',
+      )
 
     return {
       /* Functions */
-      handleClickGoHome,
+      handleGoHome,
+      handleAddCalendar,
     }
   },
 }
@@ -57,24 +67,21 @@ export default {
 <style scoped lang="scss">
 @import '@/scss/_variables.scss';
 
-main {
-  height: 100% !important;
-  overflow: hidden;
+.page-wrapper {
+  min-height: 100vh;
+  width: 100vw;
 }
 .text-content {
-  margin-top: 116px;
-  padding: 48px 32px;
+  padding: 92px 32px 16px 32px;
 }
 .background {
   height: 100%;
 }
 .action-buttons {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 94px;
-  padding: 16px;
-  display: inline-flex;
-  justify-content: center;
+  padding: 72px 64px 0 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 </style>
