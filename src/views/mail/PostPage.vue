@@ -80,11 +80,12 @@
 </template>
 
 <script>
-import { ref, computed, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
 import { openModal } from '@/utils/DialogHandler'
 import * as FileApi from '@/api/FileApi'
+import MailForm from '@/store/modules/MailForm'
 
 import MailButtonPhoto from '@/components/Button/MailButtonPhoto.vue'
 import MailButtonNews from '@/components/Button/MailButtonNews.vue'
@@ -96,31 +97,19 @@ export default {
     MailButtonNews,
     MailButtonSend,
   },
-  beforeRouteLeave(to, from, next) {
-    const isBeingSent = this.$store.state.mail.isBeingSent
-    const isConfirmedToLeave = this.$store.state.mail.isConfirmedToLeave
-
-    if (isBeingSent || isConfirmedToLeave) {
-      next()
-      return
-    }
-
-    this.$store.dispatch('mail/UPDATE_LEAVING_ROUTE', to.fullPath)
-    openModal('BeforeLeavePostMail')
-    next(false)
-  },
   setup() {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => store.state.mailBox.soldier)
-    const state = store.state.mail.mail
+    store.registerModule('mailForm', MailForm)
+    const state = store.state.mailForm.mail
     const author = computed({
       get: () => state.author,
-      set: value => store.dispatch('mail/UPDATE_AUTHOR', value),
+      set: value => store.dispatch('mailForm/UPDATE_AUTHOR', value),
     })
     const relation = computed({
       get: () => state.relation,
-      set: value => store.dispatch('mail/UPDATE_RELATION', value),
+      set: value => store.dispatch('mailForm/UPDATE_RELATION', value),
     })
     const addressInputText = computed(() =>
       state.address1 && state.postCode
@@ -129,15 +118,15 @@ export default {
     )
     const address2 = computed({
       get: () => state.address2,
-      set: value => store.dispatch('mail/UPDATE_ADDRESS2', value),
+      set: value => store.dispatch('mailForm/UPDATE_ADDRESS2', value),
     })
     const title = computed({
       get: () => state.title,
-      set: value => store.dispatch('mail/UPDATE_TITLE', value),
+      set: value => store.dispatch('mailForm/UPDATE_TITLE', value),
     })
     const content = computed({
       get: () => state.content,
-      set: value => store.dispatch('mail/UPDATE_CONTENT', value),
+      set: value => store.dispatch('mailForm/UPDATE_CONTENT', value),
     })
 
     /* Refs */
@@ -170,12 +159,14 @@ export default {
       const text = await navigator.clipboard.readText()
       document.execCommand('insertText', false, text)
     }
+    const handleOpenUploader = () => {}
+    const handleUploadImage = () => {}
     const handleOpenDaumPostcodeApi = e => {
       // eslint-disable-next-line
       new daum.Postcode({
         oncomplete: data => {
-          store.dispatch('mail/UPDATE_ADDRESS1', data.address)
-          store.dispatch('mail/UPDATE_POST_CODE', data.zonecode)
+          store.dispatch('mailForm/UPDATE_ADDRESS1', data.address)
+          store.dispatch('mailForm/UPDATE_POST_CODE', data.zonecode)
         },
       }).open()
 
@@ -195,7 +186,6 @@ export default {
           window.visualViewport.height + MIN_KEYBOARD_HEIGHT
       if (isKeyboardClosed) isMailHeaderVisible.value = true
     })
-    onUnmounted(() => store.dispatch('mail/RESET'))
 
     return {
       /* Refs */
@@ -213,12 +203,28 @@ export default {
       /* Functions */
       handleCollapseMailHeader,
       handleFocusContent,
+      handlePasteText,
+      handleOpenUploader,
       handleOpenDaumPostcodeApi,
       handleInputTitle,
       handleInputContent,
       handleOpenUploader,
       handleUploadImage,
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    const isBeingSent = this.$store.state.mailForm.isBeingSent
+    const isConfirmedToLeave = this.$store.state.mailForm.isConfirmedToLeave
+
+    if (isBeingSent || isConfirmedToLeave) {
+      this.$store.unregisterModule('mailForm')
+      next()
+      return
+    }
+
+    this.$store.dispatch('mailForm/UPDATE_LEAVING_ROUTE', to.fullPath)
+    openModal('BeforeLeavePostMail')
+    next(false)
   },
 }
 </script>

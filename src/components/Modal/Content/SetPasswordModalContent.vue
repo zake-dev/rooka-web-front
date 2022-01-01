@@ -72,9 +72,9 @@ export default {
       }
 
       if (validate()) {
-        store.dispatch('mail/UPDATE_KEY', route.params.key)
-        store.dispatch('mail/UPDATE_PASSWORD', password.value)
-        store.dispatch('mail/SEND_MAIL')
+        store.dispatch('mailForm/UPDATE_KEY', route.params.key)
+        store.dispatch('mailForm/UPDATE_PASSWORD', password.value)
+        store.dispatch('mailForm/SEND_MAIL')
         closeModal()
       }
     }

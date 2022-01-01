@@ -46,10 +46,10 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const mail = computed(() => store.state.mail.mail)
+    const mail = computed(() => store.state.mailView.mail)
 
     /* Event Handler */
-    onUnmounted(() => store.dispatch('mail/RESET'))
+    onUnmounted(() => store.dispatch('mailView/RESET'))
 
     return {
       /* Variables */

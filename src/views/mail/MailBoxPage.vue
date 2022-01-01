@@ -75,7 +75,7 @@ export default {
 
     /* Event Handler */
     const handleClickMailListItem = id => {
-      store.dispatch('mail/UPDATE_ID', id)
+      store.dispatch('mailView/UPDATE_ID', id)
       openModal('RequestPassword')
     }
     const handleClickShare = () => openModal('ShareToSns')

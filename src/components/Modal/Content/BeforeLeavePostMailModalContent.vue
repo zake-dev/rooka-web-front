@@ -33,14 +33,14 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const leavingRoute = computed(() => store.state.mail.leavingRoute)
+    const leavingRoute = computed(() => store.state.mailForm.leavingRoute)
 
     /* Router */
     const router = useRouter()
 
     /* Event Handler */
     const handleClickLeaveRoute = () => {
-      store.dispatch('mail/UPDATE_IS_CONFIRMED_TO_LEAVE', true)
+      store.dispatch('mailForm/UPDATE_IS_CONFIRMED_TO_LEAVE', true)
       router.push(leavingRoute.value)
       closeModal()
     }

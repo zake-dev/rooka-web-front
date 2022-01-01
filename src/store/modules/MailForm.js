@@ -37,24 +37,6 @@ const module = {
     },
   },
   mutations: {
-    RESET(state) {
-      Object.assign(state.mail, {
-        id: null,
-        author: '',
-        relation: '',
-        address1: '',
-        address2: '',
-        postCode: '',
-        title: '',
-        content: '',
-        password: '',
-        key: '',
-        state: '',
-        createAt: '',
-      })
-      state.isBeingSent = false
-      ;(state.isConfirmedToLeave = false), (state.leavingRoute = '')
-    },
     SET_MAIL(state, mail) {
       Object.assign(state.mail, mail)
     },
@@ -102,10 +84,6 @@ const module = {
     },
   },
   actions: {
-    async FETCH_MAIL({ commit, state }, password) {
-      const { data } = await MailApi.getMail(state.mail.id, password)
-      commit('SET_MAIL', data)
-    },
     async SEND_MAIL({ commit, state }) {
       commit('SET_IS_BEING_SENT', true)
 
@@ -156,9 +134,6 @@ const module = {
     },
     UPDATE_LEAVING_ROUTE({ commit }, route) {
       commit('SET_LEAVING_ROUTE', route)
-    },
-    RESET({ commit }) {
-      commit('RESET')
     },
   },
 }

@@ -20,7 +20,7 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const isSendable = computed(() => store.getters['mail/isSendable'])
+    const isSendable = computed(() => store.getters['mailForm/isSendable'])
 
     /* Event Handler */
     const handleSendMail = () => openModal('SetPassword')

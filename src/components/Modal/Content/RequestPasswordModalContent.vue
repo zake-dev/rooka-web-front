@@ -41,7 +41,7 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const id = computed(() => store.state.mail.mail.id)
+    const id = computed(() => store.state.mailView.mail.id)
 
     /* Router */
     const router = useRouter()
@@ -55,7 +55,7 @@ export default {
     /* Event Handler */
     const handleSubmitPassword = async () => {
       try {
-        await store.dispatch('mail/FETCH_MAIL', password.value)
+        await store.dispatch('mailView/FETCH_MAIL', password.value)
         router.push(`/${key}/mail/${id.value}`)
         closeModal()
       } catch (e) {
