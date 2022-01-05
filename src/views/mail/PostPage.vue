@@ -34,9 +34,6 @@
             placeholder="상세주소를 입력해주세요"
             v-model="address2"
           />
-          <a class="mail-header-row__link" @click="handleOpenDaumPostcodeApi"
-            >우편번호 검색</a
-          >
         </div>
       </div>
     </div>
@@ -65,17 +62,12 @@
     <div class="mail-footer">
       <MailFormButtonPhoto
         v-if="soldier.militaryType === 'ARMY'"
-        @click="handleOpenUploader"
+        @click="handleOpenImageUploader"
       />
       <MailFormButtonNews />
       <MailFormButtonSend />
     </div>
-    <input
-      ref="imageUploadInput"
-      type="file"
-      @input="handleUploadImage"
-      hidden
-    />
+    <input ref="imageInput" type="file" @input="handleUploadImage" hidden />
   </div>
 </template>
 
@@ -83,6 +75,7 @@
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
+import { useImageUploader } from '@/composables/useImageUploader'
 import { openModal } from '@/utils/DialogHandler'
 
 import MailFormButtonPhoto from '@/components/Button/MailFormButtonPhoto.vue'
@@ -128,7 +121,16 @@ export default {
 
     /* Refs */
     const mailContentInput = ref(null)
-    const imageUploadInput = ref(null)
+
+    /* Composables */
+    const {
+      imageInput,
+      handleOpenImageUploader,
+      handleUploadImage,
+      errorOnUploadImage,
+    } = useImageUploader(imageUUID =>
+      store.dispatch('mailForm/UPDATE_IMAGE_UUID', imageUUID),
+    )
 
     /* Local State */
     const isMailHeaderVisible = ref(true)
@@ -156,8 +158,6 @@ export default {
       const text = await navigator.clipboard.readText()
       document.execCommand('insertText', false, text)
     }
-    const handleOpenUploader = () => {}
-    const handleUploadImage = () => {}
     const handleOpenDaumPostcodeApi = e => {
       // eslint-disable-next-line
       new daum.Postcode({
@@ -187,7 +187,7 @@ export default {
     return {
       /* Refs */
       mailContentInput,
-      imageUploadInput,
+      imageInput,
       /* Variables */
       isMailHeaderVisible,
       soldier,
@@ -201,11 +201,10 @@ export default {
       handleCollapseMailHeader,
       handleFocusContent,
       handlePasteText,
-      handleOpenUploader,
       handleOpenDaumPostcodeApi,
       handleInputTitle,
       handleInputContent,
-      handleOpenUploader,
+      handleOpenImageUploader,
       handleUploadImage,
     }
   },
@@ -256,12 +255,6 @@ input {
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
-      }
-      &__link {
-        @extend .font__button-text;
-        text-decoration: underline;
-        text-decoration-color: $gray6;
-        color: $gray6;
       }
       &__label {
         margin-right: 8px;

@@ -1,5 +1,4 @@
 import * as MailApi from '@/api/MailApi'
-import router from '@/router'
 
 const module = {
   namespaced: true,
