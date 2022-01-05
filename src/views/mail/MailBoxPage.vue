@@ -76,7 +76,7 @@ export default {
     /* Event Handler */
     const handleClickMailListItem = id => {
       store.dispatch('mailView/UPDATE_ID', id)
-      openModal('RequestPassword')
+      openModal('RequestPasswordToView')
     }
     const handleClickShare = () => openModal('ShareToSns')
     const handleClickNewMail = () => router.push(`/${key.value}/mail/post`)

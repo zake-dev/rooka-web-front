@@ -20,10 +20,8 @@
 <script>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { useRouter, useRoute } from 'vue-router'
 
-import { closeModal } from '@/utils/DialogHandler'
-import * as MailApi from '@/api/MailApi'
+import { openModal, closeModal } from '@/utils/DialogHandler'
 
 import BaseButton from '@/components/Button/BaseButton.vue'
 
@@ -59,21 +57,8 @@ export default {
       return ''
     })
 
-    /* Router */
-    const router = useRouter()
-    const route = useRoute()
-
     /* Event Handler */
-    const handleDeleteMail = async () => {
-      try {
-        await MailApi.deleteMail(route.params.id)
-        router.push(`/${route.params.key}/mail`)
-      } catch (e) {
-        console.error(e)
-      } finally {
-        closeModal()
-      }
-    }
+    const handleDeleteMail = async () => openModal('RequestPasswordToDelete')
 
     return {
       /* Variables */

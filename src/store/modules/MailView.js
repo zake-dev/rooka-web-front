@@ -48,6 +48,9 @@ const module = {
       const { data } = await MailApi.getMail(state.mail.id, password)
       commit('SET_MAIL', data)
     },
+    async DELETE_MAIL({ commit, state }, password) {
+      await MailApi.deleteMail(state.mail.id, password)
+    },
     UPDATE_ID({ commit }, id) {
       commit('SET_ID', id)
     },

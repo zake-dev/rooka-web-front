@@ -21,7 +21,8 @@ import { useStore } from 'vuex'
 import MissingMilitaryTypeModalContent from '@/components/Modal/Content/MissingMilitaryTypeModalContent.vue'
 import WhatIsMailBoxLinkModalContent from '@/components/Modal/Content/WhatIsMailBoxLinkModalContent.vue'
 import ProfileModalContent from '@/components/Modal/Content/ProfileModalContent.vue'
-import RequestPasswordModalContent from '@/components/Modal/Content/RequestPasswordModalContent.vue'
+import RequestPasswordToViewModalContent from '@/components/Modal/Content/RequestPasswordToViewModalContent.vue'
+import RequestPasswordToDeleteModalContent from '@/components/Modal/Content/RequestPasswordToDeleteModalContent.vue'
 import SetPasswordModalContent from '@/components/Modal/Content/SetPasswordModalContent.vue'
 import BeforeLeavePostMailModalContent from '@/components/Modal/Content/BeforeLeavePostMailModalContent.vue'
 import ShareToSnsModalContent from '@/components/Modal/Content/ShareToSnsModalContent.vue'
@@ -37,7 +38,8 @@ export default {
     MissingMilitaryTypeModalContent,
     WhatIsMailBoxLinkModalContent,
     ProfileModalContent,
-    RequestPasswordModalContent,
+    RequestPasswordToViewModalContent,
+    RequestPasswordToDeleteModalContent,
     SetPasswordModalContent,
     BeforeLeavePostMailModalContent,
     ShareToSnsModalContent,
