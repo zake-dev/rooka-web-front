@@ -103,9 +103,9 @@ export default {
 @import '@/scss/_variables.scss';
 
 .mailbox {
-  padding: 0 16px 64px 16px;
+  padding: 0 16px 184px 16px;
   height: calc(100vh - #{$appBarHeight});
-  max-height: calc(100vh - #{$appBarHeight});
+  overflow: hidden;
 
   &-list {
     max-height: 100%;
@@ -117,6 +117,7 @@ export default {
 }
 .action-buttons {
   position: fixed;
+  left: 0;
   bottom: 16px;
   width: 100%;
   height: 50px;

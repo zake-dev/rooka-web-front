@@ -34,7 +34,7 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const mailStatus = computed(() => store.state.mail.mail.state)
+    const mailStatus = computed(() => store.state.mailView.mail.status)
 
     /* Local State */
     const title = computed(() => {

@@ -15,7 +15,7 @@ const module = {
       content: '',
       password: '',
       key: '',
-      state: '',
+      status: '',
       createAt: '',
     },
   },
@@ -32,7 +32,7 @@ const module = {
         content: '',
         password: '',
         key: '',
-        state: '',
+        status: '',
         createAt: '',
       })
     },

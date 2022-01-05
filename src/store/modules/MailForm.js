@@ -15,8 +15,6 @@ const module = {
       content: '',
       password: '',
       key: '',
-      state: '',
-      createAt: '',
     },
     isBeingSent: false,
     isConfirmedToLeave: false,
@@ -37,9 +35,6 @@ const module = {
     },
   },
   mutations: {
-    SET_MAIL(state, mail) {
-      Object.assign(state.mail, mail)
-    },
     SET_ID(state, id) {
       state.mail.id = id
     },
@@ -69,9 +64,6 @@ const module = {
     },
     SET_KEY(state, key) {
       state.mail.key = key
-    },
-    SET_STATE(state, mailState) {
-      state.mail.state = mailState
     },
     SET_IS_BEING_SENT(state, isBeingSent) {
       state.isBeingSent = isBeingSent
@@ -125,9 +117,6 @@ const module = {
     },
     UPDATE_KEY({ commit }, key) {
       commit('SET_KEY', key)
-    },
-    UPDATE_STATE({ commit }, state) {
-      commit('SET_STATE', state)
     },
     UPDATE_IS_CONFIRMED_TO_LEAVE({ commit }, isConfirmedToLeave) {
       commit('SET_IS_CONFIRMED_TO_LEAVE', isConfirmedToLeave)

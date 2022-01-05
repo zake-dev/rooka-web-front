@@ -324,6 +324,7 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transform: translateY($appBarHeight);
   }
 }
 </style>
