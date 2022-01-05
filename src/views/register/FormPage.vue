@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        <FormButtonBack />
+        <RegisterFormButtonBack />
       </div>
 
       <!-- 작성 폼 (군종) -->
@@ -93,7 +93,7 @@
           </div>
         </div>
 
-        <FormButtonBack />
+        <RegisterFormButtonBack />
       </div>
 
       <!-- 작성 폼 (입대일) -->
@@ -121,7 +121,7 @@
           </div>
         </div>
 
-        <FormButtonBack />
+        <RegisterFormButtonBack />
       </div>
 
       <!-- 작성 폼 (육군 - 입영부대) -->
@@ -149,7 +149,7 @@
           </div>
         </div>
 
-        <FormButtonBack />
+        <RegisterFormButtonBack />
       </div>
 
       <!-- 작성 폼 (공군 - 기수) -->
@@ -177,7 +177,7 @@
           </div>
         </div>
 
-        <FormButtonBack />
+        <RegisterFormButtonBack />
       </div>
     </transition>
   </div>
@@ -197,7 +197,7 @@ import FormLabel from '@/components/Form/FormLabel.vue'
 import FormInput from '@/components/Form/FormInput.vue'
 import ArmyTrainingCenterSelect from '@/components/Form/ArmyTrainingCenterSelect.vue'
 import AirforceKisuSelect from '@/components/Form/AirforceKisuSelect'
-import FormButtonBack from '@/components/Button/FormButtonBack.vue'
+import RegisterFormButtonBack from '@/components/Button/RegisterFormButtonBack.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
 
 export default {
@@ -208,7 +208,7 @@ export default {
     FormInput,
     ArmyTrainingCenterSelect,
     AirforceKisuSelect,
-    FormButtonBack,
+    RegisterFormButtonBack,
     BaseButton,
   },
   setup() {

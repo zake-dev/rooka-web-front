@@ -21,8 +21,8 @@
     </div>
 
     <div class="mail-footer">
-      <MailButtonDelete />
-      <MailButtonBackToMailBox />
+      <MailViewButtonDelete />
+      <MailViewButtonBackToMailBox />
     </div>
   </div>
 </template>
@@ -34,14 +34,14 @@ import { useStore } from 'vuex'
 import { openModal } from '@/utils/DialogHandler'
 
 import MailStatusChip from '@/components/Chip/MailStatusChip'
-import MailButtonDelete from '@/components/Button/MailButtonDelete'
-import MailButtonBackToMailBox from '@/components/Button/MailButtonBackToMailBox'
+import MailViewButtonDelete from '@/components/Button/MailViewButtonDelete'
+import MailViewButtonBackToMailBox from '@/components/Button/MailViewButtonBackToMailBox'
 
 export default {
   components: {
     MailStatusChip,
-    MailButtonDelete,
-    MailButtonBackToMailBox,
+    MailViewButtonDelete,
+    MailViewButtonBackToMailBox,
   },
   setup() {
     /* Vuex */

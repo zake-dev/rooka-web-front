@@ -63,12 +63,12 @@
     </div>
 
     <div class="mail-footer">
-      <MailButtonPhoto
+      <MailFormButtonPhoto
         v-if="soldier.militaryType === 'ARMY'"
         @click="handleOpenUploader"
       />
-      <MailButtonNews />
-      <MailButtonSend />
+      <MailFormButtonNews />
+      <MailFormButtonSend />
     </div>
     <input
       ref="imageUploadInput"
@@ -84,18 +84,16 @@ import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
 import { openModal } from '@/utils/DialogHandler'
-import * as FileApi from '@/api/FileApi'
-import MailForm from '@/store/modules/MailForm'
 
-import MailButtonPhoto from '@/components/Button/MailButtonPhoto.vue'
-import MailButtonNews from '@/components/Button/MailButtonNews.vue'
-import MailButtonSend from '@/components/Button/MailButtonSend.vue'
+import MailFormButtonPhoto from '@/components/Button/MailFormButtonPhoto.vue'
+import MailFormButtonNews from '@/components/Button/MailFormButtonNews.vue'
+import MailFormButtonSend from '@/components/Button/MailFormButtonSend.vue'
 
 export default {
   components: {
-    MailButtonPhoto,
-    MailButtonNews,
-    MailButtonSend,
+    MailFormButtonPhoto,
+    MailFormButtonNews,
+    MailFormButtonSend,
   },
   setup() {
     /* Vuex */
