@@ -101,7 +101,6 @@ export default {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => store.state.mailBox.soldier)
-    store.registerModule('mailForm', MailForm)
     const state = store.state.mailForm.mail
     const author = computed({
       get: () => state.author,
@@ -217,7 +216,7 @@ export default {
     const isConfirmedToLeave = this.$store.state.mailForm.isConfirmedToLeave
 
     if (isBeingSent || isConfirmedToLeave) {
-      this.$store.unregisterModule('mailForm')
+      this.$store.dispatch('mailForm/RESET')
       next()
       return
     }

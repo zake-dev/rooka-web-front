@@ -74,6 +74,25 @@ const module = {
     SET_LEAVING_ROUTE(state, route) {
       state.leavingRoute = route
     },
+    RESET(state) {
+      Object.assign(state, {
+        mail: {
+          id: null,
+          author: '',
+          relation: '',
+          address1: '',
+          address2: '',
+          postCode: '',
+          title: '',
+          content: '',
+          password: '',
+          key: '',
+        },
+        isBeingSent: false,
+        isConfirmedToLeave: false,
+        leavingRoute: '',
+      })
+    },
   },
   actions: {
     async SEND_MAIL({ commit, state }) {
@@ -123,6 +142,9 @@ const module = {
     },
     UPDATE_LEAVING_ROUTE({ commit }, route) {
       commit('SET_LEAVING_ROUTE', route)
+    },
+    RESET({ commit }) {
+      commit('RESET')
     },
   },
 }

@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate'
 import RegisterForm from '@/store/modules/RegisterForm'
 import MailBox from '@/store/modules/MailBox'
 import MailView from '@/store/modules/MailView'
+import MailForm from '@/store/modules/MailForm'
 
 export default createStore({
   state: {
@@ -41,6 +42,7 @@ export default createStore({
     registerForm: RegisterForm,
     mailBox: MailBox,
     mailView: MailView,
+    mailForm: MailForm,
   },
   plugins: [
     createPersistedState({
