@@ -92,7 +92,7 @@ export default {
   &__title {
     margin: 8px;
     padding-top: 8px;
-    color: $gray5;
+    color: $gray6;
   }
 }
 .modal-actions {

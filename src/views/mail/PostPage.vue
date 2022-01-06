@@ -47,6 +47,7 @@
         @paste.prevent="handlePasteText"
         @input="handleInputTitle"
       ></div>
+      <MailAttachmentContainer v-if="imageUUID" class="mail-content__image" />
       <div
         class="mail-content__textarea font__content-text"
         placeholder="내용을 입력해주세요"
@@ -67,7 +68,13 @@
       <MailFormButtonNews />
       <MailFormButtonSend />
     </div>
-    <input ref="imageInput" type="file" @input="handleUploadImage" hidden />
+    <input
+      v-if="soldier.militaryType === 'ARMY'"
+      ref="imageInput"
+      type="file"
+      @input="handleUploadImage"
+      hidden
+    />
   </div>
 </template>
 
@@ -78,12 +85,14 @@ import { useStore } from 'vuex'
 import { useImageUploader } from '@/composables/useImageUploader'
 import { openModal } from '@/utils/DialogHandler'
 
+import MailAttachmentContainer from '@/components/MailAttachment/MailAttachmentContainer.vue'
 import MailFormButtonPhoto from '@/components/Button/MailFormButtonPhoto.vue'
 import MailFormButtonNews from '@/components/Button/MailFormButtonNews.vue'
 import MailFormButtonSend from '@/components/Button/MailFormButtonSend.vue'
 
 export default {
   components: {
+    MailAttachmentContainer,
     MailFormButtonPhoto,
     MailFormButtonNews,
     MailFormButtonSend,
@@ -118,6 +127,7 @@ export default {
       get: () => state.content,
       set: value => store.dispatch('mailForm/UPDATE_CONTENT', value),
     })
+    const imageUUID = computed(() => state.imageUUID)
 
     /* Refs */
     const mailContentInput = ref(null)
@@ -197,6 +207,7 @@ export default {
       address2,
       title,
       content,
+      imageUUID,
       /* Functions */
       handleCollapseMailHeader,
       handleFocusContent,
@@ -294,6 +305,9 @@ input {
         content: attr(placeholder);
         color: $gray4;
       }
+    }
+    &__image {
+      margin-bottom: 16px;
     }
     &__textarea {
       cursor: text;

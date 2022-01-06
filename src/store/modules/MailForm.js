@@ -96,7 +96,6 @@ const module = {
   actions: {
     async SEND_MAIL({ commit, state }) {
       commit('SET_IS_BEING_SENT', true)
-      console.dir(state.mail)
       try {
         await MailApi.postMail(state.mail)
         await router.push(`/${state.mail.key}/mail`)

@@ -44,7 +44,6 @@ const module = {
           currentStep: 1,
         },
       })
-      console.dir(state)
     },
     SET_KEY(state, key) {
       state.key = key

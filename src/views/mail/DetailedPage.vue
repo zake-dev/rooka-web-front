@@ -17,6 +17,7 @@
 
     <div class="mail-content masked-overflow">
       <span class="font__semi-title">{{ mail.title }}</span>
+      <MailAttachmentImage v-if="mail.imageUUID" :uuid="mail.imageUUID" />
       <span class="font__content-text">{{ mail.content }}</span>
     </div>
 
@@ -31,15 +32,15 @@
 import { computed, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
 
-import { openModal } from '@/utils/DialogHandler'
-
 import MailStatusChip from '@/components/Chip/MailStatusChip'
+import MailAttachmentImage from '@/components/MailAttachment/MailAttachmentImage.vue'
 import MailViewButtonDelete from '@/components/Button/MailViewButtonDelete'
 import MailViewButtonBackToMailBox from '@/components/Button/MailViewButtonBackToMailBox'
 
 export default {
   components: {
     MailStatusChip,
+    MailAttachmentImage,
     MailViewButtonDelete,
     MailViewButtonBackToMailBox,
   },
@@ -54,7 +55,6 @@ export default {
     return {
       /* Variables */
       mail,
-      /* Functions */
     }
   },
 }
