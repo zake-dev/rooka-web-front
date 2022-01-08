@@ -1,11 +1,8 @@
 import { axiosService } from '@/api'
 
 export const getKey = form => {
-  const soldier = form.filter(
-    ({ key }) => key !== 'militaryType' || key !== 'key',
-  )
   return axiosService.get('/mailbox/existence', {
-    params: soldier,
+    params: form,
   })
 }
 
