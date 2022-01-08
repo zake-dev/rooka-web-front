@@ -40,7 +40,7 @@ import { openModal } from '@/utils/DialogHandler'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
-import SoldierCard from '@/components/Card/SoldierCard'
+import SoldierCard from '@/components/SoldierCard/SoldierCard.vue'
 
 export default {
   components: {

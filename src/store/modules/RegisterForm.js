@@ -18,7 +18,14 @@ const module = {
   },
   getters: {
     isValidForm: state => {
-      const { name, birthDate, militaryType, enterDate, kisu } = state.soldier
+      const {
+        name,
+        birthDate,
+        militaryType,
+        enterDate,
+        kisu,
+        trainingCenterName,
+      } = state.soldier
       return (
         name !== '' &&
         birthDate !== '' &&
