@@ -16,6 +16,18 @@ const module = {
       trainingCenterName: '',
     },
   },
+  getters: {
+    isValidForm: state => {
+      const { name, birthDate, militaryType, enterDate, kisu } = state.soldier
+      return (
+        name !== '' &&
+        birthDate !== '' &&
+        militaryType !== '' &&
+        enterDate !== '' &&
+        (kisu !== '' || trainingCenterName !== '')
+      )
+    },
+  },
   mutations: {
     RESET(state) {
       Object.assign(state, {

@@ -21,18 +21,15 @@ const module = {
     leavingRoute: '',
   },
   getters: {
-    isSendable: state => {
-      return (
-        state.mail.author !== '' &&
-        state.mail.relation !== '' &&
-        state.mail.address1 !== '' &&
-        state.mail.address2 !== '' &&
-        state.mail.postCode !== '' &&
-        state.mail.title !== '' &&
-        state.mail.content !== '' &&
-        !state.isBeingSend
-      )
-    },
+    isValidForm: state =>
+      state.mail.author !== '' &&
+      state.mail.relation !== '' &&
+      state.mail.address1 !== '' &&
+      state.mail.address2 !== '' &&
+      state.mail.postCode !== '' &&
+      state.mail.title !== '' &&
+      state.mail.content !== '',
+    isSendable: (state, getters) => getters.isValidForm && !state.isBeingSend,
   },
   mutations: {
     SET_AUTHOR(state, author) {

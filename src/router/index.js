@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { publicPath } from '@/../vue.config'
+import store from '@/store'
 
 const routes = [
   {
@@ -37,11 +38,19 @@ const routes = [
     path: '/register/create-link',
     name: 'RegisterCreateLink',
     component: () => import('../views/register/CreateLinkPage.vue'),
+    beforeEnter: (to, from, next) => {
+      const isValidForm = store.getters['registerForm/isValidForm']
+      isValidForm ? next() : next('/register/form')
+    },
   },
   {
     path: '/register/result',
     name: 'RegisterResult',
     component: () => import('../views/register/ResultPage.vue'),
+    beforeEnter: (to, from, next) => {
+      const isValidForm = store.getters['registerForm/isValidForm']
+      isValidForm ? next() : next('/register/form')
+    },
   },
   {
     path: '/error/mailbox-not-found',
