@@ -15,11 +15,11 @@
 
       <SoldierCard
         class="modal-content-body__image"
-        :soldier="soldier"
+        :uuid="linkImageUUID"
       ></SoldierCard>
 
       <div class="modal-content-buttons">
-        <BaseButton class="button-secondary" @click="handleDownloadLinkImage"
+        <BaseButton class="button-secondary" @click="handleDownloadAndGoNext"
           >이미지 저장하기</BaseButton
         >
         <a
@@ -36,6 +36,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
+import { useImageDownloader } from '@/composables/useImageDownloader'
 import { openModal } from '@/utils/DialogHandler'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
@@ -51,23 +52,25 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() =>
-      store.state.mailBox.key
-        ? store.state.mailBox.soldier
-        : store.state.registerForm.soldier,
+    const linkImageUUID = computed(
+      () =>
+        store.state.registerForm.linkImageUUID ??
+        store.state.mailBox.linkImageUUID,
     )
 
     /* Event Handler */
-    const handleDownloadLinkImage = () => {
+    const { handleDownloadImage } = useImageDownloader()
+    const handleDownloadAndGoNext = () => {
+      handleDownloadImage(linkImageUUID.value, 'rooka-공유-이미지.png')
       openModal('ShareToInstagramStepTwo')
     }
 
     return {
       /* Variables */
-      soldier,
+      linkImageUUID,
       /* Functions */
       openModal,
-      handleDownloadLinkImage,
+      handleDownloadAndGoNext,
     }
   },
 }

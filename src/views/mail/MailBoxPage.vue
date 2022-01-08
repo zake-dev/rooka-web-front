@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { computed, onBeforeMount, onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 
@@ -81,7 +81,6 @@ export default {
     const handleClickShare = () => openModal('ShareToSns')
     const handleClickNewMail = () => router.push(`/${key.value}/mail/post`)
 
-    onBeforeMount(() => store.dispatch('mailBox/RESET'))
     onMounted(() => store.dispatch('mailBox/FETCH_CONTEXT', route.params.key))
 
     return {
@@ -95,6 +94,10 @@ export default {
       handleClickShare,
       handleClickNewMail,
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch('mailBox/RESET')
+    next()
   },
 }
 </script>

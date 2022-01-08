@@ -52,6 +52,7 @@
 
 <script>
 import { ref, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import html2canvas from 'html2canvas'
 
 import * as FileApi from '@/api/FileApi'
@@ -74,6 +75,9 @@ export default {
     linkKey: String,
   },
   setup(props) {
+    /* Vuex */
+    const store = useStore()
+
     /* Local State */
     const uuid = ref('')
 
@@ -94,6 +98,10 @@ export default {
         const linkImageUUID = data.uuid
         uuid.value = linkImageUUID
         MailBoxApi.setLinkImageUUID(props.linkKey, linkImageUUID)
+        await store.dispatch(
+          'registerForm/UPDATE_LINK_IMAGE_UUID',
+          linkImageUUID,
+        )
       }, 'image/png')
     })
 
@@ -114,7 +122,6 @@ export default {
 @import '@/scss/_variables.scss';
 
 .card-wrapper {
-  background-color: $gray1;
   box-shadow: 0px 6px 17px -1px #0000000d;
   border-radius: 7px;
 }
