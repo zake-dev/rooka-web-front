@@ -72,10 +72,8 @@ export default {
         ? store.state.mailBox.soldier
         : store.state.registerForm.soldier,
     )
-    const key = computed(() =>
-      store.state.mailBox.key
-        ? store.state.mailBox.key
-        : store.state.registerForm.key,
+    const key = computed(
+      () => store.state.mailBox.key ?? store.state.registerForm.key,
     )
     const template = computed(
       () =>

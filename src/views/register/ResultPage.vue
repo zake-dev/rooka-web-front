@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { computed, onUnmounted } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
@@ -53,10 +53,9 @@ export default {
     /* Event Handler */
     const handleClickShareLink = () => openModal('ShareToSns')
     const handleClickNewMail = () => {
+      store.dispatch('registerForm/RESET')
       router.push(`/${key.value}/mail`)
     }
-
-    onUnmounted(() => store.dispatch('registerForm/RESET'))
 
     return {
       /* Variables */
