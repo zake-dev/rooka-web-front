@@ -53,7 +53,7 @@ export default {
     /* Event Handler */
     const handleClickShareLink = () => openModal('ShareToSns')
     const handleClickNewMail = () => {
-      router.push(`/${soldier.value.key}/mail`)
+      router.push(`/${key.value}/mail`)
     }
 
     onUnmounted(() => store.dispatch('registerForm/RESET'))
