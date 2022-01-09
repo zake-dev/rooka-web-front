@@ -34,9 +34,6 @@
             placeholder="상세주소를 입력해주세요"
             v-model="address2"
           />
-          <a class="mail-header-row__link" @click="handleOpenDaumPostcodeApi"
-            >우편번호 검색</a
-          >
         </div>
       </div>
     </div>
@@ -50,6 +47,7 @@
         @paste.prevent="handlePasteText"
         @input="handleInputTitle"
       ></div>
+      <MailAttachmentContainer v-if="imageUUID" class="mail-content__image" />
       <div
         class="mail-content__textarea font__content-text"
         placeholder="내용을 입력해주세요"
@@ -65,13 +63,14 @@
     <div class="mail-footer">
       <MailFormButtonPhoto
         v-if="soldier.militaryType === 'ARMY'"
-        @click="handleOpenUploader"
+        @click="handleOpenImageUploader"
       />
       <MailFormButtonNews />
       <MailFormButtonSend />
     </div>
     <input
-      ref="imageUploadInput"
+      v-if="soldier.militaryType === 'ARMY'"
+      ref="imageInput"
       type="file"
       @input="handleUploadImage"
       hidden
@@ -83,14 +82,17 @@
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 
+import { useImageUploader } from '@/composables/useImageUploader'
 import { openModal } from '@/utils/DialogHandler'
 
+import MailAttachmentContainer from '@/components/MailAttachment/MailAttachmentContainer.vue'
 import MailFormButtonPhoto from '@/components/Button/MailFormButtonPhoto.vue'
 import MailFormButtonNews from '@/components/Button/MailFormButtonNews.vue'
 import MailFormButtonSend from '@/components/Button/MailFormButtonSend.vue'
 
 export default {
   components: {
+    MailAttachmentContainer,
     MailFormButtonPhoto,
     MailFormButtonNews,
     MailFormButtonSend,
@@ -125,10 +127,20 @@ export default {
       get: () => state.content,
       set: value => store.dispatch('mailForm/UPDATE_CONTENT', value),
     })
+    const imageUUID = computed(() => state.imageUUID)
 
     /* Refs */
     const mailContentInput = ref(null)
-    const imageUploadInput = ref(null)
+
+    /* Composables */
+    const {
+      imageInput,
+      handleOpenImageUploader,
+      handleUploadImage,
+      errorOnUploadImage,
+    } = useImageUploader(imageUUID =>
+      store.dispatch('mailForm/UPDATE_IMAGE_UUID', imageUUID),
+    )
 
     /* Local State */
     const isMailHeaderVisible = ref(true)
@@ -156,8 +168,6 @@ export default {
       const text = await navigator.clipboard.readText()
       document.execCommand('insertText', false, text)
     }
-    const handleOpenUploader = () => {}
-    const handleUploadImage = () => {}
     const handleOpenDaumPostcodeApi = e => {
       // eslint-disable-next-line
       new daum.Postcode({
@@ -187,7 +197,7 @@ export default {
     return {
       /* Refs */
       mailContentInput,
-      imageUploadInput,
+      imageInput,
       /* Variables */
       isMailHeaderVisible,
       soldier,
@@ -197,15 +207,15 @@ export default {
       address2,
       title,
       content,
+      imageUUID,
       /* Functions */
       handleCollapseMailHeader,
       handleFocusContent,
       handlePasteText,
-      handleOpenUploader,
       handleOpenDaumPostcodeApi,
       handleInputTitle,
       handleInputContent,
-      handleOpenUploader,
+      handleOpenImageUploader,
       handleUploadImage,
     }
   },
@@ -257,12 +267,6 @@ input {
         align-items: stretch;
         gap: 8px;
       }
-      &__link {
-        @extend .font__button-text;
-        text-decoration: underline;
-        text-decoration-color: $gray6;
-        color: $gray6;
-      }
       &__label {
         margin-right: 8px;
         min-width: 80px;
@@ -301,6 +305,9 @@ input {
         content: attr(placeholder);
         color: $gray4;
       }
+    }
+    &__image {
+      margin-bottom: 16px;
     }
     &__textarea {
       cursor: text;

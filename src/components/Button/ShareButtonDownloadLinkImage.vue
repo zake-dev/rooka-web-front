@@ -1,5 +1,8 @@
 <template>
-  <button class="button" @click="handleDownloadLinkImage">
+  <button
+    class="button"
+    @click="handleDownloadImage(linkImageUUID, 'rooka-공유-이미지.png')"
+  >
     <div class="button-icon-wrapper">
       <img class="button-icon-wrapper__icon" :src="DownloadIconSvg" />
     </div>
@@ -8,23 +11,33 @@
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
+import { useImageDownloader } from '@/composables/useImageDownloader'
+
 import DownloadIconSvg from '@/assets/icons/download-icon.svg'
 
 export default {
   setup() {
+    /* Vuex */
+    const store = useStore()
+    const linkImageUUID = computed(
+      () =>
+        store.state.registerForm.linkImageUUID ??
+        store.state.mailBox.linkImageUUID,
+    )
+
     /* Event Handler */
-    const handleDownloadLinkImage = () => {
-      const link = document.createElement('a')
-      link.href = document.getElementById('card-image').src
-      link.download = 'rooka-공유-이미지.png'
-      link.click()
-    }
+    const { handleDownloadImage } = useImageDownloader()
 
     return {
       /* Assets */
       DownloadIconSvg,
+      /* Variables */
+      linkImageUUID,
       /* Functions */
-      handleDownloadLinkImage,
+      handleDownloadImage,
     }
   },
 }

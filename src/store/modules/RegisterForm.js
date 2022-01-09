@@ -2,6 +2,7 @@ const module = {
   namespaced: true,
   state: {
     key: '',
+    linkImageUUID: null,
     slideTransition: 'slide-left',
     stepper: {
       maxStep: 5,
@@ -16,10 +17,30 @@ const module = {
       trainingCenterName: '',
     },
   },
+  getters: {
+    isValidForm: state => {
+      const {
+        name,
+        birthDate,
+        militaryType,
+        enterDate,
+        kisu,
+        trainingCenterName,
+      } = state.soldier
+      return (
+        name !== '' &&
+        birthDate !== '' &&
+        militaryType !== '' &&
+        enterDate !== '' &&
+        (kisu !== '' || trainingCenterName !== '')
+      )
+    },
+  },
   mutations: {
     RESET(state) {
       Object.assign(state, {
         key: '',
+        linkImageUUID: null,
         slideTransition: 'slide-left',
         stepper: {
           maxStep: 5,
@@ -72,6 +93,9 @@ const module = {
     SET_TRAINING_CENTER_NAME(state, trainingCenterName) {
       state.soldier.trainingCenterName = trainingCenterName
     },
+    SET_LINK_IMAGE_UUID(state, linkImageUUID) {
+      state.linkImageUUID = linkImageUUID
+    },
   },
   actions: {
     INCREASE_STEP({ state, commit }) {
@@ -102,6 +126,9 @@ const module = {
     },
     UPDATE_TRAINING_CENTER_NAME({ commit }, trainingCenterName) {
       commit('SET_TRAINING_CENTER_NAME', trainingCenterName)
+    },
+    UPDATE_LINK_IMAGE_UUID({ commit }, linkImageUUID) {
+      commit('SET_LINK_IMAGE_UUID', linkImageUUID)
     },
     RESET({ commit }) {
       commit('RESET')

@@ -1,7 +1,7 @@
 <template>
   <div class="card-wrapper">
-    <!-- 이미지로 렌더될 html -->
     <div id="card-html" class="card">
+      <!-- html2canvas로 캡쳐될 영역 -->
       <div class="card-content">
         <div class="card-content-title">
           <div class="card-content-title__text">
@@ -40,64 +40,76 @@
           </div>
         </div>
       </div>
-
       <div class="card-footer">
         <TheLinkChip>{{ linkKey }}</TheLinkChip>
         <LogoImage class="logo-stamp" is-stamp />
       </div>
     </div>
-
-    <!-- 이미지 출력물 -->
-    <img id="card-image" />
+    <!-- 실제 출력 이미지 -->
+    <SoldierCardImage v-if="uuid" :uuid="uuid" />
   </div>
 </template>
 
 <script>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import html2canvas from 'html2canvas'
 
+import * as FileApi from '@/api/FileApi'
+import * as MailBoxApi from '@/api/MailBoxApi'
 import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 
 import LetterBoxPng from '@/assets/images/letter-box.png'
 import LogoImage from '@/components/LogoImage/LogoImage.vue'
 import TheLinkChip from '@/components/Chip/TheLinkChip.vue'
+import SoldierCardImage from '@/components/SoldierCard/SoldierCardImage.vue'
 
 export default {
   components: {
     LogoImage,
     TheLinkChip,
+    SoldierCardImage,
   },
   props: {
     soldier: Object,
     linkKey: String,
   },
-  setup() {
-    onMounted(async () => {
-      const currentViewPort = document
-        .getElementById('viewportMeta')
-        .getAttribute('content')
-      document
-        .getElementById('viewportMeta')
-        .setAttribute('content', 'width=1000px')
+  setup(props) {
+    /* Vuex */
+    const store = useStore()
 
+    /* Local State */
+    const uuid = ref('')
+
+    onMounted(async () => {
       const card = document.getElementById('card-html')
       const canvas = await html2canvas(card, {
-        windowWidth: '1000px',
-        windowHeight: '1000px',
-        onclone: clonedDocument =>
-          (clonedDocument.getElementById('card-html').style.display = 'block'),
+        windowWidth: 1000,
+        windowHeight: 1000,
+        onclone: clonedDocument => {
+          clonedDocument
+            .getElementById('viewportMeta')
+            .setAttribute('content', 'width=1000')
+          clonedDocument.getElementById('card-html').style.display = 'block'
+        },
       })
-      document
-        .getElementById('viewportMeta')
-        .setAttribute('content', currentViewPort)
-      const cardImage = document.getElementById('card-image')
-      cardImage.src = canvas.toDataURL('image/png')
-      cardImage.style.opacity = 1
+      canvas.toBlob(async blob => {
+        const { data } = await FileApi.postImage(blob)
+        const linkImageUUID = data.uuid
+        uuid.value = linkImageUUID
+        MailBoxApi.setLinkImageUUID(props.linkKey, linkImageUUID)
+        await store.dispatch(
+          'registerForm/UPDATE_LINK_IMAGE_UUID',
+          linkImageUUID,
+        )
+      }, 'image/png')
     })
 
     return {
       /* Assets */
       LetterBoxPng,
+      /* Varaibles */
+      uuid,
       /* Functions */
       toKoreanDateString,
       toKoreanMilitaryType,
@@ -110,7 +122,6 @@ export default {
 @import '@/scss/_variables.scss';
 
 .card-wrapper {
-  background-color: $gray1;
   box-shadow: 0px 6px 17px -1px #0000000d;
   border-radius: 7px;
 }
@@ -182,12 +193,5 @@ export default {
     justify-content: space-between;
     align-items: flex-end;
   }
-}
-#card-image {
-  opacity: 0;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 7px;
 }
 </style>

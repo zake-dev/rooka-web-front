@@ -6,6 +6,7 @@ const module = {
   state: {
     isLoaded: false,
     key: '',
+    linkImageUUID: null,
     status: '',
     soldier: {
       name: '',
@@ -23,6 +24,7 @@ const module = {
       Object.assign(state, {
         isLoaded: false,
         key: '',
+        linkImageUUID: null,
         status: '',
         soldier: {
           militaryType: '',

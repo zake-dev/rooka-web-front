@@ -1,5 +1,4 @@
 import * as MailApi from '@/api/MailApi'
-import router from '@/router'
 
 const module = {
   namespaced: true,
@@ -8,15 +7,13 @@ const module = {
       id: null,
       author: '',
       relation: '',
-      address1: '',
-      address2: '',
+      address: '',
       postCode: '',
       title: '',
       content: '',
-      password: '',
-      key: '',
       status: '',
       createAt: '',
+      imageUUID: '',
     },
   },
   mutations: {
@@ -25,15 +22,13 @@ const module = {
         id: null,
         author: '',
         relation: '',
-        address1: '',
-        address2: '',
+        address: '',
         postCode: '',
         title: '',
         content: '',
-        password: '',
-        key: '',
         status: '',
         createAt: '',
+        imageUUID: '',
       })
     },
     SET_MAIL(state, mail) {
@@ -47,6 +42,9 @@ const module = {
     async FETCH_MAIL({ commit, state }, password) {
       const { data } = await MailApi.getMail(state.mail.id, password)
       commit('SET_MAIL', data)
+    },
+    async DELETE_MAIL({ commit, state }, password) {
+      await MailApi.deleteMail(state.mail.id, password)
     },
     UPDATE_ID({ commit }, id) {
       commit('SET_ID', id)

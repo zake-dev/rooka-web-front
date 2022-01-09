@@ -5,7 +5,6 @@ const module = {
   namespaced: true,
   state: {
     mail: {
-      id: null,
       author: '',
       relation: '',
       address1: '',
@@ -15,29 +14,24 @@ const module = {
       content: '',
       password: '',
       key: '',
+      imageUUID: '',
     },
     isBeingSent: false,
     isConfirmedToLeave: false,
     leavingRoute: '',
   },
   getters: {
-    isSendable: state => {
-      return (
-        state.mail.author !== '' &&
-        state.mail.relation !== '' &&
-        state.mail.address1 !== '' &&
-        state.mail.address2 !== '' &&
-        state.mail.postCode !== '' &&
-        state.mail.title !== '' &&
-        state.mail.content !== '' &&
-        !state.isBeingSend
-      )
-    },
+    isValidForm: state =>
+      state.mail.author !== '' &&
+      state.mail.relation !== '' &&
+      state.mail.address1 !== '' &&
+      state.mail.address2 !== '' &&
+      state.mail.postCode !== '' &&
+      state.mail.title !== '' &&
+      state.mail.content !== '',
+    isSendable: (state, getters) => getters.isValidForm && !state.isBeingSend,
   },
   mutations: {
-    SET_ID(state, id) {
-      state.mail.id = id
-    },
     SET_AUTHOR(state, author) {
       state.mail.author = author
     },
@@ -65,6 +59,9 @@ const module = {
     SET_KEY(state, key) {
       state.mail.key = key
     },
+    SET_IMAGE_UUID(state, imageUUID) {
+      state.mail.imageUUID = imageUUID
+    },
     SET_IS_BEING_SENT(state, isBeingSent) {
       state.isBeingSent = isBeingSent
     },
@@ -77,7 +74,6 @@ const module = {
     RESET(state) {
       Object.assign(state, {
         mail: {
-          id: null,
           author: '',
           relation: '',
           address1: '',
@@ -97,7 +93,6 @@ const module = {
   actions: {
     async SEND_MAIL({ commit, state }) {
       commit('SET_IS_BEING_SENT', true)
-
       try {
         await MailApi.postMail(state.mail)
         await router.push(`/${state.mail.key}/mail`)
@@ -106,9 +101,6 @@ const module = {
       } finally {
         commit('SET_IS_BEING_SENT', false)
       }
-    },
-    UPDATE_ID({ commit }, id) {
-      commit('SET_ID', id)
     },
     UPDATE_AUTHOR({ commit }, author) {
       commit('SET_AUTHOR', author)
@@ -136,6 +128,9 @@ const module = {
     },
     UPDATE_KEY({ commit }, key) {
       commit('SET_KEY', key)
+    },
+    UPDATE_IMAGE_UUID({ commit }, imageUUID) {
+      commit('SET_IMAGE_UUID', imageUUID)
     },
     UPDATE_IS_CONFIRMED_TO_LEAVE({ commit }, isConfirmedToLeave) {
       commit('SET_IS_CONFIRMED_TO_LEAVE', isConfirmedToLeave)
