@@ -5,7 +5,7 @@ const module = {
   namespaced: true,
   state: {
     isLoaded: false,
-    key: '',
+    key: null,
     linkImageUUID: null,
     status: '',
     soldier: {
@@ -23,7 +23,7 @@ const module = {
     RESET(state) {
       Object.assign(state, {
         isLoaded: false,
-        key: '',
+        key: null,
         linkImageUUID: null,
         status: '',
         soldier: {
