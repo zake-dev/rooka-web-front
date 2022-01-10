@@ -133,14 +133,10 @@ export default {
     const mailContentInput = ref(null)
 
     /* Composables */
-    const {
-      imageInput,
-      handleOpenImageUploader,
-      handleUploadImage,
-      errorOnUploadImage,
-    } = useImageUploader(imageUUID =>
-      store.dispatch('mailForm/UPDATE_IMAGE_UUID', imageUUID),
-    )
+    const { imageInput, handleOpenImageUploader, handleUploadImage } =
+      useImageUploader(imageUUID =>
+        store.dispatch('mailForm/UPDATE_IMAGE_UUID', imageUUID),
+      )
 
     /* Local State */
     const isMailHeaderVisible = ref(true)
@@ -243,7 +239,6 @@ export default {
 .page-wrapper {
   display: flex;
   flex-direction: column;
-  max-height: 100%;
 }
 input {
   border: none;
@@ -328,7 +323,6 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transform: translateY($appBarHeight);
   }
 }
 </style>

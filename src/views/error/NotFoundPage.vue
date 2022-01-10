@@ -69,6 +69,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transform: translateY(-#{$appBarHeight});
 }
 .content {
   flex: 1;

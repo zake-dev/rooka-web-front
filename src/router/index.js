@@ -5,7 +5,8 @@ import store from '@/store'
 const routes = [
   {
     path: '/',
-    redirect: '/register',
+    name: 'Main',
+    component: () => import('../views/MainPage.vue'),
   },
   {
     path: '/:key(%.+[.-_~][0-9]{4})',

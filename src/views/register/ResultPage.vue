@@ -73,8 +73,7 @@ export default {
 @import '@/scss/_variables.scss';
 
 .page-wrapper {
-  padding: 48px 32px;
-  padding-top: calc(#{$appBarHeight} + 48px);
+  padding: 32px;
 }
 .link-image {
   min-width: calc(100vw - 64px);
