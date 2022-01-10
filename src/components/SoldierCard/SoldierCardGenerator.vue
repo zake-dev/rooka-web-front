@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="card-footer">
-        <TheLinkChip>{{ linkKey }}</TheLinkChip>
+        <LinkChip>{{ linkKey }}</LinkChip>
         <LogoImage class="logo-stamp" is-stamp />
       </div>
     </div>
@@ -61,13 +61,13 @@ import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 
 import LetterBoxPng from '@/assets/images/letter-box.png'
 import LogoImage from '@/components/LogoImage/LogoImage.vue'
-import TheLinkChip from '@/components/Chip/TheLinkChip.vue'
+import LinkChip from '@/components/Chip/LinkChip.vue'
 import SoldierCardImage from '@/components/SoldierCard/SoldierCardImage.vue'
 
 export default {
   components: {
     LogoImage,
-    TheLinkChip,
+    LinkChip,
     SoldierCardImage,
   },
   props: {

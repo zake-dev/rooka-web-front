@@ -1,18 +1,18 @@
 <template>
   <div class="page-wrapper">
     <MainLandingView />
-    <MainLandingView />
-    <MainLandingView />
-    <MainLandingView />
+    <MainIntroductionView />
   </div>
 </template>
 
 <script>
 import MainLandingView from '@/components/Main/MainLandingView.vue'
+import MainIntroductionView from '@/components/Main/MainIntroductionView.vue'
 
 export default {
   components: {
     MainLandingView,
+    MainIntroductionView,
   },
 }
 </script>
