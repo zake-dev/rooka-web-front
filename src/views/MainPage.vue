@@ -3,6 +3,9 @@
     <MainLandingView />
     <MainIntroductionView />
     <MainTemplateView />
+    <MainMailBoxView />
+    <MainRedirectView />
+    <MainCopyrightView />
   </div>
 </template>
 
@@ -10,12 +13,18 @@
 import MainLandingView from '@/components/Main/MainLandingView.vue'
 import MainIntroductionView from '@/components/Main/MainIntroductionView.vue'
 import MainTemplateView from '@/components/Main/MainTemplateView.vue'
+import MainMailBoxView from '@/components/Main/MainMailBoxView.vue'
+import MainRedirectView from '@/components/Main/MainRedirectView.vue'
+import MainCopyrightView from '@/components/Main/MainCopyrightView.vue'
 
 export default {
   components: {
     MainLandingView,
     MainIntroductionView,
     MainTemplateView,
+    MainMailBoxView,
+    MainRedirectView,
+    MainCopyrightView,
   },
 }
 </script>
