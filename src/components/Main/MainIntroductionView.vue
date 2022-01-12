@@ -12,26 +12,90 @@
 
     <div class="view-animations">
       <div class="view-animations-row">
-        <div class="view-animations-row__chip">로그인</div>
-        <div class="view-animations-row__chip">이름</div>
-        <div class="view-animations-row__chip">본인인증</div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.35) }"
+        >
+          로그인
+        </div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.8) }"
+        >
+          이름
+        </div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.2) }"
+        >
+          본인인증
+        </div>
       </div>
       <div class="view-animations-row" style="transform: translateX(-24px)">
-        <div class="view-animations-row__chip">앱설치</div>
-        <div class="view-animations-row__chip">기수</div>
-        <div class="view-animations-row__chip">생년월일</div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.8) }"
+        >
+          앱설치
+        </div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.2) }"
+        >
+          기수
+        </div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.65) }"
+        >
+          생년월일
+        </div>
       </div>
       <div class="view-animations-row" style="transform: translateX(24px)">
-        <div class="view-animations-row__chip">비밀번호</div>
-        <div class="view-animations-row__chip">입영일</div>
-        <div class="view-animations-row__chip">아이디</div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.35) }"
+        >
+          비밀번호
+        </div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.5) }"
+        >
+          입영일
+        </div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.2) }"
+        >
+          아이디
+        </div>
       </div>
       <div class="view-animations-row" style="transform: translateX(16px)">
-        <div class="view-animations-row__chip">회원가입</div>
-        <div class="view-animations-row__chip">입영부대</div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.5) }"
+        >
+          회원가입
+        </div>
+        <div
+          class="view-animations-row__chip"
+          :style="{ opacity: isVisible(0.65) }"
+        >
+          입영부대
+        </div>
       </div>
-      <img class="view-animations__arrow" :src="MainIntroductionArrowPng" />
-      <MainIntorductionViewLinkChip class="view-animations__link-chip"
+      <img
+        class="view-animations__arrow"
+        :src="MainIntroductionArrowPng"
+        :style="{ opacity: isVisible(0.875) }"
+      />
+      <MainIntorductionViewLinkChip
+        class="view-animations__link-chip"
+        :style="{
+          opacity: isVisible(0.95),
+          transform: isVisible(0.95) ? 'translateY(0)' : 'translateY(-24px)',
+        }"
         >김루카.12345</MainIntorductionViewLinkChip
       >
     </div>
@@ -39,6 +103,8 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue'
+
 import MainIntroductionArrowPng from '@/assets/images/main-introduction-arrow.png'
 import MainIntorductionViewLinkChip from './MainIntroductionViewLinkChip.vue'
 
@@ -47,8 +113,27 @@ export default {
     MainIntorductionViewLinkChip,
   },
   setup() {
+    /* Local State */
+    const viewAnimationsPercentage = ref(0)
+
+    /* Helper Function */
+    const isVisible = minLimit =>
+      viewAnimationsPercentage.value > minLimit ? 1 : 0
+
+    /* Event Handler */
+    const handleScroll = () => {
+      const $viewAnimations = document.querySelector('.view-animations')
+      const { y, height } = $viewAnimations.getBoundingClientRect()
+      viewAnimationsPercentage.value = (window.innerHeight - y) / height
+    }
+
+    onMounted(() => document.body.addEventListener('scroll', handleScroll))
+
     return {
+      /* Assets */
       MainIntroductionArrowPng,
+      /* Functions */
+      isVisible,
     }
   },
 }
@@ -103,7 +188,16 @@ export default {
       color: $gray3;
       border-radius: 20px;
       box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      transition: opacity 0.8s ease;
     }
+  }
+
+  &__arrow {
+    transition: opacity 0.8s ease;
+  }
+
+  &__link-chip {
+    transition: opacity 0.8s ease, transform 0.8s ease;
   }
 }
 </style>
