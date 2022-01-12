@@ -5,6 +5,7 @@
     <MainTemplateView />
     <MainMailBoxView />
     <MainRedirectView />
+    <MainCopyrightView />
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import MainIntroductionView from '@/components/Main/MainIntroductionView.vue'
 import MainTemplateView from '@/components/Main/MainTemplateView.vue'
 import MainMailBoxView from '@/components/Main/MainMailBoxView.vue'
 import MainRedirectView from '@/components/Main/MainRedirectView.vue'
+import MainCopyrightView from '@/components/Main/MainCopyrightView.vue'
 
 export default {
   components: {
@@ -22,6 +24,7 @@ export default {
     MainTemplateView,
     MainMailBoxView,
     MainRedirectView,
+    MainCopyrightView,
   },
 }
 </script>
