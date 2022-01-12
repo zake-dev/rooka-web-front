@@ -17,7 +17,7 @@
             <img
               v-if="isShowImageTemplate"
               class="view-templates-display__image"
-              :src="imageTemplatePng"
+              :src="ImageTemplatePng"
             />
             <div v-else class="view-templates-display__text masked-overflow">
               📮김루카 인편 주소 나왔어요📮<br /><br />
@@ -61,7 +61,7 @@
 <script>
 import { ref } from 'vue'
 
-import imageTemplatePng from '@/assets/images/link-image-example.png'
+import ImageTemplatePng from '@/assets/images/link-image-example.png'
 
 export default {
   setup() {
@@ -74,7 +74,7 @@ export default {
 
     return {
       /* Assets */
-      imageTemplatePng,
+      ImageTemplatePng,
       /* Variables*/
       isShowImageTemplate,
       /* Functions */
