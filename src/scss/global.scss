@@ -10,6 +10,9 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  font-family: 'Spoqa Han Sans Neo', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 html,
 body {
@@ -23,9 +26,6 @@ body {
 #app {
   height: 100%;
   width: 100%;
-  font-family: 'Spoqa Han Sans Neo', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background-color: $white;
   color: $black;
 }
