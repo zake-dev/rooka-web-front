@@ -299,12 +299,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/scss/_variables.scss';
+@import '@/scss/_variables';
 
 .form-card {
   position: absolute;
   width: 100%;
-  min-height: calc(100% - 2px);
+  min-height: 100%;
   padding: 32px;
   background-color: $white;
   display: flex;

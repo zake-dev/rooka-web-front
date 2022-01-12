@@ -70,6 +70,7 @@ export default {
 .page-wrapper {
   min-height: 100vh;
   width: 100vw;
+  transform: translateY(-#{$appBarHeight});
 }
 .text-content {
   padding: 92px 32px 16px 32px;

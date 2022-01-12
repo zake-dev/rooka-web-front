@@ -1,7 +1,7 @@
 const module = {
   namespaced: true,
   state: {
-    key: '',
+    key: null,
     linkImageUUID: null,
     slideTransition: 'slide-left',
     stepper: {
@@ -39,7 +39,7 @@ const module = {
   mutations: {
     RESET(state) {
       Object.assign(state, {
-        key: '',
+        key: null,
         linkImageUUID: null,
         slideTransition: 'slide-left',
         stepper: {

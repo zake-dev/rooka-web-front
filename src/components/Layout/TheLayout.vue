@@ -20,9 +20,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/scss/_variables.scss';
+@import '@/scss/_variables';
 
 main {
-  height: calc(100% - #{$appBarHeight});
+  height: 100%;
+  padding-top: $appBarHeight;
 }
 </style>
