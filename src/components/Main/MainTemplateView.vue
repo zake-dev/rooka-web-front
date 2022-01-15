@@ -13,25 +13,16 @@
     <div class="view-templates">
       <div class="view-templates-display">
         <transition name="fade" mode="out-in">
-          <keep-alive>
-            <img
-              v-if="isShowImageTemplate"
-              class="view-templates-display__image"
-              :src="ImageTemplatePng"
-            />
-            <div v-else class="view-templates-display__text masked-overflow">
-              📮김루카 인편 주소 나왔어요📮<br /><br />
-              🔗 rooka.kr/김루카.1595<br /><br />
-              안녕하세요 김루카의 인편지기입니다!<br />
-              루카가 3월 21일에 공군훈련소에 입소했습니다.<br />
-              열심히 훈련받고 있을 루카를 위해 짧게나마 응원의 메시지를 적어서
-              편지를 보내 주시면 감사하겠습니다!<br /><br />
-              위의 링크를 통해 정보 입력 없이 바로 편지를 작성할 수 있어요🤗<br /><br />
-              💌루카에서 인편쓰는 방법💌<br />
-              ❶ 아래 링크를 통해 루카의 인편함으로 간다.<br />
-              ❷ 편지 쓰기 버튼을 눌러 바로 편지를 작성한다.
-            </div>
-          </keep-alive>
+          <object
+            v-if="isShowImageTemplate"
+            class="view-templates-display__image"
+            :data="ImageTemplateSvg"
+          />
+          <object
+            v-else
+            class="view-templates-display__image"
+            :data="TextTemplateSvg"
+          />
         </transition>
       </div>
       <div class="view-templates-buttons">
@@ -61,7 +52,8 @@
 <script>
 import { ref } from 'vue'
 
-import ImageTemplatePng from '@/assets/images/link-image-example.png'
+import ImageTemplateSvg from '@/assets/images/main-image-template.svg'
+import TextTemplateSvg from '@/assets/images/main-text-template.svg'
 
 export default {
   setup() {
@@ -74,7 +66,8 @@ export default {
 
     return {
       /* Assets */
-      ImageTemplatePng,
+      ImageTemplateSvg,
+      TextTemplateSvg,
       /* Variables*/
       isShowImageTemplate,
       /* Functions */
@@ -120,6 +113,7 @@ export default {
   &-display {
     width: calc(100vw - 64px);
     height: calc(100vw - 64px);
+    box-shadow: 0px 6px 17px -1px rgba(0, 0, 0, 0.05);
     border-radius: 7px;
     overflow: hidden;
     background-color: $white;
@@ -128,13 +122,6 @@ export default {
       width: 100%;
       height: 100%;
       object-fit: contain;
-    }
-
-    &__text {
-      @extend .font__button-text;
-      height: calc(100vw - 64px);
-      padding: 32px;
-      color: $gray5;
     }
   }
 

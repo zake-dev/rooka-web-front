@@ -50,7 +50,6 @@
 <script>
 import { ref, onMounted } from 'vue'
 
-import imageTemplatePng from '@/assets/images/link-image-example.png'
 import phoneSvg from '@/assets/images/main-mailbox-phone.svg'
 import mail1Svg from '@/assets/images/main-mailbox-mail1.svg'
 import mail2Svg from '@/assets/images/main-mailbox-mail2.svg'
@@ -77,7 +76,6 @@ export default {
 
     return {
       /* Assets */
-      imageTemplatePng,
       phoneSvg,
       mail1Svg,
       mail2Svg,
