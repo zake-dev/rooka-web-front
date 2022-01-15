@@ -60,7 +60,7 @@ const routes = [
   },
   {
     path: '/error/to-early-birds',
-    name: 'WatingForOpen',
+    name: 'WaitingForOpen',
     component: () => import('../views/error/WatingForOpenPage.vue'),
   },
   {

@@ -5,6 +5,7 @@ import RegisterForm from '@/store/modules/RegisterForm'
 import MailBox from '@/store/modules/MailBox'
 import MailView from '@/store/modules/MailView'
 import MailForm from '@/store/modules/MailForm'
+import ToEarlyBirds from '@/store/modules/ToEarlyBirds'
 
 export default createStore({
   state: {
@@ -43,10 +44,11 @@ export default createStore({
     mailBox: MailBox,
     mailView: MailView,
     mailForm: MailForm,
+    toEarlyBirds: ToEarlyBirds,
   },
   plugins: [
     createPersistedState({
-      paths: ['registerForm', 'mailView', 'mailBox'],
+      paths: ['registerForm', 'mailView', 'mailBox', 'toEarlyBirds'],
       storage: window.sessionStorage,
     }),
   ],

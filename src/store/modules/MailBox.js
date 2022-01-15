@@ -8,6 +8,7 @@ const module = {
     key: null,
     linkImageUUID: null,
     status: '',
+    expectedMailBoxOpeningDateTime: null,
     soldier: {
       name: '',
       birthDate: '',
@@ -26,6 +27,7 @@ const module = {
         key: null,
         linkImageUUID: null,
         status: '',
+        expectedMailBoxOpeningDateTime: null,
         soldier: {
           militaryType: '',
           name: '',
@@ -56,9 +58,6 @@ const module = {
         commit('SET_IS_LOADED', true)
       } catch (e) {
         switch (e.response.status) {
-          case 403:
-            router.push({ name: 'WatingForOpen' })
-            break
           case 404:
             router.push({ name: 'PageNotFound' })
             break

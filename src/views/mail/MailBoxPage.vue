@@ -81,7 +81,13 @@ export default {
     const handleClickShare = () => openModal('ShareToSns')
     const handleClickNewMail = () => router.push(`/${key.value}/mail/post`)
 
-    onMounted(() => store.dispatch('mailBox/FETCH_CONTEXT', route.params.key))
+    onMounted(async () => {
+      await store.dispatch('mailBox/FETCH_CONTEXT', route.params.key)
+      if (state.status === 'WAITING_FOR_OPEN') {
+        store.dispatch('toEarlyBirds/UPDATE_CONTEXT', state)
+        router.push({ name: 'WaitingForOpen' })
+      }
+    })
 
     return {
       /* Variables */
@@ -94,10 +100,6 @@ export default {
       handleClickShare,
       handleClickNewMail,
     }
-  },
-  beforeRouteLeave(to, from, next) {
-    this.$store.dispatch('mailBox/RESET')
-    next()
   },
 }
 </script>

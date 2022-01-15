@@ -1,6 +1,7 @@
 export const toKoreanDateString = dateString => {
-  const [year, month, day] = dateString.split('-')
-  return `${year}년 ${month}월 ${day}일`
+  const date = dateString instanceof Date ? dateString : new Date(dateString)
+  const [year, month, day] = date.toLocaleDateString().split('.')
+  return `${year.trim()}년 ${month.trim()}월 ${day.trim()}일`
 }
 
 export const toKoreanMilitaryType = militaryType => {
