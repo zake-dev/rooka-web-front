@@ -1,10 +1,15 @@
+import * as FileApi from '@/api/FileApi'
+
 export const useImageDownloader = () => {
-  const handleDownloadImage = (linkImageUUID, title) => {
+  const handleDownloadImage = async (linkImageUUID, title) => {
+    const { data } = await FileApi.downloadImage(linkImageUUID)
+    const url = window.URL.createObjectURL(data)
     const $link = document.createElement('a')
-    $link.target = '_blank'
-    $link.href = process.env.VUE_APP_ROOKA_API_URL + `/image/${linkImageUUID}`
+    $link.href = url
     $link.download = title
     $link.click()
+    $link.remove()
+    window.URL.revokeObjectURL(url)
   }
 
   return { handleDownloadImage }
