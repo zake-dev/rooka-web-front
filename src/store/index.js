@@ -10,6 +10,11 @@ export default createStore({
   state: {
     isModalVisible: false,
     modalContentName: '',
+    isToastVisible: false,
+    toastContent: {
+      text: '',
+      emoji: '',
+    },
     userKey: '',
   },
   getters: {
@@ -22,6 +27,12 @@ export default createStore({
     SET_MODAL_CONTENT_NAME(state, name) {
       state.modalContentName = name
     },
+    SET_IS_TOAST_VISIBLE(state, isVisible) {
+      state.isToastVisible = isVisible
+    },
+    SET_TOAST_CONTENT(state, content) {
+      state.toastContent = content
+    },
     SET_USER_KEY(state, key) {
       state.userKey = key
     },
@@ -33,6 +44,11 @@ export default createStore({
     },
     CLOSE_MODAL({ commit }) {
       commit('SET_IS_MODAL_VISIBLE', false)
+    },
+    SHOW_TOAST({ commit }, toastContent) {
+      commit('SET_TOAST_CONTENT', toastContent)
+      commit('SET_IS_TOAST_VISIBLE', true)
+      setTimeout(() => commit('SET_IS_TOAST_VISIBLE', false), 3000)
     },
     LOGIN_USER({ commit }, key) {
       commit('SET_USER_KEY', key)
