@@ -20,13 +20,13 @@
         </div>
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.8) }"
+          :style="{ opacity: isVisible(1) }"
         >
           이름
         </div>
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.2) }"
+          :style="{ opacity: isVisible(0.1) }"
         >
           본인인증
         </div>
@@ -34,19 +34,19 @@
       <div class="view-animations-row" style="transform: translateX(-24px)">
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.8) }"
+          :style="{ opacity: isVisible(1) }"
         >
           앱설치
         </div>
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.2) }"
+          :style="{ opacity: isVisible(0.1) }"
         >
           기수
         </div>
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.65) }"
+          :style="{ opacity: isVisible(0.75) }"
         >
           생년월일
         </div>
@@ -60,13 +60,13 @@
         </div>
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.5) }"
+          :style="{ opacity: isVisible(0.6) }"
         >
           입영일
         </div>
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.2) }"
+          :style="{ opacity: isVisible(0.1) }"
         >
           아이디
         </div>
@@ -74,13 +74,13 @@
       <div class="view-animations-row" style="transform: translateX(16px)">
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.5) }"
+          :style="{ opacity: isVisible(0.6) }"
         >
           회원가입
         </div>
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.65) }"
+          :style="{ opacity: isVisible(0.75) }"
         >
           입영부대
         </div>
@@ -88,13 +88,13 @@
       <img
         class="view-animations__arrow"
         :src="MainIntroductionArrowPng"
-        :style="{ opacity: isVisible(0.875) }"
+        :style="{ opacity: isVisible(1.1) }"
       />
       <MainIntorductionViewLinkChip
         class="view-animations__link-chip"
         :style="{
-          opacity: isVisible(0.95),
-          transform: isVisible(0.95) ? 'translateY(0)' : 'translateY(-24px)',
+          opacity: isVisible(1.35),
+          transform: isVisible(1.35) ? 'translateY(0)' : 'translateY(-24px)',
         }"
         >김루카.12345</MainIntorductionViewLinkChip
       >
@@ -188,12 +188,12 @@ export default {
       color: $gray3;
       border-radius: 20px;
       box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-      transition: opacity 0.8s ease;
+      transition: opacity 0.3s ease;
     }
   }
 
   &__arrow {
-    transition: opacity 0.8s ease;
+    transition: opacity 0.3s ease;
   }
 
   &__link-chip {
