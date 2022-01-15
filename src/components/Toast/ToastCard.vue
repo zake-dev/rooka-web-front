@@ -1,11 +1,17 @@
 <template>
-  <transition name="pop" appear>
-    <div v-if="isVisible" class="toast-card">
-      <span>
-        {{ toastContent.text }}<Emoji>{{ toastContent.emoji }}</Emoji>
-      </span>
-    </div>
-  </transition>
+  <div class="toast-wrapper">
+    <transition-group name="list-slide-down" appear>
+      <div
+        v-for="toastContent in toastList"
+        :key="toastContent.toastId"
+        class="toast-card list-slide-down-item"
+      >
+        <span>
+          {{ toastContent.text }}<Emoji>{{ toastContent.emoji }}</Emoji>
+        </span>
+      </div>
+    </transition-group>
+  </div>
 </template>
 
 <script>
@@ -21,13 +27,11 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const isVisible = computed(() => store.state.isToastVisible)
-    const toastContent = computed(() => store.state.toastContent)
+    const toastList = computed(() => store.state.toastList)
 
     return {
       /* Variables */
-      isVisible,
-      toastContent,
+      toastList,
     }
   },
 }
@@ -36,13 +40,18 @@ export default {
 <style scoped lang="scss">
 @import '@/scss/_variables.scss';
 
-.toast-card {
+.toast-wrapper {
   position: fixed;
-  z-index: 99999;
+  z-index: 99998;
   left: 16px;
   bottom: 16px;
-  height: 54px;
   width: calc(100% - 32px);
+}
+
+.toast-card {
+  z-index: 99999;
+  height: 54px;
+  width: 100%;
   background: $rookaYellowBright1;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7px;
@@ -51,5 +60,6 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 15px 16px;
+  margin-top: 8px;
 }
 </style>

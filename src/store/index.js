@@ -10,11 +10,7 @@ export default createStore({
   state: {
     isModalVisible: false,
     modalContentName: '',
-    isToastVisible: false,
-    toastContent: {
-      text: '',
-      emoji: '',
-    },
+    toastList: [],
     userKey: '',
   },
   getters: {
@@ -27,11 +23,23 @@ export default createStore({
     SET_MODAL_CONTENT_NAME(state, name) {
       state.modalContentName = name
     },
-    SET_IS_TOAST_VISIBLE(state, isVisible) {
-      state.isToastVisible = isVisible
+    SHOW_NEW_TOAST(state, content) {
+      const newId =
+        1 +
+        state.toastList.reduce(
+          (maxId, toastContent) => Math.max(maxId, toastContent.toastId),
+          0,
+        )
+      content.toastId = newId
+      state.toastList.push(content)
     },
-    SET_TOAST_CONTENT(state, content) {
-      state.toastContent = content
+    REMOVE_TOAST(state, toastId) {
+      const index = state.toastList.findIndex(
+        toastContent => toastContent.toastId === toastId,
+      )
+      if (index >= 0) {
+        state.toastList.splice(index, 1)
+      }
     },
     SET_USER_KEY(state, key) {
       state.userKey = key
@@ -46,9 +54,8 @@ export default createStore({
       commit('SET_IS_MODAL_VISIBLE', false)
     },
     SHOW_TOAST({ commit }, toastContent) {
-      commit('SET_TOAST_CONTENT', toastContent)
-      commit('SET_IS_TOAST_VISIBLE', true)
-      setTimeout(() => commit('SET_IS_TOAST_VISIBLE', false), 3000)
+      commit('SHOW_NEW_TOAST', toastContent)
+      setTimeout(() => commit('REMOVE_TOAST', toastContent.toastId), 3000)
     },
     LOGIN_USER({ commit }, key) {
       commit('SET_USER_KEY', key)
