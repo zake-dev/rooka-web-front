@@ -1,22 +1,24 @@
 <template>
   <div class="view-wrapper">
-    <div class="view-background">
-      <img class="view-background__image" :src="MainBackgroundPng" />
-    </div>
-
-    <div class="view-content">
-      <span class="view-content__text">당신을 위한</span>
-      <span class="view-content__text view-content__text--accent"
+    <div class="view-title">
+      <span class="view-title__text">당신을 위한</span>
+      <span class="view-title__text view-title__text--accent"
         >심플한 인편함</span
       >
     </div>
 
-    <div class="view-actions">
-      <BaseButton
-        class="view-actions__button button-primary"
-        @click="handleNavigateToRegisterForm"
-        >편지 쓰러 가기</BaseButton
-      >
+    <div class="view-content">
+      <div class="view-background">
+        <img class="view-background__image" :src="MainBackgroundPng" />
+      </div>
+
+      <div class="view-actions">
+        <BaseButton
+          class="view-actions__button button-primary"
+          @click="handleNavigateToRegisterForm"
+          >편지 쓰러 가기</BaseButton
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -52,30 +54,9 @@ export default {
 @import '@/scss/global';
 @import '@/scss/_variables';
 
-.view-wrapper {
-  position: relative;
-}
-
-.view-background {
-  position: absolute;
-  left: 0;
-  top: -$appBarHeight;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &__image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-}
-
-.view-content {
-  flex: 1;
+.view-title {
   padding: 32px;
+  padding-bottom: 0;
   display: flex;
   flex-direction: column;
   z-index: 0;
@@ -89,9 +70,24 @@ export default {
   }
 }
 
+.view-content {
+  flex: 1;
+  position: relative;
+}
+
+.view-background {
+  &__image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
 .view-actions {
+  position: absolute;
+  bottom: 68px;
   height: 48px;
-  margin-bottom: 68px;
+  width: 100%;
   padding: 0 72px;
   z-index: 1;
 

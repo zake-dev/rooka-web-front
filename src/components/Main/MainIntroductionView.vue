@@ -20,7 +20,7 @@
         </div>
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(1) }"
+          :style="{ opacity: isVisible(0.85) }"
         >
           이름
         </div>
@@ -34,7 +34,7 @@
       <div class="view-animations-row" style="transform: translateX(-24px)">
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(1) }"
+          :style="{ opacity: isVisible(0.85) }"
         >
           앱설치
         </div>
@@ -46,7 +46,7 @@
         </div>
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.75) }"
+          :style="{ opacity: isVisible(0.7) }"
         >
           생년월일
         </div>
@@ -80,7 +80,7 @@
         </div>
         <div
           class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.75) }"
+          :style="{ opacity: isVisible(0.7) }"
         >
           입영부대
         </div>
@@ -88,13 +88,13 @@
       <img
         class="view-animations__arrow"
         :src="MainIntroductionArrowPng"
-        :style="{ opacity: isVisible(1) }"
+        :style="{ opacity: isVisible(0.95) }"
       />
       <MainIntorductionViewLinkChip
         class="view-animations__link-chip"
         :style="{
-          opacity: isVisible(1),
-          transform: isVisible(1) ? 'translateY(0)' : 'translateY(-24px)',
+          opacity: isVisible(0.95),
+          transform: isVisible(0.95) ? 'translateY(0)' : 'translateY(-24px)',
         }"
         >김루카.12345</MainIntorductionViewLinkChip
       >
