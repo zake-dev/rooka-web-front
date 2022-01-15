@@ -88,13 +88,13 @@
       <img
         class="view-animations__arrow"
         :src="MainIntroductionArrowPng"
-        :style="{ opacity: isVisible(1.1) }"
+        :style="{ opacity: isVisible(1) }"
       />
       <MainIntorductionViewLinkChip
         class="view-animations__link-chip"
         :style="{
-          opacity: isVisible(1.35),
-          transform: isVisible(1.35) ? 'translateY(0)' : 'translateY(-24px)',
+          opacity: isVisible(1),
+          transform: isVisible(1) ? 'translateY(0)' : 'translateY(-24px)',
         }"
         >김루카.12345</MainIntorductionViewLinkChip
       >
