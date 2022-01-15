@@ -4,13 +4,15 @@
     class="appbar"
     :class="{ 'appbar--transparent': isErrorPage }"
   >
-    <LogoImage class="mx-4 my-3" />
+    <button class="button mx-4 my-3" @click="handleToHome">
+      <LogoImage />
+    </button>
   </div>
 </template>
 
 <script>
 import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 import LogoImage from '@/components/LogoImage/LogoImage.vue'
 
@@ -20,13 +22,20 @@ export default {
   },
   setup() {
     /* Router */
+    const router = useRouter()
     const route = useRoute()
 
     /* Local State */
     const isErrorPage = computed(() => route.path.includes('/error/'))
 
+    /* Event Handler */
+    const handleToHome = () => router.push('/')
+
     return {
+      /* Variables */
       isErrorPage,
+      /* Functions */
+      handleToHome,
     }
   },
 }
@@ -46,5 +55,11 @@ export default {
   &--transparent {
     display: none;
   }
+}
+
+.button {
+  height: fit-content;
+  width: fit-content;
+  padding: 0;
 }
 </style>
