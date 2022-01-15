@@ -1,20 +1,20 @@
 <template>
   <TheLayout></TheLayout>
   <ModalContainer></ModalContainer>
-  <ToastCard />
+  <ToastContainer />
 </template>
 
 <script>
 import TheLayout from '@/components/Layout/TheLayout.vue'
 import ModalContainer from '@/components/Modal/ModalContainer.vue'
-import ToastCard from '@/components/Toast/ToastCard.vue'
+import ToastContainer from '@/components/Toast/ToastContainer.vue'
 
 export default {
   name: 'App',
   components: {
     TheLayout,
     ModalContainer,
-    ToastCard,
+    ToastContainer,
   },
 }
 </script>

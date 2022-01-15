@@ -4,11 +4,13 @@
       <div
         v-for="toastContent in toastList"
         :key="toastContent.toastId"
-        class="toast-card list-slide-down-item"
+        class="list-slide-down-item toast-card"
       >
-        <span>
-          {{ toastContent.text }}<Emoji>{{ toastContent.emoji }}</Emoji>
-        </span>
+        <ToastContent
+          :toast-id="toastContent.toastId"
+          :text="toastContent.text"
+          :emoji="toastContent.emoji"
+        />
       </div>
     </transition-group>
   </div>
@@ -18,11 +20,11 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import Emoji from '@/components/Decorator/Emoji'
+import ToastContent from '@/components/Toast/ToastContent'
 
 export default {
   components: {
-    Emoji,
+    ToastContent,
   },
   setup() {
     /* Vuex */
