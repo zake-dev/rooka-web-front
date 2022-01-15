@@ -1,5 +1,5 @@
 <template>
-  <div class="view-wrapper">
+  <div id="no-top-button" class="view-wrapper">
     <div class="view-title">
       <span class="view-title__text">당신을 위한</span>
       <span class="view-title__text view-title__text--accent"

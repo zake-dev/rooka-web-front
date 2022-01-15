@@ -49,6 +49,7 @@
 
 <script>
 import { ref, onMounted } from 'vue'
+import { onBeforeRouteLeave } from 'vue-router'
 
 import phoneSvg from '@/assets/images/main-mailbox-phone.svg'
 import mail1Svg from '@/assets/images/main-mailbox-mail1.svg'
@@ -73,6 +74,9 @@ export default {
     }
 
     onMounted(() => document.body.addEventListener('scroll', handleScroll))
+    onBeforeRouteLeave(() =>
+      document.body.removeEventListener('scroll', handleScroll),
+    )
 
     return {
       /* Assets */

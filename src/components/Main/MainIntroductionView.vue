@@ -104,6 +104,7 @@
 
 <script>
 import { ref, onMounted } from 'vue'
+import { onBeforeRouteLeave } from 'vue-router'
 
 import MainIntroductionArrowPng from '@/assets/images/main-introduction-arrow.png'
 import MainIntorductionViewLinkChip from './MainIntroductionViewLinkChip.vue'
@@ -128,6 +129,9 @@ export default {
     }
 
     onMounted(() => document.body.addEventListener('scroll', handleScroll))
+    onBeforeRouteLeave(() =>
+      document.body.removeEventListener('scroll', handleScroll),
+    )
 
     return {
       /* Assets */
