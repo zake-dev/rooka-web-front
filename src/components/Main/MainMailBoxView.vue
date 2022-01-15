@@ -10,34 +10,34 @@
     </div>
 
     <div class="view-mailbox">
-      <img class="view-mailbox__phone" :src="phoneSvg" />
-      <img
+      <object class="view-mailbox__phone" :data="phoneSvg" />
+      <object
         class="view-mailbox__mail view-mailbox__mail1"
-        :src="mail1Svg"
+        :data="mail1Svg"
         :style="{
           opacity: isVisible(0.4),
           right: isVisible(0.4) ? '16px' : '21.5%',
         }"
       />
-      <img
+      <object
         class="view-mailbox__mail view-mailbox__mail2"
-        :src="mail2Svg"
+        :data="mail2Svg"
         :style="{
           opacity: isVisible(0.55),
           right: isVisible(0.55) ? '16px' : '21.5%',
         }"
       />
-      <img
+      <object
         class="view-mailbox__mail view-mailbox__mail3"
-        :src="mail3Svg"
+        :data="mail3Svg"
         :style="{
           opacity: isVisible(0.7),
           right: isVisible(0.7) ? '16px' : '21.5%',
         }"
       />
-      <img
+      <object
         class="view-mailbox__mail view-mailbox__mail4"
-        :src="mail4Svg"
+        :data="mail4Svg"
         :style="{
           opacity: isVisible(0.85),
           right: isVisible(0.85) ? '16px' : '21.5%',
