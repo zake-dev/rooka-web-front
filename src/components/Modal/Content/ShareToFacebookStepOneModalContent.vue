@@ -34,6 +34,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 import { openModal } from '@/utils/DialogHandler'
+import { showToast } from '@/utils/ToastHandler'
 import { toKoreanDateString } from '@/utils/TextFormatter'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
@@ -70,7 +71,7 @@ export default {
     /* Event Handler */
     const handleCopyText = async () => {
       await navigator.clipboard.writeText(template.value)
-      alert('본문이 복사되었어요👍')
+      showToast('본문이 복사되었어요👍')
       openModal('ShareToFacebookStepTwo')
     }
 
