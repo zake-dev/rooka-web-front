@@ -51,7 +51,6 @@ export default createStore({
     },
     SHOW_TOAST({ commit }, toastContent) {
       commit('SHOW_NEW_TOAST', toastContent)
-      setTimeout(() => commit('REMOVE_TOAST', toastContent.toastId), 3000)
     },
     REMOVE_TOAST({ commit }, toastId) {
       commit('REMOVE_TOAST', toastId)

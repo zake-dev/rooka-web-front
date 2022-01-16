@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 
 import Emoji from '@/components/Decorator/Emoji'
@@ -33,10 +33,24 @@ export default {
     /* Vuex */
     const store = useStore()
 
+    /* Timer */
+    const removeToast = () => store.dispatch('REMOVE_TOAST', props.toastId)
+    const attachTimer = () => {
+      detachTimer()
+      timer = setTimeout(removeToast, 3000)
+    }
+    const detachTimer = () => {
+      if (timer) clearTimeout(timer)
+    }
+    let timer = null
+    attachTimer()
+
     /* Local State */
     let isDragging = ref(false)
     let startY = null
     let offsetY = ref(0)
+
+    /* Style */
     const opacity = computed(() =>
       Math.min(Math.max(0, 1 - offsetY.value / 48), 1),
     )
@@ -72,6 +86,12 @@ export default {
         offsetY.value = 0
       }
     }
+
+    /* Watch */
+    watch(isDragging, (val, _) => {
+      if (val) detachTimer()
+      else attachTimer()
+    })
 
     return {
       /* Variables */
