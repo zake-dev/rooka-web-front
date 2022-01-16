@@ -167,6 +167,9 @@ body {
 .list-slide-down-leave-active {
   position: absolute;
 }
+.list-slide-down-move {
+  transition: all .5s ease;
+}
 
 /* Effect */
 .masked-overflow {

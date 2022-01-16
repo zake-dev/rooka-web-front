@@ -57,6 +57,9 @@ export default createStore({
       commit('SHOW_NEW_TOAST', toastContent)
       setTimeout(() => commit('REMOVE_TOAST', toastContent.toastId), 3000)
     },
+    REMOVE_TOAST({ commit }, toastId) {
+      commit('REMOVE_TOAST', toastId)
+    },
     LOGIN_USER({ commit }, key) {
       commit('SET_USER_KEY', key)
     },
