@@ -10,6 +10,7 @@ export default createStore({
   state: {
     isModalVisible: false,
     modalContentName: '',
+    toastNextId: 0,
     toastList: [],
     userKey: '',
   },
@@ -24,12 +25,7 @@ export default createStore({
       state.modalContentName = name
     },
     SHOW_NEW_TOAST(state, content) {
-      const newId =
-        1 +
-        state.toastList.reduce(
-          (maxId, toastContent) => Math.max(maxId, toastContent.toastId),
-          0,
-        )
+      const newId = state.toastNextId++
       content.toastId = newId
       state.toastList.push(content)
     },
