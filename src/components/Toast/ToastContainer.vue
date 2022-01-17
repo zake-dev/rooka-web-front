@@ -1,13 +1,7 @@
 <template>
   <div class="toast-container">
     <transition-group name="list-slide-down" appear :css="true">
-      <ToastContent
-        v-for="toastContent in toastList"
-        :key="toastContent.toastId"
-        :toast-id="toastContent.toastId"
-        :text="toastContent.text"
-        :emoji="toastContent.emoji"
-      />
+      <ToastCard v-for="toast in toastList" :key="toast.id" :toast="toast" />
     </transition-group>
   </div>
 </template>
@@ -16,11 +10,11 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import ToastContent from '@/components/Toast/ToastContent'
+import ToastCard from '@/components/Toast/ToastCard'
 
 export default {
   components: {
-    ToastContent,
+    ToastCard,
   },
   setup() {
     /* Vuex */

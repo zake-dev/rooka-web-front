@@ -6,10 +6,13 @@
     @touchend.prevent="handleTouchEnd"
     @touchcancel.prevent="handleTouchEnd"
   >
-    <div class="toast-card" :style="cardStyle">
-      <span>
-        {{ text }}<Emoji>{{ emoji }}</Emoji>
-      </span>
+    <div
+      class="toast-card"
+      :class="cardClass"
+      :style="cardStyle"
+      @animationend="handleAnimationEnd"
+    >
+      <span>{{ toast.message }}</span>
     </div>
   </div>
 </template>
@@ -18,23 +21,18 @@
 import { ref, computed, watch } from 'vue'
 import { useStore } from 'vuex'
 
-import Emoji from '@/components/Decorator/Emoji'
-
 export default {
-  components: {
-    Emoji,
-  },
   props: {
-    toastId: Number,
-    text: String,
-    emoji: String,
+    toast: Object,
   },
   setup(props) {
     /* Vuex */
     const store = useStore()
 
     /* Timer */
-    const removeToast = () => store.dispatch('REMOVE_TOAST', props.toastId)
+    let timer = null
+    let resetCounter = computed(() => props.toast.resetCounter)
+    const removeToast = () => store.dispatch('REMOVE_TOAST', props.toast.id)
     const attachTimer = () => {
       detachTimer()
       timer = setTimeout(removeToast, 3000)
@@ -42,11 +40,11 @@ export default {
     const detachTimer = () => {
       if (timer) clearTimeout(timer)
     }
-    let timer = null
     attachTimer()
 
     /* Local State */
     let isDragging = ref(false)
+    let isShaking = ref(false)
     let startY = null
     let offsetY = ref(0)
 
@@ -59,6 +57,7 @@ export default {
       const limit = 12
       return -(limit * limit) / (offsetY.value - limit) - limit
     })
+    const cardClass = computed(() => (isShaking.value ? 'shake-vertical' : ''))
     const cardStyle = computed(() => ({
       opacity: opacity.value,
       transform: `translateY(${translateY.value}px)`,
@@ -80,11 +79,14 @@ export default {
     const handleTouchEnd = _ => {
       isDragging.value = false
       if (offsetY.value > 32) {
-        store.dispatch('REMOVE_TOAST', props.toastId)
+        store.dispatch('REMOVE_TOAST', props.toast.id)
       } else {
         startY = null
         offsetY.value = 0
       }
+    }
+    const handleAnimationEnd = _ => {
+      isShaking.value = false
     }
 
     /* Watch */
@@ -92,15 +94,21 @@ export default {
       if (val) detachTimer()
       else attachTimer()
     })
+    watch(resetCounter, () => {
+      isShaking.value = true
+      attachTimer()
+    })
 
     return {
       /* Variables */
+      cardClass,
       cardStyle,
 
       /* Functions */
       handleTouchStart,
       handleTouchMove,
       handleTouchEnd,
+      handleAnimationEnd,
     }
   },
 }

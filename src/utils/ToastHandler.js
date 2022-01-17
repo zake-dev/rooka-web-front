@@ -1,7 +1,4 @@
 import store from '@/store'
 
-export const showToast = (toastContentText, toastContentEmoji) =>
-  store.dispatch('SHOW_TOAST', {
-    text: toastContentText,
-    emoji: toastContentEmoji,
-  })
+export const showToast = toastMessage =>
+  store.dispatch('SHOW_TOAST', toastMessage)
