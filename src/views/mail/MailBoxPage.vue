@@ -26,13 +26,14 @@
           class="action-buttons"
           :class="{ 'action-buttons--closed': !isSendable }"
         >
-          <ShareButtonToSns @click="handleClickShare" />
+          <ShareButtonToSns />
           <BaseButton
             v-if="isSendable"
             class="button-primary ms-2"
             @click="handleClickNewMail"
-            >편지 쓰기</BaseButton
           >
+            편지 쓰기
+          </BaseButton>
         </div>
       </div>
     </transition>
@@ -78,7 +79,6 @@ export default {
       store.dispatch('mailView/UPDATE_ID', id)
       openModal('RequestPasswordToView')
     }
-    const handleClickShare = () => openModal('ShareToSns')
     const handleClickNewMail = () => router.push(`/${key.value}/mail/post`)
 
     onMounted(async () => {
@@ -97,7 +97,6 @@ export default {
       /* Functions */
       openModal,
       handleClickMailListItem,
-      handleClickShare,
       handleClickNewMail,
     }
   },
