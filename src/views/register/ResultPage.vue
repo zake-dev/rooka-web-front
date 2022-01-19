@@ -14,10 +14,10 @@
     />
 
     <div class="action-container">
-      <BaseButton class="button-secondary mb-3" @click="handleClickShareLink"
+      <BaseButton class="button-secondary mb-3" @click="handleShareLink"
         >링크 공유하기</BaseButton
       >
-      <BaseButton class="button-primary button-lg" @click="handleClickNewMail"
+      <BaseButton class="button-primary button-lg" @click="handleNewMail"
         >첫 편지 쓰기</BaseButton
       >
     </div>
@@ -51,9 +51,9 @@ export default {
     const router = useRouter()
 
     /* Event Handler */
-    const handleClickShareLink = () => openModal('ShareToSns')
-    const handleClickNewMail = () => {
-      router.push(`/${key.value}/mail`)
+    const handleShareLink = () => openModal('ShareToSns')
+    const handleNewMail = async () => {
+      await router.push(`/${key.value}/mail`)
       store.dispatch('registerForm/RESET')
     }
 
@@ -62,8 +62,8 @@ export default {
       soldier,
       key,
       /* Functions */
-      handleClickShareLink,
-      handleClickNewMail,
+      handleShareLink,
+      handleNewMail,
     }
   },
 }
