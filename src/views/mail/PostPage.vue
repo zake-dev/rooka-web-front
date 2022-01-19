@@ -160,9 +160,9 @@ export default {
       selection.addRange(range)
       input.focus()
     }
-    const handlePasteText = async () => {
-      const text = await navigator.clipboard.readText()
-      document.execCommand('insertText', false, text)
+    const handlePasteText = e => {
+      const text = (e.originalEvent || e).clipboardData.getData('text/plain')
+      document.execCommand('insertHTML', false, text)
     }
     const handleOpenDaumPostcodeApi = e => {
       // eslint-disable-next-line

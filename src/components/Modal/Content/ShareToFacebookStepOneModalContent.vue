@@ -33,6 +33,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
+import { copyTextOf } from '@/utils/ClipboardUtil'
 import { openModal } from '@/utils/DialogHandler'
 import { showToast } from '@/utils/ToastHandler'
 import { toKoreanDateString } from '@/utils/TextFormatter'
@@ -70,7 +71,7 @@ export default {
 
     /* Event Handler */
     const handleCopyText = async () => {
-      await navigator.clipboard.writeText(template.value)
+      copyTextOf(template.value)
       showToast('본문이 복사되었어요👍')
       openModal('ShareToFacebookStepTwo')
     }

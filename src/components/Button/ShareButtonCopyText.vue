@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { copyTextOf } from '@/utils/ClipboardUtil'
 import { showToast } from '@/utils/ToastHandler'
 
 export default {
@@ -24,8 +25,8 @@ export default {
     })()
 
     /* Event Handler */
-    const handleCopyText = async () => {
-      await navigator.clipboard.writeText(props.text)
+    const handleCopyText = () => {
+      copyTextOf(props.text)
       showToast(toastMessage)
     }
 
