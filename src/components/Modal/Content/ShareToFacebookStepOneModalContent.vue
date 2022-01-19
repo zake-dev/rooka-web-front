@@ -54,10 +54,13 @@ export default {
         ? store.state.mailBox.soldier
         : store.state.registerForm.soldier,
     )
+    const key = computed(
+      () => store.state.mailBox.key ?? store.state.registerForm.key,
+    )
     const template = computed(
       () =>
         `📮${soldier.value.name} 인편 주소 나왔어요📮\n\n🔗rooka.kr/${
-          soldier.value.key
+          key.value
         }\n\n안녕하세요, ${soldier.value.name}의 인편지기입니다!\n${
           soldier.value.name
         }가 ${toKoreanDateString(

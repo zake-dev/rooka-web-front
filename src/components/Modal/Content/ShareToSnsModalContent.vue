@@ -18,12 +18,12 @@
           <span class="modal-content-body-templates__label font__content-title"
             >인편함 링크</span
           >
-          <ShareButtonCopyText :text="`rooka.kr/${key}`" type="link" />
+          <ShareButtonCopyText :text="`${baseUrl}/${key}`" type="link" />
         </div>
         <div
           class="modal-content-body-templates__example modal-content-body-templates__example--narrow font__content-text"
         >
-          rooka.kr/{{ key }}
+          {{ baseUrl }}/{{ key }}
         </div>
       </div>
 
@@ -88,11 +88,15 @@ export default {
         }의 인편함으로 간다.\n❷ 편지 쓰기 버튼을 눌러 바로 편지를 작성한다.`,
     )
 
+    /* Local State */
+    const baseUrl = process.env.VUE_APP_ROOKA_URL
+
     return {
       /* Variables */
       key,
       soldier,
       template,
+      baseUrl,
     }
   },
 }

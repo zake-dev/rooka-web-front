@@ -25,6 +25,9 @@
       <BaseButton class="button-dark" @click="handleAddCalendar"
         >구글캘린더에 추가하기</BaseButton
       >
+      <BaseButton class="button-yellow" @click="handleOpenLink"
+        >[테스트용] 인편 보낼 수 있게 변경</BaseButton
+      >
     </div>
   </div>
 </template>
@@ -84,6 +87,12 @@ export default {
         }),
       )
     }
+    const handleOpenLink = async () => {
+      await fetch(
+        `${process.env.VUE_APP_ROOKA_API_URL}/mailbox/open/${key.value}`,
+      )
+      router.push(`/${key.value}/mail`)
+    }
 
     return {
       /* Variables */
@@ -92,6 +101,7 @@ export default {
       /* Functions */
       handleGoHome,
       handleAddCalendar,
+      handleOpenLink,
     }
   },
 }

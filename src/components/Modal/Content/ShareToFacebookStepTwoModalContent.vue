@@ -53,7 +53,7 @@ export default {
     /* Event Handler */
     const handleOpenFacebook = () => {
       window.open(
-        `https://www.facebook.com/sharer.php?u=rooka.kr/${soldier.value.key}`,
+        `https://www.facebook.com/sharer.php?u=${process.env.VUE_APP_ROOKA_URL}/${soldier.value.key}`,
       )
       closeModal()
     }
