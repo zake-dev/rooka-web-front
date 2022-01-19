@@ -7,10 +7,13 @@
 <script>
 import NewsButtonIconSvg from '@/assets/icons/news-button-icon.svg'
 
+import { showToast } from '@/utils/ToastHandler'
+
 export default {
   setup() {
     /* Event Handler */
-    const handleOpenNewsModal = () => alert('아직 제공되지 않는 서비스입니다.')
+    const handleOpenNewsModal = () =>
+      showToast('아직 제공되지 않는 서비스입니다.')
 
     return {
       /* Assets */

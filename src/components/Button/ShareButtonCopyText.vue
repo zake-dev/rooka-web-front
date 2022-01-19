@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { showToast } from '@/utils/ToastHandler'
+
 export default {
   props: {
     text: String,
@@ -24,7 +26,7 @@ export default {
     /* Event Handler */
     const handleCopyText = async () => {
       await navigator.clipboard.writeText(props.text)
-      alert(toastMessage)
+      showToast(toastMessage)
     }
 
     return {
