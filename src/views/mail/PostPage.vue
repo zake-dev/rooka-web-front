@@ -65,7 +65,6 @@
         v-if="soldier.militaryType === 'ARMY'"
         @click="handleOpenImageUploader"
       />
-      <MailFormButtonNews />
       <MailFormButtonSend />
     </div>
     <input
@@ -87,14 +86,12 @@ import { openModal } from '@/utils/DialogHandler'
 
 import MailAttachmentContainer from '@/components/MailAttachment/MailAttachmentContainer.vue'
 import MailFormButtonPhoto from '@/components/Button/MailFormButtonPhoto.vue'
-import MailFormButtonNews from '@/components/Button/MailFormButtonNews.vue'
 import MailFormButtonSend from '@/components/Button/MailFormButtonSend.vue'
 
 export default {
   components: {
     MailAttachmentContainer,
     MailFormButtonPhoto,
-    MailFormButtonNews,
     MailFormButtonSend,
   },
   setup() {
