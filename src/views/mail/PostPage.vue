@@ -7,7 +7,7 @@
         >
         <input
           class="mail-header-row__input"
-          placeholder="보내는 사람의 이름을 적어주세요"
+          placeholder="보내는 사람의 이름을 적어 주세요"
           v-model="author"
         />
       </div>
@@ -15,7 +15,7 @@
         <span class="mail-header-row__label font__content-title">관계</span>
         <input
           class="mail-header-row__input"
-          placeholder="훈련병과의 관계를 적어주세요"
+          placeholder="훈련병과의 관계를 적어 주세요"
           v-model="relation"
         />
       </div>
@@ -24,14 +24,14 @@
         <div class="mail-header-row-address">
           <input
             class="mail-header-row__input"
-            placeholder="답장을 받을 주소를 입력해주세요"
+            placeholder="답장을 받으려면 주소를 입력해 주세요"
             :value="addressInputText"
             @click="handleOpenDaumPostcodeApi"
             readonly
           />
           <input
             class="mail-header-row__input"
-            placeholder="상세주소를 입력해주세요"
+            placeholder="상세주소를 입력해 주세요"
             v-model="address2"
           />
         </div>
@@ -41,7 +41,7 @@
     <div class="mail-content masked-overflow">
       <div
         class="mail-content__input font__semi-title"
-        placeholder="제목을 입력해주세요"
+        placeholder="제목을 입력해 주세요"
         contenteditable
         @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
@@ -50,7 +50,7 @@
       <MailAttachmentContainer v-if="imageUUID" class="mail-content__image" />
       <div
         class="mail-content__textarea font__content-text"
-        placeholder="내용을 입력해주세요"
+        placeholder="내용을 입력해 주세요"
         contenteditable
         @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"

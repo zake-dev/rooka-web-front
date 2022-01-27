@@ -41,9 +41,6 @@ export default createStore({
         state.toastList.splice(index, 1)
       }
     },
-    SET_USER_KEY(state, key) {
-      state.userKey = key
-    },
   },
   actions: {
     OPEN_MODAL({ commit }, modalContentName) {
@@ -58,9 +55,6 @@ export default createStore({
     },
     REMOVE_TOAST({ commit }, toastId) {
       commit('REMOVE_TOAST', toastId)
-    },
-    LOGIN_USER({ commit }, key) {
-      commit('SET_USER_KEY', key)
     },
   },
   modules: {

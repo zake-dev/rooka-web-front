@@ -40,11 +40,11 @@ export default {
       switch (status) {
         case 'OPEN':
           if (totalCount === 0)
-            return '아직 받은 편지가 없네요. 지금 마음을 담아 편지를 보내보세요!'
+            return '아직 받은 편지가 없네요. 지금 마음을 담아 편지를 보내 보세요!'
           if (deliveredCount === 0)
-            return `${pendingCount}통의 편지가 전달될 예정이에요. 지금 편지를 보내보세요!`
+            return `${pendingCount}통의 편지가 전달될 예정이에요. 지금 편지를 보내 보세요!`
           if (pendingCount === 0)
-            return `${deliveredCount}통의 편지가 전달됐어요. 지금 마음을 담아 편지를 보내보세요!`
+            return `${deliveredCount}통의 편지가 전달됐어요. 지금 마음을 담아 편지를 보내 보세요!`
           return `총 ${deliveredCount}통의 편지가 전달됐고, ${pendingCount}통의 편지가 전달될 예정이에요.`
         case 'CLOSED':
           return totalCount === 0

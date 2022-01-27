@@ -18,7 +18,7 @@
             >
             <FormInput
               type="text"
-              placeholder="이름을 입력해주세요"
+              placeholder="이름을 입력해 주세요"
               :value="soldier.name"
               @input="handleUpdateName"
               @keyup.enter="handleSubmitName"
@@ -44,7 +44,7 @@
           </FormLabel>
           <FormInput
             type="date"
-            data-placeholder="생년월일을 입력해주세요"
+            data-placeholder="생년월일을 입력해 주세요"
             :value="soldier.birthDate"
             @change="handleSubmitBirthDate"
             required
@@ -105,7 +105,7 @@
           </FormLabel>
           <FormInput
             type="date"
-            data-placeholder="입대일을 입력해주세요"
+            data-placeholder="입대일을 입력해 주세요"
             :value="soldier.enterDate"
             @change="handleSubmitEnterDate"
             required

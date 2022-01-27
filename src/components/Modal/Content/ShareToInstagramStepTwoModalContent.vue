@@ -10,7 +10,7 @@
     <div class="modal-content-body masked-overflow">
       <span class="modal-content-body__step font__tag">STEP 2</span>
       <span class="modal-content-body__title font__content-title"
-        >본문을 복사해주세요!</span
+        >본문을 복사해 주세요!</span
       >
 
       <div class="modal-content-body__template">{{ template }}</div>
@@ -36,7 +36,7 @@ import { useStore } from 'vuex'
 import { copyTextOf } from '@/utils/ClipboardUtil'
 import { openModal } from '@/utils/DialogHandler'
 import { showToast } from '@/utils/ToastHandler'
-import { toKoreanDateString } from '@/utils/TextFormatter'
+import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
@@ -59,17 +59,21 @@ export default {
     )
     const template = computed(
       () =>
-        `📮${soldier.value.name} 인편 주소 나왔어요📮\n\n🔗rooka.kr/${
-          key.value
-        }\n\n안녕하세요, ${soldier.value.name}의 인편지기입니다!\n${
+        `📮${soldier.value.name} 인편 주소 나왔어요📮\n안녕하세요 ${
           soldier.value.name
-        }가 ${toKoreanDateString(
+        }의 인편지기입니다!\n${
+          soldier.value.name
+        } 훈련병이 ${toKoreanDateString(
           soldier.value.enterDate,
-        )}에 훈련소에 입소했습니다.\n열심히 훈련받고 있을 ${
+        )}에 ${toKoreanMilitaryType(
+          soldier.value.militaryType,
+        )}훈련소에 입소했습니다.\n열심히 훈련받고 있을 ${
           soldier.value.name
-        }를 위해 짧게나마 응원의 메시지를 적어서 편지를 보내 주시면 감사하겠습니다!\n\n아래 링크를 통해 정보 입력 없이 바로 편지를 작성할 수 있어요🤗\n\n💌루카에서 인편 쓰는 방법💌\n❶ 아래 링크를 통해 ${
+        } 훈련병을 위해 짧게나마 응원의 메시지를 적어서 편지를 보내 주시면 감사하겠습니다!\n\n아래 링크를 통해 정보 입력 없이 바로 편지를 작성할 수 있어요🤗\n\n💌루카에서 인편 쓰는 방법💌\n❶ 아래 링크를 통해 ${
           soldier.value.name
-        }의 인편함으로 간다.\n❷ 편지 쓰기 버튼을 눌러 바로 편지를 작성한다.`,
+        } 훈련병의 인편함으로 간다.\n❷ 편지 쓰기 버튼을 눌러 바로 편지를 작성한다.\n\n🔗${
+          soldier.value.name
+        } 훈련병 인편함 링크🔗\nrooka.kr/${key.value}`,
     )
 
     /* Event Handler */

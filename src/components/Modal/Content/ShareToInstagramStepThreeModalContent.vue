@@ -10,7 +10,7 @@
     <div class="modal-content-body masked-overflow">
       <span class="modal-content-body__step font__tag">STEP 3</span>
       <span class="modal-content-body__title font__content-title"
-        >인스타그램에 공유해주세요!</span
+        >인스타그램에 공유해 주세요!</span
       >
 
       <div class="modal-content-buttons">

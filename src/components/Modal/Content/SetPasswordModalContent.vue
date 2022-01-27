@@ -5,7 +5,7 @@
       class="mx-2"
       type="password"
       v-model="password"
-      placeholder="비밀번호를 입력해주세요"
+      placeholder="비밀번호를 입력해 주세요"
     />
 
     <span class="modal-content__title font__page-title">비밀번호 확인</span>
@@ -18,7 +18,7 @@
       <FormInput
         type="password"
         v-model="passwordConfirmation"
-        placeholder="비밀번호를 다시 한 번 입력해주세요"
+        placeholder="비밀번호를 다시 한 번 입력해 주세요"
       />
     </div>
 

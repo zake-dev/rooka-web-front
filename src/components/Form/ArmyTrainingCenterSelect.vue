@@ -2,7 +2,7 @@
   <div class="form-select-wrapper">
     <select class="form-select">
       <option class="form-select__placeholder-text" value="" hidden>
-        입영 부대를 선택해주세요
+        입영 부대를 선택해 주세요
       </option>
       <option
         v-for="trainingCenterName in trainingCenterNames"
