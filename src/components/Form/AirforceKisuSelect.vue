@@ -13,6 +13,7 @@
         {{ kisu }}기 ({{ toKoreanDateString(enterDate) }})
       </option>
     </select>
+    <img class="form-select__icon" :src="DropdownArrowIconPng" />
   </div>
 </template>
 
@@ -21,8 +22,9 @@ import { reactive, computed } from 'vue'
 import { useStore } from 'vuex'
 
 import * as CodeApi from '@/api/CodeApi'
-
 import { toKoreanDateString } from '@/utils/TextFormatter'
+
+import DropdownArrowIconPng from '@/assets/icons/dropdown-arrow-icon.png'
 
 export default {
   setup() {
@@ -40,6 +42,8 @@ export default {
     })()
 
     return {
+      /* Assets */
+      DropdownArrowIconPng,
       /* Variables */
       soldier,
       kisuAndEnterDates,
@@ -68,15 +72,14 @@ export default {
 
   &-wrapper {
     position: relative;
+  }
 
-    &::after {
-      position: absolute;
-      content: '▼';
-      font-size: 10px;
-      top: 9px;
-      right: 12px;
-      color: $gray3;
-    }
+  &__icon {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 14px;
+    right: 15px;
   }
 
   &__placeholder-text {
