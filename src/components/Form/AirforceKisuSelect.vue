@@ -18,10 +18,9 @@
 </template>
 
 <script>
-import { reactive, computed } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import * as CodeApi from '@/api/CodeApi'
 import { toKoreanDateString } from '@/utils/TextFormatter'
 
 import DropdownArrowIconPng from '@/assets/icons/dropdown-arrow-icon.png'
@@ -30,16 +29,9 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => store.state.registerForm)
-
-    /* Local State */
-    const kisuAndEnterDates = reactive([])
-
-    /* Fetch Data */
-    ;(async () => {
-      const { data } = await CodeApi.getAirforceKisus()
-      data.forEach(kisu => kisuAndEnterDates.push(kisu))
-    })()
+    const state = store.state.registerForm
+    const soldier = computed(() => state.soldier)
+    const kisuAndEnterDates = computed(() => state.selectableKisus)
 
     return {
       /* Assets */

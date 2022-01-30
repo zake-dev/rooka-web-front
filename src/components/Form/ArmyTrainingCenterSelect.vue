@@ -18,10 +18,8 @@
 </template>
 
 <script>
-import { reactive, computed } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
-
-import * as CodeApi from '@/api/CodeApi'
 
 import DropdownArrowIconPng from '@/assets/icons/dropdown-arrow-icon.png'
 
@@ -29,16 +27,11 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => store.state.registerForm)
-
-    /* Local State */
-    const trainingCenterNames = reactive([])
-
-    /* Fetch Data */
-    ;(async () => {
-      const { data } = await CodeApi.getTrainingCenterNames()
-      data.forEach(name => trainingCenterNames.push(name))
-    })()
+    const state = store.state.registerForm
+    const soldier = computed(() => state.soldier)
+    const trainingCenterNames = computed(
+      () => state.selectableTrainingCenterNames,
+    )
 
     return {
       /* Assets */

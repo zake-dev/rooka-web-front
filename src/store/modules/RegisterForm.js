@@ -1,3 +1,5 @@
+import * as CodeApi from '@/api/CodeApi'
+
 const module = {
   namespaced: true,
   state: {
@@ -16,6 +18,8 @@ const module = {
       kisu: '',
       trainingCenterName: '',
     },
+    selectableTrainingCenterNames: [],
+    selectableKisus: [],
   },
   getters: {
     isValidForm: state => {
@@ -54,6 +58,8 @@ const module = {
           kisu: '',
           trainingCenterName: '',
         },
+        selectableTrainingCenterNames: [],
+        selectableKisus: [],
       })
     },
     RESET_WITHOUT_FORM(state) {
@@ -96,8 +102,22 @@ const module = {
     SET_LINK_IMAGE_UUID(state, linkImageUUID) {
       state.linkImageUUID = linkImageUUID
     },
+    SET_SELECTABLE_TRAINING_CENTER_NAMES(state, trainingCenterNames) {
+      state.selectableTrainingCenterNames = trainingCenterNames
+    },
+    SET_SELECTABLE_KISUS(state, kisus) {
+      state.selectableKisus = kisus
+    },
   },
   actions: {
+    async FETCH_TRAINING_CENTER_NAMES({ commit }) {
+      const { data } = await CodeApi.getTrainingCenterNames()
+      commit('SET_SELECTABLE_TRAINING_CENTER_NAMES', data)
+    },
+    async FETCH_KISUS({ commit }) {
+      const { data } = await CodeApi.getAirforceKisus()
+      commit('SET_SELECTABLE_KISUS', data)
+    },
     INCREASE_STEP({ state, commit }) {
       commit('SET_SLIDE_TRANSITION', 'slide-left')
       commit('SET_CURRENT_STEP', state.stepper.currentStep + 1)
