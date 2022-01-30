@@ -5,7 +5,7 @@
     <div class="modal-content-profile">
       <img
         class="modal-content-profile__image mb-2"
-        :src="ProfileAirforcePng"
+        :src="SoldierInfoDefaultPng"
       />
       <p class="modal-content-profile__name font__semi-title mb-3">
         {{ soldier.name }} 훈련병
@@ -76,7 +76,7 @@ import { useStore } from 'vuex'
 import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
-import ProfileAirforcePng from '@/assets/images/profile-airforce.png'
+import SoldierInfoDefaultPng from '@/assets/images/soldier-info-default.png'
 
 export default {
   components: {
@@ -89,7 +89,7 @@ export default {
 
     return {
       /* Assets */
-      ProfileAirforcePng,
+      SoldierInfoDefaultPng,
       /* Variables */
       soldier,
       /* Functions */
@@ -145,6 +145,8 @@ export default {
   &__image {
     height: 72px;
     width: 72px;
+    border-radius: 50%;
+    overflow: hidden;
   }
 }
 </style>
