@@ -10,7 +10,7 @@
           <div
             class="card-content-title__text card-content-title__text--accent"
           >
-            인편을 써주세요
+            인편을 써 주세요
             <img class="card-content__image" :src="LetterBoxPng" />
           </div>
         </div>
