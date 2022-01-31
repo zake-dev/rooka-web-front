@@ -221,7 +221,7 @@ export default {
     const handleInputTitle = e => (title.value = e.target.innerText)
     const handleInputContent = e => (content.value = e.target.innerText)
     const handleResetValidation = fieldName =>
-      store.dispatch(`mailForm/RESET_VALIDATION`, fieldName)
+      store.dispatch('mailForm/RESET_VALIDATION', fieldName)
 
     window.addEventListener('resize', () => {
       const MIN_KEYBOARD_HEIGHT = 300
