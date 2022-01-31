@@ -5,14 +5,23 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
+
 import { openModal } from '@/utils/DialogHandler'
+import { showToast } from '@/utils/ToastHandler'
 
 import SendButtonIconSvg from '@/assets/icons/send-button-icon.svg'
 
 export default {
   setup() {
-    /* Event Handler */
-    const handleSendMail = () => openModal('SetPassword')
+    /* Vuex */
+    const store = useStore()
+
+    const handleSendMail = async () => {
+      const isAllValid = await store.dispatch('mailForm/UPDATE_ALL_VALIDATION')
+      if (isAllValid) openModal('SetPassword')
+      else showToast('What?')
+    }
 
     return {
       /* Assets */
