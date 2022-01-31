@@ -10,7 +10,7 @@
         <input
           class="mail-header-row__input"
           :isvalid="validation.author"
-          @focus="handleClickField('author')"
+          @focus="handleResetValidation('author')"
           placeholder="보내는 사람의 이름을 적어주세요"
           v-model="author"
         />
@@ -24,7 +24,7 @@
         <input
           class="mail-header-row__input"
           :isvalid="validation.relation"
-          @focus="handleClickField('relation')"
+          @focus="handleResetValidation('relation')"
           placeholder="훈련병과의 관계를 적어주세요"
           v-model="relation"
         />
@@ -41,14 +41,14 @@
             :isvalid="validation.address1"
             placeholder="답장을 받을 주소를 입력해주세요"
             :value="addressInputText"
-            @focus="handleClickField('address1')"
+            @focus="handleResetValidation('address1')"
             @click="handleOpenDaumPostcodeApi"
             readonly
           />
           <span
             v-if="!addressInputText"
             class="mail-header-row-address__post-code-search font__button-text"
-            @focus="handleClickField('address1')"
+            @focus="handleResetValidation('address1')"
             @click="handleOpenDaumPostcodeApi"
           >
             우편번호 검색
@@ -65,7 +65,7 @@
           <input
             class="mail-header-row__input"
             :isvalid="validation.address2"
-            @focus="handleClickField('address2')"
+            @focus="handleResetValidation('address2')"
             placeholder="상세주소를 입력해주세요"
             v-model="address2"
           />
@@ -79,7 +79,7 @@
         :isvalid="validation.title"
         placeholder="제목을 입력해주세요"
         contenteditable
-        @focus="handleClickField('title')"
+        @focus="handleResetValidation('title')"
         @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputTitle"
@@ -90,7 +90,7 @@
         :isvalid="validation.content"
         placeholder="내용을 입력해주세요"
         contenteditable
-        @focus="handleClickField('content')"
+        @focus="handleResetValidation('content')"
         @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputContent"
@@ -217,7 +217,7 @@ export default {
     }
     const handleInputTitle = e => (title.value = e.target.innerText)
     const handleInputContent = e => (content.value = e.target.innerText)
-    const handleClickField = fieldName => {
+    const handleResetValidation = fieldName => {
       if (validation.value[fieldName] === false) {
         store.commit(`mailForm/SET_${fieldName.toUpperCase()}_VALIDATION`, true)
       }
@@ -257,7 +257,7 @@ export default {
       handleOpenDaumPostcodeApi,
       handleInputTitle,
       handleInputContent,
-      handleClickField,
+      handleResetValidation,
       handleOpenImageUploader,
       handleUploadImage,
     }
