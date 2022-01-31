@@ -3,7 +3,7 @@
     <span
       v-show="isPlaceholderVisible"
       class="placeholder"
-      @click="handleFocusYear"
+      @click="handleFocus"
     >
       {{ placeholder }}
     </span>
@@ -14,10 +14,9 @@
       v-model="year"
       placeholder="YYYY"
       inputmode="numeric"
-      pattern="[0-9]{4}"
       maxlength="4"
-      @keyup="handleYearInput"
-      @focus="handleFocusYear"
+      @input="handleYearInput"
+      @focus="handleFocus"
       @blur="handleBlur"
     />
     <span class="divider divider__left">/</span>
@@ -27,11 +26,9 @@
       v-model="month"
       placeholder="MM"
       inputmode="numeric"
-      pattern="[0-9]{2}"
       maxlength="2"
-      @keyup="handleMonthInput"
-      @focus="handleFocusMonth"
-      @blur="handleBlur"
+      @input="handleMonthInput"
+      @blur="handleBlurMonth"
     />
     <span class="divider divider__right">/</span>
     <input
@@ -40,10 +37,8 @@
       v-model="date"
       placeholder="DD"
       inputmode="numeric"
-      pattern="[0-9]{2}"
       maxlength="2"
-      @keyup="handleDateInput"
-      @focus="handleFocusDate"
+      @input="handleDateInput"
       @blur="handleBlur"
     />
   </div>
@@ -95,58 +90,45 @@ export default {
 
     /* Event Handler */
     const handleYearInput = e => {
-      filterNumericOnly(e.target.value)
+      e.target.value = filterNumericOnly(e.target.value)
+
       if (e.target.value.length >= 4) {
         e.target.value = e.target.value.slice(0, 4)
         monthInput.value.focus()
       }
     }
     const handleMonthInput = e => {
-      if (year.value === '') {
-        e.target.value = ''
-        yearInput.value.focus()
-        return
-      }
+      e.target.value = filterNumericOnly(e.target.value)
 
-      filterNumericOnly(e.target.value)
       if (e.target.value.length >= 2) {
-        month.value = minmax(e.target.value.slice(0, 2), 1, 12)
-          .toString()
-          .padStart(2, '0')
+        e.target.value = e.target.value.slice(0, 2)
         dateInput.value.focus()
       }
     }
     const handleDateInput = e => {
-      if (month.value === '') {
-        e.target.value = ''
-        monthInput.value.focus()
-        return
-      }
+      e.target.value = filterNumericOnly(e.target.value)
 
-      filterNumericOnly(e.target.value)
       if (e.target.value.length >= 2) {
-        const lastDate = new Date(year.value, month.value, 0).getDate()
-        date.value = minmax(e.target.value.slice(0, 2), 1, lastDate)
-          .toString()
-          .padStart(2, '0')
+        e.target.value = e.target.value.slice(0, 2)
         e.target.blur()
       }
     }
-    const handleFocusYear = () => {
+    const handleFocus = () => {
       isFocused.value = true
       yearInput.value.focus()
     }
-    const handleFocusMonth = () => {
-      isFocused.value = true
-      year.value ? monthInput.value.focus() : yearInput.value.focus()
+    const handleUpdateDate = () => {
+      const lastDate = new Date(year.value, month.value, 0).getDate()
+      date.value = minmax(date.value, 1, lastDate).toString().padStart(2, '0')
     }
-    const handleFocusDate = () => {
-      isFocused.value = true
-      month.value ? dateInput.value.focus() : monthInput.value.focus()
-    }
-    const handleBlur = e => {
+    const handleBlur = () => {
       isFocused.value = false
-      e.target.value = e.target.value.padStart(2, '0')
+      if (date.value) handleUpdateDate()
+    }
+    const handleBlurMonth = () => {
+      if (month.value !== '')
+        month.value = minmax(month.value, 1, 12).toString().padStart(2, '0')
+      handleBlur()
     }
 
     return {
@@ -164,10 +146,9 @@ export default {
       handleYearInput,
       handleMonthInput,
       handleDateInput,
-      handleFocusYear,
-      handleFocusMonth,
-      handleFocusDate,
+      handleFocus,
       handleBlur,
+      handleBlurMonth,
     }
   },
 }

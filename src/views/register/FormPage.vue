@@ -41,17 +41,24 @@
             {{ soldier.name }} 훈련병은<br />언제 태어났나요?
             <Emoji>🎂</Emoji>
           </FormLabel>
-          <FormDateInput
-            v-model="birthDate"
-            placeholder="생년월일을 입력해 주세요"
-            required
-          />
+          <div class="input-area" @click="handleClickBirthDate">
+            <span
+              v-if="isInvalidBirthDate"
+              class="input-area__text--invalid font__caption"
+              >올바르지 않은 날짜에요!</span
+            >
+            <FormDateInput
+              v-model="birthDate"
+              placeholder="생년월일을 입력해 주세요"
+              required
+            />
+          </div>
 
           <div class="form-card-buttons my-3">
             <BaseButton
               class="button-primary"
-              @click="handleIncreaseStep"
-              :disabled="!isValidDate(soldier.birthDate)"
+              @click="handleSubmitBirthDate"
+              :disabled="!isValidDate(soldier.birthDate) || isInvalidBirthDate"
               >다음</BaseButton
             >
           </div>
@@ -236,28 +243,41 @@ export default {
 
     /* Local State */
     const isInvalidName = ref(false)
+    const isInvalidBirthDate = ref(false)
 
     /* Helper Function */
     const isValidDate = ({ year, month, date }) =>
-      year !== null &&
-      year !== '' &&
-      month !== null &&
-      month !== '' &&
-      date !== null &&
-      date !== ''
+      year !== '' && month !== '' && date !== ''
 
     /* Event Handler */
     const handleIncreaseStep = () =>
       store.dispatch('registerForm/INCREASE_STEP')
-    const handleSubmitName = event => {
+    const handleSubmitName = e => {
       const isValidKoreanName = name => new RegExp(/^[가-힣]{2,}$/g).test(name)
 
       if (!isValidKoreanName(name.value)) {
         isInvalidName.value = true
-        event.target.blur()
+        e.target.blur()
         return
       }
       isInvalidName.value = false
+      handleIncreaseStep()
+    }
+    const handleClickBirthDate = () => {
+      if (isInvalidBirthDate.value) {
+        birthDate.value = { year: '', month: '', date: '' }
+        isInvalidBirthDate.value = false
+        setTimeout(() => document.querySelector('.input').focus(), 1)
+      }
+    }
+    const handleSubmitBirthDate = () => {
+      const isFutureDate = ({ year, month, date }) =>
+        new Date(year, month - 1, date) > new Date()
+
+      if (isFutureDate(birthDate.value)) {
+        isInvalidBirthDate.value = true
+        return
+      }
       handleIncreaseStep()
     }
     const handleClickMilitaryType = militaryType => {
@@ -286,6 +306,7 @@ export default {
       slideTransition,
       stepper,
       isInvalidName,
+      isInvalidBirthDate,
       name,
       birthDate,
       enterDate,
@@ -295,6 +316,8 @@ export default {
       openModal,
       isValidDate,
       handleSubmitName,
+      handleClickBirthDate,
+      handleSubmitBirthDate,
       handleClickMilitaryType,
       handleSubmitForm,
       handleIncreaseStep,
