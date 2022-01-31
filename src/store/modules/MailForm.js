@@ -1,5 +1,6 @@
 import * as MailApi from '@/api/MailApi'
 import router from '@/router'
+import { showWarningToast } from '@/utils/ToastHandler'
 
 const module = {
   namespaced: true,
@@ -128,6 +129,7 @@ const module = {
         await router.push(`/${state.mail.key}/mail`)
       } catch (e) {
         console.dir(e.response)
+        showWarningToast('헉... 전송에 실패했어요😱')
       } finally {
         commit('SET_IS_BEING_SENT', false)
       }
