@@ -4,7 +4,7 @@
     @click="handleDownloadImage(linkImageUUID, 'rooka-공유-이미지.png')"
   >
     <div class="button-icon-wrapper">
-      <img class="button-icon-wrapper__icon" :src="DownloadIconSvg" />
+      <img class="button-icon-wrapper__icon" :src="DownloadImageIconPng" />
     </div>
     <span class="button-label font__caption">카드 이미지<br />저장</span>
   </button>
@@ -16,7 +16,7 @@ import { useStore } from 'vuex'
 
 import { useImageDownloader } from '@/composables/useImageDownloader'
 
-import DownloadIconSvg from '@/assets/icons/download-icon.svg'
+import DownloadImageIconPng from '@/assets/icons/download-image-icon.png'
 
 export default {
   setup() {
@@ -33,7 +33,7 @@ export default {
 
     return {
       /* Assets */
-      DownloadIconSvg,
+      DownloadImageIconPng,
       /* Variables */
       linkImageUUID,
       /* Functions */
@@ -68,8 +68,8 @@ export default {
     background-color: $gray1;
 
     &__icon {
-      width: 24px;
-      height: 21px;
+      width: 20px;
+      height: 20px;
     }
   }
 

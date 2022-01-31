@@ -1,7 +1,7 @@
 <template>
   <button class="button" @click="handleShareToKakaotalk">
     <div class="button-icon-wrapper">
-      <img class="button-icon-wrapper__icon" :src="KakaotalkIconSvg" />
+      <img class="button-icon-wrapper__icon" :src="KakaotalkIconPng" />
     </div>
     <span class="button-label font__caption">카카오톡</span>
   </button>
@@ -11,7 +11,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import KakaotalkIconSvg from '@/assets/icons/kakaotalk-icon.svg'
+import KakaotalkIconPng from '@/assets/icons/kakaotalk-icon.png'
 
 export default {
   setup() {
@@ -54,7 +54,7 @@ export default {
 
     return {
       /* Assets */
-      KakaotalkIconSvg,
+      KakaotalkIconPng,
       /* Functions */
       handleShareToKakaotalk,
     }
@@ -87,8 +87,8 @@ export default {
     background-color: $gray1;
 
     &__icon {
-      width: 24px;
-      height: 21px;
+      width: 20px;
+      height: 20px;
     }
   }
 

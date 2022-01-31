@@ -1,6 +1,6 @@
 <template>
   <button class="delete-button" @click="handleDeleteAttachment">
-    <img :src="AttachmentTrashIconPng" />
+    <img class="delete-button__icon" :src="AttachmentTrashIconPng" />
   </button>
 </template>
 
@@ -35,5 +35,10 @@ export default {
   border: none;
   border-radius: 50%;
   overflow: hidden;
+
+  &__icon {
+    height: 21px;
+    width: 21px;
+  }
 }
 </style>

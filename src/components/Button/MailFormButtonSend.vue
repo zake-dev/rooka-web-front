@@ -1,35 +1,22 @@
 <template>
-  <button
-    class="button send-button"
-    @click="handleSendMail"
-    :disabled="!isSendable"
-  >
-    <img :src="SendButtonIconSvg" />
+  <button class="button send-button" @click="handleSendMail">
+    <img class="send-button__image" :src="SendButtonIconPng" />
   </button>
 </template>
 
 <script>
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-
 import { openModal } from '@/utils/DialogHandler'
 
-import SendButtonIconSvg from '@/assets/icons/send-button-icon.svg'
+import SendButtonIconPng from '@/assets/icons/send-button-icon.png'
 
 export default {
   setup() {
-    /* Vuex */
-    const store = useStore()
-    const isSendable = computed(() => store.getters['mailForm/isSendable'])
-
     /* Event Handler */
     const handleSendMail = () => openModal('SetPassword')
 
     return {
       /* Assets */
-      SendButtonIconSvg,
-      /* Variables */
-      isSendable,
+      SendButtonIconPng,
       /* Functions */
       handleSendMail,
     }
@@ -45,17 +32,9 @@ export default {
   height: 100%;
   min-height: 56px;
 
-  &:disabled {
-    background-color: white !important;
-
-    & img {
-      opacity: 0.2;
-    }
+  &__image {
+    width: 21px;
+    height: 21px;
   }
-}
-img {
-  width: 21px;
-  height: 21px;
-  transition: opacity 0.3s ease;
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
   <button class="button delete-button" @click="handleOpenMailDeleteModal">
-    <img :src="TrashIconSvg" />
+    <img class="delete-button__image" :src="TrashButtonIconPng" />
   </button>
 </template>
 
 <script>
 import { openModal } from '@/utils/DialogHandler'
 
-import TrashIconSvg from '@/assets/icons/trash-icon.svg'
+import TrashButtonIconPng from '@/assets/icons/trash-button-icon.png'
 
 export default {
   setup() {
@@ -16,7 +16,7 @@ export default {
 
     return {
       /* Assets */
-      TrashIconSvg,
+      TrashButtonIconPng,
       /* Functions */
       handleOpenMailDeleteModal,
     }
@@ -31,18 +31,10 @@ export default {
   width: 96px;
   height: 100%;
   min-height: 56px;
-  color: $gray5;
 
-  &:disabled {
-    background-color: white !important;
-
-    & img {
-      opacity: 0.2;
-    }
+  &__image {
+    width: 21px;
+    height: 21px;
   }
-}
-img {
-  width: 21px;
-  height: 21px;
 }
 </style>

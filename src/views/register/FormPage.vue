@@ -274,7 +274,11 @@ export default {
     const handleIncreaseStep = () =>
       store.dispatch('registerForm/INCREASE_STEP')
 
-    onBeforeMount(() => store.dispatch('registerForm/RESET_WITHOUT_FORM'))
+    onBeforeMount(() => {
+      store.dispatch('registerForm/RESET_WITHOUT_FORM')
+      store.dispatch('registerForm/FETCH_TRAINING_CENTER_NAMES')
+      store.dispatch('registerForm/FETCH_KISUS')
+    })
 
     return {
       /* Variables */

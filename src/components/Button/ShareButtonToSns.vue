@@ -1,20 +1,20 @@
 <template>
   <button
-    class="button button-dark share-button"
+    class="button button-dark sns-button"
     @click="openModal('ShareToSns')"
   >
-    <img :src="ShareIconSvg" class="share-button__icon" />
+    <img class="sns-button__icon" :src="ShareIconPng" />
   </button>
 </template>
 
 <script>
 import { openModal } from '@/utils/DialogHandler'
-import ShareIconSvg from '@/assets/icons/share-icon.svg'
+import ShareIconPng from '@/assets/icons/share-icon.png'
 
 export default {
   setup() {
     return {
-      ShareIconSvg,
+      ShareIconPng,
       openModal,
     }
   },
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.share-button {
+.sns-button {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -33,7 +33,7 @@ export default {
   cursor: pointer;
 
   &__icon {
-    width: 16px;
+    width: 18px;
     height: 18px;
     margin-right: 2px;
   }
