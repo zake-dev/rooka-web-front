@@ -218,7 +218,6 @@ const module = {
         dispatch('UPDATE_TITLE_VALIDATION'),
         dispatch('UPDATE_CONTENT_VALIDATION'),
       ])
-      console.log(validations)
       return validations.every(v => v)
     },
     RESET({ commit }) {

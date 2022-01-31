@@ -10,6 +10,7 @@
         <input
           class="mail-header-row__input"
           :isvalid="validation.author"
+          @click="handleClickField('author')"
           placeholder="보내는 사람의 이름을 적어주세요"
           v-model="author"
         />
@@ -23,6 +24,7 @@
         <input
           class="mail-header-row__input"
           :isvalid="validation.relation"
+          @click="handleClickField('relation')"
           placeholder="훈련병과의 관계를 적어주세요"
           v-model="relation"
         />
@@ -39,12 +41,15 @@
             :isvalid="validation.address1"
             placeholder="답장을 받을 주소를 입력해주세요"
             :value="addressInputText"
-            @click="handleOpenDaumPostcodeApi"
+            @click="
+              handleOpenDaumPostcodeApi($event), handleClickField('address1')
+            "
             readonly
           />
           <input
             class="mail-header-row__input"
             :isvalid="validation.address2"
+            @click="handleClickField('address2')"
             placeholder="상세주소를 입력해주세요"
             v-model="address2"
           />
@@ -58,7 +63,7 @@
         :isvalid="validation.title"
         placeholder="제목을 입력해주세요"
         contenteditable
-        @click="handleCollapseMailHeader"
+        @click="handleCollapseMailHeader($event), handleClickField('title')"
         @paste.prevent="handlePasteText"
         @input="handleInputTitle"
       ></div>
@@ -68,7 +73,7 @@
         :isvalid="validation.content"
         placeholder="내용을 입력해주세요"
         contenteditable
-        @click="handleCollapseMailHeader"
+        @click="handleCollapseMailHeader($event), handleClickField('content')"
         @paste.prevent="handlePasteText"
         @input="handleInputContent"
         ref="mailContentInput"
@@ -194,6 +199,11 @@ export default {
     }
     const handleInputTitle = e => (title.value = e.target.innerText)
     const handleInputContent = e => (content.value = e.target.innerText)
+    const handleClickField = fieldName => {
+      if (validation.value[fieldName] === false) {
+        store.commit(`mailForm/SET_${fieldName.toUpperCase()}_VALIDATION`, true)
+      }
+    }
 
     window.addEventListener('resize', () => {
       const MIN_KEYBOARD_HEIGHT = 300
@@ -229,6 +239,7 @@ export default {
       handleOpenDaumPostcodeApi,
       handleInputTitle,
       handleInputContent,
+      handleClickField,
       handleOpenImageUploader,
       handleUploadImage,
     }
@@ -334,7 +345,6 @@ input {
     &__textarea {
       cursor: text;
       outline: none;
-      color: $warningRed;
 
       &:empty:before {
         content: attr(placeholder);
