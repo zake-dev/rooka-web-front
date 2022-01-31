@@ -33,7 +33,9 @@ export default {
   setup(props, { emit }) {
     /* Vuex */
     const store = useStore()
-    const kisuAndEnterDates = computed(() => store.state.selectableKisus)
+    const kisuAndEnterDates = computed(
+      () => store.state.registerForm.selectableKisus,
+    )
 
     /* Event Handler */
     const handleSelect = e => emit('update:modelValue', e.target.value)

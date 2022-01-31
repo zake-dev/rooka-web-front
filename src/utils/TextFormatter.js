@@ -1,5 +1,10 @@
 export const toKoreanDateString = date => {
-  date = date instanceof Date ? date : new Date(date)
+  date =
+    date instanceof Date
+      ? date
+      : date instanceof Object
+      ? new Date(Object.values(date))
+      : new Date(date)
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()

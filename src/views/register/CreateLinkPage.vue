@@ -95,7 +95,7 @@ export default {
 
     /* Event Handler */
     const handleClickCreateLink = async () => {
-      await store.dispatch('registeFrom/SUBMIT_FORM')
+      await store.dispatch('registerFrom/SUBMIT_FORM')
       router.push({ name: 'RegisterResult' })
     }
 
