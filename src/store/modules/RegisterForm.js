@@ -130,7 +130,7 @@ const module = {
     },
     async SUBMIT_FORM({ getters, dispatch }) {
       const { data } = await MailBoxApi.postKey(getters.form)
-      dispatch('registerForm/UPDATE_KEY', data.key)
+      dispatch('UPDATE_KEY', data.key)
     },
     INCREASE_STEP({ state, commit }) {
       commit('SET_SLIDE_TRANSITION', 'slide-left')

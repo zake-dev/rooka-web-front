@@ -19,3 +19,8 @@ export const toKoreanMilitaryType = militaryType => {
       return '공군'
   }
 }
+
+const shortenWithEllipsis = maxCount => text =>
+  text.length > maxCount ? text.slice(0, maxCount - 1) + '...' : text
+
+export const shortenName = shortenWithEllipsis(6)

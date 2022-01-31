@@ -95,7 +95,7 @@ export default {
 
     /* Event Handler */
     const handleClickCreateLink = async () => {
-      await store.dispatch('registerFrom/SUBMIT_FORM')
+      await store.dispatch('registerForm/SUBMIT_FORM')
       router.push({ name: 'RegisterResult' })
     }
 
@@ -117,7 +117,7 @@ export default {
 
 .page-wrapper {
   padding: 32px;
-  padding-top: calc(#{$appBarHeight} + 32px);
+  padding-top: calc(#{$appBarHeight} + 30px);
 }
 .submitted-form {
   &-row {

@@ -39,7 +39,7 @@
       <div v-else-if="stepper.currentStep === 2" class="form-card">
         <div class="form-card-content">
           <FormLabel class="mb-3">
-            {{ soldier.name }} 훈련병은<br />언제 태어났나요?
+            {{ shortenName(soldier.name) }} 훈련병은<br />언제 태어났나요?
             <Emoji>🎂</Emoji>
           </FormLabel>
           <div class="input-area" @click="handleClickBirthDate">
@@ -72,7 +72,7 @@
       <div v-else-if="stepper.currentStep === 3" class="form-card">
         <div class="form-card-content">
           <FormLabel class="mb-3">
-            {{ soldier.name }} 훈련병의<br />군종은 무엇인가요?
+            {{ shortenName(soldier.name) }} 훈련병의<br />군종은 무엇인가요?
             <Emoji>🤔</Emoji>
           </FormLabel>
 
@@ -105,7 +105,7 @@
       <div v-else-if="stepper.currentStep === 4" class="form-card">
         <div class="form-card-content">
           <FormLabel class="mb-3">
-            {{ soldier.name }} 훈련병의<br />입대일은 언제인가요?
+            {{ shortenName(soldier.name) }} 훈련병의<br />입대일은 언제인가요?
             <Emoji>🗓️</Emoji>
           </FormLabel>
           <FormDateInput
@@ -134,7 +134,8 @@
       >
         <div class="form-card-content">
           <FormLabel class="mb-3">
-            {{ soldier.name }} 훈련병의<br />입영 부대는 어디인가요?
+            {{ shortenName(soldier.name) }} 훈련병의<br />입영 부대는
+            어디인가요?
             <Emoji>🗺️</Emoji>
           </FormLabel>
           <ArmyTrainingCenterSelect v-model="trainingCenterName" />
@@ -159,7 +160,7 @@
       >
         <div class="form-card-content">
           <FormLabel class="mb-3">
-            {{ soldier.name }} 훈련병은<br />공군 몇 기인가요?
+            {{ shortenName(soldier.name) }} 훈련병은<br />공군 몇 기인가요?
             <Emoji>📋</Emoji>
           </FormLabel>
           <AirforceKisuSelect v-model="kisu" />
@@ -185,8 +186,9 @@ import { ref, computed, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 
-import { openModal } from '@/utils/DialogHandler'
 import * as MailBoxApi from '@/api/MailBoxApi'
+import { openModal } from '@/utils/DialogHandler'
+import { shortenName } from '@/utils/TextFormatter'
 
 import LineStepper from '@/components/Stepper/LineStepper.vue'
 import Emoji from '@/components/Decorator/Emoji'
@@ -316,6 +318,7 @@ export default {
       /* Functions */
       openModal,
       isValidDate,
+      shortenName,
       handleSubmitName,
       handleClickBirthDate,
       handleSubmitBirthDate,

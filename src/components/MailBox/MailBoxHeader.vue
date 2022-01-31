@@ -1,7 +1,9 @@
 <template>
   <div class="mailbox-header">
     <div class="mailbox-header-title mb-2">
-      <span class="font__title me-1">{{ soldier.name }} 훈련병</span>
+      <span class="font__title me-1">
+        {{ shortenName(soldier.name) }} 훈련병
+      </span>
       <SoldierInfoButton class="mb-2" @click="openModal('Profile')" />
     </div>
     <span class="font__content-text">
@@ -15,6 +17,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 import { openModal } from '@/utils/DialogHandler'
+import { shortenName } from '@/utils/TextFormatter'
 
 import SoldierInfoButton from '@/components/Button/SoldierInfoButton.vue'
 
@@ -60,6 +63,7 @@ export default {
       headerMessage,
       /* Functions */
       openModal,
+      shortenName,
     }
   },
 }

@@ -60,15 +60,18 @@
       <div class="mail-content__focus-area" @click="handleFocusContent"></div>
     </div>
 
-    <div class="mail-footer">
+    <div
+      class="mail-footer"
+      :style="{ 'justify-content': isArmySoldier ? 'space-between' : 'end' }"
+    >
       <MailFormButtonPhoto
-        v-if="soldier.militaryType === 'ARMY'"
+        v-if="isArmySoldier"
         @click="handleOpenImageUploader"
       />
       <MailFormButtonSend />
     </div>
     <input
-      v-if="soldier.militaryType === 'ARMY'"
+      v-if="isArmySoldier"
       ref="imageInput"
       type="file"
       @input="handleUploadImage"
@@ -125,6 +128,7 @@ export default {
       set: value => store.dispatch('mailForm/UPDATE_CONTENT', value),
     })
     const imageUUID = computed(() => state.imageUUID)
+    const isArmySoldier = computed(() => soldier.value.militaryType === 'ARMY')
 
     /* Refs */
     const mailContentInput = ref(null)
@@ -201,6 +205,7 @@ export default {
       title,
       content,
       imageUUID,
+      isArmySoldier,
       /* Functions */
       handleCollapseMailHeader,
       handleFocusContent,

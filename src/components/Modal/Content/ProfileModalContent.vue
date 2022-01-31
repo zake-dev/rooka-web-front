@@ -8,7 +8,7 @@
         :src="SoldierInfoDefaultPng"
       />
       <p class="modal-content-profile__name font__semi-title mb-3">
-        {{ soldier.name }} 훈련병
+        {{ shortenName(soldier.name) }} 훈련병
       </p>
 
       <div class="modal-content-profile-info mt-3">
@@ -73,7 +73,11 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
+import {
+  toKoreanDateString,
+  toKoreanMilitaryType,
+  shortenName,
+} from '@/utils/TextFormatter'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
 import SoldierInfoDefaultPng from '@/assets/images/soldier-info-default.png'
@@ -95,6 +99,7 @@ export default {
       /* Functions */
       toKoreanDateString,
       toKoreanMilitaryType,
+      shortenName,
     }
   },
 }

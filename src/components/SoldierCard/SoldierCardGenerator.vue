@@ -5,7 +5,7 @@
       <div class="card-content">
         <div class="card-content-title">
           <div class="card-content-title__text">
-            {{ soldier.name }} 훈련병에게
+            {{ shortenName(soldier.name) }} 훈련병에게
           </div>
           <div
             class="card-content-title__text card-content-title__text--accent"
@@ -57,7 +57,11 @@ import html2canvas from 'html2canvas'
 
 import * as FileApi from '@/api/FileApi'
 import * as MailBoxApi from '@/api/MailBoxApi'
-import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
+import {
+  toKoreanDateString,
+  toKoreanMilitaryType,
+  shortenName,
+} from '@/utils/TextFormatter'
 
 import LetterBoxPng from '@/assets/images/letter-box.png'
 import LogoImage from '@/components/LogoImage/LogoImage.vue'
@@ -113,6 +117,7 @@ export default {
       /* Functions */
       toKoreanDateString,
       toKoreanMilitaryType,
+      shortenName,
     }
   },
 }
