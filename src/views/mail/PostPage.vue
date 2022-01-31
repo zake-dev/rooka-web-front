@@ -39,7 +39,11 @@
           <input
             class="mail-header-row__input"
             :isvalid="validation.address1"
-            placeholder="답장을 받을 주소를 입력해주세요"
+            :placeholder="
+              isArmySoldier
+                ? '답장을 받으려면 주소를 입력해주세요'
+                : '답장을 받을 주소를 입력해주세요'
+            "
             :value="addressInputText"
             @focus="handleResetValidation('address1')"
             @click="handleOpenDaumPostcodeApi"
@@ -140,6 +144,7 @@ export default {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => store.state.mailBox.soldier)
+    const isArmySoldier = computed(() => soldier.value.militaryType === 'ARMY')
     const state = store.state.mailForm.mail
     const author = computed({
       get: () => state.author,
@@ -242,6 +247,7 @@ export default {
       /* Variables */
       isMailHeaderVisible,
       soldier,
+      isArmySoldier,
       author,
       relation,
       addressInputText,
