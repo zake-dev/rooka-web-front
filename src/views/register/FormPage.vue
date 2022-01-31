@@ -20,6 +20,7 @@
               type="text"
               placeholder="이름을 입력해 주세요"
               v-model="name"
+              maxlength="15"
               @keyup.enter="handleSubmitName"
             />
           </div>
