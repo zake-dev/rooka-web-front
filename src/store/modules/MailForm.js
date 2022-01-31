@@ -1,6 +1,6 @@
 import * as MailApi from '@/api/MailApi'
 import router from '@/router'
-import { showWarningToast, removeToast } from '@/utils/ToastHandler'
+import { showToast, showWarningToast, removeToast } from '@/utils/ToastHandler'
 
 const INVALID_FIELD_MESSAGE = '입력하지 않은 정보가 있네요!😳'
 
@@ -138,6 +138,7 @@ const module = {
       try {
         await MailApi.postMail(state.mail)
         await router.push(`/${state.mail.key}/mail`)
+        showToast('편지가 전송됐어요!🎉')
       } catch (e) {
         console.dir(e.response)
         showWarningToast('헉... 전송에 실패했어요😱')
