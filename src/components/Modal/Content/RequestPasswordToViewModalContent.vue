@@ -8,6 +8,7 @@
         >비밀번호가 맞지 않아요!</span
       >
       <FormInput
+        class="input-area__input"
         type="password"
         v-model="password"
         placeholder="비밀번호를 입력해 주세요"
@@ -105,6 +106,10 @@ export default {
   flex: 1;
   position: relative;
   display: flex;
+
+  &__input {
+    width: 100%;
+  }
 
   &__text {
     &--invalid {
