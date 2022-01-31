@@ -10,7 +10,7 @@
         <input
           class="mail-header-row__input"
           :isvalid="validation.author"
-          @click="handleClickField('author')"
+          @focus="handleClickField('author')"
           placeholder="보내는 사람의 이름을 적어주세요"
           v-model="author"
         />
@@ -24,7 +24,7 @@
         <input
           class="mail-header-row__input"
           :isvalid="validation.relation"
-          @click="handleClickField('relation')"
+          @focus="handleClickField('relation')"
           placeholder="훈련병과의 관계를 적어주세요"
           v-model="relation"
         />
@@ -41,17 +41,15 @@
             :isvalid="validation.address1"
             placeholder="답장을 받을 주소를 입력해주세요"
             :value="addressInputText"
-            @click="
-              handleOpenDaumPostcodeApi($event), handleClickField('address1')
-            "
+            @focus="handleClickField('address1')"
+            @click="handleOpenDaumPostcodeApi"
             readonly
           />
           <span
             v-if="!addressInputText"
             class="mail-header-row-address__post-code-search font__button-text"
-            @click="
-              handleOpenDaumPostcodeApi($event), handleClickField('address1')
-            "
+            @focus="handleClickField('address1')"
+            @click="handleOpenDaumPostcodeApi"
           >
             우편번호 검색
           </span>
@@ -67,7 +65,7 @@
           <input
             class="mail-header-row__input"
             :isvalid="validation.address2"
-            @click="handleClickField('address2')"
+            @focus="handleClickField('address2')"
             placeholder="상세주소를 입력해주세요"
             v-model="address2"
           />
@@ -81,7 +79,8 @@
         :isvalid="validation.title"
         placeholder="제목을 입력해주세요"
         contenteditable
-        @click="handleCollapseMailHeader($event), handleClickField('title')"
+        @focus="handleClickField('title')"
+        @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputTitle"
       ></div>
@@ -91,7 +90,8 @@
         :isvalid="validation.content"
         placeholder="내용을 입력해주세요"
         contenteditable
-        @click="handleCollapseMailHeader($event), handleClickField('content')"
+        @focus="handleClickField('content')"
+        @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputContent"
         ref="mailContentInput"
