@@ -20,7 +20,7 @@ export default {
     const handleSendMail = async () => {
       const isAllValid = await store.dispatch('mailForm/UPDATE_ALL_VALIDATION')
       if (isAllValid) openModal('SetPassword')
-      else showToast('입력하지 않은 정보가 있네요!')
+      else showToast('입력하지 않은 정보가 있네요!😳')
     }
 
     return {
