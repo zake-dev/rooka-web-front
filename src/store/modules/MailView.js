@@ -1,4 +1,5 @@
 import * as MailApi from '@/api/MailApi'
+import { showToast } from '@/utils/ToastHandler'
 
 const module = {
   namespaced: true,
@@ -43,8 +44,9 @@ const module = {
       const { data } = await MailApi.getMail(state.mail.id, password)
       commit('SET_MAIL', data)
     },
-    async DELETE_MAIL({ commit, state }, password) {
+    async DELETE_MAIL({ state }, password) {
       await MailApi.deleteMail(state.mail.id, password)
+      showToast('편지가 삭제됐어요👋️️')
     },
     UPDATE_ID({ commit }, id) {
       commit('SET_ID', id)

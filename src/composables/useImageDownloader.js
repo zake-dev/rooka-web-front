@@ -1,4 +1,5 @@
 import * as FileApi from '@/api/FileApi'
+import { showToast } from '@/utils/ToastHandler'
 
 export const useImageDownloader = () => {
   const handleDownloadImage = async (linkImageUUID, title) => {
@@ -10,6 +11,7 @@ export const useImageDownloader = () => {
     $link.click()
     $link.remove()
     window.URL.revokeObjectURL(url)
+    showToast('카드 이미지가 저장되었어요👍')
   }
 
   return { handleDownloadImage }
