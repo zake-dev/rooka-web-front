@@ -1,6 +1,6 @@
 <template>
   <div class="form-select-wrapper">
-    <select class="form-select">
+    <select class="form-select" :value="modelValue" @change="handleSelect">
       <option class="form-select__placeholder-text" value="" hidden>
         입영 부대를 선택해 주세요
       </option>
@@ -8,7 +8,7 @@
         v-for="trainingCenterName in trainingCenterNames"
         :key="trainingCenterName"
         :value="trainingCenterName"
-        :selected="trainingCenterName === soldier.trainingCenterName"
+        :selected="trainingCenterName === modelValue"
       >
         {{ trainingCenterName }}
       </option>
@@ -24,21 +24,28 @@ import { useStore } from 'vuex'
 import DropdownArrowIconPng from '@/assets/icons/dropdown-arrow-icon.png'
 
 export default {
-  setup() {
+  props: {
+    modelValue: String,
+  },
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
     /* Vuex */
     const store = useStore()
     const state = store.state.registerForm
-    const soldier = computed(() => state.soldier)
     const trainingCenterNames = computed(
       () => state.selectableTrainingCenterNames,
     )
+
+    /* Event Handler */
+    const handleSelect = e => emit('update:modelValue', e.target.value)
 
     return {
       /* Assets */
       DropdownArrowIconPng,
       /* Variables */
-      soldier,
       trainingCenterNames,
+      /* Functions */
+      handleSelect,
     }
   },
 }

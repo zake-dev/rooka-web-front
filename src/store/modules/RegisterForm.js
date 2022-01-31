@@ -1,4 +1,5 @@
 import * as CodeApi from '@/api/CodeApi'
+import * as MailBoxApi from '@/api/MailBoxApi'
 
 const module = {
   namespaced: true,
@@ -12,9 +13,9 @@ const module = {
     },
     soldier: {
       name: '',
-      birthDate: '',
+      birthDate: { year: null, month: null, date: null },
       militaryType: '',
-      enterDate: '',
+      enterDate: { year: null, month: null, date: null },
       kisu: '',
       trainingCenterName: '',
     },
@@ -33,12 +34,21 @@ const module = {
       } = state.soldier
       return (
         name !== '' &&
-        birthDate !== '' &&
+        birthDate.yaer !== '' &&
+        birthDate.month !== '' &&
+        birthDate.date !== '' &&
         militaryType !== '' &&
-        enterDate !== '' &&
+        enterDate.yaer !== '' &&
+        enterDate.month !== '' &&
+        enterDate.date !== '' &&
         (kisu !== '' || trainingCenterName !== '')
       )
     },
+    form: state => ({
+      ...state.soldier,
+      birthDate: Object.values(state.soldier.birthDate).join('-'),
+      enterDate: Object.values(state.soldier.enterDate).join('-'),
+    }),
   },
   mutations: {
     RESET(state) {
@@ -52,9 +62,9 @@ const module = {
         },
         soldier: {
           name: '',
-          birthDate: '',
+          birthDate: { year: '', month: '', date: '' },
           militaryType: '',
-          enterDate: '',
+          enterDate: { year: '', month: '', date: '' },
           kisu: '',
           trainingCenterName: '',
         },
@@ -117,6 +127,10 @@ const module = {
     async FETCH_KISUS({ commit }) {
       const { data } = await CodeApi.getAirforceKisus()
       commit('SET_SELECTABLE_KISUS', data)
+    },
+    async SUBMIT_FORM({ getters, dispatch }) {
+      const { data } = await MailBoxApi.postKey(getters.form)
+      dispatch('registerForm/UPDATE_KEY', data.key)
     },
     INCREASE_STEP({ state, commit }) {
       commit('SET_SLIDE_TRANSITION', 'slide-left')

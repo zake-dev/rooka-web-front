@@ -1,6 +1,6 @@
 <template>
   <div class="form-select-wrapper">
-    <select class="form-select">
+    <select class="form-select" :value="modelValue" @change="handleSelect">
       <option class="form-select__placeholder-text" value="" hidden>
         입영 기수를 선택해 주세요
       </option>
@@ -8,7 +8,7 @@
         v-for="{ kisu, enterDate } in kisuAndEnterDates"
         :key="kisu"
         :value="kisu"
-        :selected="kisu === soldier.kisu"
+        :selected="kisu === modelValue"
       >
         {{ kisu }}기 ({{ toKoreanDateString(enterDate) }})
       </option>
@@ -26,21 +26,26 @@ import { toKoreanDateString } from '@/utils/TextFormatter'
 import DropdownArrowIconPng from '@/assets/icons/dropdown-arrow-icon.png'
 
 export default {
-  setup() {
+  props: {
+    modelValue: String,
+  },
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
     /* Vuex */
     const store = useStore()
-    const state = store.state.registerForm
-    const soldier = computed(() => state.soldier)
-    const kisuAndEnterDates = computed(() => state.selectableKisus)
+    const kisuAndEnterDates = computed(() => store.state.selectableKisus)
+
+    /* Event Handler */
+    const handleSelect = e => emit('update:modelValue', e.target.value)
 
     return {
       /* Assets */
       DropdownArrowIconPng,
       /* Variables */
-      soldier,
       kisuAndEnterDates,
       /* Functions */
       toKoreanDateString,
+      handleSelect,
     }
   },
 }

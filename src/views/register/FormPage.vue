@@ -19,8 +19,7 @@
             <FormInput
               type="text"
               placeholder="이름을 입력해 주세요"
-              :value="soldier.name"
-              @input="handleUpdateName"
+              v-model="name"
               @keyup.enter="handleSubmitName"
             />
           </div>
@@ -28,7 +27,7 @@
             <BaseButton
               class="button-primary"
               @click="handleSubmitName"
-              :disabled="soldier.name === ''"
+              :disabled="name === ''"
               >다음</BaseButton
             >
           </div>
@@ -42,11 +41,9 @@
             {{ soldier.name }} 훈련병은<br />언제 태어났나요?
             <Emoji>🎂</Emoji>
           </FormLabel>
-          <FormInput
-            type="date"
-            data-placeholder="생년월일을 입력해 주세요"
-            :value="soldier.birthDate"
-            @change="handleSubmitBirthDate"
+          <FormDateInput
+            v-model="birthDate"
+            placeholder="생년월일을 입력해 주세요"
             required
           />
 
@@ -54,7 +51,7 @@
             <BaseButton
               class="button-primary"
               @click="handleIncreaseStep"
-              :disabled="soldier.birthDate === ''"
+              :disabled="!isValidDate(soldier.birthDate)"
               >다음</BaseButton
             >
           </div>
@@ -103,11 +100,9 @@
             {{ soldier.name }} 훈련병의<br />입대일은 언제인가요?
             <Emoji>🗓️</Emoji>
           </FormLabel>
-          <FormInput
-            type="date"
-            data-placeholder="입대일을 입력해 주세요"
-            :value="soldier.enterDate"
-            @change="handleSubmitEnterDate"
+          <FormDateInput
+            v-model="enterDate"
+            placeholder="입대일을 입력해 주세요"
             required
           />
 
@@ -115,7 +110,7 @@
             <BaseButton
               class="button-primary"
               @click="handleIncreaseStep"
-              :disabled="soldier.enterDate === ''"
+              :disabled="!isValidDate(soldier.enterDate)"
               >다음</BaseButton
             >
           </div>
@@ -134,10 +129,7 @@
             {{ soldier.name }} 훈련병의<br />입영 부대는 어디인가요?
             <Emoji>🗺️</Emoji>
           </FormLabel>
-          <ArmyTrainingCenterSelect
-            :value="soldier.trainingCenterName"
-            @change="handleSelectTrainingCenterName"
-          />
+          <ArmyTrainingCenterSelect v-model="trainingCenterName" />
 
           <div class="form-card-buttons">
             <BaseButton
@@ -162,10 +154,7 @@
             {{ soldier.name }} 훈련병은<br />공군 몇 기인가요?
             <Emoji>📋</Emoji>
           </FormLabel>
-          <AirforceKisuSelect
-            :value="soldier.kisu"
-            @change="handleSelectKisu"
-          />
+          <AirforceKisuSelect v-model="kisu" />
 
           <div class="form-card-buttons">
             <BaseButton
@@ -195,6 +184,7 @@ import LineStepper from '@/components/Stepper/LineStepper.vue'
 import Emoji from '@/components/Decorator/Emoji'
 import FormLabel from '@/components/Form/FormLabel.vue'
 import FormInput from '@/components/Form/FormInput.vue'
+import FormDateInput from '@/components/Form/FormDateInput.vue'
 import ArmyTrainingCenterSelect from '@/components/Form/ArmyTrainingCenterSelect.vue'
 import AirforceKisuSelect from '@/components/Form/AirforceKisuSelect'
 import RegisterFormButtonBack from '@/components/Button/RegisterFormButtonBack.vue'
@@ -206,6 +196,7 @@ export default {
     Emoji,
     FormLabel,
     FormInput,
+    FormDateInput,
     ArmyTrainingCenterSelect,
     AirforceKisuSelect,
     RegisterFormButtonBack,
@@ -217,7 +208,28 @@ export default {
     const state = store.state.registerForm
     const slideTransition = computed(() => state.slideTransition)
     const stepper = computed(() => state.stepper)
-    const soldier = computed(() => state.soldier)
+    const soldier = state.soldier
+    const name = computed({
+      get: () => soldier.name,
+      set: value => store.dispatch('registerForm/UPDATE_NAME', value),
+    })
+    const birthDate = computed({
+      get: () => soldier.birthDate,
+      set: value => store.dispatch('registerForm/UPDATE_BIRTH_DATE', value),
+    })
+    const enterDate = computed({
+      get: () => soldier.enterDate,
+      set: value => store.dispatch('registerForm/UPDATE_ENTER_DATE', value),
+    })
+    const trainingCenterName = computed({
+      get: () => soldier.trainingCenterName,
+      set: value =>
+        store.dispatch('registerForm/UPDATE_TRAINING_CENTER_NAME', value),
+    })
+    const kisu = computed({
+      get: () => soldier.kisu,
+      set: value => store.dispatch('registerForm/UPDATE_KISU', value),
+    })
 
     /* Router */
     const router = useRouter()
@@ -225,42 +237,32 @@ export default {
     /* Local State */
     const isInvalidName = ref(false)
 
+    /* Helper Function */
+    const isValidDate = ({ year, month, date }) =>
+      year !== null &&
+      year !== '' &&
+      month !== null &&
+      month !== '' &&
+      date !== null &&
+      date !== ''
+
     /* Event Handler */
-    const handleUpdateName = event => {
-      store.dispatch('registerForm/UPDATE_NAME', event.target.value)
-    }
+    const handleIncreaseStep = () =>
+      store.dispatch('registerForm/INCREASE_STEP')
     const handleSubmitName = event => {
       const isValidKoreanName = name => new RegExp(/^[가-힣]{2,}$/g).test(name)
 
-      if (!isValidKoreanName(soldier.value.name)) {
+      if (!isValidKoreanName(name.value)) {
         isInvalidName.value = true
         event.target.blur()
         return
       }
       isInvalidName.value = false
-      store.dispatch('registerForm/INCREASE_STEP')
-    }
-    const handleSubmitBirthDate = event => {
-      store.dispatch('registerForm/UPDATE_BIRTH_DATE', event.target.value)
-      event.target.blur()
+      handleIncreaseStep()
     }
     const handleClickMilitaryType = militaryType => {
       store.dispatch('registerForm/UPDATE_MILITARY_TYPE', militaryType)
-      store.dispatch('registerForm/INCREASE_STEP')
-    }
-    const handleSubmitEnterDate = event => {
-      store.dispatch('registerForm/UPDATE_ENTER_DATE', event.target.value)
-      event.target.blur()
-    }
-    const handleSelectTrainingCenterName = event => {
-      store.dispatch(
-        'registerForm/UPDATE_TRAINING_CENTER_NAME',
-        event.target.value,
-      )
-    }
-    const handleSelectKisu = event => {
-      store.dispatch('registerForm/UPDATE_KISU', event.target.value)
-      event.target.blur()
+      handleIncreaseStep()
     }
     const handleSubmitForm = async () => {
       try {
@@ -271,8 +273,6 @@ export default {
         router.push({ name: 'RegisterCreateLink' })
       }
     }
-    const handleIncreaseStep = () =>
-      store.dispatch('registerForm/INCREASE_STEP')
 
     onBeforeMount(() => {
       store.dispatch('registerForm/RESET_WITHOUT_FORM')
@@ -286,15 +286,16 @@ export default {
       slideTransition,
       stepper,
       isInvalidName,
+      name,
+      birthDate,
+      enterDate,
+      trainingCenterName,
+      kisu,
       /* Functions */
       openModal,
-      handleUpdateName,
+      isValidDate,
       handleSubmitName,
-      handleSubmitBirthDate,
       handleClickMilitaryType,
-      handleSubmitEnterDate,
-      handleSelectTrainingCenterName,
-      handleSelectKisu,
       handleSubmitForm,
       handleIncreaseStep,
     }
