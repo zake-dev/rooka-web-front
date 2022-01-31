@@ -42,6 +42,14 @@ export default createStore({
         state.toastList.splice(index, 1)
       }
     },
+    REMOVE_TOAST_BY_MESSAGE(state, message) {
+      const index = state.toastList.findIndex(
+        toast => toast.message === message,
+      )
+      if (index >= 0) {
+        state.toastList.splice(index, 1)
+      }
+    },
     SET_USER_KEY(state, key) {
       state.userKey = key
     },
@@ -62,6 +70,9 @@ export default createStore({
     },
     REMOVE_TOAST({ commit }, toastId) {
       commit('REMOVE_TOAST', toastId)
+    },
+    REMOVE_TOAST_BY_MESSAGE({ commit }, message) {
+      commit('REMOVE_TOAST_BY_MESSAGE', message)
     },
     LOGIN_USER({ commit }, key) {
       commit('SET_USER_KEY', key)

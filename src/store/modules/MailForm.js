@@ -1,6 +1,8 @@
 import * as MailApi from '@/api/MailApi'
 import router from '@/router'
-import { showWarningToast } from '@/utils/ToastHandler'
+import { showWarningToast, removeToast } from '@/utils/ToastHandler'
+
+const INVALID_FIELD_MESSAGE = '입력하지 않은 정보가 있네요!😳'
 
 const module = {
   namespaced: true,
@@ -220,7 +222,23 @@ const module = {
         dispatch('UPDATE_TITLE_VALIDATION'),
         dispatch('UPDATE_CONTENT_VALIDATION'),
       ])
-      return validations.every(v => v)
+      const isAllValid = validations.every(v => v)
+      if (!isAllValid) showWarningToast(INVALID_FIELD_MESSAGE)
+      return isAllValid
+    },
+    RESET_VALIDATION({ commit }, fieldName) {
+      removeToast(INVALID_FIELD_MESSAGE)
+      commit(`SET_${fieldName.toUpperCase()}_VALIDATION`, true)
+    },
+    RESET_ALL_VALIDATION({ commit }) {
+      removeToast(INVALID_FIELD_MESSAGE)
+      commit('SET_AUTHOR_VALIDATION', true)
+      commit('SET_RELATION_VALIDATION', true)
+      commit('SET_ADDRESS1_VALIDATION', true)
+      commit('SET_ADDRESS2_VALIDATION', true)
+      commit('SET_POST_CODE_VALIDATION', true)
+      commit('SET_TITLE_VALIDATION', true)
+      commit('SET_CONTENT_VALIDATION', true)
     },
     RESET({ commit }) {
       commit('RESET')

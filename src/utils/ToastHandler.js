@@ -5,3 +5,6 @@ export const showToast = toastMessage =>
 
 export const showWarningToast = toastMessage =>
   store.dispatch('SHOW_WARNING_TOAST', toastMessage)
+
+export const removeToast = toastMessage =>
+  store.dispatch('REMOVE_TOAST_BY_MESSAGE', toastMessage)
