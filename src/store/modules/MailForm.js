@@ -16,6 +16,15 @@ const module = {
       key: '',
       imageUUID: '',
     },
+    validation: {
+      author: true,
+      relation: true,
+      address1: true,
+      address2: true,
+      postCode: true,
+      title: true,
+      content: true,
+    },
     isBeingSent: false,
     isConfirmedToLeave: false,
     leavingRoute: '',
@@ -70,6 +79,27 @@ const module = {
     },
     SET_LEAVING_ROUTE(state, route) {
       state.leavingRoute = route
+    },
+    SET_AUTHOR_VALIDATION(state, isAuthorValid) {
+      state.validation.author = isAuthorValid
+    },
+    SET_RELATION_VALIDATION(state, isRelationValid) {
+      state.validation.relation = isRelationValid
+    },
+    SET_ADDRESS1_VALIDATION(state, isAddress1Valid) {
+      state.validation.address1 = isAddress1Valid
+    },
+    SET_ADDRESS2_VALIDATION(state, isAddress2Valid) {
+      state.validation.address2 = isAddress2Valid
+    },
+    SET_POST_CODE_VALIDATION(state, isPostCodeValid) {
+      state.validation.postCode = isPostCodeValid
+    },
+    SET_TITLE_VALIDATION(state, isTitleValid) {
+      state.validation.title = isTitleValid
+    },
+    SET_CONTENT_VALIDATION(state, isContentValid) {
+      state.validation.content = isContentValid
     },
     RESET(state) {
       Object.assign(state, {
@@ -137,6 +167,58 @@ const module = {
     },
     UPDATE_LEAVING_ROUTE({ commit }, route) {
       commit('SET_LEAVING_ROUTE', route)
+    },
+    UPDATE_AUTHOR_VALIDATION({ commit, state }) {
+      const isValid = state.mail.author !== ''
+      commit('SET_AUTHOR_VALIDATION', isValid)
+      return isValid
+    },
+    UPDATE_RELATION_VALIDATION({ commit, state }) {
+      const isValid = state.mail.relation !== ''
+      commit('SET_RELATION_VALIDATION', isValid)
+      return isValid
+    },
+    UPDATE_ADDRESS1_VALIDATION({ commit, state, rootState }) {
+      const isArmySoldier = rootState.mailBox.soldier.militaryType === 'ARMY'
+      const isValid = isArmySoldier || state.mail.address1 !== ''
+      commit('SET_ADDRESS1_VALIDATION', isValid)
+      return isValid
+    },
+    UPDATE_ADDRESS2_VALIDATION({ commit, state, rootState }) {
+      const isArmySoldier = rootState.mailBox.soldier.militaryType === 'ARMY'
+      const isValid =
+        state.mail.address2 !== '' ||
+        (isArmySoldier && state.mail.address1 === '')
+      commit('SET_ADDRESS2_VALIDATION', isValid)
+      return isValid
+    },
+    UPDATE_POST_CODE_VALIDATION({ commit, state, rootState }) {
+      const isArmySoldier = rootState.mailBox.soldier.militaryType === 'ARMY'
+      const isValid = isArmySoldier || state.mail.postCode !== ''
+      commit('SET_POST_CODE_VALIDATION', isValid)
+      return isValid
+    },
+    UPDATE_TITLE_VALIDATION({ commit, state }) {
+      const isValid = state.mail.title !== ''
+      commit('SET_TITLE_VALIDATION', isValid)
+      return isValid
+    },
+    UPDATE_CONTENT_VALIDATION({ commit, state }) {
+      const isValid = state.mail.content !== ''
+      commit('SET_CONTENT_VALIDATION', isValid)
+      return isValid
+    },
+    async UPDATE_ALL_VALIDATION({ dispatch }) {
+      const validations = await Promise.all([
+        dispatch('UPDATE_AUTHOR_VALIDATION'),
+        dispatch('UPDATE_RELATION_VALIDATION'),
+        dispatch('UPDATE_ADDRESS1_VALIDATION'),
+        dispatch('UPDATE_ADDRESS2_VALIDATION'),
+        dispatch('UPDATE_POST_CODE_VALIDATION'),
+        dispatch('UPDATE_TITLE_VALIDATION'),
+        dispatch('UPDATE_CONTENT_VALIDATION'),
+      ])
+      return validations.every(v => v)
     },
     RESET({ commit }) {
       commit('RESET')

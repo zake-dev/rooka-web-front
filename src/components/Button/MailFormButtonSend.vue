@@ -1,18 +1,14 @@
 <template>
-  <button
-    class="button send-button"
-    @click="handleSendMail"
-    :disabled="!isSendable"
-  >
+  <button class="button send-button" @click="handleSendMail">
     <img :src="SendButtonIconSvg" />
   </button>
 </template>
 
 <script>
-import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 import { openModal } from '@/utils/DialogHandler'
+import { showToast } from '@/utils/ToastHandler'
 
 import SendButtonIconSvg from '@/assets/icons/send-button-icon.svg'
 
@@ -20,16 +16,16 @@ export default {
   setup() {
     /* Vuex */
     const store = useStore()
-    const isSendable = computed(() => store.getters['mailForm/isSendable'])
 
-    /* Event Handler */
-    const handleSendMail = () => openModal('SetPassword')
+    const handleSendMail = async () => {
+      const isAllValid = await store.dispatch('mailForm/UPDATE_ALL_VALIDATION')
+      if (isAllValid) openModal('SetPassword')
+      else showToast('입력하지 않은 정보가 있네요!😳')
+    }
 
     return {
       /* Assets */
       SendButtonIconSvg,
-      /* Variables */
-      isSendable,
       /* Functions */
       handleSendMail,
     }

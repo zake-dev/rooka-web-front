@@ -2,47 +2,86 @@
   <div class="page-wrapper">
     <div v-show="isMailHeaderVisible" class="mail-header">
       <div class="mail-header-row">
-        <span class="mail-header-row__label font__content-title"
+        <span
+          class="mail-header-row__label font__content-title"
+          :isvalid="validation.author"
           >보내는 사람</span
         >
         <input
           class="mail-header-row__input"
+          :isvalid="validation.author"
+          @focus="handleResetValidation('author')"
           placeholder="보내는 사람의 이름을 적어주세요"
           v-model="author"
         />
       </div>
       <div class="mail-header-row">
-        <span class="mail-header-row__label font__content-title">관계</span>
+        <span
+          class="mail-header-row__label font__content-title"
+          :isvalid="validation.relation"
+          >관계</span
+        >
         <input
           class="mail-header-row__input"
+          :isvalid="validation.relation"
+          @focus="handleResetValidation('relation')"
           placeholder="훈련병과의 관계를 적어주세요"
           v-model="relation"
         />
       </div>
       <div class="mail-header-row">
-        <span class="mail-header-row__label font__content-title">주소</span>
-        <div class="mail-header-row-address">
-          <input
-            class="mail-header-row__input"
-            placeholder="답장을 받을 주소를 입력해주세요"
-            :value="addressInputText"
-            @click="handleOpenDaumPostcodeApi"
-            readonly
-          />
-          <input
-            class="mail-header-row__input"
-            placeholder="상세주소를 입력해주세요"
-            v-model="address2"
-          />
-        </div>
+        <span
+          class="mail-header-row__label font__content-title"
+          :isvalid="validation.address1"
+          >주소</span
+        >
+        <input
+          class="mail-header-row__input"
+          :isvalid="validation.address1"
+          :placeholder="
+            isArmySoldier
+              ? '답장을 받으려면 주소를 입력해주세요'
+              : '답장을 받을 주소를 입력해주세요'
+          "
+          :value="addressInputText"
+          @focus="handleResetValidation('address1')"
+          @click="handleOpenDaumPostcodeApi"
+          readonly
+        />
+      </div>
+      <div v-if="addressInputText" class="mail-header-row">
+        <span
+          class="mail-header-row__label font__content-title"
+          :isvalid="validation.address2"
+          >상세주소</span
+        >
+        <input
+          class="mail-header-row__input"
+          :isvalid="validation.address2"
+          @focus="handleResetValidation('address2')"
+          placeholder="상세주소를 입력해주세요"
+          v-model="address2"
+        />
+      </div>
+      <div v-else class="mail-header-row">
+        <span class="mail-header-row__label font__content-title"></span>
+        <span
+          class="mail-header-row__post-code-search font__button-text"
+          @focus="handleResetValidation('address1')"
+          @click="handleOpenDaumPostcodeApi"
+        >
+          우편번호 검색
+        </span>
       </div>
     </div>
 
     <div class="mail-content masked-overflow">
       <div
         class="mail-content__input font__semi-title"
+        :isvalid="validation.title"
         placeholder="제목을 입력해주세요"
         contenteditable
+        @focus="handleResetValidation('title')"
         @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputTitle"
@@ -50,8 +89,10 @@
       <MailAttachmentContainer v-if="imageUUID" class="mail-content__image" />
       <div
         class="mail-content__textarea font__content-text"
+        :isvalid="validation.content"
         placeholder="내용을 입력해주세요"
         contenteditable
+        @focus="handleResetValidation('content')"
         @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputContent"
@@ -101,6 +142,7 @@ export default {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => store.state.mailBox.soldier)
+    const isArmySoldier = computed(() => soldier.value.militaryType === 'ARMY')
     const state = store.state.mailForm.mail
     const author = computed({
       get: () => state.author,
@@ -128,6 +170,7 @@ export default {
       set: value => store.dispatch('mailForm/UPDATE_CONTENT', value),
     })
     const imageUUID = computed(() => state.imageUUID)
+    const validation = computed(() => store.state.mailForm.validation)
 
     /* Refs */
     const mailContentInput = ref(null)
@@ -177,6 +220,11 @@ export default {
     }
     const handleInputTitle = e => (title.value = e.target.innerText)
     const handleInputContent = e => (content.value = e.target.innerText)
+    const handleResetValidation = fieldName => {
+      if (validation.value[fieldName] === false) {
+        store.commit(`mailForm/SET_${fieldName.toUpperCase()}_VALIDATION`, true)
+      }
+    }
 
     window.addEventListener('resize', () => {
       const MIN_KEYBOARD_HEIGHT = 300
@@ -197,6 +245,7 @@ export default {
       /* Variables */
       isMailHeaderVisible,
       soldier,
+      isArmySoldier,
       author,
       relation,
       addressInputText,
@@ -204,6 +253,7 @@ export default {
       title,
       content,
       imageUUID,
+      validation,
       /* Functions */
       handleCollapseMailHeader,
       handleFocusContent,
@@ -211,6 +261,7 @@ export default {
       handleOpenDaumPostcodeApi,
       handleInputTitle,
       handleInputContent,
+      handleResetValidation,
       handleOpenImageUploader,
       handleUploadImage,
     }
@@ -255,17 +306,13 @@ input {
       display: flex;
       flex-direction: row;
 
-      &-address {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-      }
       &__label {
         margin-right: 8px;
         min-width: 80px;
         color: $black;
+        &[isvalid='false'] {
+          color: $warningRed;
+        }
       }
       &__input {
         @extend .font__content-text;
@@ -281,6 +328,15 @@ input {
           @extend .font__content-text;
           color: $gray4;
         }
+        &[isvalid='false']::placeholder {
+          color: $warningRed;
+        }
+      }
+      &__post-code-search {
+        text-decoration: underline;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -300,6 +356,9 @@ input {
         content: attr(placeholder);
         color: $gray4;
       }
+      &[isvalid='false']:empty:before {
+        color: $warningRed;
+      }
     }
     &__image {
       margin-bottom: 16px;
@@ -311,6 +370,9 @@ input {
       &:empty:before {
         content: attr(placeholder);
         color: $gray4;
+      }
+      &[isvalid='false']:empty:before {
+        color: $warningRed;
       }
     }
     &__focus-area {
