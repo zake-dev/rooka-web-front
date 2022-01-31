@@ -3,7 +3,7 @@
     <span
       v-show="isPlaceholderVisible"
       class="placeholder"
-      @click="handleFocus"
+      @click="handleFocusYear"
     >
       {{ placeholder }}
     </span>
@@ -17,6 +17,7 @@
       pattern="[0-9]{4}"
       maxlength="4"
       @keyup="handleYearInput"
+      @focus="handleFocusYear"
       @blur="handleBlur"
     />
     <span class="divider divider__left">/</span>
@@ -29,6 +30,7 @@
       pattern="[0-9]{2}"
       maxlength="2"
       @keyup="handleMonthInput"
+      @focus="handleFocusMonth"
       @blur="handleBlur"
     />
     <span class="divider divider__right">/</span>
@@ -41,6 +43,7 @@
       pattern="[0-9]{2}"
       maxlength="2"
       @keyup="handleDateInput"
+      @focus="handleFocusDate"
       @blur="handleBlur"
     />
   </div>
@@ -88,6 +91,7 @@ export default {
 
     /* Helper Function */
     const filterNumericOnly = text => text.replace(/[^0-9]/g, '')
+    const minmax = (value, min, max) => Math.max(min, Math.min(value, max))
 
     /* Event Handler */
     const handleYearInput = e => {
@@ -98,26 +102,47 @@ export default {
       }
     }
     const handleMonthInput = e => {
+      if (year.value === '') {
+        e.target.value = ''
+        yearInput.value.focus()
+        return
+      }
+
       filterNumericOnly(e.target.value)
       if (e.target.value.length >= 2) {
-        e.target.value = Math.min(e.target.value.slice(0, 2), 12)
+        month.value = minmax(e.target.value.slice(0, 2), 1, 12)
+          .toString()
+          .padStart(2, '0')
         dateInput.value.focus()
       }
     }
     const handleDateInput = e => {
+      if (month.value === '') {
+        e.target.value = ''
+        monthInput.value.focus()
+        return
+      }
+
       filterNumericOnly(e.target.value)
       if (e.target.value.length >= 2) {
-        const maxDate =
-          year.value === null || month.value === null
-            ? 31
-            : new Date(year.value, month.value, 0).getDate()
-        e.target.value = Math.min(e.target.value.slice(0, 2), maxDate)
+        const lastDate = new Date(year.value, month.value, 0).getDate()
+        date.value = minmax(e.target.value.slice(0, 2), 1, lastDate)
+          .toString()
+          .padStart(2, '0')
         e.target.blur()
       }
     }
-    const handleFocus = () => {
+    const handleFocusYear = () => {
       isFocused.value = true
       yearInput.value.focus()
+    }
+    const handleFocusMonth = () => {
+      isFocused.value = true
+      year.value ? monthInput.value.focus() : yearInput.value.focus()
+    }
+    const handleFocusDate = () => {
+      isFocused.value = true
+      month.value ? dateInput.value.focus() : monthInput.value.focus()
     }
     const handleBlur = e => {
       isFocused.value = false
@@ -139,7 +164,9 @@ export default {
       handleYearInput,
       handleMonthInput,
       handleDateInput,
-      handleFocus,
+      handleFocusYear,
+      handleFocusMonth,
+      handleFocusDate,
       handleBlur,
     }
   },
