@@ -35,45 +35,43 @@
           :isvalid="validation.address1"
           >주소</span
         >
-        <div class="mail-header-row-address">
-          <input
-            class="mail-header-row__input"
-            :isvalid="validation.address1"
-            :placeholder="
-              isArmySoldier
-                ? '답장을 받으려면 주소를 입력해주세요'
-                : '답장을 받을 주소를 입력해주세요'
-            "
-            :value="addressInputText"
-            @focus="handleResetValidation('address1')"
-            @click="handleOpenDaumPostcodeApi"
-            readonly
-          />
-          <span
-            v-if="!addressInputText"
-            class="mail-header-row-address__post-code-search font__button-text"
-            @focus="handleResetValidation('address1')"
-            @click="handleOpenDaumPostcodeApi"
-          >
-            우편번호 검색
-          </span>
-        </div>
+        <input
+          class="mail-header-row__input"
+          :isvalid="validation.address1"
+          :placeholder="
+            isArmySoldier
+              ? '답장을 받으려면 주소를 입력해주세요'
+              : '답장을 받을 주소를 입력해주세요'
+          "
+          :value="addressInputText"
+          @focus="handleResetValidation('address1')"
+          @click="handleOpenDaumPostcodeApi"
+          readonly
+        />
       </div>
-      <div class="mail-header-row" v-if="addressInputText">
+      <div v-if="addressInputText" class="mail-header-row">
         <span
           class="mail-header-row__label font__content-title"
           :isvalid="validation.address2"
           >상세주소</span
         >
-        <div class="mail-header-row-address">
-          <input
-            class="mail-header-row__input"
-            :isvalid="validation.address2"
-            @focus="handleResetValidation('address2')"
-            placeholder="상세주소를 입력해주세요"
-            v-model="address2"
-          />
-        </div>
+        <input
+          class="mail-header-row__input"
+          :isvalid="validation.address2"
+          @focus="handleResetValidation('address2')"
+          placeholder="상세주소를 입력해주세요"
+          v-model="address2"
+        />
+      </div>
+      <div v-else class="mail-header-row">
+        <span class="mail-header-row__label font__content-title"></span>
+        <span
+          class="mail-header-row__post-code-search font__button-text"
+          @focus="handleResetValidation('address1')"
+          @click="handleOpenDaumPostcodeApi"
+        >
+          우편번호 검색
+        </span>
       </div>
     </div>
 
@@ -308,18 +306,6 @@ input {
       display: flex;
       flex-direction: row;
 
-      &-address {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-
-        &__post-code-search {
-          width: fit-content;
-          text-decoration: underline;
-        }
-      }
       &__label {
         margin-right: 8px;
         min-width: 80px;
@@ -345,6 +331,12 @@ input {
         &[isvalid='false']::placeholder {
           color: $warningRed;
         }
+      }
+      &__post-code-search {
+        text-decoration: underline;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
