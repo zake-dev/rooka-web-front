@@ -25,12 +25,13 @@ export default createStore({
     SET_MODAL_CONTENT_NAME(state, name) {
       state.modalContentName = name
     },
-    SHOW_TOAST(state, message) {
+    SHOW_TOAST(state, { message, type }) {
       const toast = state.toastList.find(toast => toast.message == message)
       if (toast) toast.resetCounter++
       else
         state.toastList.push({
           id: state.toastNextId++,
+          type: type,
           message: message,
           resetCounter: 0,
         })
@@ -54,7 +55,10 @@ export default createStore({
       commit('SET_IS_MODAL_VISIBLE', false)
     },
     SHOW_TOAST({ commit }, message) {
-      commit('SHOW_TOAST', message)
+      commit('SHOW_TOAST', { message })
+    },
+    SHOW_WARNING_TOAST({ commit }, message) {
+      commit('SHOW_TOAST', { message, type: 'warning' })
     },
     REMOVE_TOAST({ commit }, toastId) {
       commit('REMOVE_TOAST', toastId)

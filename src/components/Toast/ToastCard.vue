@@ -57,7 +57,12 @@ export default {
       const limit = 12
       return -(limit * limit) / (offsetY.value - limit) - limit
     })
-    const cardClass = computed(() => (isShaking.value ? 'shake-vertical' : ''))
+    const cardClass = computed(() => {
+      const classList = []
+      if (isShaking.value) classList.push('shake-vertical')
+      classList.push(`toast-card--${props.toast.type || 'alert'}`)
+      return classList
+    })
     const cardStyle = computed(() => ({
       opacity: opacity.value,
       transform: `translateY(${translateY.value}px)`,
@@ -126,7 +131,6 @@ export default {
 .toast-card {
   height: 54px;
   width: 100%;
-  background: $rookaYellowBright1;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
   border-radius: 7px;
   display: flex;
@@ -134,5 +138,15 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 15px 16px;
+
+  &--alert {
+    background: $rookaYellowBright1;
+    color: $rookaYellowDark1;
+  }
+
+  &--warning {
+    background: $warningRedBright;
+    color: $warningRed;
+  }
 }
 </style>
