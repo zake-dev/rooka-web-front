@@ -46,6 +46,24 @@
             "
             readonly
           />
+          <span
+            v-if="!addressInputText"
+            class="mail-header-row-address__post-code-search font__button-text"
+            @click="
+              handleOpenDaumPostcodeApi($event), handleClickField('address1')
+            "
+          >
+            우편번호 검색
+          </span>
+        </div>
+      </div>
+      <div class="mail-header-row" v-if="addressInputText">
+        <span
+          class="mail-header-row__label font__content-title"
+          :isvalid="validation.address2"
+          >상세주소</span
+        >
+        <div class="mail-header-row-address">
           <input
             class="mail-header-row__input"
             :isvalid="validation.address2"
@@ -290,6 +308,11 @@ input {
         flex-direction: column;
         align-items: stretch;
         gap: 8px;
+
+        &__post-code-search {
+          width: fit-content;
+          text-decoration: underline;
+        }
       }
       &__label {
         margin-right: 8px;
