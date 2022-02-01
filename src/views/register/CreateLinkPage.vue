@@ -94,10 +94,8 @@ export default {
     const router = useRouter()
 
     /* Event Handler */
-    const handleClickCreateLink = async () => {
-      await store.dispatch('registerForm/SUBMIT_FORM')
-      router.push({ name: 'RegisterResult' })
-    }
+    const handleClickCreateLink = () =>
+      router.push({ name: 'TermsAndConditions' })
 
     return {
       /* Variables */

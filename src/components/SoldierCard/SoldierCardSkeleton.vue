@@ -56,7 +56,7 @@
       width: 60%;
       display: flex;
       flex-direction: column;
-      justify-content: end;
+      justify-content: flex-end;
     }
     &-3 {
       height: 15%;
@@ -106,7 +106,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
     height: 50%;
     width: 100%;
   }
