@@ -1,5 +1,8 @@
 import * as MailApi from '@/api/MailApi'
 import router from '@/router'
+import { showToast, showWarningToast, removeToast } from '@/utils/ToastHandler'
+
+const INVALID_FIELD_MESSAGE = '입력하지 않은 정보가 있네요!😳'
 
 const module = {
   namespaced: true,
@@ -114,6 +117,15 @@ const module = {
           password: '',
           key: '',
         },
+        validation: {
+          author: true,
+          relation: true,
+          address1: true,
+          address2: true,
+          postCode: true,
+          title: true,
+          content: true,
+        },
         isBeingSent: false,
         isConfirmedToLeave: false,
         leavingRoute: '',
@@ -126,8 +138,10 @@ const module = {
       try {
         await MailApi.postMail(state.mail)
         await router.push(`/${state.mail.key}/mail`)
+        showToast('편지가 전송됐어요!🎉')
       } catch (e) {
         console.dir(e.response)
+        showWarningToast('헉... 전송에 실패했어요😱')
       } finally {
         commit('SET_IS_BEING_SENT', false)
       }
@@ -218,7 +232,23 @@ const module = {
         dispatch('UPDATE_TITLE_VALIDATION'),
         dispatch('UPDATE_CONTENT_VALIDATION'),
       ])
-      return validations.every(v => v)
+      const isAllValid = validations.every(v => v)
+      if (!isAllValid) showWarningToast(INVALID_FIELD_MESSAGE)
+      return isAllValid
+    },
+    RESET_VALIDATION({ commit }, fieldName) {
+      removeToast(INVALID_FIELD_MESSAGE)
+      commit(`SET_${fieldName.toUpperCase()}_VALIDATION`, true)
+    },
+    RESET_ALL_VALIDATION({ commit }) {
+      removeToast(INVALID_FIELD_MESSAGE)
+      commit('SET_AUTHOR_VALIDATION', true)
+      commit('SET_RELATION_VALIDATION', true)
+      commit('SET_ADDRESS1_VALIDATION', true)
+      commit('SET_ADDRESS2_VALIDATION', true)
+      commit('SET_POST_CODE_VALIDATION', true)
+      commit('SET_TITLE_VALIDATION', true)
+      commit('SET_CONTENT_VALIDATION', true)
     },
     RESET({ commit }) {
       commit('RESET')

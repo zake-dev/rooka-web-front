@@ -25,18 +25,27 @@ export default createStore({
     SET_MODAL_CONTENT_NAME(state, name) {
       state.modalContentName = name
     },
-    SHOW_TOAST(state, message) {
+    SHOW_TOAST(state, { message, type }) {
       const toast = state.toastList.find(toast => toast.message == message)
       if (toast) toast.resetCounter++
       else
         state.toastList.push({
           id: state.toastNextId++,
+          type: type,
           message: message,
           resetCounter: 0,
         })
     },
     REMOVE_TOAST(state, toastId) {
       const index = state.toastList.findIndex(toast => toast.id === toastId)
+      if (index >= 0) {
+        state.toastList.splice(index, 1)
+      }
+    },
+    REMOVE_TOAST_BY_MESSAGE(state, message) {
+      const index = state.toastList.findIndex(
+        toast => toast.message === message,
+      )
       if (index >= 0) {
         state.toastList.splice(index, 1)
       }
@@ -54,10 +63,16 @@ export default createStore({
       commit('SET_IS_MODAL_VISIBLE', false)
     },
     SHOW_TOAST({ commit }, message) {
-      commit('SHOW_TOAST', message)
+      commit('SHOW_TOAST', { message })
+    },
+    SHOW_WARNING_TOAST({ commit }, message) {
+      commit('SHOW_TOAST', { message, type: 'warning' })
     },
     REMOVE_TOAST({ commit }, toastId) {
       commit('REMOVE_TOAST', toastId)
+    },
+    REMOVE_TOAST_BY_MESSAGE({ commit }, message) {
+      commit('REMOVE_TOAST_BY_MESSAGE', message)
     },
     LOGIN_USER({ commit }, key) {
       commit('SET_USER_KEY', key)
