@@ -70,6 +70,7 @@
       />
       <MailFormButtonSend />
     </div>
+
     <input
       v-if="isArmySoldier"
       ref="imageInput"
@@ -77,6 +78,8 @@
       @input="handleUploadImage"
       hidden
     />
+
+    <RoundSpinnerWithBlur v-if="isBeingSent" />
   </div>
 </template>
 
@@ -90,44 +93,47 @@ import { openModal } from '@/utils/DialogHandler'
 import MailAttachmentContainer from '@/components/MailAttachment/MailAttachmentContainer.vue'
 import MailFormButtonPhoto from '@/components/Button/MailFormButtonPhoto.vue'
 import MailFormButtonSend from '@/components/Button/MailFormButtonSend.vue'
+import RoundSpinnerWithBlur from '@/components/Spinner/RoundSpinnerWithBlur.vue'
 
 export default {
   components: {
     MailAttachmentContainer,
     MailFormButtonPhoto,
     MailFormButtonSend,
+    RoundSpinnerWithBlur,
   },
   setup() {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => store.state.mailBox.soldier)
-    const state = store.state.mailForm.mail
+    const mail = store.state.mailForm.mail
     const author = computed({
-      get: () => state.author,
+      get: () => mail.author,
       set: value => store.dispatch('mailForm/UPDATE_AUTHOR', value),
     })
     const relation = computed({
-      get: () => state.relation,
+      get: () => mail.relation,
       set: value => store.dispatch('mailForm/UPDATE_RELATION', value),
     })
     const addressInputText = computed(() =>
-      state.address1 && state.postCode
-        ? `(${state.postCode}) ${state.address1}`
+      mail.address1 && mail.postCode
+        ? `(${mail.postCode}) ${mail.address1}`
         : '',
     )
     const address2 = computed({
-      get: () => state.address2,
+      get: () => mail.address2,
       set: value => store.dispatch('mailForm/UPDATE_ADDRESS2', value),
     })
     const title = computed({
-      get: () => state.title,
+      get: () => mail.title,
       set: value => store.dispatch('mailForm/UPDATE_TITLE', value),
     })
     const content = computed({
-      get: () => state.content,
+      get: () => mail.content,
       set: value => store.dispatch('mailForm/UPDATE_CONTENT', value),
     })
-    const imageUUID = computed(() => state.imageUUID)
+    const imageUUID = computed(() => mail.imageUUID)
+    const isBeingSent = computed(() => store.state.mailForm.isBeingSent)
     const isArmySoldier = computed(() => soldier.value.militaryType === 'ARMY')
 
     /* Refs */
@@ -206,6 +212,7 @@ export default {
       content,
       imageUUID,
       isArmySoldier,
+      isBeingSent,
       /* Functions */
       handleCollapseMailHeader,
       handleFocusContent,
