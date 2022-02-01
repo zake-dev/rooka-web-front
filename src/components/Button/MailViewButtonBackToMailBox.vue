@@ -1,13 +1,13 @@
 <template>
   <button class="button list-button" @click="handleBackToMailBox">
-    <img :src="ListIconSvg" />
+    <img class="list-button__image" :src="ListButtonIconPng" />
   </button>
 </template>
 
 <script>
 import { useRouter, useRoute } from 'vue-router'
 
-import ListIconSvg from '@/assets/icons/list-icon.svg'
+import ListButtonIconPng from '@/assets/icons/list-button-icon.png'
 
 export default {
   setup() {
@@ -20,7 +20,7 @@ export default {
 
     return {
       /* Assets */
-      ListIconSvg,
+      ListButtonIconPng,
       /* Functions */
       handleBackToMailBox,
     }
@@ -35,18 +35,10 @@ export default {
   width: 96px;
   height: 100%;
   min-height: 56px;
-  color: $gray5;
 
-  &:disabled {
-    background-color: white !important;
-
-    & img {
-      opacity: 0.2;
-    }
+  &__image {
+    width: 21px;
+    height: 21px;
   }
-}
-img {
-  width: 21px;
-  height: 21px;
 }
 </style>

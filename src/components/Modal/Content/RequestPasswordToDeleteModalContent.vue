@@ -10,7 +10,7 @@
       <FormInput
         type="password"
         v-model="password"
-        placeholder="비밀번호를 입력해주세요"
+        placeholder="비밀번호를 입력해 주세요"
       />
     </div>
 

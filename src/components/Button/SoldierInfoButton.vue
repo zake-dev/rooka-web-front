@@ -1,16 +1,16 @@
 <template>
   <button class="button info-button">
-    <img :src="InfoIconSvg" />
+    <img class="info-button__image" :src="InfoIconPng" />
   </button>
 </template>
 
 <script>
-import InfoIconSvg from '@/assets/icons/info-icon.svg'
+import InfoIconPng from '@/assets/icons/info-icon.png'
 
 export default {
   setup() {
     return {
-      InfoIconSvg,
+      InfoIconPng,
     }
   },
 }
@@ -27,6 +27,10 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: $gray5;
+
+  &__image {
+    height: 16px;
+    width: 16px;
+  }
 }
 </style>

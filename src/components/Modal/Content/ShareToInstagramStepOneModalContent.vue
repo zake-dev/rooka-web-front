@@ -10,7 +10,7 @@
     <div class="modal-content-body masked-overflow">
       <span class="modal-content-body__step font__tag">STEP 1</span>
       <span class="modal-content-body__title font__content-title"
-        >카드 이미지를 저장해주세요!</span
+        >카드 이미지를 저장해 주세요!</span
       >
 
       <SoldierCard

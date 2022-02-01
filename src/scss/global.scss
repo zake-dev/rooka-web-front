@@ -3,6 +3,8 @@
 /* Reset */
 html {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 *,
 *:before,
@@ -159,7 +161,8 @@ body {
 .list-slide-down-item {
   transition: transform 0.3s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.3s ease;
 }
-.list-slide-down-enter-from, .list-slide-down-leave-to {
+.list-slide-down-enter-from,
+.list-slide-down-leave-to {
   opacity: 0;
   transform: translateY(100%);
 }
@@ -167,24 +170,29 @@ body {
   position: absolute;
 }
 .list-slide-down-move {
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 .shake-vertical {
-  animation: shake 0.65s cubic-bezier(.36,.07,.19,.97) both;
+  animation: shake 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   transform: translate3d(0, 0, 0);
 }
 
 @keyframes shake {
-  10%, 90% {
-    transform: translate3d(0, -.5px, 0);
+  10%,
+  90% {
+    transform: translate3d(0, -0.5px, 0);
   }
-  20%, 80% {
+  20%,
+  80% {
     transform: translate3d(0, 1px, 0);
   }
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: translate3d(0, -2px, 0);
   }
-  40%, 60% {
+  40%,
+  60% {
     transform: translate3d(0, 2px, 0);
   }
 }
@@ -573,33 +581,4 @@ body {
 /* Input */
 input {
   -webkit-appearance: none;
-}
-input[type='date'] {
-  flex: 1;
-  width: 100%;
-  position: relative;
-
-  &::before {
-    @extend .font__content-text;
-    content: attr(data-placeholder);
-    width: 100%;
-    color: $gray4;
-    white-space: pre;
-  }
-  &:valid::before {
-    display: none;
-  }
-
-  &::-webkit-calendar-picker-indicator {
-    position: absolute;
-    background: transparent;
-    color: transparent;
-    cursor: pointer;
-    height: auto;
-    width: auto;
-    left: -100px;
-    right: 0;
-    top: 0;
-    bottom: 0;
-  }
 }

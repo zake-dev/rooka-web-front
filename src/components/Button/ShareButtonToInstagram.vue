@@ -1,7 +1,7 @@
 <template>
   <button class="button" @click="handleShareToInstagram">
     <div class="button-icon-wrapper">
-      <img class="button-icon-wrapper__icon" :src="InstagramIconSvg" />
+      <img class="button-icon-wrapper__icon" :src="InstagramIconPng" />
     </div>
     <span class="button-label font__caption">인스타그램</span>
   </button>
@@ -10,7 +10,7 @@
 <script>
 import { openModal } from '@/utils/DialogHandler'
 
-import InstagramIconSvg from '@/assets/icons/instagram-icon.svg'
+import InstagramIconPng from '@/assets/icons/instagram-icon.png'
 
 export default {
   setup() {
@@ -19,7 +19,7 @@ export default {
 
     return {
       /* Assets */
-      InstagramIconSvg,
+      InstagramIconPng,
       /* Functions */
       handleShareToInstagram,
     }
@@ -52,8 +52,8 @@ export default {
     background-color: $gray1;
 
     &__icon {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
     }
   }
 

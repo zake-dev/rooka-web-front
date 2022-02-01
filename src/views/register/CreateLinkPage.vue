@@ -76,8 +76,6 @@ import { useRouter } from 'vue-router'
 
 import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
 import { openModal } from '@/utils/DialogHandler'
-import { showToast } from '@/utils/ToastHandler'
-import * as MailBoxApi from '@/api/MailBoxApi'
 
 import Emoji from '@/components/Decorator/Emoji.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
@@ -96,16 +94,8 @@ export default {
     const router = useRouter()
 
     /* Event Handler */
-    const handleClickCreateLink = async () => {
-      try {
-        const { data } = await MailBoxApi.postKey(soldier.value)
-        store.dispatch('registerForm/UPDATE_KEY', data.key)
-        router.push({ name: 'RegisterResult' })
-      } catch (e) {
-        const { message } = e.response
-        showToast(message)
-      }
-    }
+    const handleClickCreateLink = () =>
+      router.push({ name: 'TermsAndConditions' })
 
     return {
       /* Variables */
@@ -125,7 +115,7 @@ export default {
 
 .page-wrapper {
   padding: 32px;
-  padding-top: calc(#{$appBarHeight} + 32px);
+  padding-top: calc(#{$appBarHeight} + 30px);
 }
 .submitted-form {
   &-row {

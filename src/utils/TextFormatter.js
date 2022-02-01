@@ -1,5 +1,10 @@
 export const toKoreanDateString = date => {
-  date = date instanceof Date ? date : new Date(date)
+  date =
+    date instanceof Date
+      ? date
+      : date instanceof Object
+      ? new Date(Object.values(date))
+      : new Date(date)
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -14,3 +19,8 @@ export const toKoreanMilitaryType = militaryType => {
       return '공군'
   }
 }
+
+const shortenWithEllipsis = maxCount => text =>
+  text.length > maxCount ? text.slice(0, maxCount - 1) + '...' : text
+
+export const shortenName = shortenWithEllipsis(6)

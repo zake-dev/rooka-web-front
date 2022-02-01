@@ -5,12 +5,12 @@
       <div class="card-content">
         <div class="card-content-title">
           <div class="card-content-title__text">
-            {{ soldier.name }} 훈련병에게
+            {{ shortenName(soldier.name) }} 훈련병에게
           </div>
           <div
             class="card-content-title__text card-content-title__text--accent"
           >
-            인편을 써주세요
+            인편을 써 주세요
             <img class="card-content__image" :src="LetterBoxPng" />
           </div>
         </div>
@@ -47,6 +47,9 @@
     </div>
     <!-- 실제 출력 이미지 -->
     <SoldierCardImage v-if="uuid" :uuid="uuid" />
+    <transition name="fade">
+      <SoldierCardSkeleton v-if="!isLoaded" class="card-skeleton" />
+    </transition>
   </div>
 </template>
 
@@ -57,18 +60,24 @@ import html2canvas from 'html2canvas'
 
 import * as FileApi from '@/api/FileApi'
 import * as MailBoxApi from '@/api/MailBoxApi'
-import { toKoreanDateString, toKoreanMilitaryType } from '@/utils/TextFormatter'
+import {
+  toKoreanDateString,
+  toKoreanMilitaryType,
+  shortenName,
+} from '@/utils/TextFormatter'
 
 import LetterBoxPng from '@/assets/images/letter-box.png'
 import LogoImage from '@/components/LogoImage/LogoImage.vue'
 import LinkChip from '@/components/Chip/LinkChip.vue'
 import SoldierCardImage from '@/components/SoldierCard/SoldierCardImage.vue'
+import SoldierCardSkeleton from '@/components/SoldierCard/SoldierCardSkeleton.vue'
 
 export default {
   components: {
     LogoImage,
     LinkChip,
     SoldierCardImage,
+    SoldierCardSkeleton,
   },
   props: {
     soldier: Object,
@@ -80,6 +89,7 @@ export default {
 
     /* Local State */
     const uuid = ref('')
+    const isLoaded = ref(false)
 
     onMounted(async () => {
       const card = document.getElementById('card-html')
@@ -102,6 +112,8 @@ export default {
           'registerForm/UPDATE_LINK_IMAGE_UUID',
           linkImageUUID,
         )
+        // 이미지 다운로드 시간 동안 Skeleton 끄지 않음
+        setTimeout(() => (isLoaded.value = true), 1500)
       }, 'image/png')
     })
 
@@ -110,9 +122,11 @@ export default {
       LetterBoxPng,
       /* Varaibles */
       uuid,
+      isLoaded,
       /* Functions */
       toKoreanDateString,
       toKoreanMilitaryType,
+      shortenName,
     }
   },
 }
@@ -122,6 +136,7 @@ export default {
 @import '@/scss/_variables.scss';
 
 .card-wrapper {
+  position: relative;
   box-shadow: 0px 6px 17px -1px #0000000d;
   border-radius: 7px;
 }
@@ -193,5 +208,13 @@ export default {
     justify-content: space-between;
     align-items: flex-end;
   }
+}
+.card-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 </style>

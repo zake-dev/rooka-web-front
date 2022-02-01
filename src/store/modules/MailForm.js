@@ -41,7 +41,6 @@ const module = {
       state.mail.postCode !== '' &&
       state.mail.title !== '' &&
       state.mail.content !== '',
-    isSendable: (state, getters) => getters.isValidForm && !state.isBeingSend,
   },
   mutations: {
     SET_AUTHOR(state, author) {

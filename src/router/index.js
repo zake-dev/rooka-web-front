@@ -2,6 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { publicPath } from '@/../vue.config'
 import store from '@/store'
 
+const checkFormBeforeRouteEnter = (to, from, next) => {
+  const isValidForm = store.getters['registerForm/isValidForm']
+  isValidForm ? next() : next('/register/form')
+}
+
 const routes = [
   {
     path: '/',
@@ -39,19 +44,19 @@ const routes = [
     path: '/register/create-link',
     name: 'RegisterCreateLink',
     component: () => import('../views/register/CreateLinkPage.vue'),
-    beforeEnter: (to, from, next) => {
-      const isValidForm = store.getters['registerForm/isValidForm']
-      isValidForm ? next() : next('/register/form')
-    },
+    beforeEnter: checkFormBeforeRouteEnter,
+  },
+  {
+    path: '/register/terms-and-conditions',
+    name: 'TermsAndConditions',
+    component: () => import('../views/register/TermsAndConditionsPage.vue'),
+    beforeEnter: checkFormBeforeRouteEnter,
   },
   {
     path: '/register/result',
     name: 'RegisterResult',
     component: () => import('../views/register/ResultPage.vue'),
-    beforeEnter: (to, from, next) => {
-      const isValidForm = store.getters['registerForm/isValidForm']
-      isValidForm ? next() : next('/register/form')
-    },
+    beforeEnter: checkFormBeforeRouteEnter,
   },
   {
     path: '/error/mailbox-not-found',
