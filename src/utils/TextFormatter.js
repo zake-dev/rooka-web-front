@@ -14,3 +14,6 @@ export const toKoreanMilitaryType = militaryType => {
       return '공군'
   }
 }
+
+export const toCommaNumber = number =>
+  new String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',')

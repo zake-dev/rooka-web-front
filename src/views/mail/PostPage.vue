@@ -98,6 +98,14 @@
         @input="handleInputContent"
         ref="mailContentInput"
       ></div>
+      <div
+        class="mail-content__length font__caption"
+        :isvalid="content.length <= maxContentLength"
+      >
+        ({{ toCommaNumber(content.length) }}/{{
+          toCommaNumber(maxContentLength)
+        }})
+      </div>
       <div class="mail-content__focus-area" @click="handleFocusContent"></div>
     </div>
 
@@ -125,6 +133,7 @@ import { useStore } from 'vuex'
 
 import { useImageUploader } from '@/composables/useImageUploader'
 import { openModal } from '@/utils/DialogHandler'
+import { toCommaNumber } from '@/utils/TextFormatter'
 
 import MailAttachmentContainer from '@/components/MailAttachment/MailAttachmentContainer.vue'
 import MailFormButtonPhoto from '@/components/Button/MailFormButtonPhoto.vue'
@@ -171,6 +180,7 @@ export default {
     })
     const imageUUID = computed(() => state.imageUUID)
     const validation = computed(() => store.state.mailForm.validation)
+    const maxContentLength = store.getters['mailForm/maxContentLength']
 
     /* Refs */
     const mailContentInput = ref(null)
@@ -240,6 +250,7 @@ export default {
       mailContentInput,
       imageInput,
       /* Variables */
+      maxContentLength,
       isMailHeaderVisible,
       soldier,
       isArmySoldier,
@@ -261,6 +272,7 @@ export default {
       handleResetValidation,
       handleOpenImageUploader,
       handleUploadImage,
+      toCommaNumber,
     }
   },
   beforeRouteLeave(to, from, next) {
@@ -369,6 +381,14 @@ input {
         color: $gray4;
       }
       &[isvalid='false']:empty:before {
+        color: $warningRed;
+      }
+    }
+    &__length {
+      color: $gray4;
+      align-self: flex-end;
+      margin-top: 16px;
+      &[isvalid='false'] {
         color: $warningRed;
       }
     }
