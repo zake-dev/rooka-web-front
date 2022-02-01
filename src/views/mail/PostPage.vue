@@ -12,6 +12,7 @@
           :isvalid="validation.author"
           @focus="handleResetValidation('author')"
           placeholder="보내는 사람의 이름을 적어주세요"
+          maxlength="15"
           v-model="author"
         />
       </div>
@@ -26,6 +27,7 @@
           :isvalid="validation.relation"
           @focus="handleResetValidation('relation')"
           placeholder="훈련병과의 관계를 적어주세요"
+          maxlength="10"
           v-model="relation"
         />
       </div>
@@ -60,6 +62,7 @@
           :isvalid="validation.address2"
           @focus="handleResetValidation('address2')"
           placeholder="상세주소를 입력해주세요"
+          maxlength="44"
           v-model="address2"
         />
       </div>
