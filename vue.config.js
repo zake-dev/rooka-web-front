@@ -1,10 +1,10 @@
 module.exports = {
-  publicPath: '/absproxy/8081',
+  publicPath: '/',
   devServer: {
     port: 8081,
     allowedHosts: 'all',
     static: {
-      publicPath: '/absproxy/8081',
+      publicPath: '/',
     },
     client: {
       overlay: false,
