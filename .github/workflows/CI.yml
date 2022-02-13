@@ -17,7 +17,7 @@ on:
   
 env:
   VUE_APP_ROOKA_URL: https://rooka.kr
-  VUE_APP_ROOKA_API_URL: https://api.rooka.kr
+  VUE_APP_ROOKA_API_URL: https://api.rooka.kr/api/v1
   VUE_APP_KAKAO_API_KEY: ${{ secrets.VUE_APP_KAKAO_API_KEY }}
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
