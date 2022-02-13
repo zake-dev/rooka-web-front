@@ -1,6 +1,6 @@
 <template>
   <div class="copyright">
-    <span class="copyright__text">rooka@gmail.com</span>
+    <span class="copyright__text">rookadotkr@gmail.com</span>
     <span class="copyright__text">
       Copyright © 2021 by rooka. All Rights Reserved.<br />
       www.rooka.kr

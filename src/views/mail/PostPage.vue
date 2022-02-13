@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <div v-show="isMailHeaderVisible" class="mail-header">
+    <div v-show="isMailHeaderVisible" ref="mailHeader" class="mail-header">
       <div class="mail-header-row">
         <span
           class="mail-header-row__label font__content-title"
@@ -84,7 +84,7 @@
         :isvalid="validation.title"
         placeholder="제목을 입력해 주세요"
         contenteditable
-        @focus="handleResetValidation('title')"
+        @focus=";[handleFocusInput(), handleResetValidation('title')]"
         @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputTitle"
@@ -96,8 +96,7 @@
         :isvalid="validation.content"
         placeholder="내용을 입력해 주세요"
         contenteditable
-        @focus="handleResetValidation('content')"
-        @click="handleCollapseMailHeader"
+        @focus=";[handleFocusInput(), handleResetValidation('content')]"
         @paste.prevent="handlePasteText"
         @input="handleInputContent"
         ref="mailContentInput"
@@ -193,6 +192,7 @@ export default {
     const isBeingSent = computed(() => store.state.mailForm.isBeingSent)
 
     /* Refs */
+    const mailHeader = ref(null)
     const mailTitleInput = ref(null)
     const mailContentInput = ref(null)
 
@@ -206,14 +206,7 @@ export default {
     const isMailHeaderVisible = ref(true)
 
     /* Event Handler */
-    const handleCollapseMailHeader = e => {
-      e.target.focus()
-
-      const isMobile =
-        'ontouchstart' in document.documentElement &&
-        navigator.userAgent.match(/Mobi/)
-      if (isMobile) isMailHeaderVisible.value = false
-    }
+    const handleFocusInput = () => checkCollapseMailHeader()
     const handleFocusContent = () => {
       const input = mailContentInput.value
       const selection = window.getSelection()
@@ -262,20 +255,37 @@ export default {
       }
     }
 
-    window.addEventListener('resize', () => {
+    /* Helper Function */
+    const isMobileKeyboardOpened = () => {
       const MIN_KEYBOARD_HEIGHT = 300
       const isMobile =
         'ontouchstart' in document.documentElement &&
         navigator.userAgent.match(/Mobi/)
-      const isKeyboardClosed =
+      const isKeyboardOpened =
         isMobile &&
-        window.screen.height <
+        window.screen.height >=
           window.visualViewport.height + MIN_KEYBOARD_HEIGHT
-      if (isKeyboardClosed) isMailHeaderVisible.value = true
+      return isMobile && isKeyboardOpened
+    }
+    const checkCollapseMailHeader = () => {
+      if (isMailHeaderVisible.value) {
+        const isFocusInHeader = mailHeader.value.contains(
+          document.activeElement,
+        )
+        if (isMobileKeyboardOpened() && !isFocusInHeader)
+          isMailHeaderVisible.value = false
+      } else {
+        if (!isMobileKeyboardOpened()) isMailHeaderVisible.value = true
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      checkCollapseMailHeader()
     })
 
     return {
       /* Refs */
+      mailHeader,
       mailTitleInput,
       mailContentInput,
       imageInput,
@@ -294,7 +304,7 @@ export default {
       isArmySoldier,
       isBeingSent,
       /* Functions */
-      handleCollapseMailHeader,
+      handleFocusInput,
       handleFocusContent,
       handlePasteText,
       handleOpenDaumPostcodeApi,
