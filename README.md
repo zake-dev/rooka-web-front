@@ -1,4 +1,5 @@
 # rooka-front
+[![CI](https://github.com/zake-dev/rooka-web-front/actions/workflows/CI.yml/badge.svg)](https://github.com/zake-dev/rooka-web-front/actions/workflows/CI.yml)
 
 ## Project setup
 ```
