@@ -10,7 +10,7 @@
           {{ new Date(mail.createAt).toLocaleDateString() }}
         </span>
       </div>
-      <span class="mail-header__text">
+      <span v-if="mail.postCode && mail.address" class="mail-header__text">
         ({{ mail.postCode }}) {{ mail.address }}
       </span>
     </div>

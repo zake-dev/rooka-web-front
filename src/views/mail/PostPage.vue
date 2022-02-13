@@ -11,7 +11,7 @@
           class="mail-header-row__input"
           :isvalid="validation.author"
           @focus="handleResetValidation('author')"
-          placeholder="보내는 사람의 이름을 적어주세요"
+          placeholder="보내는 사람의 이름을 적어 주세요"
           maxlength="15"
           v-model="author"
         />
@@ -26,7 +26,7 @@
           class="mail-header-row__input"
           :isvalid="validation.relation"
           @focus="handleResetValidation('relation')"
-          placeholder="훈련병과의 관계를 적어주세요"
+          placeholder="훈련병과의 관계를 적어 주세요"
           maxlength="10"
           v-model="relation"
         />
@@ -42,8 +42,8 @@
           :isvalid="validation.address1"
           :placeholder="
             isArmySoldier
-              ? '답장을 받으려면 주소를 입력해주세요'
-              : '답장을 받을 주소를 입력해주세요'
+              ? '답장을 받으려면 주소를 입력해 주세요'
+              : '답장을 받을 주소를 입력해 주세요'
           "
           :value="addressInputText"
           @focus="handleResetValidation('address1')"
@@ -61,7 +61,7 @@
           class="mail-header-row__input"
           :isvalid="validation.address2"
           @focus="handleResetValidation('address2')"
-          placeholder="상세주소를 입력해주세요"
+          placeholder="상세주소를 입력해 주세요"
           maxlength="44"
           v-model="address2"
         />
@@ -82,7 +82,7 @@
       <div
         class="mail-content__input font__semi-title"
         :isvalid="validation.title"
-        placeholder="제목을 입력해주세요"
+        placeholder="제목을 입력해 주세요"
         contenteditable
         @focus="handleResetValidation('title')"
         @click="handleCollapseMailHeader"
@@ -94,7 +94,7 @@
       <div
         class="mail-content__textarea font__content-text"
         :isvalid="validation.content"
-        placeholder="내용을 입력해주세요"
+        placeholder="내용을 입력해 주세요"
         contenteditable
         @focus="handleResetValidation('content')"
         @click="handleCollapseMailHeader"
@@ -113,21 +113,26 @@
       <div class="mail-content__focus-area" @click="handleFocusContent"></div>
     </div>
 
-    <div class="mail-footer">
+    <div
+      class="mail-footer"
+      :style="{ 'justify-content': isArmySoldier ? 'space-between' : 'end' }"
+    >
       <MailFormButtonPhoto
-        v-if="soldier.militaryType === 'ARMY'"
+        v-if="isArmySoldier"
         @click="handleOpenImageUploader"
       />
-      <MailFormButtonNews />
       <MailFormButtonSend />
     </div>
+
     <input
-      v-if="soldier.militaryType === 'ARMY'"
+      v-if="isArmySoldier"
       ref="imageInput"
       type="file"
       @input="handleUploadImage"
       hidden
     />
+
+    <RoundSpinnerWithBlur v-if="isBeingSent" />
   </div>
 </template>
 
@@ -141,50 +146,51 @@ import { toCommaNumber } from '@/utils/TextFormatter'
 
 import MailAttachmentContainer from '@/components/MailAttachment/MailAttachmentContainer.vue'
 import MailFormButtonPhoto from '@/components/Button/MailFormButtonPhoto.vue'
-import MailFormButtonNews from '@/components/Button/MailFormButtonNews.vue'
 import MailFormButtonSend from '@/components/Button/MailFormButtonSend.vue'
+import RoundSpinnerWithBlur from '@/components/Spinner/RoundSpinnerWithBlur.vue'
 
 export default {
   components: {
     MailAttachmentContainer,
     MailFormButtonPhoto,
-    MailFormButtonNews,
     MailFormButtonSend,
+    RoundSpinnerWithBlur,
   },
   setup() {
     /* Vuex */
     const store = useStore()
     const soldier = computed(() => store.state.mailBox.soldier)
     const isArmySoldier = computed(() => soldier.value.militaryType === 'ARMY')
-    const state = store.state.mailForm.mail
+    const mail = store.state.mailForm.mail
     const author = computed({
-      get: () => state.author,
+      get: () => mail.author,
       set: value => store.dispatch('mailForm/UPDATE_AUTHOR', value),
     })
     const relation = computed({
-      get: () => state.relation,
+      get: () => mail.relation,
       set: value => store.dispatch('mailForm/UPDATE_RELATION', value),
     })
     const addressInputText = computed(() =>
-      state.address1 && state.postCode
-        ? `(${state.postCode}) ${state.address1}`
+      mail.address1 && mail.postCode
+        ? `(${mail.postCode}) ${mail.address1}`
         : '',
     )
     const address2 = computed({
-      get: () => state.address2,
+      get: () => mail.address2,
       set: value => store.dispatch('mailForm/UPDATE_ADDRESS2', value),
     })
     const title = computed({
-      get: () => state.title,
+      get: () => mail.title,
       set: value => store.dispatch('mailForm/UPDATE_TITLE', value),
     })
     const content = computed({
-      get: () => state.content,
+      get: () => mail.content,
       set: value => store.dispatch('mailForm/UPDATE_CONTENT', value),
     })
-    const imageUUID = computed(() => state.imageUUID)
+    const imageUUID = computed(() => mail.imageUUID)
     const validation = computed(() => store.state.mailForm.validation)
     const maxContentLength = store.getters['mailForm/maxContentLength']
+    const isBeingSent = computed(() => store.state.mailForm.isBeingSent)
 
     /* Refs */
     const mailTitleInput = ref(null)
@@ -277,7 +283,6 @@ export default {
       maxContentLength,
       isMailHeaderVisible,
       soldier,
-      isArmySoldier,
       author,
       relation,
       addressInputText,
@@ -286,6 +291,8 @@ export default {
       content,
       imageUUID,
       validation,
+      isArmySoldier,
+      isBeingSent,
       /* Functions */
       handleCollapseMailHeader,
       handleFocusContent,

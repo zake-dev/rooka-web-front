@@ -10,7 +10,7 @@
     <div class="modal-content-body masked-overflow">
       <span class="modal-content-body__step font__tag">STEP 2</span>
       <span class="modal-content-body__title font__content-title"
-        >페이스북에 공유해주세요!</span
+        >페이스북에 공유해 주세요!</span
       >
 
       <div class="modal-content-buttons">

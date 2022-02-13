@@ -1,50 +1,53 @@
 <template>
   <div class="form-select-wrapper">
-    <select class="form-select">
+    <select class="form-select" :value="modelValue" @change="handleSelect">
       <option class="form-select__placeholder-text" value="" hidden>
-        입영 기수를 선택해주세요
+        입영 기수를 선택해 주세요
       </option>
       <option
         v-for="{ kisu, enterDate } in kisuAndEnterDates"
         :key="kisu"
         :value="kisu"
-        :selected="kisu === soldier.kisu"
+        :selected="kisu === modelValue"
       >
         {{ kisu }}기 ({{ toKoreanDateString(enterDate) }})
       </option>
     </select>
+    <img class="form-select__icon" :src="DropdownArrowIconPng" />
   </div>
 </template>
 
 <script>
-import { reactive, computed } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
-
-import * as CodeApi from '@/api/CodeApi'
 
 import { toKoreanDateString } from '@/utils/TextFormatter'
 
+import DropdownArrowIconPng from '@/assets/icons/dropdown-arrow-icon.png'
+
 export default {
-  setup() {
+  props: {
+    modelValue: String,
+  },
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
     /* Vuex */
     const store = useStore()
-    const soldier = computed(() => store.state.registerForm)
+    const kisuAndEnterDates = computed(
+      () => store.state.registerForm.selectableKisus,
+    )
 
-    /* Local State */
-    const kisuAndEnterDates = reactive([])
-
-    /* Fetch Data */
-    ;(async () => {
-      const { data } = await CodeApi.getAirforceKisus()
-      data.forEach(kisu => kisuAndEnterDates.push(kisu))
-    })()
+    /* Event Handler */
+    const handleSelect = e => emit('update:modelValue', e.target.value)
 
     return {
+      /* Assets */
+      DropdownArrowIconPng,
       /* Variables */
-      soldier,
       kisuAndEnterDates,
       /* Functions */
       toKoreanDateString,
+      handleSelect,
     }
   },
 }
@@ -68,15 +71,14 @@ export default {
 
   &-wrapper {
     position: relative;
+  }
 
-    &::after {
-      position: absolute;
-      content: '▼';
-      font-size: 10px;
-      top: 9px;
-      right: 12px;
-      color: $gray3;
-    }
+  &__icon {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 14px;
+    right: 15px;
   }
 
   &__placeholder-text {

@@ -1,5 +1,5 @@
 <template>
-  <input class="form-input" @input="handleInput" />
+  <input class="form-input" :value="modelValue" @input="handleInput" />
 </template>
 
 <script>

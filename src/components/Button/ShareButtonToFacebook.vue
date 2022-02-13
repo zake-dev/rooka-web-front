@@ -1,7 +1,7 @@
 <template>
   <button class="button" @click="handleShareToFacebook">
     <div class="button-icon-wrapper">
-      <img class="button-icon-wrapper__icon" :src="FacebookIconSvg" />
+      <img class="button-icon-wrapper__icon" :src="FacebookIconPng" />
     </div>
     <span class="button-label font__caption">페이스북</span>
   </button>
@@ -10,7 +10,7 @@
 <script>
 import { openModal } from '@/utils/DialogHandler'
 
-import FacebookIconSvg from '@/assets/icons/facebook-icon.svg'
+import FacebookIconPng from '@/assets/icons/facebook-icon.png'
 
 export default {
   setup() {
@@ -19,7 +19,7 @@ export default {
 
     return {
       /* Assets */
-      FacebookIconSvg,
+      FacebookIconPng,
       /* Functions */
       handleShareToFacebook,
     }
@@ -52,8 +52,8 @@ export default {
     background-color: $gray1;
 
     &__icon {
-      width: 13px;
-      height: 26px;
+      width: 20px;
+      height: 20px;
     }
   }
 

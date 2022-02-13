@@ -1,6 +1,6 @@
 <template>
   <div class="card-wrapper">
-    <SoldierCardImage :uuid="uuid" />
+    <SoldierCardImage class="card-image" :uuid="uuid" />
   </div>
 </template>
 

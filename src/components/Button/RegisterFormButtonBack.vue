@@ -1,6 +1,6 @@
 <template>
   <button class="button" @click="handleDecreaseStep">
-    <img class="button__icon" :src="LeftArrowIconSvg" />
+    <img class="button__icon" :src="LeftArrowIconPng" />
     <span class="font__button-text">이전</span>
   </button>
 </template>
@@ -8,7 +8,7 @@
 <script>
 import { useStore } from 'vuex'
 
-import LeftArrowIconSvg from '@/assets/icons/left-arrow-icon.svg'
+import LeftArrowIconPng from '@/assets/icons/left-arrow-icon.png'
 
 export default {
   setup() {
@@ -21,7 +21,7 @@ export default {
 
     return {
       /* Assets */
-      LeftArrowIconSvg,
+      LeftArrowIconPng,
       /* Functions */
       handleDecreaseStep,
     }
@@ -44,7 +44,6 @@ export default {
   &__icon {
     width: 24px;
     height: 24px;
-    color: $black;
   }
 }
 </style>

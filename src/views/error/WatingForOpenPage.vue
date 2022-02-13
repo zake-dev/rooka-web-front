@@ -8,7 +8,7 @@
       <p class="font__content-text mt-3">
         이렇게 먼저 찾아와 주셔서 정말 감사해요! 아쉽게도 아직은 인터넷 편지
         작성 기간이 아니지만 조금만 기다리시면 인터넷 편지를 보내실 수 있어요.
-        캘린더에 일정을 추가해보세요!
+        캘린더에 일정을 추가해 보세요!
       </p>
     </div>
 
@@ -24,9 +24,6 @@
       >
       <BaseButton class="button-dark" @click="handleAddCalendar"
         >구글캘린더에 추가하기</BaseButton
-      >
-      <BaseButton class="button-yellow" @click="handleOpenLink"
-        >[테스트용] 인편 보낼 수 있게 변경</BaseButton
       >
     </div>
   </div>
@@ -87,12 +84,6 @@ export default {
         }),
       )
     }
-    const handleOpenLink = async () => {
-      await fetch(
-        `${process.env.VUE_APP_ROOKA_API_URL}/mailbox/open/${key.value}`,
-      )
-      router.push(`/${key.value}/mail`)
-    }
 
     return {
       /* Variables */
@@ -101,7 +92,6 @@ export default {
       /* Functions */
       handleGoHome,
       handleAddCalendar,
-      handleOpenLink,
     }
   },
 }

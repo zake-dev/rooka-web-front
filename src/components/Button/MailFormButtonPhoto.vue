@@ -1,17 +1,17 @@
 <template>
   <button class="button photo-menu-button">
-    <img :src="PhotoButtonIconSvg" />
+    <img class="photo-menu-button__icon" :src="PhotoButtonIconPng" />
   </button>
 </template>
 
 <script>
-import PhotoButtonIconSvg from '@/assets/icons/photo-button-icon.svg'
+import PhotoButtonIconPng from '@/assets/icons/photo-button-icon.png'
 
 export default {
   setup() {
     return {
       /* Assets */
-      PhotoButtonIconSvg,
+      PhotoButtonIconPng,
     }
   },
 }
@@ -24,10 +24,10 @@ export default {
   width: 96px;
   height: 100%;
   min-height: 56px;
-  color: $gray5;
-}
-img {
-  width: 21px;
-  height: 21px;
+
+  &__icon {
+    width: 21px;
+    height: 21px;
+  }
 }
 </style>

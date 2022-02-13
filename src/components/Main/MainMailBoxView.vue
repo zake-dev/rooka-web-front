@@ -4,7 +4,7 @@
       <span class="view-content__title">다시 꺼내 보는</span>
       <span class="view-content__title">소중한 편지들</span>
       <p class="view-content__text pt-3">
-        편지는 두고두고 읽을수록 그 감동이 커지는 법.나만을 위한 rooka의
+        편지는 두고두고 읽을수록 그 감동이 커지는 법. 나만을 위한 rooka의
         인편함에서 소중한 인편들을 언제든지 읽어보고 관리할 수 있답니다.
       </p>
     </div>
