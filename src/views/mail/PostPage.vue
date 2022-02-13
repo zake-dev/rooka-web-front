@@ -88,6 +88,7 @@
         @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputTitle"
+        ref="mailTitleInput"
       ></div>
       <MailAttachmentContainer v-if="imageUUID" class="mail-content__image" />
       <div
@@ -186,6 +187,7 @@ export default {
     const maxContentLength = store.getters['mailForm/maxContentLength']
 
     /* Refs */
+    const mailTitleInput = ref(null)
     const mailContentInput = ref(null)
 
     /* Composables */
@@ -231,10 +233,28 @@ export default {
 
       e.target.blur()
     }
-    const handleInputTitle = e => (title.value = e.target.innerText)
+    const handleInputTitle = e => {
+      title.value = e.target.innerText
+      limitTitleLength()
+    }
     const handleInputContent = e => (content.value = e.target.innerText)
     const handleResetValidation = fieldName =>
       store.dispatch('mailForm/RESET_VALIDATION', fieldName)
+    const limitTitleLength = () => {
+      const selection = window.getSelection()
+      const offset = selection.anchorOffset
+      const length = mailTitleInput.value.innerText.length
+      if (length > 80) {
+        selection.extend(
+          mailTitleInput.value.childNodes[0],
+          Math.min(length, offset - (length - 80)),
+        )
+        setTimeout(() => {
+          selection.deleteFromDocument()
+          title.value = mailTitleInput.value.innerText
+        }, 0)
+      }
+    }
 
     window.addEventListener('resize', () => {
       const MIN_KEYBOARD_HEIGHT = 300
@@ -250,6 +270,7 @@ export default {
 
     return {
       /* Refs */
+      mailTitleInput,
       mailContentInput,
       imageInput,
       /* Variables */
