@@ -2,7 +2,9 @@ import * as MailApi from '@/api/MailApi'
 import router from '@/router'
 import { showToast, showWarningToast, removeToast } from '@/utils/ToastHandler'
 
+const MAX_CONTENT_LENGTH = 10000
 const INVALID_FIELD_MESSAGE = '입력하지 않은 정보가 있네요!😳'
+const TOO_LONG_CONTENT_MESSAGE = '편지 내용이 너무 길어요!😨'
 
 const module = {
   namespaced: true,
@@ -41,6 +43,8 @@ const module = {
       state.mail.postCode !== '' &&
       state.mail.title !== '' &&
       state.mail.content !== '',
+    isSendable: (state, getters) => getters.isValidForm && !state.isBeingSend,
+    maxContentLength: () => MAX_CONTENT_LENGTH,
   },
   mutations: {
     SET_AUTHOR(state, author) {
@@ -221,7 +225,7 @@ const module = {
       commit('SET_CONTENT_VALIDATION', isValid)
       return isValid
     },
-    async UPDATE_ALL_VALIDATION({ dispatch }) {
+    async UPDATE_ALL_VALIDATION({ state, dispatch }) {
       const validations = await Promise.all([
         dispatch('UPDATE_AUTHOR_VALIDATION'),
         dispatch('UPDATE_RELATION_VALIDATION'),
@@ -233,13 +237,18 @@ const module = {
       ])
       const isAllValid = validations.every(v => v)
       if (!isAllValid) showWarningToast(INVALID_FIELD_MESSAGE)
-      return isAllValid
+      const isContentLengthValid =
+        state.mail.content.length <= MAX_CONTENT_LENGTH
+      if (!isContentLengthValid) showWarningToast(TOO_LONG_CONTENT_MESSAGE)
+      return isAllValid && isContentLengthValid
     },
     RESET_VALIDATION({ commit }, fieldName) {
+      removeToast(TOO_LONG_CONTENT_MESSAGE)
       removeToast(INVALID_FIELD_MESSAGE)
       commit(`SET_${fieldName.toUpperCase()}_VALIDATION`, true)
     },
     RESET_ALL_VALIDATION({ commit }) {
+      removeToast(TOO_LONG_CONTENT_MESSAGE)
       removeToast(INVALID_FIELD_MESSAGE)
       commit('SET_AUTHOR_VALIDATION', true)
       commit('SET_RELATION_VALIDATION', true)
