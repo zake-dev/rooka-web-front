@@ -188,6 +188,7 @@ import { useRouter } from 'vue-router'
 
 import * as MailBoxApi from '@/api/MailBoxApi'
 import { openModal } from '@/utils/DialogHandler'
+import { showWarningToast } from '@/utils/ToastHandler'
 import { shortenName } from '@/utils/TextFormatter'
 
 import LineStepper from '@/components/Stepper/LineStepper.vue'
@@ -284,6 +285,10 @@ export default {
       handleIncreaseStep()
     }
     const handleClickMilitaryType = militaryType => {
+      if (militaryType === 'ARMY') {
+        showWarningToast('육군은 아직 서비스 준비중이에요!😔')
+        return
+      }
       store.dispatch('registerForm/UPDATE_MILITARY_TYPE', militaryType)
       handleIncreaseStep()
     }
