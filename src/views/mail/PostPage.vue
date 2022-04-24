@@ -1,6 +1,6 @@
 <template>
   <div class="page-wrapper">
-    <div v-show="isMailHeaderVisible" class="mail-header">
+    <div v-show="isMailHeaderVisible" ref="mailHeader" class="mail-header">
       <div class="mail-header-row">
         <span
           class="mail-header-row__label font__content-title"
@@ -12,6 +12,7 @@
           :isvalid="validation.author"
           @focus="handleResetValidation('author')"
           placeholder="보내는 사람의 이름을 적어 주세요"
+          maxlength="15"
           v-model="author"
         />
       </div>
@@ -26,6 +27,7 @@
           :isvalid="validation.relation"
           @focus="handleResetValidation('relation')"
           placeholder="훈련병과의 관계를 적어 주세요"
+          maxlength="10"
           v-model="relation"
         />
       </div>
@@ -60,6 +62,7 @@
           :isvalid="validation.address2"
           @focus="handleResetValidation('address2')"
           placeholder="상세주소를 입력해 주세요"
+          maxlength="44"
           v-model="address2"
         />
       </div>
@@ -81,10 +84,11 @@
         :isvalid="validation.title"
         placeholder="제목을 입력해 주세요"
         contenteditable
-        @focus="handleResetValidation('title')"
+        @focus=";[handleFocusInput(), handleResetValidation('title')]"
         @click="handleCollapseMailHeader"
         @paste.prevent="handlePasteText"
         @input="handleInputTitle"
+        ref="mailTitleInput"
       ></div>
       <MailAttachmentContainer v-if="imageUUID" class="mail-content__image" />
       <div
@@ -92,12 +96,19 @@
         :isvalid="validation.content"
         placeholder="내용을 입력해 주세요"
         contenteditable
-        @focus="handleResetValidation('content')"
-        @click="handleCollapseMailHeader"
+        @focus=";[handleFocusInput(), handleResetValidation('content')]"
         @paste.prevent="handlePasteText"
         @input="handleInputContent"
         ref="mailContentInput"
       ></div>
+      <div
+        class="mail-content__length font__caption"
+        :isvalid="content.length <= maxContentLength"
+      >
+        ({{ toCommaNumber(content.length) }}/{{
+          toCommaNumber(maxContentLength)
+        }})
+      </div>
       <div class="mail-content__focus-area" @click="handleFocusContent"></div>
     </div>
 
@@ -130,6 +141,7 @@ import { useStore } from 'vuex'
 
 import { useImageUploader } from '@/composables/useImageUploader'
 import { openModal } from '@/utils/DialogHandler'
+import { toCommaNumber } from '@/utils/TextFormatter'
 
 import MailAttachmentContainer from '@/components/MailAttachment/MailAttachmentContainer.vue'
 import MailFormButtonPhoto from '@/components/Button/MailFormButtonPhoto.vue'
@@ -176,9 +188,12 @@ export default {
     })
     const imageUUID = computed(() => mail.imageUUID)
     const validation = computed(() => store.state.mailForm.validation)
+    const maxContentLength = store.getters['mailForm/maxContentLength']
     const isBeingSent = computed(() => store.state.mailForm.isBeingSent)
 
     /* Refs */
+    const mailHeader = ref(null)
+    const mailTitleInput = ref(null)
     const mailContentInput = ref(null)
 
     /* Composables */
@@ -191,14 +206,7 @@ export default {
     const isMailHeaderVisible = ref(true)
 
     /* Event Handler */
-    const handleCollapseMailHeader = e => {
-      e.target.focus()
-
-      const isMobile =
-        'ontouchstart' in document.documentElement &&
-        navigator.userAgent.match(/Mobi/)
-      if (isMobile) isMailHeaderVisible.value = false
-    }
+    const handleFocusInput = () => checkCollapseMailHeader()
     const handleFocusContent = () => {
       const input = mailContentInput.value
       const selection = window.getSelection()
@@ -224,28 +232,65 @@ export default {
 
       e.target.blur()
     }
-    const handleInputTitle = e => (title.value = e.target.innerText)
+    const handleInputTitle = e => {
+      title.value = e.target.innerText
+      limitTitleLength()
+    }
     const handleInputContent = e => (content.value = e.target.innerText)
     const handleResetValidation = fieldName =>
       store.dispatch('mailForm/RESET_VALIDATION', fieldName)
+    const limitTitleLength = () => {
+      const selection = window.getSelection()
+      const offset = selection.anchorOffset
+      const length = mailTitleInput.value.innerText.length
+      if (length > 80) {
+        selection.extend(
+          mailTitleInput.value.childNodes[0],
+          Math.min(length, offset - (length - 80)),
+        )
+        setTimeout(() => {
+          selection.deleteFromDocument()
+          title.value = mailTitleInput.value.innerText
+        }, 0)
+      }
+    }
 
-    window.addEventListener('resize', () => {
+    /* Helper Function */
+    const isMobileKeyboardOpened = () => {
       const MIN_KEYBOARD_HEIGHT = 300
       const isMobile =
         'ontouchstart' in document.documentElement &&
         navigator.userAgent.match(/Mobi/)
-      const isKeyboardClosed =
+      const isKeyboardOpened =
         isMobile &&
-        window.screen.height <
+        window.screen.height >=
           window.visualViewport.height + MIN_KEYBOARD_HEIGHT
-      if (isKeyboardClosed) isMailHeaderVisible.value = true
+      return isMobile && isKeyboardOpened
+    }
+    const checkCollapseMailHeader = () => {
+      if (isMailHeaderVisible.value) {
+        const isFocusInHeader = mailHeader.value.contains(
+          document.activeElement,
+        )
+        if (isMobileKeyboardOpened() && !isFocusInHeader)
+          isMailHeaderVisible.value = false
+      } else {
+        if (!isMobileKeyboardOpened()) isMailHeaderVisible.value = true
+      }
+    }
+
+    window.addEventListener('resize', () => {
+      checkCollapseMailHeader()
     })
 
     return {
       /* Refs */
+      mailHeader,
+      mailTitleInput,
       mailContentInput,
       imageInput,
       /* Variables */
+      maxContentLength,
       isMailHeaderVisible,
       soldier,
       author,
@@ -259,7 +304,7 @@ export default {
       isArmySoldier,
       isBeingSent,
       /* Functions */
-      handleCollapseMailHeader,
+      handleFocusInput,
       handleFocusContent,
       handlePasteText,
       handleOpenDaumPostcodeApi,
@@ -268,6 +313,7 @@ export default {
       handleResetValidation,
       handleOpenImageUploader,
       handleUploadImage,
+      toCommaNumber,
     }
   },
   beforeRouteLeave(to, from, next) {
@@ -376,6 +422,14 @@ input {
         color: $gray4;
       }
       &[isvalid='false']:empty:before {
+        color: $warningRed;
+      }
+    }
+    &__length {
+      color: $gray4;
+      align-self: flex-end;
+      margin-top: 16px;
+      &[isvalid='false'] {
         color: $warningRed;
       }
     }

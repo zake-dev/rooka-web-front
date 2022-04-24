@@ -20,6 +20,9 @@ export const toKoreanMilitaryType = militaryType => {
   }
 }
 
+export const toCommaNumber = number =>
+  new String(number).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
 const shortenWithEllipsis = maxCount => text =>
   text.length > maxCount ? text.slice(0, maxCount - 1) + '...' : text
 
