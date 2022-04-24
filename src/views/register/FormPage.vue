@@ -163,6 +163,11 @@
             {{ shortenName(soldier.name) }} 훈련병은<br />공군 몇 기인가요?
             <Emoji>📋</Emoji>
           </FormLabel>
+          <p>
+            만약 기수 목록이 안 보이면<br />
+            <strong>새로고침</strong> 후 다시 시도해주세요! &#128591;
+          </p>
+          <p style="color: transparent">루카는 당신을 사랑해요</p>
           <AirforceKisuSelect v-model="kisu" />
 
           <div class="form-card-buttons">
