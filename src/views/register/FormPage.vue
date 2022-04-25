@@ -257,7 +257,12 @@ export default {
     /* Helper Function */
     const isValidDate = ({ year, month, date }) =>
       year !== '' && month !== '' && date !== ''
-
+    const registerForm = () => ({
+      ...soldier,
+      birthDate: Object.values(soldier.birthDate).join('-'),
+      enterDate: Object.values(soldier.birthDate).join('-'),
+    })
+    
     /* Event Handler */
     const handleIncreaseStep = () =>
       store.dispatch('registerForm/INCREASE_STEP')
@@ -299,7 +304,7 @@ export default {
     }
     const handleSubmitForm = async () => {
       try {
-        const { data } = await MailBoxApi.getKey(soldier.value)
+        const { data } = await MailBoxApi.getKey(registerForm())
         store.dispatch('registerForm/RESET')
         router.push(`/${data.key}/mail`)
       } catch (e) {
