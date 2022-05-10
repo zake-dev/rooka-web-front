@@ -5,9 +5,6 @@
     </div>
     <div v-else-if="mail.status === 'SENT'" class="chip chip-delivered">
       <span class="chip__text font__tag me-1">전달 완료</span>
-      <span class="chip__text font__caption">
-        {{ new Date(mail.deliveredAt).toLocaleDateString() }}
-      </span>
     </div>
     <div v-else class="chip chip-failed">
       <span class="chip__text font__tag">전달 실패</span>
