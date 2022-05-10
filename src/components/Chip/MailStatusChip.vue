@@ -3,7 +3,7 @@
     <div v-if="mail.status === 'PENDING'" class="chip chip-pending">
       <span class="chip__text font__tag">전달 대기</span>
     </div>
-    <div v-else-if="mail.status === 'DELIVERED'" class="chip chip-delivered">
+    <div v-else-if="mail.status === 'SENT'" class="chip chip-delivered">
       <span class="chip__text font__tag me-1">전달 완료</span>
       <span class="chip__text font__caption">
         {{ new Date(mail.deliveredAt).toLocaleDateString() }}
