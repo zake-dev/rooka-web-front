@@ -41,7 +41,7 @@ export default {
           return '정말 삭제하시겠어요??'
         case 'DELIVERED':
         case 'FAILED':
-          return '편지함에서 삭제하시겠어요?'
+          return '인편함에서 삭제하시겠어요?'
       }
       return ''
     })
@@ -50,9 +50,9 @@ export default {
         case 'PENDING':
           return '한번 삭제한 편지는 복구할 수 없으며\n훈련병에게 전달되지 않아요.'
         case 'DELIVERED':
-          return '훈련병에게 이미 전달이 완료된 편지에요.\n편지는 편지함에서만 지워집니다.'
+          return '훈련병에게 이미 전달이 완료된 편지에요.\n편지는 인편함에서만 지워집니다.'
         case 'FAILED':
-          return '훈련병이 받지 못한 편지에요.\n편지는 편지함에서만 지워집니다.'
+          return '훈련병이 받지 못한 편지에요.\n편지는 인편함에서만 지워집니다.'
       }
       return ''
     })
