@@ -1,14 +1,14 @@
 <template>
   <div class="form-select-wrapper">
-    <select class="form-select" :value="modelValue" @change="handleSelect">
-      <option class="form-select__placeholder-text" value="" hidden>
+    <select class="form-select" v-model="selectedValue" @change="handleSelect">
+      <option class="form-select__placeholder-text" :value="null" hidden>
         입영 기수를 선택해 주세요
       </option>
       <option
         v-for="{ kisu, enterDate } in kisuAndEnterDates"
         :key="kisu"
-        :value="kisu"
-        :selected="kisu === modelValue"
+        :value="{ kisu, enterDate }"
+        :selected="kisu === selectedValue?.kisu"
       >
         {{ kisu }}기 ({{ toKoreanDateString(enterDate) }})
       </option>
@@ -17,40 +17,34 @@
   </div>
 </template>
 
-<script>
-import { computed } from 'vue'
+<script setup>
+import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 
 import { toKoreanDateString } from '@/utils/TextFormatter'
 
 import DropdownArrowIconPng from '@/assets/icons/dropdown-arrow-icon.png'
 
-export default {
-  props: {
-    modelValue: String,
-  },
-  emits: ['update:modelValue'],
-  setup(props, { emit }) {
-    /* Vuex */
-    const store = useStore()
-    const kisuAndEnterDates = computed(
-      () => store.state.registerForm.selectableKisus,
-    )
+/* Vuex */
+const store = useStore()
+const state = store.state.registerForm
+const kisuAndEnterDates = computed(() => state.selectableKisus)
 
-    /* Event Handler */
-    const handleSelect = e => emit('update:modelValue', e.target.value)
+/* Local State */
+const selectedValue = ref(null)
 
-    return {
-      /* Assets */
-      DropdownArrowIconPng,
-      /* Variables */
-      kisuAndEnterDates,
-      /* Functions */
-      toKoreanDateString,
-      handleSelect,
-    }
-  },
+/* Event Handler */
+const handleSelect = () => {
+  const { kisu, enterDate } = selectedValue.value
+  store.dispatch('registerForm/UPDATE_KISU', kisu)
+  store.dispatch('registerForm/UPDATE_ENTER_DATE', enterDate)
 }
+
+/* Hooks */
+onMounted(() => {
+  store.dispatch('registerForm/UPDATE_KISU', '')
+  store.dispatch('registerForm/UPDATE_ENTER_DATE', '')
+})
 </script>
 
 <style scoped lang="scss">

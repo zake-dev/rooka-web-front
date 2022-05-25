@@ -11,9 +11,9 @@
 @import '@/scss/_variables.scss';
 
 .chip {
-  height: 40px;
+  height: 32px;
   width: fit-content;
-  padding: 0 18px;
+  padding: 0 19px;
   border-radius: 20px;
   background-color: $rookaYellow;
   display: flex;

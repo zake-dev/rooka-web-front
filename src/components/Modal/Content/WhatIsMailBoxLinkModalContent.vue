@@ -4,7 +4,7 @@
 
     <div class="modal-content-body masked-overflow">
       <p class="modal-content-body__question-text font__content-title mb-2">
-        Q. 인터넷 편지함 링크라는 게 뭔가요?
+        Q. 인편함 링크라는 게 뭔가요?
       </p>
       <p class="modal-content-body__answer-text font__page-title mb-3">
         A. 인편 작성을 위한 훈련병 정보 입력 없이 바로 인편을 작성할 수 있는
