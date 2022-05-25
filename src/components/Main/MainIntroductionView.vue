@@ -11,93 +11,49 @@
     </div>
 
     <div class="view-animations">
-      <div class="view-animations-row">
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.35) }"
-        >
-          로그인
-        </div>
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.85) }"
-        >
-          이름
-        </div>
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.1) }"
-        >
-          본인인증
-        </div>
+      <div
+        class="view-animations-row__chip mb-3"
+        :style="{ opacity: isVisible(0.3) }"
+      >
+        이름
       </div>
-      <div class="view-animations-row" style="transform: translateX(-24px)">
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.85) }"
-        >
-          앱설치
-        </div>
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.1) }"
-        >
-          기수
-        </div>
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.7) }"
-        >
-          생년월일
-        </div>
+      <div
+        class="view-animations-row__chip mb-3"
+        :style="{ opacity: isVisible(0.4) }"
+      >
+        기수
       </div>
-      <div class="view-animations-row" style="transform: translateX(24px)">
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.35) }"
-        >
-          비밀번호
-        </div>
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.6) }"
-        >
-          입영일
-        </div>
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.1) }"
-        >
-          아이디
-        </div>
+      <div
+        class="view-animations-row__chip mb-3"
+        :style="{ opacity: isVisible(0.5) }"
+      >
+        생년월일
       </div>
-      <div class="view-animations-row" style="transform: translateX(16px)">
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.6) }"
-        >
-          회원가입
-        </div>
-        <div
-          class="view-animations-row__chip"
-          :style="{ opacity: isVisible(0.7) }"
-        >
-          입영부대
-        </div>
+      <div
+        class="view-animations-row__chip mb-3"
+        :style="{ opacity: isVisible(0.6) }"
+      >
+        입영일
       </div>
       <img
-        class="view-animations__arrow"
+        class="view-animations__ellipsis mb-2"
+        :src="MainIntroductionEllipsisPng"
+        :style="{ opacity: isVisible(0.7) }"
+      />
+      <img
+        class="view-animations__arrow mb-2"
         :src="MainIntroductionArrowPng"
-        :style="{ opacity: isVisible(0.95) }"
+        :style="{ opacity: isVisible(0.8) }"
       />
       <MainIntorductionViewLinkChip
         class="view-animations__link-chip"
         :style="{
-          opacity: isVisible(0.95),
-          transform: isVisible(0.95) ? 'translateY(0)' : 'translateY(-24px)',
+          opacity: isVisible(0.9),
+          transform: isVisible(0.9) ? 'translateY(0)' : 'translateY(-24px)',
         }"
-        >김루카.12345</MainIntorductionViewLinkChip
       >
+        김루카.12345
+      </MainIntorductionViewLinkChip>
     </div>
   </div>
 </template>
@@ -106,6 +62,7 @@
 import { ref, onMounted } from 'vue'
 import { onBeforeRouteLeave } from 'vue-router'
 
+import MainIntroductionEllipsisPng from '@/assets/images/main-introduction-ellipsis.png'
 import MainIntroductionArrowPng from '@/assets/images/main-introduction-arrow.png'
 import MainIntorductionViewLinkChip from './MainIntroductionViewLinkChip.vue'
 
@@ -135,6 +92,7 @@ export default {
 
     return {
       /* Assets */
+      MainIntroductionEllipsisPng,
       MainIntroductionArrowPng,
       /* Functions */
       isVisible,
@@ -176,13 +134,11 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
 
   &-row {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    gap: 32px;
+    justify-content: center;
 
     &__chip {
       @extend .font__caption;
@@ -194,6 +150,12 @@ export default {
       box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
       transition: opacity 0.3s ease;
     }
+  }
+
+  &__ellipsis {
+    width: 8px;
+    height: 24px;
+    transition: opacity 0.3s ease;
   }
 
   &__arrow {

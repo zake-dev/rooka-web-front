@@ -82,7 +82,6 @@ import BaseButton from '@/components/Button/BaseButton.vue'
 /* Vuex */
 const store = useStore()
 const soldier = computed(() => store.state.registerForm.soldier)
-console.log(soldier.value)
 
 /* Router */
 const router = useRouter()
