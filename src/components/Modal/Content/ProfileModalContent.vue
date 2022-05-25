@@ -13,55 +13,41 @@
 
       <div class="modal-content-profile-info mt-3">
         <div class="modal-content-profile-row">
-          <span class="modal-content-profile-row__label font__content-title"
-            >생년월일</span
-          >
-          <span class="modal-content-profile-row__text font__content-text">{{
-            toKoreanDateString(soldier.birthDate)
-          }}</span>
+          <span class="modal-content-profile-row__label font__content-title">
+            생년월일
+          </span>
+          <span class="modal-content-profile-row__text font__content-text">
+            {{ toKoreanDateString(soldier.birthDate) }}
+          </span>
         </div>
         <div class="modal-content-profile-row">
-          <span class="modal-content-profile-row__label font__content-title"
-            >군종</span
-          >
-          <span class="modal-content-profile-row__text font__content-text">{{
-            toKoreanMilitaryType(soldier.militaryType)
-          }}</span>
+          <span class="modal-content-profile-row__label font__content-title">
+            군종
+          </span>
+          <span class="modal-content-profile-row__text font__content-text">
+            공군
+          </span>
         </div>
         <div class="modal-content-profile-row">
-          <span class="modal-content-profile-row__label font__content-title"
-            >입대일</span
-          >
-          <span class="modal-content-profile-row__text font__content-text">{{
-            toKoreanDateString(soldier.enterDate)
-          }}</span>
+          <span class="modal-content-profile-row__label font__content-title">
+            입대일
+          </span>
+          <span class="modal-content-profile-row__text font__content-text">
+            {{ toKoreanDateString(soldier.enterDate) }}
+          </span>
         </div>
         <div class="modal-content-profile-row">
-          <span class="modal-content-profile-row__label font__content-title"
-            >소속</span
-          >
+          <span class="modal-content-profile-row__label font__content-title">
+            소속
+          </span>
           <span class="modal-content-profile-row__text font__content-text">{{
             soldier.trainingCenterDetail
           }}</span>
         </div>
-        <div
-          v-if="soldier.militaryType === 'ARMY'"
-          class="modal-content-profile-row"
-        >
-          <span class="modal-content-profile-row__label font__content-title"
-            >부대</span
-          >
-          <span class="modal-content-profile-row__text font__content-text">{{
-            soldier.trainingCenterName
-          }}</span>
-        </div>
-        <div
-          v-if="soldier.militaryType === 'AIR_FORCE'"
-          class="modal-content-profile-row"
-        >
-          <span class="modal-content-profile-row__label font__content-title"
-            >기수</span
-          >
+        <div class="modal-content-profile-row">
+          <span class="modal-content-profile-row__label font__content-title">
+            기수
+          </span>
           <span class="font__content-text">{{ soldier.kisu }}기</span>
         </div>
       </div>
@@ -69,40 +55,18 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import {
-  toKoreanDateString,
-  toKoreanMilitaryType,
-  shortenName,
-} from '@/utils/TextFormatter'
+import { toKoreanDateString, shortenName } from '@/utils/TextFormatter'
 
 import ModalButtonClose from '@/components/Button/ModalButtonClose.vue'
 import SoldierInfoDefaultPng from '@/assets/images/soldier-info-default.png'
 
-export default {
-  components: {
-    ModalButtonClose,
-  },
-  setup() {
-    /* Vuex */
-    const store = useStore()
-    const soldier = computed(() => store.state.mailBox.soldier)
-
-    return {
-      /* Assets */
-      SoldierInfoDefaultPng,
-      /* Variables */
-      soldier,
-      /* Functions */
-      toKoreanDateString,
-      toKoreanMilitaryType,
-      shortenName,
-    }
-  },
-}
+/* Vuex */
+const store = useStore()
+const soldier = computed(() => store.state.mailBox.soldier)
 </script>
 
 <style scoped lang="scss">

@@ -14,9 +14,9 @@
     />
 
     <div class="action-container">
-      <BaseButton class="button-primary mb-3" @click="handleShareLink"
-        >링크 공유하기</BaseButton
-      >
+      <BaseButton class="button-primary mb-3" @click="handleShareLink">
+        링크 공유하기
+      </BaseButton>
       <!-- <BaseButton class="button-primary button-lg" @click="handleNewMail"
         >첫 편지 쓰기</BaseButton
       > -->
