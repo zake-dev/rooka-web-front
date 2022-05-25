@@ -1,7 +1,7 @@
 <template>
   <div class="page-wrapper">
     <p class="font__semi-title">
-      편지함 링크가<br />생성됐어요! <Emoji>😍</Emoji>
+      인편함 링크가<br />생성됐어요! <Emoji>😍</Emoji>
     </p>
     <p class="font__content-text mt-3 mb-2">
       아래의 이미지를 저장하여 링크와 함께 공유해보세요!
@@ -14,9 +14,9 @@
     />
 
     <div class="action-container">
-      <BaseButton class="button-primary mb-3" @click="handleShareLink"
-        >링크 공유하기</BaseButton
-      >
+      <BaseButton class="button-primary mb-3" @click="handleShareLink">
+        링크 공유하기
+      </BaseButton>
       <!-- <BaseButton class="button-primary button-lg" @click="handleNewMail"
         >첫 편지 쓰기</BaseButton
       > -->

@@ -8,46 +8,33 @@ const module = {
     linkImageUUID: null,
     slideTransition: 'slide-left',
     stepper: {
-      maxStep: 5,
+      maxStep: 3,
       currentStep: 1,
     },
     soldier: {
       name: '',
       birthDate: { year: null, month: null, date: null },
-      militaryType: '',
-      enterDate: { year: null, month: null, date: null },
+      militaryType: 'AF',
+      enterDate: '',
       kisu: '',
-      trainingCenterName: '',
     },
-    selectableTrainingCenterNames: [],
     selectableKisus: [],
   },
   getters: {
     isValidForm: state => {
-      const {
-        name,
-        birthDate,
-        militaryType,
-        enterDate,
-        kisu,
-        trainingCenterName,
-      } = state.soldier
+      const { name, birthDate, enterDate, kisu } = state.soldier
       return (
         name !== '' &&
         birthDate.yaer !== '' &&
         birthDate.month !== '' &&
         birthDate.date !== '' &&
-        militaryType !== '' &&
-        enterDate.yaer !== '' &&
-        enterDate.month !== '' &&
-        enterDate.date !== '' &&
-        (kisu !== '' || trainingCenterName !== '')
+        enterDate !== '' &&
+        kisu !== ''
       )
     },
     form: state => ({
       ...state.soldier,
       birthDate: Object.values(state.soldier.birthDate).join('-'),
-      enterDate: Object.values(state.soldier.enterDate).join('-'),
     }),
   },
   mutations: {
@@ -57,18 +44,16 @@ const module = {
         linkImageUUID: null,
         slideTransition: 'slide-left',
         stepper: {
-          maxStep: 5,
+          maxStep: 3,
           currentStep: 1,
         },
         soldier: {
           name: '',
           birthDate: { year: '', month: '', date: '' },
-          militaryType: '',
-          enterDate: { year: '', month: '', date: '' },
+          militaryType: 'AF',
+          enterDate: '',
           kisu: '',
-          trainingCenterName: '',
         },
-        selectableTrainingCenterNames: [],
         selectableKisus: [],
       })
     },
@@ -77,7 +62,7 @@ const module = {
         key: '',
         slideTransition: 'slide-left',
         stepper: {
-          maxStep: 5,
+          maxStep: 3,
           currentStep: 1,
         },
       })
@@ -97,33 +82,20 @@ const module = {
     SET_BIRTH_DATE(state, date) {
       state.soldier.birthDate = date
     },
-    SET_MILITARY_TYPE(state, type) {
-      state.soldier.militaryType = type
-    },
     SET_ENTER_DATE(state, date) {
       state.soldier.enterDate = date
     },
     SET_KISU(state, kisu) {
       state.soldier.kisu = kisu
     },
-    SET_TRAINING_CENTER_NAME(state, trainingCenterName) {
-      state.soldier.trainingCenterName = trainingCenterName
-    },
     SET_LINK_IMAGE_UUID(state, linkImageUUID) {
       state.linkImageUUID = linkImageUUID
-    },
-    SET_SELECTABLE_TRAINING_CENTER_NAMES(state, trainingCenterNames) {
-      state.selectableTrainingCenterNames = trainingCenterNames
     },
     SET_SELECTABLE_KISUS(state, kisus) {
       state.selectableKisus = kisus
     },
   },
   actions: {
-    async FETCH_TRAINING_CENTER_NAMES({ commit }) {
-      const { data } = await CodeApi.getTrainingCenterNames()
-      commit('SET_SELECTABLE_TRAINING_CENTER_NAMES', data)
-    },
     async FETCH_KISUS({ commit }) {
       const { data } = await CodeApi.getAirforceKisus()
       commit('SET_SELECTABLE_KISUS', data)
@@ -149,17 +121,11 @@ const module = {
     UPDATE_BIRTH_DATE({ commit }, date) {
       commit('SET_BIRTH_DATE', date)
     },
-    UPDATE_MILITARY_TYPE({ commit }, type) {
-      commit('SET_MILITARY_TYPE', type)
-    },
     UPDATE_ENTER_DATE({ commit }, date) {
       commit('SET_ENTER_DATE', date)
     },
     UPDATE_KISU({ commit }, kisu) {
       commit('SET_KISU', kisu)
-    },
-    UPDATE_TRAINING_CENTER_NAME({ commit }, trainingCenterName) {
-      commit('SET_TRAINING_CENTER_NAME', trainingCenterName)
     },
     UPDATE_LINK_IMAGE_UUID({ commit }, linkImageUUID) {
       commit('SET_LINK_IMAGE_UUID', linkImageUUID)

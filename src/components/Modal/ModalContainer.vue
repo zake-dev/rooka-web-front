@@ -18,7 +18,6 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import MissingMilitaryTypeModalContent from '@/components/Modal/Content/MissingMilitaryTypeModalContent.vue'
 import WhatIsMailBoxLinkModalContent from '@/components/Modal/Content/WhatIsMailBoxLinkModalContent.vue'
 import ProfileModalContent from '@/components/Modal/Content/ProfileModalContent.vue'
 import RequestPasswordToViewModalContent from '@/components/Modal/Content/RequestPasswordToViewModalContent.vue'
@@ -35,7 +34,6 @@ import ConfirmDeleteMailModalContent from '@/components/Modal/Content/ConfirmDel
 
 export default {
   components: {
-    MissingMilitaryTypeModalContent,
     WhatIsMailBoxLinkModalContent,
     ProfileModalContent,
     RequestPasswordToViewModalContent,
