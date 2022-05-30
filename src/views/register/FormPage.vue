@@ -179,15 +179,8 @@ const handleSubmitBirthDate = () => {
 const handleSubmitForm = async () => {
   try {
     const { data } = await MailBoxApi.getKey(registerForm())
-    if (/*FIXME*/ false) {
-      // 인편함이 열린 상태이면
-      store.dispatch('registerForm/RESET')
-      router.push(`/${data.key}/mail`)
-    } else {
-      // 인편함이 닫힌 상태이면
-      store.dispatch('registerForm/UPDATE_KEY', data.key)
-      router.push({ name: 'RegisterResult' })
-    }
+    store.dispatch('registerForm/RESET')
+    router.push(`/${data.key}/mail`)
   } catch (e) {
     router.push({ name: 'RegisterCreateLink' })
   }
