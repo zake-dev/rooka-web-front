@@ -80,4 +80,10 @@ const router = createRouter({
   routes,
 })
 
+router.afterEach((to, from) => {
+  if (to.path.includes('error')) {
+    history.replaceState({ urlPath: from.path }, from.name, from.path)
+  }
+})
+
 export default router

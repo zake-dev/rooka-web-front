@@ -52,6 +52,7 @@ const module = {
       commit('RESET')
     },
     async FETCH_CONTEXT({ commit }, key) {
+      commit('RESET')
       try {
         const { data } = await MaildBoxApi.getContext(key)
         commit('SET_CONTEXT', data)
@@ -59,7 +60,7 @@ const module = {
       } catch (e) {
         switch (e.response.status) {
           case 404:
-            router.push({ name: 'PageNotFound' })
+            router.replace({ name: 'PageNotFound' })
             break
         }
       }
