@@ -41,26 +41,26 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10% 5%;
+  padding: 7.5% 5%;
 }
 .skeleton {
   &-area {
     position: relative;
 
     &-1 {
-      height: 30%;
+      height: 40%;
       width: 80%;
     }
     &-2 {
-      height: 100%;
-      width: 60%;
+      height: 85%;
+      width: 70%;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
     }
     &-3 {
-      height: 15%;
-      width: 20%;
+      height: 20%;
+      width: 25%;
       background-color: $gray2;
     }
   }
@@ -79,26 +79,26 @@
     }
   }
   &-details-row {
-    height: 18%;
+    height: 30%;
     width: 90%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
     &__key {
-      height: 75%;
-      width: 22%;
+      height: 85%;
+      width: 25%;
       background-color: $gray2;
     }
     &__value {
-      height: 75%;
-      width: 55%;
+      height: 85%;
+      width: 70%;
       background-color: $gray2;
     }
   }
   &-details__link {
-    margin-top: 15%;
-    height: 17.5%;
+    margin-top: 2.5%;
+    height: 30%;
     width: 100%;
     background-color: $gray2;
   }
@@ -117,12 +117,11 @@
     height: 100%;
     width: 100%;
     background: linear-gradient(
-      120deg,
-      transparent 32%,
-      #fbfbfb 38%,
-      #ffffff 39%,
-      #fbfbfb 40%,
-      transparent 46%
+      90deg,
+      transparent 10%,
+      #f8f8f8 35%,
+      #f8f8f8 37%,
+      transparent 50%
     );
     background-size: 200% 100%;
     background-position: 100% 0;
