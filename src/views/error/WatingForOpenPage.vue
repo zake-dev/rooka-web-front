@@ -36,10 +36,10 @@ import { useStore } from 'vuex'
 import { toKoreanDateString } from '@/utils/TextFormatter'
 import { getDiffInDays } from '@/utils/DateUtil'
 import { openModal } from '@/utils/DialogHandler'
+import { getCalendarUrl } from '@/utils/GoogleCalendar'
 
 import Emoji from '@/components/Decorator/Emoji'
 import BaseButton from '@/components/Button/BaseButton'
-import { getCalendarUrl } from '../../utils/GoogleCalendar'
 
 /* Vuex */
 const store = useStore()

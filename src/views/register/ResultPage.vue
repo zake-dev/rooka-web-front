@@ -14,17 +14,17 @@
     />
 
     <div class="action-container">
-      <BaseButton class="button-primary mb-3" @click="handleShareLink">
+      <BaseButton class="button-gray" @click="handleShareLink">
         링크 공유하기
       </BaseButton>
-      <!-- <BaseButton class="button-primary button-lg" @click="handleNewMail"
-        >첫 편지 쓰기</BaseButton
-      > -->
+      <BaseButton class="button-dark" @click="handleNewMail">
+        첫 편지 쓰기
+      </BaseButton>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
@@ -35,37 +35,19 @@ import Emoji from '@/components/Decorator/Emoji.vue'
 import SoldierCardGenerator from '@/components/SoldierCard/SoldierCardGenerator.vue'
 import BaseButton from '@/components/Button/BaseButton.vue'
 
-export default {
-  components: {
-    Emoji,
-    SoldierCardGenerator,
-    BaseButton,
-  },
-  setup() {
-    /* Vuex */
-    const store = useStore()
-    const soldier = computed(() => store.state.registerForm.soldier)
-    const key = computed(() => store.state.registerForm.key)
+/* Vuex */
+const store = useStore()
+const soldier = computed(() => store.state.registerForm.soldier)
+const key = computed(() => store.state.registerForm.key)
 
-    /* Router */
-    const router = useRouter()
+/* Router */
+const router = useRouter()
 
-    /* Event Handler */
-    const handleShareLink = () => openModal('ShareToSns')
-    const handleNewMail = async () => {
-      await router.push(`/${key.value}/mail`)
-      store.dispatch('registerForm/RESET')
-    }
-
-    return {
-      /* Variables */
-      soldier,
-      key,
-      /* Functions */
-      handleShareLink,
-      handleNewMail,
-    }
-  },
+/* Event Handler */
+const handleShareLink = () => openModal('ShareToSns')
+const handleNewMail = async () => {
+  await router.push(`/${key.value}/mail`)
+  store.dispatch('registerForm/RESET')
 }
 </script>
 
@@ -85,5 +67,6 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 16px;
 }
 </style>
