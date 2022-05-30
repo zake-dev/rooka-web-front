@@ -85,7 +85,7 @@ export default {
       await store.dispatch('mailBox/FETCH_CONTEXT', route.params.key)
       if (state.status === 'WAITING_FOR_OPEN') {
         store.dispatch('toEarlyBirds/UPDATE_CONTEXT', state)
-        router.push({ name: 'WaitingForOpen' })
+        router.replace({ name: 'WaitingForOpen' })
       }
     })
 

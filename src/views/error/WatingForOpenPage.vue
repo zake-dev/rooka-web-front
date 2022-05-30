@@ -19,81 +19,61 @@
     </div>
 
     <div class="action-buttons">
-      <BaseButton class="button-gray" @click="handleGoHome"
-        >홈으로 가기</BaseButton
-      >
-      <BaseButton class="button-dark" @click="handleAddCalendar"
-        >구글캘린더에 추가하기</BaseButton
-      >
+      <BaseButton class="button-gray" @click="handleAddCalendar">
+        구글캘린더에 추가하기
+      </BaseButton>
+      <BaseButton class="button-dark" @click="handleOpenModal">
+        링크 공유하기
+      </BaseButton>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
 
 import { toKoreanDateString } from '@/utils/TextFormatter'
 import { getDiffInDays } from '@/utils/DateUtil'
+import { openModal } from '@/utils/DialogHandler'
+import { getCalendarUrl } from '@/utils/GoogleCalendar'
 
 import Emoji from '@/components/Decorator/Emoji'
 import BaseButton from '@/components/Button/BaseButton'
-import { getCalendarUrl } from '../../utils/GoogleCalendar'
 
-export default {
-  components: {
-    Emoji,
-    BaseButton,
-  },
-  setup() {
-    /* Vuex */
-    const store = useStore()
-    const state = store.state.toEarlyBirds
-    const key = computed(() => state.key)
-    const soldier = computed(() => state.soldier)
-    const expectedMailBoxOpeningDateTime = computed(
-      () => state.expectedMailBoxOpeningDateTime,
-    )
-    const expectedMailBoxOpeningDate = computed(() =>
-      toKoreanDateString(expectedMailBoxOpeningDateTime.value),
-    )
-    const remainingDays = computed(() =>
-      getDiffInDays(new Date(), expectedMailBoxOpeningDateTime.value),
-    )
+/* Vuex */
+const store = useStore()
+const state = store.state.toEarlyBirds
+const key = computed(() => state.key)
+const soldier = computed(() => state.soldier)
+const expectedMailBoxOpeningDateTime = computed(
+  () => state.expectedMailBoxOpeningDateTime,
+)
+const expectedMailBoxOpeningDate = computed(() =>
+  toKoreanDateString(expectedMailBoxOpeningDateTime.value),
+)
+const remainingDays = computed(() =>
+  getDiffInDays(new Date(), expectedMailBoxOpeningDateTime.value),
+)
 
-    /* Router */
-    const router = useRouter()
-
-    /* Event Handler */
-    const handleGoHome = () => router.push('/')
-    const handleAddCalendar = () => {
-      const { name } = soldier.value
-      const title = `${name} 훈련병 인편 오픈일`
-      const link = `rooka.kr/${key.value}`
-      const description = `${name} 훈련병에게 인편 보내기 시작하는 날 ${link}`
-      const startDatetime = new Date(expectedMailBoxOpeningDateTime.value)
-      const endDatetime = new Date(startDatetime.getTime() + 1000 * 60 * 60)
-      window.open(
-        getCalendarUrl({
-          title,
-          description,
-          location: link,
-          startDatetime,
-          endDatetime,
-        }),
-      )
-    }
-
-    return {
-      /* Variables */
-      expectedMailBoxOpeningDate,
-      remainingDays,
-      /* Functions */
-      handleGoHome,
-      handleAddCalendar,
-    }
-  },
+/* Event Handler */
+const handleOpenModal = () => openModal('ShareToSns')
+const handleAddCalendar = () => {
+  const { name } = soldier.value
+  const title = `${name} 훈련병 인편 오픈일`
+  const link = `rooka.kr/${key.value}`
+  const description = `${name} 훈련병에게 인편 보내기 시작하는 날 ${link}`
+  const startDatetime = new Date(expectedMailBoxOpeningDateTime.value)
+  const endDatetime = new Date(startDatetime.getTime() + 1000 * 60 * 60)
+  window.open(
+    getCalendarUrl({
+      title,
+      description,
+      location: link,
+      startDatetime,
+      endDatetime,
+    }),
+  )
 }
 </script>
 
