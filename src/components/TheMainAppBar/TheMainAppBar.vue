@@ -2,7 +2,7 @@
   <div
     key="mainAppBar"
     class="appbar"
-    :class="{ 'appbar--transparent': isErrorPage }"
+    :class="{ 'appbar--transparent': isNotFoundPage }"
   >
     <button class="button mx-4 my-3" @click="handleToHome">
       <LogoImage />
@@ -10,35 +10,21 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
 import LogoImage from '@/components/LogoImage/LogoImage.vue'
 
-export default {
-  components: {
-    LogoImage,
-  },
-  setup() {
-    /* Router */
-    const router = useRouter()
-    const route = useRoute()
+/* Router */
+const router = useRouter()
+const route = useRoute()
 
-    /* Local State */
-    const isErrorPage = computed(() => route.path.includes('/error/'))
+/* Local State */
+const isNotFoundPage = computed(() => route.name === 'PageNotFound')
 
-    /* Event Handler */
-    const handleToHome = () => router.push('/')
-
-    return {
-      /* Variables */
-      isErrorPage,
-      /* Functions */
-      handleToHome,
-    }
-  },
-}
+/* Event Handler */
+const handleToHome = () => router.push('/')
 </script>
 
 <style lang="scss">
