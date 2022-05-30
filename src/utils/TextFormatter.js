@@ -9,7 +9,6 @@ const objectToDate = obj => {
 }
 
 export const toKoreanDateString = date => {
-  console.log(date)
   date =
     date instanceof Date
       ? date
