@@ -15,7 +15,7 @@
     <div class="message-box">
       <span class="message-box__title">인터넷 편지 시작 예상일</span>
       <span class="message-box__date">{{ expectedMailBoxOpeningDate }}</span>
-      <span class="message-box__caption">{{ remainingDays }}일 남음</span>
+      <span class="message-box__caption">{{ remainingDays }} 남음</span>
     </div>
 
     <div class="action-buttons">
@@ -33,8 +33,8 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 
-import { toKoreanDateString } from '@/utils/TextFormatter'
-import { getDiffInDays } from '@/utils/DateUtil'
+import { toKoreanDateTimeString, toTimeString } from '@/utils/TextFormatter'
+import { getDiffInDayHourMinSec } from '@/utils/DateUtil'
 import { openModal } from '@/utils/DialogHandler'
 import { getCalendarUrl } from '@/utils/GoogleCalendar'
 
@@ -50,10 +50,10 @@ const expectedMailBoxOpeningDateTime = computed(
   () => state.expectedMailBoxOpeningDateTime,
 )
 const expectedMailBoxOpeningDate = computed(() =>
-  toKoreanDateString(expectedMailBoxOpeningDateTime.value),
+  toKoreanDateTimeString(expectedMailBoxOpeningDateTime.value),
 )
 const remainingDays = computed(() =>
-  getDiffInDays(new Date(), expectedMailBoxOpeningDateTime.value),
+  toTimeString(getDiffInDayHourMinSec(new Date(), expectedMailBoxOpeningDateTime.value)),
 )
 
 /* Event Handler */
