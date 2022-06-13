@@ -1,5 +1,6 @@
 import * as CodeApi from '@/api/CodeApi'
 import * as MailBoxApi from '@/api/MailBoxApi'
+import * as TextFormatter from '@/utils/TextFormatter'
 
 const module = {
   namespaced: true,
@@ -34,7 +35,7 @@ const module = {
     },
     form: state => ({
       ...state.soldier,
-      birthDate: Object.values(state.soldier.birthDate).join('-'),
+      birthDate: TextFormatter.toInputDateString(state.soldier.birthDate),
     }),
   },
   mutations: {
