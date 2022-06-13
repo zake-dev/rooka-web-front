@@ -130,6 +130,7 @@ const birthDate = computed({
   get: () => soldier.birthDate,
   set: value => store.dispatch('registerForm/UPDATE_BIRTH_DATE', value),
 })
+const registerForm = computed(() => store.getters['registerForm/form'])
 
 /* Router */
 const router = useRouter()
@@ -141,10 +142,6 @@ const isInvalidBirthDate = ref(false)
 /* Helper Function */
 const isValidDate = ({ year, month, date }) =>
   year !== '' && month !== '' && date !== ''
-const registerForm = () => ({
-  ...soldier,
-  birthDate: Object.values(soldier.birthDate).join('-'),
-})
 
 /* Event Handler */
 const handleIncreaseStep = () => store.dispatch('registerForm/INCREASE_STEP')
@@ -178,7 +175,7 @@ const handleSubmitBirthDate = () => {
 }
 const handleSubmitForm = async () => {
   try {
-    const { data } = await MailBoxApi.getKey(registerForm())
+    const { data } = await MailBoxApi.getKey(registerForm.value)
     store.dispatch('registerForm/RESET')
     router.push(`/${data.key}/mail`)
   } catch (e) {
