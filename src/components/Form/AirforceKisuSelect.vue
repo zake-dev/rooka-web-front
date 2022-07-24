@@ -1,6 +1,11 @@
 <template>
   <div class="form-select-wrapper">
-    <select class="form-select" v-model="selectedValue" @change="handleSelect">
+    <select
+      id="kisu-select"
+      class="form-select"
+      v-model="selectedValue"
+      @change="handleSelect"
+    >
       <option class="form-select__placeholder-text" :value="null" hidden>
         입영 기수를 선택해 주세요
       </option>
@@ -8,7 +13,7 @@
         v-for="{ kisu, enterDate } in kisuAndEnterDates"
         :key="kisu"
         :value="{ kisu, enterDate }"
-        :selected="kisu === selectedValue?.kisu"
+        :data-kisu="kisu"
       >
         {{ kisu }}기 ({{ toKoreanDateString(enterDate) }})
       </option>
@@ -33,6 +38,16 @@ const kisuAndEnterDates = computed(() => state.selectableKisus)
 /* Local State */
 const selectedValue = ref(null)
 
+/* Helper Function */
+const setSelectedOption = () => {
+  const $selectedOption = Array.prototype.find.call(
+    document.getElementById('kisu-select').children,
+    $option => $option.dataset.kisu === state.soldier.kisu.toString(),
+  )
+
+  if ($selectedOption) $selectedOption.selected = true
+}
+
 /* Event Handler */
 const handleSelect = () => {
   const { kisu, enterDate } = selectedValue.value
@@ -41,10 +56,7 @@ const handleSelect = () => {
 }
 
 /* Hooks */
-onMounted(() => {
-  store.dispatch('registerForm/UPDATE_KISU', '')
-  store.dispatch('registerForm/UPDATE_ENTER_DATE', '')
-})
+onMounted(() => setSelectedOption())
 </script>
 
 <style scoped lang="scss">

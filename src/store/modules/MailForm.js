@@ -2,7 +2,7 @@ import * as MailApi from '@/api/MailApi'
 import router from '@/router'
 import { showToast, showWarningToast, removeToast } from '@/utils/ToastHandler'
 
-const MAX_CONTENT_LENGTH = 10000
+const MAX_CONTENT_LENGTH = 1200
 const INVALID_FIELD_MESSAGE = '입력하지 않은 정보가 있네요!😳'
 const TOO_LONG_CONTENT_MESSAGE = '편지 내용이 너무 길어요!😨'
 
