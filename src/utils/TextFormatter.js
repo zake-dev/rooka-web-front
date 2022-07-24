@@ -1,7 +1,9 @@
 /* Private Functions */
 const stringToDate = str => {
-  const [year, month, date] = str.split('-').map(n => parseInt(n))
-  return new Date(year, month - 1, date, 0, 0, 0)
+  const [date, time] = str.split('T')
+  const [year, month, day] = date.split('-').map(n => parseInt(n))
+  const [hour, minute, second] = time.split(':').map(n => parseInt(n))
+  return new Date(year, month - 1, day, hour, minute, second)
 }
 
 const objectToDate = obj => {
